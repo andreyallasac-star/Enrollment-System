@@ -5,6 +5,7 @@
   </Folder>
   <Folder Name="/DB/StoredProc/" />
   <Folder Name="/DB/Table/">
+    <File Path="DB/Table/Sections.sql" />
     <File Path="DB/Table/Students.sql" />
     <File Path="DB/Table/Users.sql" />
   </Folder>
