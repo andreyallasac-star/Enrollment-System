@@ -1,0 +1,9 @@
+CREATE TABLE Students (
+    StudentId NVARCHAR(20) PRIMARY KEY,
+    FirstName NVARCHAR(50) NOT NULL,
+    MiddleName NVARCHAR(50) NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    Address NVARCHAR(255) NULL,
+    Gender NVARCHAR(10) NULL
+);
