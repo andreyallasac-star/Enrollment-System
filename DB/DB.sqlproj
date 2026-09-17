@@ -62,7 +62,7 @@
     <Folder Include="View" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="PostScript\Users_Seed.sql" />
+    <PostDeploy Include="PostScript\Users_Seed.sql" />
     <Build Include="Table\Users.sql" />
     <Build Include="Table\Students.sql" />
     <Build Include="Table\Sections.sql" />
