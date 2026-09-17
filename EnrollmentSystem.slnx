@@ -1,16 +1,9 @@
 <Solution>
-  <Folder Name="/DB/" />
-  <Folder Name="/DB/PostScript/">
-    <File Path="DB/PostScript/Users_Seed.sql" />
-  </Folder>
-  <Folder Name="/DB/StoredProc/" />
-  <Folder Name="/DB/Table/">
-    <File Path="DB/Table/Sections.sql" />
-    <File Path="DB/Table/Students.sql" />
-    <File Path="DB/Table/Users.sql" />
-  </Folder>
-  <Folder Name="/DB/View/" />
   <Project Path="BusinessLogic/BusinessLogic.csproj" />
+  <Project Path="DB/DB.sqlproj" Id="7b56893c-0304-4a43-b36c-97d765ee117b">
+    <Build />
+    <Deploy />
+  </Project>
   <Project Path="Model/Model.csproj" />
   <Project Path="UI/UI.csproj" />
 </Solution>
