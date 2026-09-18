@@ -10,14 +10,18 @@ namespace UI
 {
     public partial class StaffDashboardForm : Form
     {
-        public StaffDashboardForm()
+        private string currentUsername;
+        private string currentRole;
+        public StaffDashboardForm(string username, string role)
         {
             InitializeComponent();
+            currentUsername = username;
+            currentRole = role;
         }
 
         private void StaffDashboardForm_Load(object sender, EventArgs e)
         {
-
+            lblWelcomeStaff.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
         }
     }
 }
