@@ -32,8 +32,7 @@
             panel1 = new Panel();
             button12 = new Button();
             label6 = new Label();
-            label4 = new Label();
-            label3 = new Label();
+            lblWelcome = new Label();
             label2 = new Label();
             panel2 = new Panel();
             button11 = new Button();
@@ -68,8 +67,7 @@
             panel1.BackColor = Color.DeepSkyBlue;
             panel1.Controls.Add(button12);
             panel1.Controls.Add(label6);
-            panel1.Controls.Add(label4);
-            panel1.Controls.Add(label3);
+            panel1.Controls.Add(lblWelcome);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(2, 2);
@@ -101,29 +99,17 @@
             label6.TabIndex = 4;
             label6.Text = " │";
             // 
-            // label4
+            // lblWelcome
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.DeepSkyBlue;
-            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = SystemColors.Control;
-            label4.Location = new Point(670, 7);
-            label4.Name = "label4";
-            label4.Size = new Size(114, 45);
-            label4.TabIndex = 4;
-            label4.Text = "Admin";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.DeepSkyBlue;
-            label3.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = SystemColors.Control;
-            label3.Location = new Point(625, 7);
-            label3.Name = "label3";
-            label3.Size = new Size(57, 45);
-            label3.TabIndex = 3;
-            label3.Text = "👤";
+            lblWelcome.AutoSize = true;
+            lblWelcome.BackColor = Color.DeepSkyBlue;
+            lblWelcome.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblWelcome.ForeColor = SystemColors.Control;
+            lblWelcome.Location = new Point(398, 17);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(31, 32);
+            lblWelcome.TabIndex = 4;
+            lblWelcome.Text = "A";
             // 
             // label2
             // 
@@ -276,11 +262,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(968, 513);
+            ClientSize = new Size(968, 524);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             ForeColor = SystemColors.ControlLightLight;
+            MaximizeBox = false;
             Name = "DashboardForm";
             Text = "DashboardForm";
             TransparencyKey = Color.Black;
@@ -297,7 +284,7 @@
         private Panel panel1;
         private Label label2;
         private Label label3;
-        private Label label4;
+        private Label lblWelcome;
         private Label label6;
         private Panel panel2;
         private Button button1;
