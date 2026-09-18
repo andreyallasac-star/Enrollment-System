@@ -75,13 +75,15 @@
             // 
             // btnLogin
             // 
+            btnLogin.BackColor = Color.DeepSkyBlue;
             btnLogin.Font = new Font("Segoe UI Semibold", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogin.ForeColor = Color.Black;
             btnLogin.Location = new Point(224, 202);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(112, 45);
             btnLogin.TabIndex = 4;
             btnLogin.Text = "LOGIN";
-            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.UseVisualStyleBackColor = false;
             // 
             // LoginForm
             // 
