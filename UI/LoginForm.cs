@@ -22,6 +22,24 @@ namespace UI
             AuthController authController = new AuthController();
             var result = authController.Login(txtUsername.Text, txtPassword.Text);
 
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                MessageBox.Show("Please enter the account's username.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Please enter the account's password.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtPassword.Text.Length < 8)
+            {
+                MessageBox.Show("Password must be at least 8 characters long.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (result.Success)
             {
                 if (result.Role == "Admin")

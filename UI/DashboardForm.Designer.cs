@@ -270,7 +270,6 @@
             MaximizeBox = false;
             Name = "DashboardForm";
             Text = "DashboardForm";
-            TransparencyKey = Color.Black;
             Load += DashboardForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
