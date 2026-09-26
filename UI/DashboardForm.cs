@@ -24,5 +24,18 @@ namespace UI
         {
             lblWelcome.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            
+            AssessmentForm ass = new AssessmentForm();
+            ass.TopLevel = false;
+            ass.FormBorderStyle = FormBorderStyle.None;
+
+            ass.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(ass);
+            ass.Show();
+        }
     }
 }
