@@ -72,7 +72,7 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(964, 61);
+            panel1.Size = new Size(1180, 61);
             panel1.TabIndex = 1;
             // 
             // button12
@@ -80,7 +80,7 @@
             button12.BackColor = Color.DeepSkyBlue;
             button12.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button12.ForeColor = Color.White;
-            button12.Location = new Point(826, 10);
+            button12.Location = new Point(1045, 9);
             button12.Name = "button12";
             button12.Size = new Size(125, 43);
             button12.TabIndex = 4;
@@ -93,7 +93,7 @@
             label6.BackColor = Color.DeepSkyBlue;
             label6.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.ForeColor = SystemColors.Control;
-            label6.Location = new Point(775, 4);
+            label6.Location = new Point(994, 0);
             label6.Name = "label6";
             label6.Size = new Size(45, 45);
             label6.TabIndex = 4;
@@ -105,7 +105,7 @@
             lblWelcome.BackColor = Color.DeepSkyBlue;
             lblWelcome.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblWelcome.ForeColor = SystemColors.Control;
-            lblWelcome.Location = new Point(398, 17);
+            lblWelcome.Location = new Point(611, 10);
             lblWelcome.Name = "lblWelcome";
             lblWelcome.Size = new Size(31, 32);
             lblWelcome.TabIndex = 4;
@@ -136,16 +136,16 @@
             panel2.Controls.Add(button3);
             panel2.Controls.Add(button2);
             panel2.Controls.Add(button1);
-            panel2.Location = new Point(2, 69);
+            panel2.Location = new Point(2, 57);
             panel2.Name = "panel2";
-            panel2.Size = new Size(201, 440);
+            panel2.Size = new Size(201, 443);
             panel2.TabIndex = 2;
             // 
             // button11
             // 
             button11.BackColor = Color.Azure;
             button11.ForeColor = Color.Black;
-            button11.Location = new Point(3, 381);
+            button11.Location = new Point(3, 387);
             button11.Name = "button11";
             button11.Size = new Size(194, 36);
             button11.TabIndex = 11;
@@ -156,7 +156,7 @@
             // 
             button10.BackColor = Color.Azure;
             button10.ForeColor = Color.Black;
-            button10.Location = new Point(3, 339);
+            button10.Location = new Point(3, 345);
             button10.Name = "button10";
             button10.Size = new Size(194, 36);
             button10.TabIndex = 10;
@@ -167,7 +167,7 @@
             // 
             button9.BackColor = Color.Azure;
             button9.ForeColor = Color.Black;
-            button9.Location = new Point(3, 297);
+            button9.Location = new Point(3, 303);
             button9.Name = "button9";
             button9.Size = new Size(194, 36);
             button9.TabIndex = 9;
@@ -178,18 +178,19 @@
             // 
             button7.BackColor = Color.Azure;
             button7.ForeColor = Color.Black;
-            button7.Location = new Point(3, 255);
+            button7.Location = new Point(3, 261);
             button7.Name = "button7";
             button7.Size = new Size(194, 36);
             button7.TabIndex = 6;
             button7.Text = "Student Assessment";
             button7.UseVisualStyleBackColor = false;
+            button7.Click += button7_Click;
             // 
             // button6
             // 
             button6.BackColor = Color.Azure;
             button6.ForeColor = Color.Black;
-            button6.Location = new Point(3, 213);
+            button6.Location = new Point(3, 219);
             button6.Name = "button6";
             button6.Size = new Size(194, 36);
             button6.TabIndex = 7;
@@ -200,7 +201,7 @@
             // 
             button5.BackColor = Color.Azure;
             button5.ForeColor = Color.Black;
-            button5.Location = new Point(3, 171);
+            button5.Location = new Point(3, 177);
             button5.Name = "button5";
             button5.Size = new Size(194, 36);
             button5.TabIndex = 6;
@@ -211,7 +212,7 @@
             // 
             button4.BackColor = Color.Azure;
             button4.ForeColor = Color.Black;
-            button4.Location = new Point(3, 129);
+            button4.Location = new Point(3, 135);
             button4.Name = "button4";
             button4.Size = new Size(194, 36);
             button4.TabIndex = 5;
@@ -222,7 +223,7 @@
             // 
             button3.BackColor = Color.Azure;
             button3.ForeColor = Color.Black;
-            button3.Location = new Point(3, 87);
+            button3.Location = new Point(3, 93);
             button3.Name = "button3";
             button3.Size = new Size(194, 36);
             button3.TabIndex = 5;
@@ -233,7 +234,7 @@
             // 
             button2.BackColor = Color.Azure;
             button2.ForeColor = Color.Black;
-            button2.Location = new Point(3, 45);
+            button2.Location = new Point(3, 51);
             button2.Name = "button2";
             button2.Size = new Size(194, 36);
             button2.TabIndex = 4;
@@ -244,7 +245,7 @@
             // 
             button1.BackColor = Color.Azure;
             button1.ForeColor = Color.Black;
-            button1.Location = new Point(3, 3);
+            button1.Location = new Point(3, 9);
             button1.Name = "button1";
             button1.Size = new Size(194, 36);
             button1.TabIndex = 3;
@@ -253,19 +254,22 @@
             // 
             // panel3
             // 
-            panel3.Location = new Point(209, 72);
+            panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.AutoScroll = true;
+            panel3.AutoSize = true;
+            panel3.Location = new Point(209, 35);
             panel3.Name = "panel3";
-            panel3.Size = new Size(757, 437);
+            panel3.Size = new Size(973, 481);
             panel3.TabIndex = 3;
             // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(968, 524);
+            ClientSize = new Size(1184, 531);
+            Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panel2);
-            Controls.Add(panel1);
             ForeColor = SystemColors.ControlLightLight;
             MaximizeBox = false;
             Name = "DashboardForm";
@@ -275,6 +279,7 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
