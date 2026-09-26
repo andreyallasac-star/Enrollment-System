@@ -122,7 +122,7 @@
             // 
             btnUpdate.BackColor = Color.Red;
             btnUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnUpdate.Location = new Point(235, 284);
+            btnUpdate.Location = new Point(241, 284);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(113, 45);
             btnUpdate.TabIndex = 8;
