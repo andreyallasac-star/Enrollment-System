@@ -97,5 +97,17 @@ namespace UI
             panel3.Controls.Add(enrollment);
             enrollment.Show();
         }
+
+        private void btnPaymentCashiering_Click(object sender, EventArgs e)
+        {
+            PaymentandCashieringForm payment = new PaymentandCashieringForm();
+            payment.TopLevel = false;
+            payment.FormBorderStyle = FormBorderStyle.None;
+
+            payment.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(payment);
+            payment.Show();
+        }
     }
 }
