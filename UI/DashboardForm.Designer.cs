@@ -40,7 +40,7 @@
             button9 = new Button();
             button7 = new Button();
             button6 = new Button();
-            button5 = new Button();
+            btnSectionManagement = new Button();
             btnStudentManagement = new Button();
             btnUserAccount = new Button();
             btnSearch = new Button();
@@ -131,7 +131,7 @@
             panel2.Controls.Add(button9);
             panel2.Controls.Add(button7);
             panel2.Controls.Add(button6);
-            panel2.Controls.Add(button5);
+            panel2.Controls.Add(btnSectionManagement);
             panel2.Controls.Add(btnStudentManagement);
             panel2.Controls.Add(btnUserAccount);
             panel2.Controls.Add(btnSearch);
@@ -197,16 +197,17 @@
             button6.Text = "Student Enrollment";
             button6.UseVisualStyleBackColor = false;
             // 
-            // button5
+            // btnSectionManagement
             // 
-            button5.BackColor = Color.Azure;
-            button5.ForeColor = Color.Black;
-            button5.Location = new Point(3, 177);
-            button5.Name = "button5";
-            button5.Size = new Size(194, 36);
-            button5.TabIndex = 6;
-            button5.Text = "Section Management";
-            button5.UseVisualStyleBackColor = false;
+            btnSectionManagement.BackColor = Color.Azure;
+            btnSectionManagement.ForeColor = Color.Black;
+            btnSectionManagement.Location = new Point(3, 177);
+            btnSectionManagement.Name = "btnSectionManagement";
+            btnSectionManagement.Size = new Size(194, 36);
+            btnSectionManagement.TabIndex = 6;
+            btnSectionManagement.Text = "Section Management";
+            btnSectionManagement.UseVisualStyleBackColor = false;
+            btnSectionManagement.Click += btnSectionManagement_Click;
             // 
             // btnStudentManagement
             // 
@@ -260,9 +261,9 @@
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.AutoScroll = true;
             panel3.AutoSize = true;
-            panel3.Location = new Point(209, 35);
+            panel3.Location = new Point(209, 60);
             panel3.Name = "panel3";
-            panel3.Size = new Size(973, 561);
+            panel3.Size = new Size(973, 536);
             panel3.TabIndex = 3;
             // 
             // DashboardForm
@@ -297,7 +298,7 @@
         private Panel panel2;
         private Button button1;
         private Button button6;
-        private Button button5;
+        private Button btnSectionManagement;
         private Button btnStudentManagement;
         private Button btnUserAccount;
         private Button btnSearch;
