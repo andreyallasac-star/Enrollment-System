@@ -73,5 +73,17 @@ namespace UI
             panel3.Controls.Add(student);
             student.Show();
         }
+
+        private void btnSectionManagement_Click(object sender, EventArgs e)
+        {
+            SectionManagement section = new SectionManagement();
+            section.TopLevel = false;
+            section.FormBorderStyle = FormBorderStyle.None;
+
+            section.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(section);
+            section.Show();
+        }
     }
 }
