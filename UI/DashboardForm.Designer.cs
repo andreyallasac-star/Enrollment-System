@@ -39,7 +39,7 @@
             button10 = new Button();
             button9 = new Button();
             button7 = new Button();
-            button6 = new Button();
+            btnStudentEnrollment = new Button();
             btnSectionManagement = new Button();
             btnStudentManagement = new Button();
             btnUserAccount = new Button();
@@ -130,7 +130,7 @@
             panel2.Controls.Add(button10);
             panel2.Controls.Add(button9);
             panel2.Controls.Add(button7);
-            panel2.Controls.Add(button6);
+            panel2.Controls.Add(btnStudentEnrollment);
             panel2.Controls.Add(btnSectionManagement);
             panel2.Controls.Add(btnStudentManagement);
             panel2.Controls.Add(btnUserAccount);
@@ -186,16 +186,17 @@
             button7.UseVisualStyleBackColor = false;
             button7.Click += button7_Click;
             // 
-            // button6
+            // btnStudentEnrollment
             // 
-            button6.BackColor = Color.Azure;
-            button6.ForeColor = Color.Black;
-            button6.Location = new Point(3, 219);
-            button6.Name = "button6";
-            button6.Size = new Size(194, 36);
-            button6.TabIndex = 7;
-            button6.Text = "Student Enrollment";
-            button6.UseVisualStyleBackColor = false;
+            btnStudentEnrollment.BackColor = Color.Azure;
+            btnStudentEnrollment.ForeColor = Color.Black;
+            btnStudentEnrollment.Location = new Point(3, 219);
+            btnStudentEnrollment.Name = "btnStudentEnrollment";
+            btnStudentEnrollment.Size = new Size(194, 36);
+            btnStudentEnrollment.TabIndex = 7;
+            btnStudentEnrollment.Text = "Student Enrollment";
+            btnStudentEnrollment.UseVisualStyleBackColor = false;
+            btnStudentEnrollment.Click += btnStudentEnrollment_Click;
             // 
             // btnSectionManagement
             // 
@@ -297,7 +298,7 @@
         private Label label6;
         private Panel panel2;
         private Button button1;
-        private Button button6;
+        private Button btnStudentEnrollment;
         private Button btnSectionManagement;
         private Button btnStudentManagement;
         private Button btnUserAccount;
