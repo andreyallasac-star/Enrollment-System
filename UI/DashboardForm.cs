@@ -109,5 +109,17 @@ namespace UI
             panel3.Controls.Add(payment);
             payment.Show();
         }
+
+        private void btnStudentInfoReport_Click(object sender, EventArgs e)
+        {
+            StudentInformationReport report = new StudentInformationReport();
+            report.TopLevel = false;
+            report.FormBorderStyle = FormBorderStyle.None;
+
+            report.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(report);
+            report.Show();
+        }
     }
 }
