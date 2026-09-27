@@ -37,7 +37,7 @@
             panel2 = new Panel();
             button11 = new Button();
             button10 = new Button();
-            button9 = new Button();
+            btnPaymentCashiering = new Button();
             button7 = new Button();
             btnStudentEnrollment = new Button();
             btnSectionManagement = new Button();
@@ -128,7 +128,7 @@
             panel2.BackColor = Color.Azure;
             panel2.Controls.Add(button11);
             panel2.Controls.Add(button10);
-            panel2.Controls.Add(button9);
+            panel2.Controls.Add(btnPaymentCashiering);
             panel2.Controls.Add(button7);
             panel2.Controls.Add(btnStudentEnrollment);
             panel2.Controls.Add(btnSectionManagement);
@@ -163,16 +163,17 @@
             button10.Text = "Payment History/ Reciepts";
             button10.UseVisualStyleBackColor = false;
             // 
-            // button9
+            // btnPaymentCashiering
             // 
-            button9.BackColor = Color.Azure;
-            button9.ForeColor = Color.Black;
-            button9.Location = new Point(3, 303);
-            button9.Name = "button9";
-            button9.Size = new Size(194, 36);
-            button9.TabIndex = 9;
-            button9.Text = "Payment/Cashiering";
-            button9.UseVisualStyleBackColor = false;
+            btnPaymentCashiering.BackColor = Color.Azure;
+            btnPaymentCashiering.ForeColor = Color.Black;
+            btnPaymentCashiering.Location = new Point(3, 303);
+            btnPaymentCashiering.Name = "btnPaymentCashiering";
+            btnPaymentCashiering.Size = new Size(194, 36);
+            btnPaymentCashiering.TabIndex = 9;
+            btnPaymentCashiering.Text = "Payment/Cashiering";
+            btnPaymentCashiering.UseVisualStyleBackColor = false;
+            btnPaymentCashiering.Click += btnPaymentCashiering_Click;
             // 
             // button7
             // 
@@ -305,7 +306,7 @@
         private Button btnSearch;
         private Button button11;
         private Button button10;
-        private Button button9;
+        private Button btnPaymentCashiering;
         private Button button7;
         private Button button12;
         private Panel panel3;
