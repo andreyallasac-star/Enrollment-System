@@ -42,7 +42,7 @@
             button6 = new Button();
             button5 = new Button();
             button4 = new Button();
-            button3 = new Button();
+            btnUserAccount = new Button();
             btnSearch = new Button();
             button1 = new Button();
             panel3 = new Panel();
@@ -133,7 +133,7 @@
             panel2.Controls.Add(button6);
             panel2.Controls.Add(button5);
             panel2.Controls.Add(button4);
-            panel2.Controls.Add(button3);
+            panel2.Controls.Add(btnUserAccount);
             panel2.Controls.Add(btnSearch);
             panel2.Controls.Add(button1);
             panel2.Location = new Point(2, 57);
@@ -219,16 +219,17 @@
             button4.Text = "Student Management";
             button4.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnUserAccount
             // 
-            button3.BackColor = Color.Azure;
-            button3.ForeColor = Color.Black;
-            button3.Location = new Point(3, 93);
-            button3.Name = "button3";
-            button3.Size = new Size(194, 36);
-            button3.TabIndex = 5;
-            button3.Text = "User Account Management";
-            button3.UseVisualStyleBackColor = false;
+            btnUserAccount.BackColor = Color.Azure;
+            btnUserAccount.ForeColor = Color.Black;
+            btnUserAccount.Location = new Point(3, 93);
+            btnUserAccount.Name = "btnUserAccount";
+            btnUserAccount.Size = new Size(194, 36);
+            btnUserAccount.TabIndex = 5;
+            btnUserAccount.Text = "User Account Management";
+            btnUserAccount.UseVisualStyleBackColor = false;
+            btnUserAccount.Click += btnUserAccount_Click;
             // 
             // btnSearch
             // 
@@ -297,7 +298,7 @@
         private Button button6;
         private Button button5;
         private Button button4;
-        private Button button3;
+        private Button btnUserAccount;
         private Button btnSearch;
         private Button button11;
         private Button button10;

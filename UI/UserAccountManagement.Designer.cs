@@ -64,8 +64,9 @@
             panel1.Controls.Add(lblUserAccount);
             panel1.ForeColor = Color.Black;
             panel1.Location = new Point(3, 2);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(859, 650);
+            panel1.Size = new Size(752, 488);
             panel1.TabIndex = 0;
             // 
             // dgvStudentInfo
@@ -73,10 +74,11 @@
             dgvStudentInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStudentInfo.Columns.AddRange(new DataGridViewColumn[] { dtvUser, dgvUsername, dgvRole, dgvStatus });
             dgvStudentInfo.GridColor = Color.Gray;
-            dgvStudentInfo.Location = new Point(0, 358);
+            dgvStudentInfo.Location = new Point(0, 268);
+            dgvStudentInfo.Margin = new Padding(3, 2, 3, 2);
             dgvStudentInfo.Name = "dgvStudentInfo";
             dgvStudentInfo.RowHeadersWidth = 51;
-            dgvStudentInfo.Size = new Size(856, 292);
+            dgvStudentInfo.Size = new Size(749, 219);
             dgvStudentInfo.TabIndex = 10;
             // 
             // dtvUser
@@ -111,9 +113,10 @@
             // 
             btnDeactivate.BackColor = Color.Red;
             btnDeactivate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnDeactivate.Location = new Point(437, 284);
+            btnDeactivate.Location = new Point(382, 213);
+            btnDeactivate.Margin = new Padding(3, 2, 3, 2);
             btnDeactivate.Name = "btnDeactivate";
-            btnDeactivate.Size = new Size(159, 45);
+            btnDeactivate.Size = new Size(139, 34);
             btnDeactivate.TabIndex = 9;
             btnDeactivate.Text = "DEACTIVATE";
             btnDeactivate.UseVisualStyleBackColor = false;
@@ -122,9 +125,10 @@
             // 
             btnUpdate.BackColor = Color.Red;
             btnUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnUpdate.Location = new Point(241, 284);
+            btnUpdate.Location = new Point(211, 213);
+            btnUpdate.Margin = new Padding(3, 2, 3, 2);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(113, 45);
+            btnUpdate.Size = new Size(99, 34);
             btnUpdate.TabIndex = 8;
             btnUpdate.Text = "UPDATE";
             btnUpdate.UseVisualStyleBackColor = false;
@@ -133,9 +137,10 @@
             // 
             btnCreate.BackColor = Color.Green;
             btnCreate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCreate.Location = new Point(27, 284);
+            btnCreate.Location = new Point(24, 213);
+            btnCreate.Margin = new Padding(3, 2, 3, 2);
             btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(113, 45);
+            btnCreate.Size = new Size(99, 34);
             btnCreate.TabIndex = 7;
             btnCreate.Text = "CREATE";
             btnCreate.UseVisualStyleBackColor = false;
@@ -144,34 +149,37 @@
             // 
             cmbRoles.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbRoles.FormattingEnabled = true;
-            cmbRoles.Location = new Point(146, 205);
+            cmbRoles.Location = new Point(128, 154);
+            cmbRoles.Margin = new Padding(3, 2, 3, 2);
             cmbRoles.Name = "cmbRoles";
-            cmbRoles.Size = new Size(224, 39);
+            cmbRoles.Size = new Size(196, 33);
             cmbRoles.TabIndex = 6;
             // 
             // txtPassword
             // 
             txtPassword.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPassword.Location = new Point(146, 144);
+            txtPassword.Location = new Point(128, 108);
+            txtPassword.Margin = new Padding(3, 2, 3, 2);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(315, 38);
+            txtPassword.Size = new Size(276, 32);
             txtPassword.TabIndex = 5;
             // 
             // txtUsername
             // 
             txtUsername.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsername.Location = new Point(146, 99);
+            txtUsername.Location = new Point(128, 74);
+            txtUsername.Margin = new Padding(3, 2, 3, 2);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(315, 38);
+            txtUsername.Size = new Size(276, 32);
             txtUsername.TabIndex = 4;
             // 
             // lblRoles
             // 
             lblRoles.AutoSize = true;
             lblRoles.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblRoles.Location = new Point(18, 213);
+            lblRoles.Location = new Point(16, 160);
             lblRoles.Name = "lblRoles";
-            lblRoles.Size = new Size(73, 31);
+            lblRoles.Size = new Size(60, 25);
             lblRoles.TabIndex = 3;
             lblRoles.Text = "Roles:";
             // 
@@ -179,9 +187,9 @@
             // 
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPassword.Location = new Point(18, 151);
+            lblPassword.Location = new Point(16, 113);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(115, 31);
+            lblPassword.Size = new Size(95, 25);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password:";
             // 
@@ -189,9 +197,9 @@
             // 
             lblUsername.AutoSize = true;
             lblUsername.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblUsername.Location = new Point(18, 106);
+            lblUsername.Location = new Point(16, 80);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(122, 31);
+            lblUsername.Size = new Size(101, 25);
             lblUsername.TabIndex = 1;
             lblUsername.Text = "Username:";
             // 
@@ -199,18 +207,20 @@
             // 
             lblUserAccount.AutoSize = true;
             lblUserAccount.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblUserAccount.Location = new Point(18, 18);
+            lblUserAccount.Location = new Point(13, 24);
             lblUserAccount.Name = "lblUserAccount";
-            lblUserAccount.Size = new Size(454, 46);
+            lblUserAccount.Size = new Size(365, 37);
             lblUserAccount.TabIndex = 0;
             lblUserAccount.Text = "User Account Management";
             // 
             // UserAccountManagement
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(866, 659);
+            AutoScroll = true;
+            ClientSize = new Size(758, 494);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "UserAccountManagement";
             Text = "UserAccountManagement";
             panel1.ResumeLayout(false);
