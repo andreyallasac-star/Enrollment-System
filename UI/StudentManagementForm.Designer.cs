@@ -28,12 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            label2 = new Label();
             label1 = new Label();
-            panel2 = new Panel();
             label3 = new Label();
-            panel3 = new Panel();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
@@ -52,63 +48,28 @@
             btnAdd = new Button();
             btnUpdate = new Button();
             btnDeactivate = new Button();
-            panel4 = new Panel();
-            label20 = new Label();
-            label19 = new Label();
-            label18 = new Label();
-            label17 = new Label();
-            label16 = new Label();
-            label15 = new Label();
-            label14 = new Label();
-            label13 = new Label();
-            label12 = new Label();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            panel3.SuspendLayout();
-            panel4.SuspendLayout();
+            dgvStudentRecords = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
+            Column7 = new DataGridViewTextBoxColumn();
+            Column8 = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dgvStudentRecords).BeginInit();
             SuspendLayout();
-            // 
-            // panel1
-            // 
-            panel1.BackColor = Color.DeepSkyBlue;
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(837, 52);
-            panel1.TabIndex = 0;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.Control;
-            label2.Location = new Point(12, 11);
-            label2.Name = "label2";
-            label2.Size = new Size(42, 32);
-            label2.TabIndex = 1;
-            label2.Text = "👤";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(65, 11);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(12, 26);
             label1.Name = "label1";
             label1.Size = new Size(260, 32);
             label1.TabIndex = 1;
             label1.Text = "Student Management";
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.Azure;
-            panel2.Controls.Add(label3);
-            panel2.ForeColor = Color.Azure;
-            panel2.Location = new Point(12, 75);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(810, 48);
-            panel2.TabIndex = 1;
             // 
             // label3
             // 
@@ -116,28 +77,18 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(3, 11);
+            label3.Location = new Point(21, 101);
             label3.Name = "label3";
             label3.Size = new Size(196, 25);
             label3.TabIndex = 3;
             label3.Text = "Student Information";
-            // 
-            // panel3
-            // 
-            panel3.BackColor = Color.Transparent;
-            panel3.Controls.Add(label4);
-            panel3.ForeColor = Color.Black;
-            panel3.Location = new Point(12, 528);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(810, 48);
-            panel3.TabIndex = 2;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(3, 13);
+            label4.Location = new Point(21, 531);
             label4.Name = "label4";
             label4.Size = new Size(159, 25);
             label4.TabIndex = 4;
@@ -315,129 +266,66 @@
             btnDeactivate.Text = "Deactivate";
             btnDeactivate.UseVisualStyleBackColor = false;
             // 
-            // panel4
+            // dgvStudentRecords
             // 
-            panel4.BackColor = Color.Azure;
-            panel4.Controls.Add(label20);
-            panel4.Controls.Add(label19);
-            panel4.Controls.Add(label18);
-            panel4.Controls.Add(label17);
-            panel4.Controls.Add(label16);
-            panel4.Controls.Add(label15);
-            panel4.Controls.Add(label14);
-            panel4.Controls.Add(label13);
-            panel4.Controls.Add(label12);
-            panel4.ForeColor = Color.Azure;
-            panel4.Location = new Point(12, 582);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(810, 28);
-            panel4.TabIndex = 20;
+            dgvStudentRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvStudentRecords.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8 });
+            dgvStudentRecords.Location = new Point(12, 563);
+            dgvStudentRecords.Name = "dgvStudentRecords";
+            dgvStudentRecords.Size = new Size(801, 172);
+            dgvStudentRecords.TabIndex = 20;
             // 
-            // label20
+            // Column1
             // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label20.ForeColor = Color.Black;
-            label20.Location = new Point(742, 7);
-            label20.Name = "label20";
-            label20.Size = new Size(46, 17);
-            label20.TabIndex = 23;
-            label20.Text = "Status";
+            Column1.HeaderText = "Student ID";
+            Column1.Name = "Column1";
             // 
-            // label19
+            // Column2
             // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label19.ForeColor = Color.Black;
-            label19.Location = new Point(658, 7);
-            label19.Name = "label19";
-            label19.Size = new Size(0, 17);
-            label19.TabIndex = 22;
+            Column2.HeaderText = "First Name";
+            Column2.Name = "Column2";
             // 
-            // label18
+            // Column3
             // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label18.ForeColor = Color.Black;
-            label18.Location = new Point(627, 7);
-            label18.Name = "label18";
-            label18.Size = new Size(15, 17);
-            label18.TabIndex = 22;
-            label18.Text = "a";
+            Column3.HeaderText = "Middle Name";
+            Column3.Name = "Column3";
             // 
-            // label17
+            // Column4
             // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label17.ForeColor = Color.Black;
-            label17.Location = new Point(520, 7);
-            label17.Name = "label17";
-            label17.Size = new Size(52, 17);
-            label17.TabIndex = 22;
-            label17.Text = "Gender";
+            Column4.HeaderText = "Last Name";
+            Column4.Name = "Column4";
             // 
-            // label16
+            // Column5
             // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.ForeColor = Color.Black;
-            label16.Location = new Point(391, 7);
-            label16.Name = "label16";
-            label16.Size = new Size(88, 17);
-            label16.TabIndex = 22;
-            label16.Text = "Date of Birth";
+            Column5.HeaderText = "Date of Birth";
+            Column5.Name = "Column5";
             // 
-            // label15
+            // Column6
             // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label15.ForeColor = Color.Black;
-            label15.Location = new Point(282, 7);
-            label15.Name = "label15";
-            label15.Size = new Size(73, 17);
-            label15.TabIndex = 22;
-            label15.Text = "Last Name";
+            Column6.HeaderText = "Gender";
+            Column6.Name = "Column6";
             // 
-            // label14
+            // Column7
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.Black;
-            label14.Location = new Point(176, 7);
-            label14.Name = "label14";
-            label14.Size = new Size(91, 17);
-            label14.TabIndex = 22;
-            label14.Text = "Middle Name";
+            Column7.HeaderText = "Address";
+            Column7.Name = "Column7";
             // 
-            // label13
+            // Column8
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.ForeColor = Color.Black;
-            label13.Location = new Point(88, 7);
-            label13.Name = "label13";
-            label13.Size = new Size(75, 17);
-            label13.TabIndex = 22;
-            label13.Text = "First Name";
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label12.ForeColor = Color.Black;
-            label12.Location = new Point(3, 7);
-            label12.Name = "label12";
-            label12.Size = new Size(74, 17);
-            label12.TabIndex = 21;
-            label12.Text = "Student ID";
+            Column8.HeaderText = "Status";
+            Column8.Name = "Column8";
             // 
             // StudentManagementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = Color.Azure;
             ClientSize = new Size(834, 747);
-            Controls.Add(panel4);
+            Controls.Add(dgvStudentRecords);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label1);
             Controls.Add(btnDeactivate);
             Controls.Add(btnUpdate);
             Controls.Add(btnAdd);
@@ -455,31 +343,16 @@
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(panel3);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
             Name = "StudentManagementForm";
             Text = "StudentManagementForm";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvStudentRecords).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Panel panel1;
         private Label label1;
-        private Label label2;
-        private Panel panel2;
         private Label label3;
-        private Panel panel3;
         private Label label4;
         private Label label5;
         private Label label6;
@@ -498,15 +371,14 @@
         private Button btnAdd;
         private Button btnUpdate;
         private Button btnDeactivate;
-        private Panel panel4;
-        private Label label12;
-        private Label label20;
-        private Label label19;
-        private Label label18;
-        private Label label17;
-        private Label label16;
-        private Label label15;
-        private Label label14;
-        private Label label13;
+        private DataGridView dgvStudentRecords;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn Column8;
     }
 }
