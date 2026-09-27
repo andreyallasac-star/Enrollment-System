@@ -43,7 +43,7 @@
             button5 = new Button();
             button4 = new Button();
             button3 = new Button();
-            button2 = new Button();
+            btnSearch = new Button();
             button1 = new Button();
             panel3 = new Panel();
             panel1.SuspendLayout();
@@ -134,7 +134,7 @@
             panel2.Controls.Add(button5);
             panel2.Controls.Add(button4);
             panel2.Controls.Add(button3);
-            panel2.Controls.Add(button2);
+            panel2.Controls.Add(btnSearch);
             panel2.Controls.Add(button1);
             panel2.Location = new Point(2, 57);
             panel2.Name = "panel2";
@@ -230,16 +230,17 @@
             button3.Text = "User Account Management";
             button3.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnSearch
             // 
-            button2.BackColor = Color.Azure;
-            button2.ForeColor = Color.Black;
-            button2.Location = new Point(3, 51);
-            button2.Name = "button2";
-            button2.Size = new Size(194, 36);
-            button2.TabIndex = 4;
-            button2.Text = "Student Account Search";
-            button2.UseVisualStyleBackColor = false;
+            btnSearch.BackColor = Color.Azure;
+            btnSearch.ForeColor = Color.Black;
+            btnSearch.Location = new Point(3, 51);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(194, 36);
+            btnSearch.TabIndex = 4;
+            btnSearch.Text = "Student Account Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // button1
             // 
@@ -259,20 +260,21 @@
             panel3.AutoSize = true;
             panel3.Location = new Point(209, 35);
             panel3.Name = "panel3";
-            panel3.Size = new Size(973, 481);
+            panel3.Size = new Size(973, 561);
             panel3.TabIndex = 3;
             // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1184, 531);
+            ClientSize = new Size(1184, 611);
             Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panel2);
             ForeColor = SystemColors.ControlLightLight;
             MaximizeBox = false;
             Name = "DashboardForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "DashboardForm";
             Load += DashboardForm_Load;
             panel1.ResumeLayout(false);
@@ -296,7 +298,7 @@
         private Button button5;
         private Button button4;
         private Button button3;
-        private Button button2;
+        private Button btnSearch;
         private Button button11;
         private Button button10;
         private Button button9;
