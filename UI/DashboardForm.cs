@@ -61,5 +61,17 @@ namespace UI
             panel3.Controls.Add(user);
             user.Show();
         }
+
+        private void btnStudentManagement_Click(object sender, EventArgs e)
+        {
+            StudentManagementForm student = new StudentManagementForm();
+            student.TopLevel = false;
+            student.FormBorderStyle = FormBorderStyle.None;
+
+            student.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(student);
+            student.Show();
+        }
     }
 }

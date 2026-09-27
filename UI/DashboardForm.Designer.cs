@@ -41,7 +41,7 @@
             button7 = new Button();
             button6 = new Button();
             button5 = new Button();
-            button4 = new Button();
+            btnStudentManagement = new Button();
             btnUserAccount = new Button();
             btnSearch = new Button();
             button1 = new Button();
@@ -132,7 +132,7 @@
             panel2.Controls.Add(button7);
             panel2.Controls.Add(button6);
             panel2.Controls.Add(button5);
-            panel2.Controls.Add(button4);
+            panel2.Controls.Add(btnStudentManagement);
             panel2.Controls.Add(btnUserAccount);
             panel2.Controls.Add(btnSearch);
             panel2.Controls.Add(button1);
@@ -208,16 +208,17 @@
             button5.Text = "Section Management";
             button5.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnStudentManagement
             // 
-            button4.BackColor = Color.Azure;
-            button4.ForeColor = Color.Black;
-            button4.Location = new Point(3, 135);
-            button4.Name = "button4";
-            button4.Size = new Size(194, 36);
-            button4.TabIndex = 5;
-            button4.Text = "Student Management";
-            button4.UseVisualStyleBackColor = false;
+            btnStudentManagement.BackColor = Color.Azure;
+            btnStudentManagement.ForeColor = Color.Black;
+            btnStudentManagement.Location = new Point(3, 135);
+            btnStudentManagement.Name = "btnStudentManagement";
+            btnStudentManagement.Size = new Size(194, 36);
+            btnStudentManagement.TabIndex = 5;
+            btnStudentManagement.Text = "Student Management";
+            btnStudentManagement.UseVisualStyleBackColor = false;
+            btnStudentManagement.Click += btnStudentManagement_Click;
             // 
             // btnUserAccount
             // 
@@ -297,7 +298,7 @@
         private Button button1;
         private Button button6;
         private Button button5;
-        private Button button4;
+        private Button btnStudentManagement;
         private Button btnUserAccount;
         private Button btnSearch;
         private Button button11;
