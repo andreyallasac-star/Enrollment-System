@@ -36,7 +36,7 @@
             label2 = new Label();
             panel2 = new Panel();
             btnStudentInfoReport = new Button();
-            button10 = new Button();
+            btnPaymentHistoryReceipts = new Button();
             btnPaymentCashiering = new Button();
             button7 = new Button();
             btnStudentEnrollment = new Button();
@@ -127,7 +127,7 @@
             // 
             panel2.BackColor = Color.Azure;
             panel2.Controls.Add(btnStudentInfoReport);
-            panel2.Controls.Add(button10);
+            panel2.Controls.Add(btnPaymentHistoryReceipts);
             panel2.Controls.Add(btnPaymentCashiering);
             panel2.Controls.Add(button7);
             panel2.Controls.Add(btnStudentEnrollment);
@@ -153,16 +153,17 @@
             btnStudentInfoReport.UseVisualStyleBackColor = false;
             btnStudentInfoReport.Click += btnStudentInfoReport_Click;
             // 
-            // button10
+            // btnPaymentHistoryReceipts
             // 
-            button10.BackColor = Color.Azure;
-            button10.ForeColor = Color.Black;
-            button10.Location = new Point(3, 345);
-            button10.Name = "button10";
-            button10.Size = new Size(194, 36);
-            button10.TabIndex = 10;
-            button10.Text = "Payment History/ Reciepts";
-            button10.UseVisualStyleBackColor = false;
+            btnPaymentHistoryReceipts.BackColor = Color.Azure;
+            btnPaymentHistoryReceipts.ForeColor = Color.Black;
+            btnPaymentHistoryReceipts.Location = new Point(3, 345);
+            btnPaymentHistoryReceipts.Name = "btnPaymentHistoryReceipts";
+            btnPaymentHistoryReceipts.Size = new Size(194, 36);
+            btnPaymentHistoryReceipts.TabIndex = 10;
+            btnPaymentHistoryReceipts.Text = "Payment History/ Reciepts";
+            btnPaymentHistoryReceipts.UseVisualStyleBackColor = false;
+            btnPaymentHistoryReceipts.Click += btnPaymentHistoryReceipts_Click;
             // 
             // btnPaymentCashiering
             // 
@@ -306,7 +307,7 @@
         private Button btnUserAccount;
         private Button btnSearch;
         private Button btnStudentInfoReport;
-        private Button button10;
+        private Button btnPaymentHistoryReceipts;
         private Button btnPaymentCashiering;
         private Button button7;
         private Button button12;

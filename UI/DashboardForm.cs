@@ -110,6 +110,18 @@ namespace UI
             payment.Show();
         }
 
+        private void btnPaymentHistoryReceipts_Click(object sender, EventArgs e)
+        {
+            PaymentHistoryandReceiptsForm paymentHistory = new PaymentHistoryandReceiptsForm();
+            paymentHistory.TopLevel = false;
+            paymentHistory.FormBorderStyle = FormBorderStyle.None;
+
+            paymentHistory.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(paymentHistory);
+            paymentHistory.Show();
+        }
+
         private void btnStudentInfoReport_Click(object sender, EventArgs e)
         {
             StudentInformationReport report = new StudentInformationReport();
@@ -121,5 +133,7 @@ namespace UI
             panel3.Controls.Add(report);
             report.Show();
         }
+
+        
     }
 }
