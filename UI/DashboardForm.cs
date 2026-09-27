@@ -49,5 +49,17 @@ namespace UI
             panel3.Controls.Add(search);
             search.Show();
         }
+
+        private void btnUserAccount_Click(object sender, EventArgs e)
+        {
+            UserAccountManagement user = new UserAccountManagement();
+            user.TopLevel = false;
+            user.FormBorderStyle = FormBorderStyle.None;
+
+            user.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(user);
+            user.Show();
+        }
     }
 }
