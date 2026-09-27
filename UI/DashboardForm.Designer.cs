@@ -35,7 +35,7 @@
             lblWelcome = new Label();
             label2 = new Label();
             panel2 = new Panel();
-            button11 = new Button();
+            btnStudentInfoReport = new Button();
             button10 = new Button();
             btnPaymentCashiering = new Button();
             button7 = new Button();
@@ -126,7 +126,7 @@
             // panel2
             // 
             panel2.BackColor = Color.Azure;
-            panel2.Controls.Add(button11);
+            panel2.Controls.Add(btnStudentInfoReport);
             panel2.Controls.Add(button10);
             panel2.Controls.Add(btnPaymentCashiering);
             panel2.Controls.Add(button7);
@@ -141,16 +141,17 @@
             panel2.Size = new Size(201, 443);
             panel2.TabIndex = 2;
             // 
-            // button11
+            // btnStudentInfoReport
             // 
-            button11.BackColor = Color.Azure;
-            button11.ForeColor = Color.Black;
-            button11.Location = new Point(3, 387);
-            button11.Name = "button11";
-            button11.Size = new Size(194, 36);
-            button11.TabIndex = 11;
-            button11.Text = "Student Information Report";
-            button11.UseVisualStyleBackColor = false;
+            btnStudentInfoReport.BackColor = Color.Azure;
+            btnStudentInfoReport.ForeColor = Color.Black;
+            btnStudentInfoReport.Location = new Point(3, 387);
+            btnStudentInfoReport.Name = "btnStudentInfoReport";
+            btnStudentInfoReport.Size = new Size(194, 36);
+            btnStudentInfoReport.TabIndex = 11;
+            btnStudentInfoReport.Text = "Student Information Report";
+            btnStudentInfoReport.UseVisualStyleBackColor = false;
+            btnStudentInfoReport.Click += btnStudentInfoReport_Click;
             // 
             // button10
             // 
@@ -304,7 +305,7 @@
         private Button btnStudentManagement;
         private Button btnUserAccount;
         private Button btnSearch;
-        private Button button11;
+        private Button btnStudentInfoReport;
         private Button button10;
         private Button btnPaymentCashiering;
         private Button button7;

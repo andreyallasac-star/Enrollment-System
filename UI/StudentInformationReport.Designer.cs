@@ -49,7 +49,9 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Arial", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Black;
             label1.Location = new Point(12, 20);
             label1.Name = "label1";
             label1.Size = new Size(226, 34);
@@ -59,7 +61,9 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Black;
             label2.Location = new Point(12, 85);
             label2.Name = "label2";
             label2.Size = new Size(132, 25);
@@ -69,7 +73,9 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Black;
             label3.Location = new Point(12, 132);
             label3.Name = "label3";
             label3.Size = new Size(98, 20);
@@ -79,7 +85,9 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.Black;
             label4.Location = new Point(313, 132);
             label4.Name = "label4";
             label4.Size = new Size(67, 20);
@@ -117,7 +125,9 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.Black;
             label5.Location = new Point(12, 289);
             label5.Name = "label5";
             label5.Size = new Size(150, 25);
