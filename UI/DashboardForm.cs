@@ -27,7 +27,7 @@ namespace UI
 
         private void button7_Click(object sender, EventArgs e)
         {
-            
+
             AssessmentForm ass = new AssessmentForm();
             ass.TopLevel = false;
             ass.FormBorderStyle = FormBorderStyle.None;
@@ -36,6 +36,18 @@ namespace UI
             panel3.Controls.Clear();
             panel3.Controls.Add(ass);
             ass.Show();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            StudentAccountSearch search = new StudentAccountSearch();
+            search.TopLevel = false;
+            search.FormBorderStyle = FormBorderStyle.None;
+
+            search.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(search);
+            search.Show();
         }
     }
 }
