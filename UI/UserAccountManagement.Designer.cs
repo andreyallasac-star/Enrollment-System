@@ -80,6 +80,7 @@
             dgvStudentInfo.RowHeadersWidth = 51;
             dgvStudentInfo.Size = new Size(749, 219);
             dgvStudentInfo.TabIndex = 10;
+            dgvStudentInfo.CellClick += dgvStudentInfo_CellClick;
             // 
             // dtvUser
             // 
@@ -120,6 +121,7 @@
             btnDeactivate.TabIndex = 9;
             btnDeactivate.Text = "DEACTIVATE";
             btnDeactivate.UseVisualStyleBackColor = false;
+            btnDeactivate.Click += btnDeactivate_Click;
             // 
             // btnUpdate
             // 
@@ -132,6 +134,7 @@
             btnUpdate.TabIndex = 8;
             btnUpdate.Text = "UPDATE";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnCreate
             // 
@@ -144,6 +147,7 @@
             btnCreate.TabIndex = 7;
             btnCreate.Text = "CREATE";
             btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
             // cmbRoles
             // 
@@ -223,6 +227,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "UserAccountManagement";
             Text = "UserAccountManagement";
+            Load += UserAccountManagement_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStudentInfo).EndInit();
