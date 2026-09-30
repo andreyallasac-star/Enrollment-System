@@ -17,7 +17,7 @@ namespace BusinessLogic.Repository
                 conn.Open();
                 var cmd = new SqlCommand(
                     "INSERT INTO Students (StudentId, FirstName, MiddleName, LastName, DateOfBirth, Address, Gender, Status) " +
-                    "VALUES (@StudentId, @FirstName, @MiddleName, @LastName, @DateOfBirth, @Address, @Gender, 'Active')", conn);
+                    "VALUES (@StudentId, @FirstName, @MiddleName, @LastName, @DateOfBirth, @Address, @Gender, 'Inactive')", conn);
 
                 cmd.Parameters.AddWithValue("@StudentId", student.StudentId);
                 cmd.Parameters.AddWithValue("@FirstName", student.FirstName);
