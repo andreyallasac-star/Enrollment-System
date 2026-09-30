@@ -17,6 +17,14 @@ namespace UI
         public StudentManagementForm()
         {
             InitializeComponent();
+            dgvStudentRecords.DefaultCellStyle.ForeColor = Color.Black;
+            dgvStudentRecords.DefaultCellStyle.BackColor = Color.White;
+
+            dgvStudentRecords.RowsDefaultCellStyle.ForeColor = Color.Black;
+            dgvStudentRecords.RowsDefaultCellStyle.BackColor = Color.White;
+
+            dgvStudentRecords.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+            dgvStudentRecords.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
             cmbGender.Items.Add("Male");
             cmbGender.Items.Add("Female");
             cmbGender.SelectedIndex = 0;
@@ -30,7 +38,7 @@ namespace UI
 
         private void StudentManagementForm_Load(object sender, EventArgs e)
         {
-
+            RefreshGrid();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
