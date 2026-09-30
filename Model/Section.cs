@@ -10,7 +10,7 @@ namespace Model
         public string SectionName { get; set; }
         public string GradeLevel { get; set; }
         public string SchoolYear { get; set; }
-        public int Capacity { get; set; }
+        public int Capacity { get; set; } = 40;
         public string Status { get; set; }
     }
 }
