@@ -79,8 +79,10 @@
             dgvInfo.Margin = new Padding(3, 2, 3, 2);
             dgvInfo.Name = "dgvInfo";
             dgvInfo.RowHeadersWidth = 51;
+            dgvInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvInfo.Size = new Size(751, 176);
             dgvInfo.TabIndex = 12;
+            dgvInfo.CellClick += dgvInfo_CellClick;
             // 
             // dgvCode
             // 
@@ -121,6 +123,7 @@
             btnDeactivate.TabIndex = 11;
             btnDeactivate.Text = "DEACTIVATE";
             btnDeactivate.UseVisualStyleBackColor = false;
+            btnDeactivate.Click += btnDeactivate_Click;
             // 
             // btnUpdate
             // 
@@ -133,6 +136,7 @@
             btnUpdate.TabIndex = 10;
             btnUpdate.Text = "UPDATE";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnAdd
             // 
@@ -146,6 +150,7 @@
             btnAdd.TabIndex = 9;
             btnAdd.Text = "ADD";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // txtSchoolYear
             // 
@@ -248,6 +253,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "SectionManagement";
             Text = "SectionManagement";
+            Load += SectionManagement_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvInfo).EndInit();
