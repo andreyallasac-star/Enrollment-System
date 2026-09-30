@@ -243,6 +243,7 @@
             btnAdd.TabIndex = 17;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
             // 
             // btnUpdate
             // 
@@ -254,6 +255,7 @@
             btnUpdate.TabIndex = 18;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDeactivate
             // 
@@ -265,6 +267,7 @@
             btnDeactivate.TabIndex = 19;
             btnDeactivate.Text = "Deactivate";
             btnDeactivate.UseVisualStyleBackColor = false;
+            btnDeactivate.Click += btnDeactivate_Click;
             // 
             // dgvStudentRecords
             // 
@@ -272,8 +275,10 @@
             dgvStudentRecords.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8 });
             dgvStudentRecords.Location = new Point(12, 563);
             dgvStudentRecords.Name = "dgvStudentRecords";
+            dgvStudentRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvStudentRecords.Size = new Size(801, 172);
             dgvStudentRecords.TabIndex = 20;
+            dgvStudentRecords.CellClick += dgvStudentRecords_CellClick_1;
             // 
             // Column1
             // 
@@ -345,6 +350,7 @@
             Controls.Add(label5);
             Name = "StudentManagementForm";
             Text = "StudentManagementForm";
+            Load += StudentManagementForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvStudentRecords).EndInit();
             ResumeLayout(false);
             PerformLayout();
