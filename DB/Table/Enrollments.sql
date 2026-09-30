@@ -1,0 +1,9 @@
+﻿CREATE TABLE Enrollments (
+    EnrollmentId INT PRIMARY KEY IDENTITY(1,1),
+    StudentId NVARCHAR(50) NOT NULL,
+    SectionCode NVARCHAR(20) NOT NULL,
+    SchoolYear NVARCHAR(10) NOT NULL,
+    AssessedFee DECIMAL(18,2) NOT NULL,
+    EnrollmentDate DATETIME NOT NULL DEFAULT GETDATE(),
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Enrolled'
+);

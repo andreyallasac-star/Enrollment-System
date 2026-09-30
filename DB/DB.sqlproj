@@ -67,4 +67,7 @@
     <Build Include="Table\Students.sql" />
     <Build Include="Table\Sections.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Table\Enrollments.sql" />
+  </ItemGroup>
 </Project>
