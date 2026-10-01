@@ -16,6 +16,7 @@ namespace UI
         private readonly StudentSearchController _searchController = new StudentSearchController();
         public AssessmentForm()
         {
+            InitializeComponent();
             txtTuitionFee.ReadOnly = true;
             txtTuitionFee.BackColor = System.Drawing.SystemColors.Control;
 
