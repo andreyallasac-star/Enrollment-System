@@ -69,5 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Enrollments.sql" />
+    <Build Include="Table\Payments.sql" />
+    <Build Include="Table\Assessments.sql" />
+    <Build Include="Table\GradeLevelFees.sql" />
   </ItemGroup>
 </Project>
