@@ -69,5 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Assessments.sql" />
+    <Build Include="Table\GradeLevelFees.sql" />
   </ItemGroup>
 </Project>
