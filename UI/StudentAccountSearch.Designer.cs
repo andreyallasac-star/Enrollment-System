@@ -89,6 +89,7 @@
             btnSearch.TabIndex = 2;
             btnSearch.Text = "🔍︎ Search";
             btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // label2
             // 
@@ -192,7 +193,7 @@
             lblStudentName.BackColor = Color.Transparent;
             lblStudentName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentName.ForeColor = Color.Black;
-            lblStudentName.Location = new Point(141, 201);
+            lblStudentName.Location = new Point(141, 240);
             lblStudentName.Name = "lblStudentName";
             lblStudentName.Size = new Size(65, 21);
             lblStudentName.TabIndex = 11;
@@ -204,7 +205,7 @@
             lblStudentID.BackColor = Color.Transparent;
             lblStudentID.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentID.ForeColor = Color.Black;
-            lblStudentID.Location = new Point(141, 242);
+            lblStudentID.Location = new Point(141, 198);
             lblStudentID.Name = "lblStudentID";
             lblStudentID.Size = new Size(65, 21);
             lblStudentID.TabIndex = 12;
@@ -264,7 +265,7 @@
             lblAddress.BackColor = Color.Transparent;
             lblAddress.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAddress.ForeColor = Color.Black;
-            lblAddress.Location = new Point(141, 276);
+            lblAddress.Location = new Point(141, 279);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(65, 21);
             lblAddress.TabIndex = 17;
