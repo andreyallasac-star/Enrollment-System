@@ -68,6 +68,7 @@
     <Build Include="Table\Sections.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="Table\Enrollments.sql" />
     <Build Include="Table\Payments.sql" />
     <Build Include="Table\Assessments.sql" />
     <Build Include="Table\GradeLevelFees.sql" />
