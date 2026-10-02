@@ -75,5 +75,6 @@
     <Build Include="StoredProc\SearchStudentAccount.sql" />
     <Build Include="StoredProc\CreateStudent.sql" />
     <Build Include="StoredProc\DeactivateStudent.sql" />
+    <Build Include="StoredProc\GetAllStudents.sql" />
   </ItemGroup>
 </Project>
