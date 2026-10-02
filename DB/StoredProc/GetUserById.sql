@@ -1,0 +1,8 @@
+﻿CREATE PROCEDURE GetUserById
+    @UserId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT * FROM Users WHERE UserId = @UserId;
+END
+GO
