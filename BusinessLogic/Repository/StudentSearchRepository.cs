@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using Microsoft.Data.SqlClient;
 using Model;
@@ -15,24 +16,9 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string query = @"
-                    SELECT 
-                        s.StudentId,
-                        s.FirstName + ' ' + ISNULL(s.MiddleName + ' ', '') + s.LastName AS FullName,
-                        s.DateOfBirth,
-                        s.Gender,
-                        s.Address,
-                        e.SchoolYear,
-                        sec.GradeLevel,
-                        e.SectionCode AS Section,
-                        ISNULL((SELECT TOP 1 TotalAssessment FROM Assessments WHERE StudentId = s.StudentId ORDER BY AssessmentId DESC), 0) AS TotalAssessment,
-                        ISNULL((SELECT SUM(AmountPaid) FROM Payments WHERE StudentId = s.StudentId), 0) AS TotalPaid
-                    FROM Students s
-                    LEFT JOIN Enrollments e ON s.StudentId = e.StudentId AND e.Status = 'Enrolled'
-                    LEFT JOIN Sections sec ON e.SectionCode = sec.SectionCode
-                    WHERE s.StudentId = @Keyword OR (s.FirstName + ' ' + s.LastName) LIKE '%' + @Keyword + '%'";
 
-                var cmd = new SqlCommand(query, conn);
+                var cmd = new SqlCommand("SearchStudentAccount", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Keyword", keyword);
 
                 using (var reader = cmd.ExecuteReader())
