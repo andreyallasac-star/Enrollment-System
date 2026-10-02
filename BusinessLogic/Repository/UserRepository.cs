@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Model;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Text;
 
 namespace BusinessLogic.Repository
 {
@@ -12,11 +13,12 @@ namespace BusinessLogic.Repository
 
         public User GetByUsername(string username)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using(SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand(
-                    "SELECT UserId, Username, PasswordHash, Role, Status FROM Users WHERE Username = @Username AND Status = 'Active'", conn);
+                var cmd = new SqlCommand("GetUserByUsername", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@Username", username);
 
                 using (var reader = cmd.ExecuteReader())
@@ -25,7 +27,7 @@ namespace BusinessLogic.Repository
                     {
                         return new User
                         {
-                            UserId = (int)reader["UserId"],
+                            UserId = Convert.ToInt32(reader["UserId"]),
                             Username = reader["Username"].ToString(),
                             PasswordHash = reader["PasswordHash"].ToString(),
                             Role = reader["Role"].ToString(),
@@ -42,8 +44,9 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand(
-                    "SELECT UserId, Username, PasswordHash, Role, Status FROM Users WHERE UserId = @UserId", conn);
+                var cmd = new SqlCommand("GetUserById", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@UserId", userId);
 
                 using (var reader = cmd.ExecuteReader())
@@ -52,7 +55,7 @@ namespace BusinessLogic.Repository
                     {
                         return new User
                         {
-                            UserId = (int)reader["UserId"],
+                            UserId = Convert.ToInt32(reader["UserId"]),
                             Username = reader["Username"].ToString(),
                             PasswordHash = reader["PasswordHash"].ToString(),
                             Role = reader["Role"].ToString(),
@@ -69,8 +72,9 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand(
-                    "INSERT INTO Users (Username, PasswordHash, Role, Status) VALUES (@Username, @PasswordHash, @Role, 'Active')", conn);
+                var cmd = new SqlCommand("CreateUser", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@Username", user.Username);
                 cmd.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
                 cmd.Parameters.AddWithValue("@Role", user.Role);
@@ -85,14 +89,16 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand("SELECT UserId, Username, PasswordHash, Role, Status FROM Users", conn);
+                var cmd = new SqlCommand("GetAllUsers", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         users.Add(new User
                         {
-                            UserId = (int)reader["UserId"],
+                            UserId = Convert.ToInt32(reader["UserId"]),
                             Username = reader["Username"].ToString(),
                             PasswordHash = reader["PasswordHash"].ToString(),
                             Role = reader["Role"].ToString(),
@@ -109,8 +115,9 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand(
-                    "UPDATE Users SET PasswordHash = @PasswordHash, Role = @Role WHERE UserId = @UserId", conn);
+                var cmd = new SqlCommand("UpdateUser", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@PasswordHash", user.PasswordHash);
                 cmd.Parameters.AddWithValue("@Role", user.Role);
                 cmd.Parameters.AddWithValue("@UserId", user.UserId);
@@ -124,7 +131,9 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand("UPDATE Users SET Status = 'Inactive' WHERE UserId = @UserId", conn);
+                var cmd = new SqlCommand("DeactivateUser", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 cmd.Parameters.AddWithValue("@UserId", userId);
 
                 return cmd.ExecuteNonQuery() > 0;
