@@ -82,7 +82,8 @@ namespace UI
 
             if (_studentController.UpdateStudent(updatedStudent) == "Success")
             {
-                ClearForm(); RefreshGrid();
+                ClearForm(); 
+                RefreshGrid();
             }
         }
 
@@ -92,7 +93,8 @@ namespace UI
 
             if (_studentController.DeactivateStudent(_selectedStudentId) == "Success")
             {
-                ClearForm(); RefreshGrid();
+                ClearForm(); 
+                RefreshGrid();
             }
         }
 

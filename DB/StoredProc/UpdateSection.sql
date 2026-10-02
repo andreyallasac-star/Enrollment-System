@@ -4,7 +4,6 @@
     @Capacity INT
 AS
 BEGIN
-    SET NOCOUNT ON;
     UPDATE Sections 
     SET GradeLevel = @GradeLevel, 
         Capacity = @Capacity 

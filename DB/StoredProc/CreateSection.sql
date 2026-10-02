@@ -4,7 +4,6 @@
     @Capacity INT
 AS
 BEGIN
-    SET NOCOUNT ON;
     INSERT INTO Sections (SectionCode, GradeLevel, Capacity, Status) 
     VALUES (@SectionCode, @GradeLevel, @Capacity, 'Active');
 END

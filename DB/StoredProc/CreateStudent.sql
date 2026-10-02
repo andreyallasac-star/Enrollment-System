@@ -8,7 +8,6 @@
     @Gender NVARCHAR(10)
 AS
 BEGIN
-    SET NOCOUNT ON;
     INSERT INTO Students (StudentId, FirstName, MiddleName, LastName, DateOfBirth, Address, Gender, Status) 
     VALUES (@StudentId, @FirstName, @MiddleName, @LastName, @DateOfBirth, @Address, @Gender, 'Active');
 END
