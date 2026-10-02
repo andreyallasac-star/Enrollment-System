@@ -18,6 +18,15 @@ namespace UI
         public SectionManagement()
         {
             InitializeComponent();
+            dgvInfo.DefaultCellStyle.ForeColor = Color.Black;
+            dgvInfo.DefaultCellStyle.BackColor = Color.White;
+
+            dgvInfo.RowsDefaultCellStyle.ForeColor = Color.Black;
+            dgvInfo.RowsDefaultCellStyle.BackColor = Color.White;
+
+            dgvInfo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+            dgvInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
+
             this.Load += SectionManagement_Load;
             btnAdd.Click += btnAdd_Click;
             btnUpdate.Click += btnUpdate_Click;
@@ -56,6 +65,7 @@ namespace UI
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(_selectedCode)) return;
+
             var section = new Section
             {
                 SectionCode = _selectedCode,
@@ -64,9 +74,22 @@ namespace UI
                 SchoolYear = txtSchoolYear.Text,
             };
 
+            string result = _sectionController.UpdateSection(section);
+            if (result == "Success")
+            {
+                MessageBox.Show("Section updated successfully!");
+                ClearForm();
+                RefreshGrid();
+            }
+            else
+            {
+                MessageBox.Show("Failed to update: " + result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             if (_sectionController.UpdateSection(section) == "Success")
             {
-                ClearForm(); RefreshGrid();
+                ClearForm(); 
+                RefreshGrid();
             }
         }
 
@@ -95,15 +118,18 @@ namespace UI
 
         private void RefreshGrid()
         {
-            dgvInfo.Rows.Clear();
-            foreach (var s in _sectionController.GetAllSections())
-                dgvInfo.Rows.Add(
-                    s.SectionCode, 
-                    s.SectionName, 
-                    s.GradeLevel, 
-                    s.SchoolYear, 
-                    s.Status
-                    );
+            try
+            {
+                dgvInfo.Rows.Clear();
+                foreach (var s in _sectionController.GetAllSections())
+                {
+                    dgvInfo.Rows.Add(s.SectionCode, s.SectionName, s.GradeLevel, s.SchoolYear);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading sections: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ClearForm()
