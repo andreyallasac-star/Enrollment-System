@@ -72,5 +72,6 @@
     <Build Include="Table\Payments.sql" />
     <Build Include="Table\Assessments.sql" />
     <Build Include="Table\GradeLevelFees.sql" />
+    <Build Include="StoredProc\SearchStudentAccount.sql" />
   </ItemGroup>
 </Project>
