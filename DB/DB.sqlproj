@@ -73,6 +73,7 @@
     <Build Include="Table\Assessments.sql" />
     <Build Include="Table\GradeLevelFees.sql" />
     <Build Include="StoredProc\SearchStudentAccount.sql" />
+    <Build Include="StoredProc\CreateStudent.sql" />
     <Build Include="StoredProc\DeactivateStudent.sql" />
   </ItemGroup>
 </Project>
