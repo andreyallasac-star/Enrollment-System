@@ -82,5 +82,6 @@
     <Build Include="StoredProc\UpdateUser.sql" />
     <Build Include="StoredProc\DeactivateUser.sql" />
     <Build Include="StoredProc\CreateSection.sql" />
+    <Build Include="StoredProc\GetAllSections.sql" />
   </ItemGroup>
 </Project>
