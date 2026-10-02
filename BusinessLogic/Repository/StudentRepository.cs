@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Model;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Text;
 
 namespace BusinessLogic.Repository
 {
@@ -15,9 +16,8 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand(
-                    "INSERT INTO Students (StudentId, FirstName, MiddleName, LastName, DateOfBirth, Address, Gender, Status) " +
-                    "VALUES (@StudentId, @FirstName, @MiddleName, @LastName, @DateOfBirth, @Address, @Gender, 'Active')", conn);
+                var cmd = new SqlCommand("CreateStudent", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@StudentId", student.StudentId);
                 cmd.Parameters.AddWithValue("@FirstName", student.FirstName);
@@ -37,7 +37,9 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand("SELECT StudentId, FirstName, MiddleName, LastName, DateOfBirth, Gender, Address, Status FROM Students", conn);
+                var cmd = new SqlCommand("GetAllStudents", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -64,9 +66,8 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand(
-                    "UPDATE Students SET FirstName = @FirstName, MiddleName = @MiddleName, LastName = @LastName, " +
-                    "DateOfBirth = @DateOfBirth, Address = @Address, Gender = @Gender WHERE StudentId = @StudentId", conn);
+                var cmd = new SqlCommand("UpdateStudent", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@FirstName", student.FirstName);
                 cmd.Parameters.AddWithValue("@MiddleName", student.MiddleName ?? (object)DBNull.Value);
@@ -85,7 +86,8 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand("UPDATE Students SET Status = 'Inactive' WHERE StudentId = @StudentId", conn);
+                var cmd = new SqlCommand("DeactivateStudent", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@StudentId", studentId);
                 return cmd.ExecuteNonQuery() > 0;
             }
