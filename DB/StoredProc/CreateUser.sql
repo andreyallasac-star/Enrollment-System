@@ -4,7 +4,6 @@
     @Role NVARCHAR(20)
 AS
 BEGIN
-    SET NOCOUNT ON;
     INSERT INTO Users (Username, PasswordHash, Role, Status) 
     VALUES (@Username, @PasswordHash, @Role, 'Active');
 END

@@ -4,7 +4,6 @@
     @UserId INT
 AS
 BEGIN
-    SET NOCOUNT ON;
     UPDATE Users 
     SET PasswordHash = @PasswordHash, Role = @Role 
     WHERE UserId = @UserId;

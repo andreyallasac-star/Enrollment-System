@@ -8,7 +8,6 @@
     @Gender NVARCHAR(10)
 AS
 BEGIN
-    SET NOCOUNT ON;
     UPDATE Students 
     SET FirstName = @FirstName, MiddleName = @MiddleName, LastName = @LastName, 
         DateOfBirth = @DateOfBirth, Address = @Address, Gender = @Gender 
