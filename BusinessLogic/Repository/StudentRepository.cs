@@ -92,5 +92,37 @@ namespace BusinessLogic.Repository
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+
+        public string GenerateNextStudentId()
+        {
+            string yearPrefix = DateTime.Now.Year.ToString();
+            string lastId = string.Empty;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var cmd = new SqlCommand("GetLatestStudentId", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@YearPrefix", yearPrefix);
+
+                var result = cmd.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    lastId = result.ToString();
+                }
+            }
+
+            int nextNumber = 1;
+            if (!string.IsNullOrEmpty(lastId))
+            {
+                string[] parts = lastId.Split('-');
+                if (parts.Length == 2 && int.TryParse(parts[1], out int currentNum))
+                {
+                    nextNumber = currentNum + 1;
+                }
+            }
+
+            return $"{yearPrefix}-{nextNumber:D4}";
+        }
     }
 }
