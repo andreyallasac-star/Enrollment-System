@@ -87,5 +87,6 @@
     <Build Include="StoredProc\DeactivateSection.sql" />
     <Build Include="StoredProc\GetUserByUsername.sql" />
     <Build Include="StoredProc\GetUserById.sql" />
+    <Build Include="StoredProc\GetLatestStudentId.sql" />
   </ItemGroup>
 </Project>
