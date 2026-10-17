@@ -200,8 +200,7 @@
             lblStudentName.BackColor = Color.Transparent;
             lblStudentName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentName.ForeColor = Color.Black;
-            lblStudentName.Location = new Point(180, 129);
-            lblStudentName.Location = new Point(141, 240);
+            lblStudentName.Location = new Point(132, 129);
             lblStudentName.Name = "lblStudentName";
             lblStudentName.Size = new Size(65, 21);
             lblStudentName.TabIndex = 11;
@@ -213,8 +212,7 @@
             lblStudentID.BackColor = Color.Transparent;
             lblStudentID.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentID.ForeColor = Color.Black;
-            lblStudentID.Location = new Point(180, 85);
-            lblStudentID.Location = new Point(141, 198);
+            lblStudentID.Location = new Point(106, 85);
             lblStudentID.Name = "lblStudentID";
             lblStudentID.Size = new Size(65, 21);
             lblStudentID.TabIndex = 12;
@@ -250,7 +248,7 @@
             lblDateofBirth.BackColor = Color.Transparent;
             lblDateofBirth.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDateofBirth.ForeColor = Color.Black;
-            lblDateofBirth.Location = new Point(180, 173);
+            lblDateofBirth.Location = new Point(121, 167);
             lblDateofBirth.Name = "lblDateofBirth";
             lblDateofBirth.Size = new Size(65, 21);
             lblDateofBirth.TabIndex = 15;
@@ -262,7 +260,7 @@
             lblGender.BackColor = Color.Transparent;
             lblGender.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGender.ForeColor = Color.Black;
-            lblGender.Location = new Point(180, 218);
+            lblGender.Location = new Point(84, 218);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(65, 21);
             lblGender.TabIndex = 16;
@@ -274,8 +272,7 @@
             lblAddress.BackColor = Color.Transparent;
             lblAddress.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAddress.ForeColor = Color.Black;
-            lblAddress.Location = new Point(180, 258);
-            lblAddress.Location = new Point(141, 279);
+            lblAddress.Location = new Point(87, 258);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(65, 21);
             lblAddress.TabIndex = 17;
