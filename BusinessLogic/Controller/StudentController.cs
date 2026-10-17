@@ -41,7 +41,7 @@ namespace BusinessLogic.Controller
 
         public string GetNextStudentId()
         {
-            return _studentRepository.GenerateNextStudentId();
+            return _studentRepo.GenerateNextStudentId();
         }
     }
 }
