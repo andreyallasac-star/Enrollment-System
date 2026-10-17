@@ -38,5 +38,10 @@ namespace BusinessLogic.Controller
         { 
             return _studentRepo.DeactivateStudent(studentId) ? "Success" : "Failed to deactivate student."; 
         }
+
+        public string GetNextStudentId()
+        {
+            return _studentRepository.GenerateNextStudentId();
+        }
     }
 }
