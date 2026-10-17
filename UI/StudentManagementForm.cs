@@ -39,6 +39,7 @@ namespace UI
         private void StudentManagementForm_Load(object sender, EventArgs e)
         {
             RefreshGrid();
+            ClearForm();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -133,12 +134,12 @@ namespace UI
         private void ClearForm()
         {
             _selectedStudentId = "";
-            txtStudentID.Clear();
+            txtStudentID.Text = _studentController.GetNextStudentId();
             txtFirstName.Clear();
             txtMiddleName.Clear();
             txtLastName.Clear();
             txtAddress.Clear();
-            txtStudentID.Enabled = true;
+            txtStudentID.Enabled = false;
         }
 
         
