@@ -46,7 +46,6 @@
             lblDateofBirth = new Label();
             lblGender = new Label();
             lblAddress = new Label();
-            label10 = new Label();
             label11 = new Label();
             label12 = new Label();
             label13 = new Label();
@@ -56,6 +55,14 @@
             lblRemainingBalance = new Label();
             label15 = new Label();
             lblSection = new Label();
+            panel1 = new Panel();
+            panel3 = new Panel();
+            label10 = new Label();
+            panel2 = new Panel();
+            btnClear = new Button();
+            panel1.SuspendLayout();
+            panel3.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -75,15 +82,15 @@
             txtSearch.Location = new Point(22, 82);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(713, 33);
+            txtSearch.Size = new Size(802, 33);
             txtSearch.TabIndex = 1;
             // 
             // btnSearch
             // 
             btnSearch.BackColor = Color.DeepSkyBlue;
-            btnSearch.Font = new Font("Arial Narrow", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSearch.Font = new Font("Arial Narrow", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(741, 82);
+            btnSearch.Location = new Point(830, 82);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(136, 33);
             btnSearch.TabIndex = 2;
@@ -95,8 +102,8 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.Black;
-            label2.Location = new Point(22, 145);
+            label2.ForeColor = Color.DeepSkyBlue;
+            label2.Location = new Point(52, 24);
             label2.Name = "label2";
             label2.Size = new Size(193, 22);
             label2.TabIndex = 3;
@@ -108,7 +115,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(22, 240);
+            label3.Location = new Point(23, 132);
             label3.Name = "label3";
             label3.Size = new Size(112, 18);
             label3.TabIndex = 4;
@@ -120,7 +127,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(23, 201);
+            label4.Location = new Point(23, 88);
             label4.Name = "label4";
             label4.Size = new Size(87, 18);
             label4.TabIndex = 5;
@@ -132,7 +139,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(26, 393);
+            label5.Location = new Point(28, 81);
             label5.Name = "label5";
             label5.Size = new Size(97, 18);
             label5.TabIndex = 6;
@@ -144,7 +151,7 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(26, 430);
+            label6.Location = new Point(28, 125);
             label6.Name = "label6";
             label6.Size = new Size(100, 18);
             label6.TabIndex = 7;
@@ -156,7 +163,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(448, 204);
+            label7.Location = new Point(23, 170);
             label7.Name = "label7";
             label7.Size = new Size(100, 18);
             label7.TabIndex = 8;
@@ -168,7 +175,7 @@
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(448, 240);
+            label8.Location = new Point(23, 221);
             label8.Name = "label8";
             label8.Size = new Size(66, 18);
             label8.TabIndex = 9;
@@ -180,7 +187,7 @@
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.ForeColor = Color.Black;
-            label9.Location = new Point(23, 279);
+            label9.Location = new Point(23, 261);
             label9.Name = "label9";
             label9.Size = new Size(70, 18);
             label9.TabIndex = 10;
@@ -192,7 +199,7 @@
             lblStudentName.BackColor = Color.Transparent;
             lblStudentName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentName.ForeColor = Color.Black;
-            lblStudentName.Location = new Point(141, 201);
+            lblStudentName.Location = new Point(180, 129);
             lblStudentName.Name = "lblStudentName";
             lblStudentName.Size = new Size(65, 21);
             lblStudentName.TabIndex = 11;
@@ -204,7 +211,7 @@
             lblStudentID.BackColor = Color.Transparent;
             lblStudentID.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentID.ForeColor = Color.Black;
-            lblStudentID.Location = new Point(141, 242);
+            lblStudentID.Location = new Point(180, 85);
             lblStudentID.Name = "lblStudentID";
             lblStudentID.Size = new Size(65, 21);
             lblStudentID.TabIndex = 12;
@@ -216,7 +223,7 @@
             lblSchoolYear.BackColor = Color.Transparent;
             lblSchoolYear.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSchoolYear.ForeColor = Color.Black;
-            lblSchoolYear.Location = new Point(141, 390);
+            lblSchoolYear.Location = new Point(179, 78);
             lblSchoolYear.Name = "lblSchoolYear";
             lblSchoolYear.Size = new Size(65, 21);
             lblSchoolYear.TabIndex = 13;
@@ -228,7 +235,7 @@
             lblGradeLevel.BackColor = Color.Transparent;
             lblGradeLevel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGradeLevel.ForeColor = Color.Black;
-            lblGradeLevel.Location = new Point(141, 427);
+            lblGradeLevel.Location = new Point(179, 122);
             lblGradeLevel.Name = "lblGradeLevel";
             lblGradeLevel.Size = new Size(65, 21);
             lblGradeLevel.TabIndex = 14;
@@ -240,7 +247,7 @@
             lblDateofBirth.BackColor = Color.Transparent;
             lblDateofBirth.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDateofBirth.ForeColor = Color.Black;
-            lblDateofBirth.Location = new Point(564, 204);
+            lblDateofBirth.Location = new Point(180, 173);
             lblDateofBirth.Name = "lblDateofBirth";
             lblDateofBirth.Size = new Size(65, 21);
             lblDateofBirth.TabIndex = 15;
@@ -252,7 +259,7 @@
             lblGender.BackColor = Color.Transparent;
             lblGender.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGender.ForeColor = Color.Black;
-            lblGender.Location = new Point(564, 240);
+            lblGender.Location = new Point(180, 218);
             lblGender.Name = "lblGender";
             lblGender.Size = new Size(65, 21);
             lblGender.TabIndex = 16;
@@ -264,31 +271,19 @@
             lblAddress.BackColor = Color.Transparent;
             lblAddress.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAddress.ForeColor = Color.Black;
-            lblAddress.Location = new Point(141, 276);
+            lblAddress.Location = new Point(180, 258);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(65, 21);
             lblAddress.TabIndex = 17;
             lblAddress.Text = "<label>";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.Black;
-            label10.Location = new Point(22, 341);
-            label10.Name = "label10";
-            label10.Size = new Size(251, 22);
-            label10.TabIndex = 18;
-            label10.Text = "Current Enrollment Status";
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.BackColor = Color.Transparent;
             label11.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.ForeColor = Color.Black;
-            label11.Location = new Point(11, 492);
+            label11.ForeColor = Color.DeepSkyBlue;
+            label11.Location = new Point(59, 24);
             label11.Name = "label11";
             label11.Size = new Size(246, 22);
             label11.TabIndex = 19;
@@ -300,7 +295,7 @@
             label12.BackColor = Color.Transparent;
             label12.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.Black;
-            label12.Location = new Point(22, 551);
+            label12.Location = new Point(35, 81);
             label12.Name = "label12";
             label12.Size = new Size(135, 18);
             label12.TabIndex = 20;
@@ -312,7 +307,7 @@
             label13.BackColor = Color.Transparent;
             label13.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label13.ForeColor = Color.Black;
-            label13.Location = new Point(22, 588);
+            label13.Location = new Point(35, 122);
             label13.Name = "label13";
             label13.Size = new Size(82, 18);
             label13.TabIndex = 21;
@@ -324,7 +319,7 @@
             label14.BackColor = Color.Transparent;
             label14.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label14.ForeColor = Color.Black;
-            label14.Location = new Point(448, 548);
+            label14.Location = new Point(35, 166);
             label14.Name = "label14";
             label14.Size = new Size(148, 18);
             label14.TabIndex = 22;
@@ -336,7 +331,7 @@
             lblTotalAssessment.BackColor = Color.Transparent;
             lblTotalAssessment.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTotalAssessment.ForeColor = Color.Black;
-            lblTotalAssessment.Location = new Point(166, 548);
+            lblTotalAssessment.Location = new Point(226, 78);
             lblTotalAssessment.Name = "lblTotalAssessment";
             lblTotalAssessment.Size = new Size(65, 21);
             lblTotalAssessment.TabIndex = 23;
@@ -348,7 +343,7 @@
             lblTotalPaid.BackColor = Color.Transparent;
             lblTotalPaid.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTotalPaid.ForeColor = Color.Black;
-            lblTotalPaid.Location = new Point(166, 585);
+            lblTotalPaid.Location = new Point(226, 119);
             lblTotalPaid.Name = "lblTotalPaid";
             lblTotalPaid.Size = new Size(65, 21);
             lblTotalPaid.TabIndex = 24;
@@ -360,7 +355,7 @@
             lblRemainingBalance.BackColor = Color.Transparent;
             lblRemainingBalance.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblRemainingBalance.ForeColor = Color.Black;
-            lblRemainingBalance.Location = new Point(602, 548);
+            lblRemainingBalance.Location = new Point(226, 163);
             lblRemainingBalance.Name = "lblRemainingBalance";
             lblRemainingBalance.Size = new Size(65, 21);
             lblRemainingBalance.TabIndex = 25;
@@ -372,7 +367,7 @@
             label15.BackColor = Color.Transparent;
             label15.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label15.ForeColor = Color.Black;
-            label15.Location = new Point(448, 390);
+            label15.Location = new Point(28, 169);
             label15.Name = "label15";
             label15.Size = new Size(66, 18);
             label15.TabIndex = 26;
@@ -384,11 +379,84 @@
             lblSection.BackColor = Color.Transparent;
             lblSection.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSection.ForeColor = Color.Black;
-            lblSection.Location = new Point(564, 390);
+            lblSection.Location = new Point(179, 166);
             lblSection.Name = "lblSection";
             lblSection.Size = new Size(65, 21);
             lblSection.TabIndex = 27;
             lblSection.Text = "<label>";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lblStudentID);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(lblStudentName);
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(lblDateofBirth);
+            panel1.Controls.Add(label8);
+            panel1.Controls.Add(lblGender);
+            panel1.Controls.Add(label9);
+            panel1.Controls.Add(lblAddress);
+            panel1.Location = new Point(22, 186);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(329, 331);
+            panel1.TabIndex = 28;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.White;
+            panel3.Controls.Add(label11);
+            panel3.Controls.Add(label12);
+            panel3.Controls.Add(lblTotalAssessment);
+            panel3.Controls.Add(lblRemainingBalance);
+            panel3.Controls.Add(label13);
+            panel3.Controls.Add(label14);
+            panel3.Controls.Add(lblTotalPaid);
+            panel3.Location = new Point(744, 186);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(329, 331);
+            panel3.TabIndex = 30;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.DeepSkyBlue;
+            label10.Location = new Point(48, 24);
+            label10.Name = "label10";
+            label10.Size = new Size(251, 22);
+            label10.TabIndex = 18;
+            label10.Text = "Current Enrollment Status";
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.White;
+            panel2.Controls.Add(label10);
+            panel2.Controls.Add(label5);
+            panel2.Controls.Add(lblSchoolYear);
+            panel2.Controls.Add(lblSection);
+            panel2.Controls.Add(label6);
+            panel2.Controls.Add(label15);
+            panel2.Controls.Add(lblGradeLevel);
+            panel2.Location = new Point(379, 186);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(329, 331);
+            panel2.TabIndex = 29;
+            // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.White;
+            btnClear.Font = new Font("Arial Narrow", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.ForeColor = Color.DeepSkyBlue;
+            btnClear.Location = new Point(970, 82);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(124, 33);
+            btnClear.TabIndex = 31;
+            btnClear.Text = "⟳ Clear";
+            btnClear.UseVisualStyleBackColor = false;
             // 
             // StudentAccountSearch
             // 
@@ -396,38 +464,23 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.Azure;
-            ClientSize = new Size(887, 655);
-            Controls.Add(lblSection);
-            Controls.Add(label15);
-            Controls.Add(lblRemainingBalance);
-            Controls.Add(lblTotalPaid);
-            Controls.Add(lblTotalAssessment);
-            Controls.Add(label14);
-            Controls.Add(label13);
-            Controls.Add(label12);
-            Controls.Add(label11);
-            Controls.Add(label10);
-            Controls.Add(lblAddress);
-            Controls.Add(lblGender);
-            Controls.Add(lblDateofBirth);
-            Controls.Add(lblGradeLevel);
-            Controls.Add(lblSchoolYear);
-            Controls.Add(lblStudentID);
-            Controls.Add(lblStudentName);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
+            ClientSize = new Size(1102, 655);
+            Controls.Add(btnClear);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(btnSearch);
             Controls.Add(txtSearch);
             Controls.Add(label1);
             Name = "StudentAccountSearch";
             Text = "StudentAccountSearch";
             Load += StudentAccountSearch_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -452,7 +505,6 @@
         private Label lblDateofBirth;
         private Label lblGender;
         private Label lblAddress;
-        private Label label10;
         private Label label11;
         private Label label12;
         private Label label13;
@@ -462,5 +514,10 @@
         private Label lblRemainingBalance;
         private Label label15;
         private Label lblSection;
+        private Panel panel1;
+        private Panel panel3;
+        private Label label10;
+        private Panel panel2;
+        private Button btnClear;
     }
 }
