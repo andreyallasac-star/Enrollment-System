@@ -65,6 +65,8 @@
             lblTotalAssessment = new Label();
             lblStudentName = new Label();
             lblStudentID = new Label();
+            label3 = new Label();
+            label4 = new Label();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -75,7 +77,7 @@
             label12.BackColor = Color.Transparent;
             label12.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label12.ForeColor = Color.Black;
-            label12.Location = new Point(29, 0);
+            label12.Location = new Point(80, 13);
             label12.Name = "label12";
             label12.Size = new Size(291, 37);
             label12.TabIndex = 0;
@@ -84,6 +86,8 @@
             // panel3
             // 
             panel3.BackColor = Color.Azure;
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(label3);
             panel3.Controls.Add(lblReceipt);
             panel3.Controls.Add(label2);
             panel3.Controls.Add(dataGridView1);
@@ -116,7 +120,7 @@
             panel3.Location = new Point(2, 1);
             panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(991, 589);
+            panel3.Size = new Size(991, 615);
             panel3.TabIndex = 2;
             // 
             // lblReceipt
@@ -124,7 +128,7 @@
             lblReceipt.AutoSize = true;
             lblReceipt.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblReceipt.ForeColor = Color.Black;
-            lblReceipt.Location = new Point(783, 12);
+            lblReceipt.Location = new Point(884, 25);
             lblReceipt.Name = "lblReceipt";
             lblReceipt.Size = new Size(83, 25);
             lblReceipt.TabIndex = 26;
@@ -135,7 +139,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(677, 12);
+            label2.Location = new Point(766, 25);
             label2.Name = "label2";
             label2.Size = new Size(100, 25);
             label2.TabIndex = 25;
@@ -144,9 +148,11 @@
             // dataGridView1
             // 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7 });
-            dataGridView1.Location = new Point(34, 361);
+            dataGridView1.GridColor = Color.DeepSkyBlue;
+            dataGridView1.Location = new Point(29, 376);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(886, 218);
             dataGridView1.TabIndex = 24;
@@ -191,7 +197,7 @@
             lblSection.AutoSize = true;
             lblSection.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSection.ForeColor = Color.Black;
-            lblSection.Location = new Point(144, 145);
+            lblSection.Location = new Point(170, 167);
             lblSection.Name = "lblSection";
             lblSection.Size = new Size(83, 25);
             lblSection.TabIndex = 23;
@@ -202,7 +208,7 @@
             LabelSection.AutoSize = true;
             LabelSection.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LabelSection.ForeColor = Color.Black;
-            LabelSection.Location = new Point(29, 145);
+            LabelSection.Location = new Point(29, 167);
             LabelSection.Name = "LabelSection";
             LabelSection.Size = new Size(78, 25);
             LabelSection.TabIndex = 22;
@@ -223,7 +229,7 @@
             // dtpPayment
             // 
             dtpPayment.Font = new Font("Segoe UI", 12F);
-            dtpPayment.Location = new Point(598, 190);
+            dtpPayment.Location = new Point(593, 205);
             dtpPayment.Name = "dtpPayment";
             dtpPayment.Size = new Size(273, 29);
             dtpPayment.TabIndex = 20;
@@ -233,7 +239,7 @@
             lblPaid.AutoSize = true;
             lblPaid.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPaid.ForeColor = Color.Black;
-            lblPaid.Location = new Point(635, 115);
+            lblPaid.Location = new Point(635, 142);
             lblPaid.Name = "lblPaid";
             lblPaid.Size = new Size(83, 25);
             lblPaid.TabIndex = 19;
@@ -244,7 +250,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(460, 115);
+            label1.Location = new Point(460, 142);
             label1.Name = "label1";
             label1.Size = new Size(97, 25);
             label1.TabIndex = 18;
@@ -252,19 +258,20 @@
             // 
             // btnConfirm
             // 
+            btnConfirm.BackColor = Color.DeepSkyBlue;
             btnConfirm.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Bold);
             btnConfirm.Location = new Point(573, 283);
             btnConfirm.Name = "btnConfirm";
             btnConfirm.Size = new Size(122, 38);
             btnConfirm.TabIndex = 17;
             btnConfirm.Text = "CONFIRM";
-            btnConfirm.UseVisualStyleBackColor = true;
+            btnConfirm.UseVisualStyleBackColor = false;
             // 
             // btnSearchID
             // 
-            btnSearchID.BackColor = Color.Transparent;
+            btnSearchID.BackColor = Color.DeepSkyBlue;
             btnSearchID.Font = new Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSearchID.Location = new Point(554, 45);
+            btnSearchID.Location = new Point(554, 60);
             btnSearchID.Name = "btnSearchID";
             btnSearchID.Size = new Size(75, 34);
             btnSearchID.TabIndex = 16;
@@ -274,7 +281,7 @@
             // txtSearchStudent
             // 
             txtSearchStudent.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSearchStudent.Location = new Point(205, 46);
+            txtSearchStudent.Location = new Point(205, 62);
             txtSearchStudent.Margin = new Padding(3, 2, 3, 2);
             txtSearchStudent.Name = "txtSearchStudent";
             txtSearchStudent.Size = new Size(343, 32);
@@ -285,7 +292,7 @@
             lblSearch.AutoSize = true;
             lblSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSearch.ForeColor = Color.Black;
-            lblSearch.Location = new Point(29, 50);
+            lblSearch.Location = new Point(29, 65);
             lblSearch.Name = "lblSearch";
             lblSearch.Size = new Size(165, 25);
             lblSearch.TabIndex = 0;
@@ -295,7 +302,7 @@
             // 
             cmbPaymentMethod.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbPaymentMethod.FormattingEnabled = true;
-            cmbPaymentMethod.Location = new Point(205, 225);
+            cmbPaymentMethod.Location = new Point(205, 242);
             cmbPaymentMethod.Margin = new Padding(3, 2, 3, 2);
             cmbPaymentMethod.Name = "cmbPaymentMethod";
             cmbPaymentMethod.Size = new Size(218, 33);
@@ -315,7 +322,7 @@
             // txtPaymentAmount
             // 
             txtPaymentAmount.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPaymentAmount.Location = new Point(205, 190);
+            txtPaymentAmount.Location = new Point(205, 201);
             txtPaymentAmount.Margin = new Padding(3, 2, 3, 2);
             txtPaymentAmount.Name = "txtPaymentAmount";
             txtPaymentAmount.Size = new Size(218, 32);
@@ -326,7 +333,7 @@
             lblBalance.AutoSize = true;
             lblBalance.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblBalance.ForeColor = Color.Black;
-            lblBalance.Location = new Point(635, 145);
+            lblBalance.Location = new Point(635, 167);
             lblBalance.Name = "lblBalance";
             lblBalance.Size = new Size(83, 25);
             lblBalance.TabIndex = 11;
@@ -337,7 +344,7 @@
             lblAssessment.AutoSize = true;
             lblAssessment.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAssessment.ForeColor = Color.Black;
-            lblAssessment.Location = new Point(635, 84);
+            lblAssessment.Location = new Point(635, 115);
             lblAssessment.Name = "lblAssessment";
             lblAssessment.Size = new Size(83, 25);
             lblAssessment.TabIndex = 10;
@@ -348,7 +355,7 @@
             lblName.AutoSize = true;
             lblName.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblName.ForeColor = Color.Black;
-            lblName.Location = new Point(191, 115);
+            lblName.Location = new Point(170, 142);
             lblName.Name = "lblName";
             lblName.Size = new Size(83, 25);
             lblName.TabIndex = 9;
@@ -359,7 +366,7 @@
             lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblID.ForeColor = Color.Black;
-            lblID.Location = new Point(144, 84);
+            lblID.Location = new Point(170, 115);
             lblID.Name = "lblID";
             lblID.Size = new Size(83, 25);
             lblID.TabIndex = 8;
@@ -381,7 +388,7 @@
             lblPaymentDate.AutoSize = true;
             lblPaymentDate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPaymentDate.ForeColor = Color.Black;
-            lblPaymentDate.Location = new Point(460, 192);
+            lblPaymentDate.Location = new Point(460, 208);
             lblPaymentDate.Name = "lblPaymentDate";
             lblPaymentDate.Size = new Size(132, 25);
             lblPaymentDate.TabIndex = 6;
@@ -392,7 +399,7 @@
             lblPaymentMethod.AutoSize = true;
             lblPaymentMethod.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPaymentMethod.ForeColor = Color.Black;
-            lblPaymentMethod.Location = new Point(29, 225);
+            lblPaymentMethod.Location = new Point(29, 242);
             lblPaymentMethod.Name = "lblPaymentMethod";
             lblPaymentMethod.Size = new Size(159, 25);
             lblPaymentMethod.TabIndex = 5;
@@ -403,7 +410,7 @@
             lblPaymentAmount.AutoSize = true;
             lblPaymentAmount.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPaymentAmount.ForeColor = Color.Black;
-            lblPaymentAmount.Location = new Point(29, 192);
+            lblPaymentAmount.Location = new Point(29, 208);
             lblPaymentAmount.Name = "lblPaymentAmount";
             lblPaymentAmount.Size = new Size(160, 25);
             lblPaymentAmount.TabIndex = 4;
@@ -414,7 +421,7 @@
             lblCurrentBalance.AutoSize = true;
             lblCurrentBalance.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCurrentBalance.ForeColor = Color.Black;
-            lblCurrentBalance.Location = new Point(460, 145);
+            lblCurrentBalance.Location = new Point(460, 167);
             lblCurrentBalance.Name = "lblCurrentBalance";
             lblCurrentBalance.Size = new Size(151, 25);
             lblCurrentBalance.TabIndex = 3;
@@ -425,7 +432,7 @@
             lblTotalAssessment.AutoSize = true;
             lblTotalAssessment.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTotalAssessment.ForeColor = Color.Black;
-            lblTotalAssessment.Location = new Point(460, 84);
+            lblTotalAssessment.Location = new Point(460, 115);
             lblTotalAssessment.Name = "lblTotalAssessment";
             lblTotalAssessment.Size = new Size(158, 25);
             lblTotalAssessment.TabIndex = 2;
@@ -436,7 +443,7 @@
             lblStudentName.AutoSize = true;
             lblStudentName.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentName.ForeColor = Color.Black;
-            lblStudentName.Location = new Point(29, 115);
+            lblStudentName.Location = new Point(29, 142);
             lblStudentName.Name = "lblStudentName";
             lblStudentName.Size = new Size(135, 25);
             lblStudentName.TabIndex = 1;
@@ -447,18 +454,38 @@
             lblStudentID.AutoSize = true;
             lblStudentID.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentID.ForeColor = Color.Black;
-            lblStudentID.Location = new Point(29, 84);
+            lblStudentID.Location = new Point(29, 115);
             lblStudentID.Name = "lblStudentID";
             lblStudentID.Size = new Size(103, 25);
             lblStudentID.TabIndex = 0;
             lblStudentID.Text = "Student ID:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(10, 5);
+            label3.Name = "label3";
+            label3.Size = new Size(64, 45);
+            label3.TabIndex = 27;
+            label3.Text = "💰";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(696, 13);
+            label4.Name = "label4";
+            label4.Size = new Size(64, 45);
+            label4.TabIndex = 28;
+            label4.Text = "\U0001f9fe";
             // 
             // PaymentandCashieringForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(996, 592);
+            ClientSize = new Size(996, 617);
             Controls.Add(panel3);
             ForeColor = Color.Black;
             Margin = new Padding(3, 2, 3, 2);
@@ -508,5 +535,7 @@
         private DataGridViewTextBoxColumn Column7;
         private Label lblReceipt;
         private Label label2;
+        private Label label3;
+        private Label label4;
     }
 }
