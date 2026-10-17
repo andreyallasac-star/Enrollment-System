@@ -1,12 +1,12 @@
-﻿using BusinessLogic.Controller;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BusinessLogic.Controller;
+using Model;
 
 namespace UI
 {
@@ -82,7 +82,8 @@ namespace UI
 
             if (_studentController.UpdateStudent(updatedStudent) == "Success")
             {
-                ClearForm(); RefreshGrid();
+                ClearForm(); 
+                RefreshGrid();
             }
         }
 
@@ -92,7 +93,8 @@ namespace UI
 
             if (_studentController.DeactivateStudent(_selectedStudentId) == "Success")
             {
-                ClearForm(); RefreshGrid();
+                ClearForm(); 
+                RefreshGrid();
             }
         }
 

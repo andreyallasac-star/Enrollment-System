@@ -216,6 +216,7 @@
             btnSave.TabIndex = 11;
             btnSave.Text = "SAVE";
             btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
             // 
             // btnCompute
             // 
@@ -228,6 +229,7 @@
             btnCompute.TabIndex = 10;
             btnCompute.Text = "COMPUTE";
             btnCompute.UseVisualStyleBackColor = false;
+            btnCompute.Click += btnCompute_Click;
             // 
             // lblTotalAssessment
             // 
