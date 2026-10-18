@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            cmbGradeLevel = new ComboBox();
             dgvInfo = new DataGridView();
             dgvCode = new DataGridViewTextBoxColumn();
             dgvName = new DataGridViewTextBoxColumn();
@@ -37,7 +38,6 @@
             btnDeactivate = new Button();
             btnUpdate = new Button();
             btnAdd = new Button();
-            txtSchoolYear = new TextBox();
             txtSectionName = new TextBox();
             txtSectionCode = new TextBox();
             lblSchoolYear = new Label();
@@ -45,19 +45,19 @@
             lblSectionName = new Label();
             lblSectionCode = new Label();
             lblSectionManagement = new Label();
-            cmbGradeLevel = new ComboBox();
+            cmbSchoolYear = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvInfo).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(cmbSchoolYear);
             panel1.Controls.Add(cmbGradeLevel);
             panel1.Controls.Add(dgvInfo);
             panel1.Controls.Add(btnDeactivate);
             panel1.Controls.Add(btnUpdate);
             panel1.Controls.Add(btnAdd);
-            panel1.Controls.Add(txtSchoolYear);
             panel1.Controls.Add(txtSectionName);
             panel1.Controls.Add(txtSectionCode);
             panel1.Controls.Add(lblSchoolYear);
@@ -70,6 +70,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(751, 430);
             panel1.TabIndex = 0;
+            // 
+            // cmbGradeLevel
+            // 
+            cmbGradeLevel.Font = new Font("Segoe UI", 13.8F);
+            cmbGradeLevel.FormattingEnabled = true;
+            cmbGradeLevel.Location = new Point(173, 156);
+            cmbGradeLevel.Name = "cmbGradeLevel";
+            cmbGradeLevel.Size = new Size(299, 33);
+            cmbGradeLevel.TabIndex = 13;
             // 
             // dgvInfo
             // 
@@ -152,15 +161,6 @@
             btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
-            // txtSchoolYear
-            // 
-            txtSchoolYear.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSchoolYear.Location = new Point(173, 196);
-            txtSchoolYear.Margin = new Padding(3, 2, 3, 2);
-            txtSchoolYear.Name = "txtSchoolYear";
-            txtSchoolYear.Size = new Size(299, 32);
-            txtSchoolYear.TabIndex = 8;
-            // 
             // txtSectionName
             // 
             txtSectionName.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -235,14 +235,15 @@
             lblSectionManagement.TabIndex = 0;
             lblSectionManagement.Text = "Section Management";
             // 
-            // cmbGradeLevel
+            // cmbSchoolYear
             // 
-            cmbGradeLevel.Font = new Font("Segoe UI", 13.8F);
-            cmbGradeLevel.FormattingEnabled = true;
-            cmbGradeLevel.Location = new Point(173, 156);
-            cmbGradeLevel.Name = "cmbGradeLevel";
-            cmbGradeLevel.Size = new Size(299, 33);
-            cmbGradeLevel.TabIndex = 13;
+            cmbSchoolYear.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSchoolYear.Font = new Font("Segoe UI", 13.8F);
+            cmbSchoolYear.FormattingEnabled = true;
+            cmbSchoolYear.Location = new Point(173, 196);
+            cmbSchoolYear.Name = "cmbSchoolYear";
+            cmbSchoolYear.Size = new Size(299, 33);
+            cmbSchoolYear.TabIndex = 14;
             // 
             // SectionManagement
             // 
@@ -264,7 +265,6 @@
 
         private Panel panel1;
         private Label lblSectionManagement;
-        private TextBox txtSchoolYear;
         private TextBox txtSectionName;
         private TextBox txtSectionCode;
         private Label lblSchoolYear;
@@ -280,5 +280,6 @@
         private DataGridViewTextBoxColumn dgvGrade;
         private DataGridViewTextBoxColumn dgvYear;
         private ComboBox cmbGradeLevel;
+        private ComboBox cmbSchoolYear;
     }
 }
