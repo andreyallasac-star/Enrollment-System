@@ -29,11 +29,6 @@ namespace UI
             cmbGender.Items.Add("Female");
             cmbGender.SelectedIndex = 0;
 
-            this.Load += StudentManagementForm_Load;
-            btnAdd.Click += btnAdd_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDeactivate.Click += btnDeactivate_Click;
-            dgvStudentRecords.CellClick += dgvStudentRecords_CellClick_1;
         }
 
         private void StudentManagementForm_Load(object sender, EventArgs e)
