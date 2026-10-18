@@ -38,7 +38,6 @@
             btnUpdate = new Button();
             btnAdd = new Button();
             txtSchoolYear = new TextBox();
-            txtGradeLevel = new TextBox();
             txtSectionName = new TextBox();
             txtSectionCode = new TextBox();
             lblSchoolYear = new Label();
@@ -46,18 +45,19 @@
             lblSectionName = new Label();
             lblSectionCode = new Label();
             lblSectionManagement = new Label();
+            cmbGradeLevel = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvInfo).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(cmbGradeLevel);
             panel1.Controls.Add(dgvInfo);
             panel1.Controls.Add(btnDeactivate);
             panel1.Controls.Add(btnUpdate);
             panel1.Controls.Add(btnAdd);
             panel1.Controls.Add(txtSchoolYear);
-            panel1.Controls.Add(txtGradeLevel);
             panel1.Controls.Add(txtSectionName);
             panel1.Controls.Add(txtSectionCode);
             panel1.Controls.Add(lblSchoolYear);
@@ -161,15 +161,6 @@
             txtSchoolYear.Size = new Size(299, 32);
             txtSchoolYear.TabIndex = 8;
             // 
-            // txtGradeLevel
-            // 
-            txtGradeLevel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtGradeLevel.Location = new Point(173, 156);
-            txtGradeLevel.Margin = new Padding(3, 2, 3, 2);
-            txtGradeLevel.Name = "txtGradeLevel";
-            txtGradeLevel.Size = new Size(299, 32);
-            txtGradeLevel.TabIndex = 7;
-            // 
             // txtSectionName
             // 
             txtSectionName.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -244,6 +235,15 @@
             lblSectionManagement.TabIndex = 0;
             lblSectionManagement.Text = "Section Management";
             // 
+            // cmbGradeLevel
+            // 
+            cmbGradeLevel.Font = new Font("Segoe UI", 13.8F);
+            cmbGradeLevel.FormattingEnabled = true;
+            cmbGradeLevel.Location = new Point(173, 156);
+            cmbGradeLevel.Name = "cmbGradeLevel";
+            cmbGradeLevel.Size = new Size(299, 33);
+            cmbGradeLevel.TabIndex = 13;
+            // 
             // SectionManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -265,7 +265,6 @@
         private Panel panel1;
         private Label lblSectionManagement;
         private TextBox txtSchoolYear;
-        private TextBox txtGradeLevel;
         private TextBox txtSectionName;
         private TextBox txtSectionCode;
         private Label lblSchoolYear;
@@ -280,5 +279,6 @@
         private DataGridViewTextBoxColumn dgvName;
         private DataGridViewTextBoxColumn dgvGrade;
         private DataGridViewTextBoxColumn dgvYear;
+        private ComboBox cmbGradeLevel;
     }
 }
