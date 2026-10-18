@@ -53,21 +53,21 @@ namespace UI
 
             if (profile != null)
             {
-                label1.Text = profile.FullName;
-                label2.Text = profile.GradeLevel;
-                label3.Text = profile.Section;
+                lblStudentName.Text = profile.FullName;
+                lblGrade.Text = profile.GradeLevel;
+                lblSection.Text = profile.Section;
             }
             else
             {
-                label1.Text = "Student not found";
-                label2.Text = "---";
-                label3.Text = "---";
+                lblStudentName.Text = "Student not found";
+                lblGrade.Text = "---";
+                lblSection.Text = "---";
             }
         }
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
-            string gradeLevel = label2.Text;
+            string gradeLevel = lblGrade.Text;
             string schoolYear = "2026-2027";
 
             if (gradeLevel == "<Label>" || gradeLevel == "---")
@@ -83,7 +83,7 @@ namespace UI
             decimal.TryParse(txtOtherFee.Text, out otherFees);
 
             decimal total = officialTuition + otherFees;
-            label5.Text = total.ToString("F2");
+            lblTotalAssessment.Text = total.ToString("F2");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace UI
             }
 
             decimal totalAssessment = 0;
-            decimal.TryParse(label5.Text, out totalAssessment);
+            decimal.TryParse(lblTotalAssessment.Text, out totalAssessment);
 
             if (totalAssessment <= 0)
             {
@@ -131,10 +131,10 @@ namespace UI
             txtTuitionFee.Clear();
             txtOtherFee.Text = "0.00";
             txtPaymentMode.Clear();
-            label1.Text = "<Label>";
-            label2.Text = "<Label>";
-            label3.Text = "<Label>";
-            label5.Text = "<Label>";
+            lblStudentName.Text = "<Label>";
+            lblGrade.Text = "<Label>";
+            lblSection.Text = "<Label>";
+            lblTotalAssessment.Text = "<Label>";
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
