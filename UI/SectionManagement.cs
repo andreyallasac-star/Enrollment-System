@@ -26,6 +26,8 @@ namespace UI
 
             dgvInfo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
             dgvInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
+
+            cmbGradeLevel.Items.AddRange(new string[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10"});
         }
 
         private void SectionManagement_Load(object sender, EventArgs e)
@@ -39,7 +41,7 @@ namespace UI
             {
                 SectionCode = txtSectionCode.Text,
                 SectionName = txtSectionName.Text,
-                GradeLevel = txtGradeLevel.Text,
+                GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
                 SchoolYear = txtSchoolYear.Text,
             };
 
@@ -64,7 +66,7 @@ namespace UI
             {
                 SectionCode = _selectedCode,
                 SectionName = txtSectionName.Text,
-                GradeLevel = txtGradeLevel.Text,
+                GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
                 SchoolYear = txtSchoolYear.Text,
             };
 
@@ -104,7 +106,7 @@ namespace UI
                 _selectedCode = row.Cells[0].Value?.ToString();
                 txtSectionCode.Text = _selectedCode;
                 txtSectionName.Text = row.Cells[1].Value?.ToString();
-                txtGradeLevel.Text = row.Cells[2].Value?.ToString();
+                cmbGradeLevel.SelectedItem = row.Cells[2].Value?.ToString();
                 txtSchoolYear.Text = row.Cells[3].Value?.ToString();
                 txtSectionCode.Enabled = false;
             }
@@ -130,8 +132,8 @@ namespace UI
         {
             _selectedCode = "";
             txtSectionCode.Clear(); 
-            txtSectionName.Clear(); 
-            txtGradeLevel.Clear(); 
+            txtSectionName.Clear();
+            cmbGradeLevel.SelectedIndex = -1;
             txtSchoolYear.Clear(); 
             txtSectionCode.Enabled = true;
         }
