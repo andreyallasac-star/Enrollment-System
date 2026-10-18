@@ -30,6 +30,9 @@
         {
             label6 = new Label();
             panel2 = new Panel();
+            btnSearch = new Button();
+            dateTimePicker1 = new DateTimePicker();
+            cmbPaymentMode = new ComboBox();
             lblTotalAssessment = new Label();
             lblStatus = new Label();
             lblSection = new Label();
@@ -50,8 +53,6 @@
             labelgrade = new Label();
             lblStudent = new Label();
             lblStudentId = new Label();
-            cmbPaymentMode = new ComboBox();
-            dateTimePicker1 = new DateTimePicker();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -71,6 +72,7 @@
             // 
             panel2.Anchor = AnchorStyles.None;
             panel2.BackColor = Color.Azure;
+            panel2.Controls.Add(btnSearch);
             panel2.Controls.Add(dateTimePicker1);
             panel2.Controls.Add(cmbPaymentMode);
             panel2.Controls.Add(label6);
@@ -100,6 +102,35 @@
             panel2.Size = new Size(990, 489);
             panel2.TabIndex = 1;
             panel2.Paint += panel2_Paint;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSearch.Location = new Point(470, 57);
+            btnSearch.Margin = new Padding(3, 2, 3, 2);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(112, 32);
+            btnSearch.TabIndex = 26;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Font = new Font("Segoe UI", 13.8F);
+            dateTimePicker1.Location = new Point(565, 295);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(293, 32);
+            dateTimePicker1.TabIndex = 23;
+            // 
+            // cmbPaymentMode
+            // 
+            cmbPaymentMode.Font = new Font("Segoe UI", 13.8F);
+            cmbPaymentMode.FormattingEnabled = true;
+            cmbPaymentMode.Location = new Point(652, 248);
+            cmbPaymentMode.Name = "cmbPaymentMode";
+            cmbPaymentMode.Size = new Size(206, 33);
+            cmbPaymentMode.TabIndex = 22;
             // 
             // lblTotalAssessment
             // 
@@ -333,23 +364,6 @@
             lblStudentId.TabIndex = 0;
             lblStudentId.Text = "Student ID:";
             // 
-            // cmbPaymentMode
-            // 
-            cmbPaymentMode.Font = new Font("Segoe UI", 13.8F);
-            cmbPaymentMode.FormattingEnabled = true;
-            cmbPaymentMode.Location = new Point(652, 248);
-            cmbPaymentMode.Name = "cmbPaymentMode";
-            cmbPaymentMode.Size = new Size(206, 33);
-            cmbPaymentMode.TabIndex = 22;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Font = new Font("Segoe UI", 13.8F);
-            dateTimePicker1.Location = new Point(565, 295);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(293, 32);
-            dateTimePicker1.TabIndex = 23;
-            // 
             // AssessmentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -391,5 +405,6 @@
         private Label lblStudentName;
         private DateTimePicker dateTimePicker1;
         private ComboBox cmbPaymentMode;
+        private Button btnSearch;
     }
 }
