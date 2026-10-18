@@ -458,6 +458,7 @@
             btnClear.TabIndex = 31;
             btnClear.Text = "⟳ Clear";
             btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // StudentAccountSearch
             // 
