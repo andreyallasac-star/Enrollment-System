@@ -26,12 +26,6 @@ namespace UI
 
             dgvInfo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
             dgvInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
-
-            this.Load += SectionManagement_Load;
-            btnAdd.Click += btnAdd_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDeactivate.Click += btnDeactivate_Click;
-            dgvInfo.CellClick += dgvInfo_CellClick;
         }
 
         private void SectionManagement_Load(object sender, EventArgs e)
