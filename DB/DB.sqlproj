@@ -88,5 +88,6 @@
     <Build Include="StoredProc\GetUserByUsername.sql" />
     <Build Include="StoredProc\GetUserById.sql" />
     <Build Include="StoredProc\GetLatestStudentId.sql" />
+    <Build Include="StoredProc\EnrollStudent.sql" />
   </ItemGroup>
 </Project>
