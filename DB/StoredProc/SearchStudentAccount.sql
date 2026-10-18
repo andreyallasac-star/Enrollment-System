@@ -12,7 +12,7 @@ BEGIN
         s.Address,
         e.SchoolYear,
         sec.GradeLevel,
-        e.SectionCode AS Section,
+        sec.SectionName AS Section, 
         ISNULL((SELECT TOP 1 TotalAssessment FROM Assessments WHERE StudentId = s.StudentId ORDER BY AssessmentId DESC), 0) AS TotalAssessment,
         ISNULL((SELECT SUM(AmountPaid) FROM Payments WHERE StudentId = s.StudentId), 0) AS TotalPaid
     FROM Students s
