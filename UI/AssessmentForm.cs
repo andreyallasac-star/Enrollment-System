@@ -111,7 +111,6 @@ namespace UI
             txtTuitionFee.Clear();
             txtOtherFee.Text = "0.00";
 
-            cmbPaymentMode.SelectedIndex = -1;
             dateTimePicker1.Value = DateTime.Now;
 
             lblStudentName.Text = "<Label>";
@@ -128,6 +127,5 @@ namespace UI
 
         }
 
-        
     }
 }
