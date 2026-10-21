@@ -100,6 +100,7 @@
             btnLogOut.TabIndex = 2;
             btnLogOut.Text = "Log Out";
             btnLogOut.UseVisualStyleBackColor = false;
+            btnLogOut.Click += btnLogOut_Click;
             // 
             // btnPaymentHistory
             // 
