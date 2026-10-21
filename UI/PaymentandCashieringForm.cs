@@ -24,6 +24,11 @@ namespace UI
         public PaymentandCashieringForm()
         {
             InitializeComponent();
+            dataGridView1.GridColor = System.Drawing.Color.Black; 
+
+            dataGridView1.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            dataGridView1.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.White;
 
             cmbPaymentMethod.Items.AddRange(new string[] { "Cash", "GCash", "Bank Transfer" });
 
@@ -132,19 +137,8 @@ namespace UI
             {
                 MessageBox.Show(result.Message + $"\n\nOfficial Receipt ID: {result.ReceiptId}", "Transaction Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                lblReceipt.Text = result.ReceiptId.ToString();
-
-                dataGridView1.Rows.Add(
-                    lblName.Text,
-                    _studentGrade,
-                    lblSection.Text,
-                    DateTime.Now.ToString("yyyy-MM-dd"),
-                    cmbPaymentMethod.SelectedItem.ToString(),
-                    paymentAmount.ToString("F2"),
-                    result.ReceiptId
-                );
-
                 btnSearchID.PerformClick();
+                lblReceipt.Text = result.ReceiptId.ToString();
             }
             else
             {
@@ -172,7 +166,7 @@ namespace UI
             lblReceipt.Text = "---";
 
             if (cmbPaymentMethod.Items.Count > 0)
-                cmbPaymentMethod.SelectedIndex = 0; // Default to Cash
+                cmbPaymentMethod.SelectedIndex = 0;
 
             dtpPayment.Value = DateTime.Now;
 
@@ -180,6 +174,8 @@ namespace UI
             _totalAssessment = 0;
             _totalPaid = 0;
             _studentGrade = "";
+
+            dataGridView1.Rows.Clear();
         }
     }
 }
