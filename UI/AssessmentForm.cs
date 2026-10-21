@@ -21,6 +21,7 @@ namespace UI
             txtTuitionFee.ReadOnly = true;
             txtTuitionFee.BackColor = System.Drawing.SystemColors.Control;
             txtOtherFee.Text = "0.00";
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -42,8 +43,17 @@ namespace UI
                 lblSection.Text = profile.Section;
 
                 _currentSchoolYear = profile.SchoolYear;
-
                 lblStatus.Text = (profile.SchoolYear == "Not Enrolled") ? "Not Enrolled" : "Enrolled";
+
+                if (lblStatus.Text == "Enrolled")
+                {
+                    decimal officialTuition = _assessmentController.ComputeTuition(profile.GradeLevel, _currentSchoolYear);
+                    txtTuitionFee.Text = officialTuition.ToString("F2");
+                }
+                else
+                {
+                    txtTuitionFee.Text = "0.00";
+                }
             }
             else
             {
@@ -54,21 +64,13 @@ namespace UI
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
-            string gradeLevel = lblGrade.Text;
-
-            if (gradeLevel == "<Label>" || gradeLevel == "---" || gradeLevel == "N/A")
-            {
-                MessageBox.Show("Please enter a valid, enrolled Student ID first.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            decimal officialTuition = _assessmentController.ComputeTuition(gradeLevel, _currentSchoolYear);
-            txtTuitionFee.Text = officialTuition.ToString("F2");
+            decimal tuitionFee = 0;
+            decimal.TryParse(txtTuitionFee.Text, System.Globalization.NumberStyles.Any, null, out tuitionFee);
 
             decimal otherFees = 0;
-            decimal.TryParse(txtOtherFee.Text, out otherFees);
+            decimal.TryParse(txtOtherFee.Text, System.Globalization.NumberStyles.Any, null, out otherFees);
 
-            decimal total = officialTuition + otherFees;
+            decimal total = tuitionFee + otherFees;
             lblTotalAssessment.Text = total.ToString("F2");
         }
 
