@@ -30,8 +30,9 @@
         {
             label1 = new Label();
             panel1 = new Panel();
-            button12 = new Button();
+            btnLogout = new Button();
             label6 = new Label();
+            lblWelcome = new Label();
             label2 = new Label();
             panel2 = new Panel();
             btnStudentInfoReport = new Button();
@@ -45,31 +46,30 @@
             btnSearch = new Button();
             button1 = new Button();
             panel3 = new Panel();
-            lblWelcome = new Label();
-            label3 = new Label();
-            panel4 = new Panel();
-            label4 = new Label();
-            label5 = new Label();
-            lblNumberOfStudents = new Label();
-            panel5 = new Panel();
-            lblNumberOfCurrentlyEnrolled = new Label();
-            label8 = new Label();
-            label9 = new Label();
-            panel6 = new Panel();
-            lblNumberOfTotalSection = new Label();
-            label11 = new Label();
-            label12 = new Label();
             panel7 = new Panel();
             lblNumberOfPendingPayment = new Label();
             label14 = new Label();
             label15 = new Label();
+            panel6 = new Panel();
+            lblNumberOfTotalSection = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            panel5 = new Panel();
+            lblNumberOfCurrentlyEnrolled = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            panel4 = new Panel();
+            lblNumberOfStudents = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
-            panel4.SuspendLayout();
-            panel5.SuspendLayout();
-            panel6.SuspendLayout();
             panel7.SuspendLayout();
+            panel6.SuspendLayout();
+            panel5.SuspendLayout();
+            panel4.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -87,7 +87,7 @@
             // panel1
             // 
             panel1.BackColor = Color.DeepSkyBlue;
-            panel1.Controls.Add(button12);
+            panel1.Controls.Add(btnLogout);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(lblWelcome);
             panel1.Controls.Add(label2);
@@ -97,17 +97,18 @@
             panel1.Size = new Size(1261, 61);
             panel1.TabIndex = 1;
             // 
-            // button12
+            // btnLogout
             // 
-            button12.BackColor = Color.DeepSkyBlue;
-            button12.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button12.ForeColor = Color.White;
-            button12.Location = new Point(1125, 9);
-            button12.Name = "button12";
-            button12.Size = new Size(125, 43);
-            button12.TabIndex = 4;
-            button12.Text = "Logout";
-            button12.UseVisualStyleBackColor = false;
+            btnLogout.BackColor = Color.DeepSkyBlue;
+            btnLogout.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Location = new Point(1125, 9);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(125, 43);
+            btnLogout.TabIndex = 4;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
             // 
             // label6
             // 
@@ -120,6 +121,18 @@
             label6.Size = new Size(45, 45);
             label6.TabIndex = 4;
             label6.Text = " │";
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.AutoSize = true;
+            lblWelcome.BackColor = Color.DeepSkyBlue;
+            lblWelcome.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblWelcome.ForeColor = SystemColors.Control;
+            lblWelcome.Location = new Point(699, 14);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(31, 32);
+            lblWelcome.TabIndex = 4;
+            lblWelcome.Text = "A";
             // 
             // label2
             // 
@@ -285,118 +298,50 @@
             panel3.Size = new Size(1057, 536);
             panel3.TabIndex = 3;
             // 
-            // lblWelcome
+            // panel7
             // 
-            lblWelcome.AutoSize = true;
-            lblWelcome.BackColor = Color.DeepSkyBlue;
-            lblWelcome.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblWelcome.ForeColor = SystemColors.Control;
-            lblWelcome.Location = new Point(806, 14);
-            lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(31, 32);
-            lblWelcome.TabIndex = 4;
-            lblWelcome.Text = "A";
+            panel7.BackColor = Color.White;
+            panel7.Controls.Add(lblNumberOfPendingPayment);
+            panel7.Controls.Add(label14);
+            panel7.Controls.Add(label15);
+            panel7.ForeColor = SystemColors.ActiveCaption;
+            panel7.Location = new Point(802, 78);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(241, 100);
+            panel7.TabIndex = 4;
             // 
-            // label3
+            // lblNumberOfPendingPayment
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = SystemColors.InfoText;
-            label3.Location = new Point(20, 10);
-            label3.Name = "label3";
-            label3.Size = new Size(241, 32);
-            label3.TabIndex = 0;
-            label3.Text = "Dashboard Overview";
+            lblNumberOfPendingPayment.AutoSize = true;
+            lblNumberOfPendingPayment.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNumberOfPendingPayment.ForeColor = Color.DarkOrange;
+            lblNumberOfPendingPayment.Location = new Point(116, 45);
+            lblNumberOfPendingPayment.Name = "lblNumberOfPendingPayment";
+            lblNumberOfPendingPayment.Size = new Size(49, 40);
+            lblNumberOfPendingPayment.TabIndex = 4;
+            lblNumberOfPendingPayment.Text = "00";
             // 
-            // panel4
+            // label14
             // 
-            panel4.BackColor = Color.White;
-            panel4.Controls.Add(lblNumberOfStudents);
-            panel4.Controls.Add(label5);
-            panel4.Controls.Add(label4);
-            panel4.ForeColor = SystemColors.ActiveCaption;
-            panel4.Location = new Point(20, 78);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(241, 100);
-            panel4.TabIndex = 1;
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.DarkOrange;
+            label14.Location = new Point(82, 19);
+            label14.Name = "label14";
+            label14.Size = new Size(128, 20);
+            label14.TabIndex = 3;
+            label14.Text = "Pending Payments";
             // 
-            // label4
+            // label15
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.DodgerBlue;
-            label4.Location = new Point(3, 12);
-            label4.Name = "label4";
-            label4.Size = new Size(73, 50);
-            label4.TabIndex = 2;
-            label4.Text = "👥";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.DodgerBlue;
-            label5.Location = new Point(82, 19);
-            label5.Name = "label5";
-            label5.Size = new Size(103, 20);
-            label5.TabIndex = 3;
-            label5.Text = "Total Students";
-            // 
-            // lblNumberOfStudents
-            // 
-            lblNumberOfStudents.AutoSize = true;
-            lblNumberOfStudents.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNumberOfStudents.ForeColor = Color.DodgerBlue;
-            lblNumberOfStudents.Location = new Point(116, 45);
-            lblNumberOfStudents.Name = "lblNumberOfStudents";
-            lblNumberOfStudents.Size = new Size(49, 40);
-            lblNumberOfStudents.TabIndex = 4;
-            lblNumberOfStudents.Text = "00";
-            // 
-            // panel5
-            // 
-            panel5.BackColor = Color.White;
-            panel5.Controls.Add(lblNumberOfCurrentlyEnrolled);
-            panel5.Controls.Add(label8);
-            panel5.Controls.Add(label9);
-            panel5.ForeColor = SystemColors.ActiveCaption;
-            panel5.Location = new Point(282, 78);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(241, 100);
-            panel5.TabIndex = 2;
-            // 
-            // lblNumberOfCurrentlyEnrolled
-            // 
-            lblNumberOfCurrentlyEnrolled.AutoSize = true;
-            lblNumberOfCurrentlyEnrolled.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNumberOfCurrentlyEnrolled.ForeColor = Color.LimeGreen;
-            lblNumberOfCurrentlyEnrolled.Location = new Point(116, 45);
-            lblNumberOfCurrentlyEnrolled.Name = "lblNumberOfCurrentlyEnrolled";
-            lblNumberOfCurrentlyEnrolled.Size = new Size(49, 40);
-            lblNumberOfCurrentlyEnrolled.TabIndex = 4;
-            lblNumberOfCurrentlyEnrolled.Text = "00";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.LimeGreen;
-            label8.Location = new Point(97, 19);
-            label8.Name = "label8";
-            label8.Size = new Size(127, 20);
-            label8.TabIndex = 3;
-            label8.Text = "Currently Enrolled";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.LimeGreen;
-            label9.Location = new Point(3, 12);
-            label9.Name = "label9";
-            label9.Size = new Size(101, 50);
-            label9.TabIndex = 2;
-            label9.Text = "👤✓";
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label15.ForeColor = Color.DarkOrange;
+            label15.Location = new Point(3, 12);
+            label15.Name = "label15";
+            label15.Size = new Size(73, 50);
+            label15.TabIndex = 2;
+            label15.Text = "👛";
             // 
             // panel6
             // 
@@ -443,50 +388,106 @@
             label12.TabIndex = 2;
             label12.Text = "🏛";
             // 
-            // panel7
+            // panel5
             // 
-            panel7.BackColor = Color.White;
-            panel7.Controls.Add(lblNumberOfPendingPayment);
-            panel7.Controls.Add(label14);
-            panel7.Controls.Add(label15);
-            panel7.ForeColor = SystemColors.ActiveCaption;
-            panel7.Location = new Point(802, 78);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(241, 100);
-            panel7.TabIndex = 4;
+            panel5.BackColor = Color.White;
+            panel5.Controls.Add(lblNumberOfCurrentlyEnrolled);
+            panel5.Controls.Add(label8);
+            panel5.Controls.Add(label9);
+            panel5.ForeColor = SystemColors.ActiveCaption;
+            panel5.Location = new Point(282, 78);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(241, 100);
+            panel5.TabIndex = 2;
             // 
-            // lblNumberOfPendingPayment
+            // lblNumberOfCurrentlyEnrolled
             // 
-            lblNumberOfPendingPayment.AutoSize = true;
-            lblNumberOfPendingPayment.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNumberOfPendingPayment.ForeColor = Color.DarkOrange;
-            lblNumberOfPendingPayment.Location = new Point(116, 45);
-            lblNumberOfPendingPayment.Name = "lblNumberOfPendingPayment";
-            lblNumberOfPendingPayment.Size = new Size(49, 40);
-            lblNumberOfPendingPayment.TabIndex = 4;
-            lblNumberOfPendingPayment.Text = "00";
+            lblNumberOfCurrentlyEnrolled.AutoSize = true;
+            lblNumberOfCurrentlyEnrolled.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNumberOfCurrentlyEnrolled.ForeColor = Color.LimeGreen;
+            lblNumberOfCurrentlyEnrolled.Location = new Point(116, 45);
+            lblNumberOfCurrentlyEnrolled.Name = "lblNumberOfCurrentlyEnrolled";
+            lblNumberOfCurrentlyEnrolled.Size = new Size(49, 40);
+            lblNumberOfCurrentlyEnrolled.TabIndex = 4;
+            lblNumberOfCurrentlyEnrolled.Text = "00";
             // 
-            // label14
+            // label8
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.DarkOrange;
-            label14.Location = new Point(82, 19);
-            label14.Name = "label14";
-            label14.Size = new Size(128, 20);
-            label14.TabIndex = 3;
-            label14.Text = "Pending Payments";
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.LimeGreen;
+            label8.Location = new Point(97, 19);
+            label8.Name = "label8";
+            label8.Size = new Size(127, 20);
+            label8.TabIndex = 3;
+            label8.Text = "Currently Enrolled";
             // 
-            // label15
+            // label9
             // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label15.ForeColor = Color.DarkOrange;
-            label15.Location = new Point(3, 12);
-            label15.Name = "label15";
-            label15.Size = new Size(73, 50);
-            label15.TabIndex = 2;
-            label15.Text = "👛";
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.LimeGreen;
+            label9.Location = new Point(3, 12);
+            label9.Name = "label9";
+            label9.Size = new Size(93, 50);
+            label9.TabIndex = 2;
+            label9.Text = "👤✓";
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.White;
+            panel4.Controls.Add(lblNumberOfStudents);
+            panel4.Controls.Add(label5);
+            panel4.Controls.Add(label4);
+            panel4.ForeColor = SystemColors.ActiveCaption;
+            panel4.Location = new Point(20, 78);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(241, 100);
+            panel4.TabIndex = 1;
+            // 
+            // lblNumberOfStudents
+            // 
+            lblNumberOfStudents.AutoSize = true;
+            lblNumberOfStudents.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNumberOfStudents.ForeColor = Color.DodgerBlue;
+            lblNumberOfStudents.Location = new Point(116, 45);
+            lblNumberOfStudents.Name = "lblNumberOfStudents";
+            lblNumberOfStudents.Size = new Size(49, 40);
+            lblNumberOfStudents.TabIndex = 4;
+            lblNumberOfStudents.Text = "00";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.ForeColor = Color.DodgerBlue;
+            label5.Location = new Point(82, 19);
+            label5.Name = "label5";
+            label5.Size = new Size(103, 20);
+            label5.TabIndex = 3;
+            label5.Text = "Total Students";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.DodgerBlue;
+            label4.Location = new Point(3, 12);
+            label4.Name = "label4";
+            label4.Size = new Size(73, 50);
+            label4.TabIndex = 2;
+            label4.Text = "👥";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = SystemColors.InfoText;
+            label3.Location = new Point(20, 10);
+            label3.Name = "label3";
+            label3.Size = new Size(241, 32);
+            label3.TabIndex = 0;
+            label3.Text = "Dashboard Overview";
             // 
             // DashboardForm
             // 
@@ -507,14 +508,14 @@
             panel2.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -536,7 +537,7 @@
         private Button btnPaymentHistoryReceipts;
         private Button btnPaymentCashiering;
         private Button button7;
-        private Button button12;
+        private Button btnLogout;
         private Panel panel3;
         private Label lblWelcome;
         private Label label3;
