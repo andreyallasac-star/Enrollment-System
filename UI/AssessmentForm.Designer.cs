@@ -30,9 +30,9 @@
         {
             label6 = new Label();
             panel2 = new Panel();
+            lblTotalAssessment = new Label();
             btnSearch = new Button();
             dateTimePicker1 = new DateTimePicker();
-            lblTotalAssessment = new Label();
             lblStatus = new Label();
             lblSection = new Label();
             lblGrade = new Label();
@@ -71,10 +71,10 @@
             // 
             panel2.Anchor = AnchorStyles.None;
             panel2.BackColor = Color.Azure;
+            panel2.Controls.Add(lblTotalAssessment);
             panel2.Controls.Add(btnSearch);
             panel2.Controls.Add(dateTimePicker1);
             panel2.Controls.Add(label6);
-            panel2.Controls.Add(lblTotalAssessment);
             panel2.Controls.Add(lblStatus);
             panel2.Controls.Add(lblSection);
             panel2.Controls.Add(lblGrade);
@@ -101,6 +101,18 @@
             panel2.TabIndex = 1;
             panel2.Paint += panel2_Paint;
             // 
+            // lblTotalAssessment
+            // 
+            lblTotalAssessment.AutoSize = true;
+            lblTotalAssessment.BackColor = Color.Transparent;
+            lblTotalAssessment.Font = new Font("Segoe UI", 13.8F);
+            lblTotalAssessment.ForeColor = Color.Black;
+            lblTotalAssessment.Location = new Point(175, 382);
+            lblTotalAssessment.Name = "lblTotalAssessment";
+            lblTotalAssessment.Size = new Size(83, 25);
+            lblTotalAssessment.TabIndex = 27;
+            lblTotalAssessment.Text = "<Label>";
+            // 
             // btnSearch
             // 
             btnSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -120,17 +132,6 @@
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(258, 32);
             dateTimePicker1.TabIndex = 23;
-            // 
-            // lblTotalAssessment
-            // 
-            lblTotalAssessment.AutoSize = true;
-            lblTotalAssessment.BackColor = Color.Transparent;
-            lblTotalAssessment.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTotalAssessment.Location = new Point(189, 385);
-            lblTotalAssessment.Name = "lblTotalAssessment";
-            lblTotalAssessment.Size = new Size(69, 21);
-            lblTotalAssessment.TabIndex = 21;
-            lblTotalAssessment.Text = "<Label>";
             // 
             // lblStatus
             // 
@@ -386,12 +387,12 @@
         private TextBox txtTuitionFee;
         private TextBox txtStudentId;
         private Label label6;
-        private Label lblTotalAssessment;
         private Label lblStatus;
         private Label lblSection;
         private Label lblGrade;
         private Label lblStudentName;
         private DateTimePicker dateTimePicker1;
         private Button btnSearch;
+        private Label lblTotalAssessment;
     }
 }
