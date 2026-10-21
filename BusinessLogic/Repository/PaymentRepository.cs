@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Data.SqlClient;
 using Model;
+using System.Data;
 
 namespace BusinessLogic.Repository
 {
@@ -67,6 +68,26 @@ namespace BusinessLogic.Repository
 
                 var result = cmd.ExecuteScalar();
                 return result != null ? Convert.ToInt32(result) : 0;
+            }
+        }
+
+        public DataTable GetPaymentHistory(string studentId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT PaymentDate, PaymentMethod, AmountPaid, ReceiptId FROM Payments WHERE StudentId = @StudentId ORDER BY PaymentDate DESC";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@StudentId", studentId);
+                    DataTable dt = new DataTable();
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                    return dt;
+                }
             }
         }
     }
