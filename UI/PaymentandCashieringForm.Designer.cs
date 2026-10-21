@@ -30,6 +30,8 @@
         {
             label12 = new Label();
             panel3 = new Panel();
+            label4 = new Label();
+            label3 = new Label();
             lblReceipt = new Label();
             label2 = new Label();
             dataGridView1 = new DataGridView();
@@ -65,8 +67,6 @@
             lblTotalAssessment = new Label();
             lblStudentName = new Label();
             lblStudentID = new Label();
-            label3 = new Label();
-            label4 = new Label();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -123,6 +123,26 @@
             panel3.Size = new Size(991, 615);
             panel3.TabIndex = 2;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(696, 13);
+            label4.Name = "label4";
+            label4.Size = new Size(59, 45);
+            label4.TabIndex = 28;
+            label4.Text = "\U0001f9fe";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(10, 5);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 45);
+            label3.TabIndex = 27;
+            label3.Text = "💰";
+            // 
             // lblReceipt
             // 
             lblReceipt.AutoSize = true;
@@ -154,6 +174,7 @@
             dataGridView1.GridColor = Color.DeepSkyBlue;
             dataGridView1.Location = new Point(29, 376);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(886, 218);
             dataGridView1.TabIndex = 24;
             // 
@@ -225,6 +246,7 @@
             btnClear.TabIndex = 21;
             btnClear.Text = "CLEAR";
             btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // dtpPayment
             // 
@@ -266,6 +288,7 @@
             btnConfirm.TabIndex = 17;
             btnConfirm.Text = "CONFIRM";
             btnConfirm.UseVisualStyleBackColor = false;
+            btnConfirm.Click += btnConfirm_Click;
             // 
             // btnSearchID
             // 
@@ -277,6 +300,7 @@
             btnSearchID.TabIndex = 16;
             btnSearchID.Text = "SEARCH";
             btnSearchID.UseVisualStyleBackColor = false;
+            btnSearchID.Click += btnSearchID_Click;
             // 
             // txtSearchStudent
             // 
@@ -327,6 +351,7 @@
             txtPaymentAmount.Name = "txtPaymentAmount";
             txtPaymentAmount.Size = new Size(218, 32);
             txtPaymentAmount.TabIndex = 2;
+            txtPaymentAmount.TextChanged += txtPaymentAmount_TextChanged;
             // 
             // lblBalance
             // 
@@ -459,26 +484,6 @@
             lblStudentID.Size = new Size(103, 25);
             lblStudentID.TabIndex = 0;
             lblStudentID.Text = "Student ID:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(10, 5);
-            label3.Name = "label3";
-            label3.Size = new Size(64, 45);
-            label3.TabIndex = 27;
-            label3.Text = "💰";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(696, 13);
-            label4.Name = "label4";
-            label4.Size = new Size(64, 45);
-            label4.TabIndex = 28;
-            label4.Text = "\U0001f9fe";
             // 
             // PaymentandCashieringForm
             // 
