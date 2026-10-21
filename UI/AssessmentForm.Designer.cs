@@ -32,7 +32,6 @@
             panel2 = new Panel();
             btnSearch = new Button();
             dateTimePicker1 = new DateTimePicker();
-            cmbPaymentMode = new ComboBox();
             lblTotalAssessment = new Label();
             lblStatus = new Label();
             lblSection = new Label();
@@ -74,7 +73,6 @@
             panel2.BackColor = Color.Azure;
             panel2.Controls.Add(btnSearch);
             panel2.Controls.Add(dateTimePicker1);
-            panel2.Controls.Add(cmbPaymentMode);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(lblTotalAssessment);
             panel2.Controls.Add(lblStatus);
@@ -118,26 +116,17 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Font = new Font("Segoe UI", 13.8F);
-            dateTimePicker1.Location = new Point(565, 295);
+            dateTimePicker1.Location = new Point(151, 340);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(293, 32);
+            dateTimePicker1.Size = new Size(258, 32);
             dateTimePicker1.TabIndex = 23;
-            // 
-            // cmbPaymentMode
-            // 
-            cmbPaymentMode.Font = new Font("Segoe UI", 13.8F);
-            cmbPaymentMode.FormattingEnabled = true;
-            cmbPaymentMode.Location = new Point(652, 248);
-            cmbPaymentMode.Name = "cmbPaymentMode";
-            cmbPaymentMode.Size = new Size(206, 33);
-            cmbPaymentMode.TabIndex = 22;
             // 
             // lblTotalAssessment
             // 
             lblTotalAssessment.AutoSize = true;
             lblTotalAssessment.BackColor = Color.Transparent;
             lblTotalAssessment.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTotalAssessment.Location = new Point(200, 345);
+            lblTotalAssessment.Location = new Point(189, 385);
             lblTotalAssessment.Name = "lblTotalAssessment";
             lblTotalAssessment.Size = new Size(69, 21);
             lblTotalAssessment.TabIndex = 21;
@@ -222,7 +211,7 @@
             // 
             btnSave.BackColor = Color.IndianRed;
             btnSave.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSave.Location = new Point(209, 396);
+            btnSave.Location = new Point(210, 425);
             btnSave.Margin = new Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(127, 40);
@@ -235,7 +224,7 @@
             // 
             btnCompute.BackColor = Color.IndianRed;
             btnCompute.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCompute.Location = new Point(25, 396);
+            btnCompute.Location = new Point(25, 425);
             btnCompute.Margin = new Padding(3, 2, 3, 2);
             btnCompute.Name = "btnCompute";
             btnCompute.Size = new Size(127, 40);
@@ -250,7 +239,7 @@
             labelTotalAssessment.BackColor = Color.Transparent;
             labelTotalAssessment.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelTotalAssessment.ForeColor = Color.Black;
-            labelTotalAssessment.Location = new Point(25, 345);
+            labelTotalAssessment.Location = new Point(25, 382);
             labelTotalAssessment.Name = "labelTotalAssessment";
             labelTotalAssessment.Size = new Size(158, 25);
             labelTotalAssessment.TabIndex = 9;
@@ -262,7 +251,7 @@
             lblDate.BackColor = Color.Transparent;
             lblDate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDate.ForeColor = Color.Black;
-            lblDate.Location = new Point(504, 295);
+            lblDate.Location = new Point(25, 340);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(55, 25);
             lblDate.TabIndex = 8;
@@ -288,9 +277,8 @@
             lblPaymentMode.ForeColor = Color.Black;
             lblPaymentMode.Location = new Point(504, 254);
             lblPaymentMode.Name = "lblPaymentMode";
-            lblPaymentMode.Size = new Size(142, 25);
+            lblPaymentMode.Size = new Size(0, 25);
             lblPaymentMode.TabIndex = 6;
-            lblPaymentMode.Text = "Payment Mode:";
             // 
             // lblTuitionFee
             // 
@@ -404,7 +392,6 @@
         private Label lblGrade;
         private Label lblStudentName;
         private DateTimePicker dateTimePicker1;
-        private ComboBox cmbPaymentMode;
         private Button btnSearch;
     }
 }
