@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-
-namespace UI
+﻿namespace UI
 {
     public partial class StaffDashboardForm : Form
     {
@@ -30,10 +22,8 @@ namespace UI
 
             if (result == DialogResult.Yes)
             {
-
                 LoginForm login = new LoginForm();
                 login.Show();
-
                 this.Close();
             }
         }
