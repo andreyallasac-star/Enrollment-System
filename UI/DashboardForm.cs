@@ -22,6 +22,7 @@ namespace UI
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
+            UserControl_Load(new AdminDashboarchUserControl());
             lblWelcome.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
         }
 
@@ -145,6 +146,18 @@ namespace UI
 
                 this.Close();
             }
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            UserControl_Load(new AdminDashboarchUserControl());           
+        }
+
+        private void UserControl_Load(UserControl userControl) {
+            panel3.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
+            panel3.Controls.Add(userControl);
+            userControl.BringToFront();
         }
     }
 }
