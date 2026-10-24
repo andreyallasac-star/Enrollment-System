@@ -41,5 +41,10 @@ namespace BusinessLogic.Controller
         { 
             return _paymentRepo.GetPaymentHistory(studentId); 
         }
+
+        public DataTable SearchPaymentHistory(string studentId, string receiptId, DateTime dateFrom, DateTime dateTo)
+        {
+            return _paymentRepo.SearchPaymentHistory(studentId, receiptId, dateFrom, dateTo);
+        }
     }
 }
