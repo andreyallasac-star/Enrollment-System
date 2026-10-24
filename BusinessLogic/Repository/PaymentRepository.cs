@@ -90,5 +90,54 @@ namespace BusinessLogic.Repository
                 }
             }
         }
+
+        public DataTable SearchPaymentHistory(string studentId, string receiptId, DateTime dateFrom, DateTime dateTo)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = @"
+                SELECT 
+                    p.ReceiptId, 
+                    p.PaymentDate, 
+                    p.StudentId, 
+                    (s.FirstName + ' ' + s.LastName) AS StudentName,
+                    e.SectionCode AS Section,
+                    p.AmountPaid
+                FROM Payments p
+                INNER JOIN Students s ON p.StudentId = s.StudentId
+                LEFT JOIN Enrollments e ON p.StudentId = e.StudentId AND e.Status = 'Enrolled'
+                WHERE CAST(p.PaymentDate AS DATE) >= @DateFrom 
+                  AND CAST(p.PaymentDate AS DATE) <= @DateTo";
+
+                if (!string.IsNullOrWhiteSpace(studentId))
+                    query += " AND p.StudentId = @StudentId";
+
+                if (!string.IsNullOrWhiteSpace(receiptId))
+                    query += " AND p.ReceiptId = @ReceiptId";
+
+                query += " ORDER BY p.PaymentDate DESC";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@DateFrom", dateFrom.Date);
+                    cmd.Parameters.AddWithValue("@DateTo", dateTo.Date);
+
+                    if (!string.IsNullOrWhiteSpace(studentId))
+                        cmd.Parameters.AddWithValue("@StudentId", studentId);
+
+                    if (!string.IsNullOrWhiteSpace(receiptId))
+                        cmd.Parameters.AddWithValue("@ReceiptId", receiptId);
+
+                    DataTable dt = new DataTable();
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                    return dt;
+                }
+            }
+        }
     }
 }
