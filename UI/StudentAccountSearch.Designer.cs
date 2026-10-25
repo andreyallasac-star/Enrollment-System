@@ -82,7 +82,7 @@
             txtSearch.Location = new Point(22, 82);
             txtSearch.Multiline = true;
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(802, 33);
+            txtSearch.Size = new Size(718, 33);
             txtSearch.TabIndex = 1;
             // 
             // btnSearch
@@ -90,7 +90,7 @@
             btnSearch.BackColor = Color.DeepSkyBlue;
             btnSearch.Font = new Font("Arial Narrow", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearch.ForeColor = SystemColors.Control;
-            btnSearch.Location = new Point(830, 82);
+            btnSearch.Location = new Point(746, 82);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(136, 33);
             btnSearch.TabIndex = 2;
@@ -415,7 +415,7 @@
             panel3.Controls.Add(label13);
             panel3.Controls.Add(label14);
             panel3.Controls.Add(lblTotalPaid);
-            panel3.Location = new Point(744, 186);
+            panel3.Location = new Point(711, 186);
             panel3.Name = "panel3";
             panel3.Size = new Size(329, 331);
             panel3.TabIndex = 30;
@@ -442,7 +442,7 @@
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label15);
             panel2.Controls.Add(lblGradeLevel);
-            panel2.Location = new Point(379, 186);
+            panel2.Location = new Point(367, 186);
             panel2.Name = "panel2";
             panel2.Size = new Size(329, 331);
             panel2.TabIndex = 29;
@@ -452,7 +452,7 @@
             btnClear.BackColor = Color.White;
             btnClear.Font = new Font("Arial Narrow", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnClear.ForeColor = Color.DeepSkyBlue;
-            btnClear.Location = new Point(970, 82);
+            btnClear.Location = new Point(888, 82);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(124, 33);
             btnClear.TabIndex = 31;
