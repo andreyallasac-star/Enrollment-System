@@ -78,7 +78,7 @@
             panel7.Controls.Add(label15);
             panel7.Font = new Font("Microsoft Sans Serif", 20.25F);
             panel7.ForeColor = SystemColors.ActiveCaption;
-            panel7.Location = new Point(1175, 87);
+            panel7.Location = new Point(513, 324);
             panel7.Name = "panel7";
             panel7.Size = new Size(323, 132);
             panel7.TabIndex = 4;
@@ -125,7 +125,7 @@
             panel6.Controls.Add(label12);
             panel6.Font = new Font("Microsoft Sans Serif", 20.25F);
             panel6.ForeColor = SystemColors.ActiveCaption;
-            panel6.Location = new Point(824, 87);
+            panel6.Location = new Point(513, 167);
             panel6.Name = "panel6";
             panel6.Size = new Size(323, 132);
             panel6.TabIndex = 3;
@@ -172,7 +172,7 @@
             panel5.Controls.Add(label9);
             panel5.Font = new Font("Microsoft Sans Serif", 20.25F);
             panel5.ForeColor = SystemColors.ActiveCaption;
-            panel5.Location = new Point(472, 87);
+            panel5.Location = new Point(171, 167);
             panel5.Name = "panel5";
             panel5.Size = new Size(323, 132);
             panel5.TabIndex = 2;
@@ -206,7 +206,7 @@
             label9.ForeColor = Color.LimeGreen;
             label9.Location = new Point(3, 26);
             label9.Name = "label9";
-            label9.Size = new Size(101, 50);
+            label9.Size = new Size(93, 50);
             label9.TabIndex = 2;
             label9.Text = "👤✓";
             // 
@@ -219,7 +219,7 @@
             panel4.Controls.Add(label4);
             panel4.Font = new Font("Microsoft Sans Serif", 12F);
             panel4.ForeColor = SystemColors.ActiveCaption;
-            panel4.Location = new Point(120, 87);
+            panel4.Location = new Point(171, 324);
             panel4.Name = "panel4";
             panel4.Size = new Size(323, 132);
             panel4.TabIndex = 1;
@@ -262,7 +262,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Microsoft Sans Serif", 20.25F);
             label3.ForeColor = SystemColors.InfoText;
-            label3.Location = new Point(97, 19);
+            label3.Location = new Point(23, 23);
             label3.Name = "label3";
             label3.Size = new Size(268, 31);
             label3.TabIndex = 0;
