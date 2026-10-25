@@ -8,7 +8,7 @@ namespace BusinessLogic.Repository
 {
     public class AssessmentRepository
     {
-        private readonly string connectionString = "Server=.\\SQLEXPRESS; Database=EnrollmentSystemDB; Trusted_Connection=True; TrustServerCertificate=True;";
+        private readonly string connectionString = "Server=DESKTOP-TCVIDJV\\SQLEXPRESS01; Database=EnrollmentSystemDB; Trusted_Connection=True; TrustServerCertificate=True;";
 
         public decimal GetTuitionFee(string gradeLevel, string schoolYear)
         {
