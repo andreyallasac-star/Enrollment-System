@@ -161,6 +161,7 @@
             btnStudentEnrollment.TabIndex = 0;
             btnStudentEnrollment.Text = "Student Enrollment";
             btnStudentEnrollment.UseVisualStyleBackColor = false;
+            btnStudentEnrollment.Click += btnStudentEnrollment_Click;
             // 
             // panel3
             // 
