@@ -78,6 +78,7 @@
             dgvStudentInfo.Margin = new Padding(3, 2, 3, 2);
             dgvStudentInfo.Name = "dgvStudentInfo";
             dgvStudentInfo.RowHeadersWidth = 51;
+            dgvStudentInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvStudentInfo.Size = new Size(749, 219);
             dgvStudentInfo.TabIndex = 10;
             dgvStudentInfo.CellClick += dgvStudentInfo_CellClick;
