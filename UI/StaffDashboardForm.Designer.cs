@@ -125,6 +125,7 @@
             btnPaymentHistory.TabIndex = 3;
             btnPaymentHistory.Text = "Payment History and Receipts";
             btnPaymentHistory.UseVisualStyleBackColor = false;
+            btnPaymentHistory.Click += btnPaymentHistory_Click;
             // 
             // btnPaymentandCashiering
             // 
@@ -137,6 +138,7 @@
             btnPaymentandCashiering.TabIndex = 2;
             btnPaymentandCashiering.Text = "Payment and Cashiering";
             btnPaymentandCashiering.UseVisualStyleBackColor = false;
+            btnPaymentandCashiering.Click += btnPaymentandCashiering_Click;
             // 
             // btnStudentsAccSearch
             // 
