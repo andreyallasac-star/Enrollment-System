@@ -1,0 +1,6 @@
+﻿CREATE TABLE GradeLevelFees (
+    FeeId INT PRIMARY KEY IDENTITY(1,1),
+    GradeLevel NVARCHAR(20) NOT NULL,
+    SchoolYear NVARCHAR(10) NOT NULL,
+    TuitionFee DECIMAL(18,2) NOT NULL
+);

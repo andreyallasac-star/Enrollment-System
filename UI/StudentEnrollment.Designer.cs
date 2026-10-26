@@ -29,20 +29,21 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            button2 = new Button();
-            button1 = new Button();
-            comboBox4 = new ComboBox();
-            comboBox3 = new ComboBox();
+            btnSearch = new Button();
+            lblGender = new Label();
+            btnClear = new Button();
+            btnEnroll = new Button();
+            cmbSection = new ComboBox();
             label17 = new Label();
-            comboBox2 = new ComboBox();
+            cmbGradeLevel = new ComboBox();
             label16 = new Label();
-            comboBox1 = new ComboBox();
+            cmbSchoolYear = new ComboBox();
             label15 = new Label();
-            label14 = new Label();
-            label13 = new Label();
-            label12 = new Label();
-            label10 = new Label();
-            label9 = new Label();
+            lblSection = new Label();
+            lblGradeLevel = new Label();
+            lblDateOfBirth = new Label();
+            lblStudentId = new Label();
+            lblStudentName = new Label();
             label8 = new Label();
             label7 = new Label();
             label6 = new Label();
@@ -50,27 +51,28 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
+            txtStudentId = new TextBox();
             label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
-            panel1.Controls.Add(comboBox4);
-            panel1.Controls.Add(comboBox3);
+            panel1.Controls.Add(btnSearch);
+            panel1.Controls.Add(lblGender);
+            panel1.Controls.Add(btnClear);
+            panel1.Controls.Add(btnEnroll);
+            panel1.Controls.Add(cmbSection);
             panel1.Controls.Add(label17);
-            panel1.Controls.Add(comboBox2);
+            panel1.Controls.Add(cmbGradeLevel);
             panel1.Controls.Add(label16);
-            panel1.Controls.Add(comboBox1);
+            panel1.Controls.Add(cmbSchoolYear);
             panel1.Controls.Add(label15);
-            panel1.Controls.Add(label14);
-            panel1.Controls.Add(label13);
-            panel1.Controls.Add(label12);
-            panel1.Controls.Add(label10);
-            panel1.Controls.Add(label9);
+            panel1.Controls.Add(lblSection);
+            panel1.Controls.Add(lblGradeLevel);
+            panel1.Controls.Add(lblDateOfBirth);
+            panel1.Controls.Add(lblStudentId);
+            panel1.Controls.Add(lblStudentName);
             panel1.Controls.Add(label8);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(label6);
@@ -78,7 +80,7 @@
             panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(txtStudentId);
             panel1.Controls.Add(label1);
             panel1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             panel1.Location = new Point(0, 0);
@@ -87,49 +89,63 @@
             panel1.Size = new Size(754, 557);
             panel1.TabIndex = 0;
             // 
-            // button2
+            // btnSearch
             // 
-            button2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(427, 505);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(133, 36);
-            button2.TabIndex = 23;
-            button2.Text = "Clear";
-            button2.UseVisualStyleBackColor = true;
+            btnSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSearch.Location = new Point(633, 94);
+            btnSearch.Margin = new Padding(3, 2, 3, 2);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(112, 32);
+            btnSearch.TabIndex = 25;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
-            // button1
+            // lblGender
             // 
-            button1.BackColor = Color.Blue;
-            button1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(594, 505);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(133, 36);
-            button1.TabIndex = 22;
-            button1.Text = "ENROLL";
-            button1.UseVisualStyleBackColor = false;
+            lblGender.AutoSize = true;
+            lblGender.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblGender.ForeColor = Color.Black;
+            lblGender.Location = new Point(161, 226);
+            lblGender.Name = "lblGender";
+            lblGender.Size = new Size(83, 25);
+            lblGender.TabIndex = 24;
+            lblGender.Text = "<Label>";
             // 
-            // comboBox4
+            // btnClear
             // 
-            comboBox4.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox4.ForeColor = Color.Black;
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(190, 226);
-            comboBox4.Margin = new Padding(3, 2, 3, 2);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(221, 33);
-            comboBox4.TabIndex = 21;
+            btnClear.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClear.Location = new Point(427, 505);
+            btnClear.Margin = new Padding(3, 2, 3, 2);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(133, 36);
+            btnClear.TabIndex = 23;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
-            // comboBox3
+            // btnEnroll
             // 
-            comboBox3.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(20, 438);
-            comboBox3.Margin = new Padding(3, 2, 3, 2);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(607, 33);
-            comboBox3.TabIndex = 20;
+            btnEnroll.BackColor = Color.Blue;
+            btnEnroll.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEnroll.Location = new Point(594, 505);
+            btnEnroll.Margin = new Padding(3, 2, 3, 2);
+            btnEnroll.Name = "btnEnroll";
+            btnEnroll.Size = new Size(133, 36);
+            btnEnroll.TabIndex = 22;
+            btnEnroll.Text = "ENROLL";
+            btnEnroll.UseVisualStyleBackColor = false;
+            btnEnroll.Click += btnEnroll_Click;
+            // 
+            // cmbSection
+            // 
+            cmbSection.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbSection.FormattingEnabled = true;
+            cmbSection.Location = new Point(20, 438);
+            cmbSection.Margin = new Padding(3, 2, 3, 2);
+            cmbSection.Name = "cmbSection";
+            cmbSection.Size = new Size(607, 33);
+            cmbSection.TabIndex = 20;
             // 
             // label17
             // 
@@ -142,15 +158,16 @@
             label17.TabIndex = 19;
             label17.Text = "Section *";
             // 
-            // comboBox2
+            // cmbGradeLevel
             // 
-            comboBox2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(20, 370);
-            comboBox2.Margin = new Padding(3, 2, 3, 2);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(607, 33);
-            comboBox2.TabIndex = 18;
+            cmbGradeLevel.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbGradeLevel.FormattingEnabled = true;
+            cmbGradeLevel.Location = new Point(20, 370);
+            cmbGradeLevel.Margin = new Padding(3, 2, 3, 2);
+            cmbGradeLevel.Name = "cmbGradeLevel";
+            cmbGradeLevel.Size = new Size(607, 33);
+            cmbGradeLevel.TabIndex = 18;
+            cmbGradeLevel.SelectedIndexChanged += FilterSections;
             // 
             // label16
             // 
@@ -163,15 +180,16 @@
             label16.TabIndex = 17;
             label16.Text = "Grade Level *";
             // 
-            // comboBox1
+            // cmbSchoolYear
             // 
-            comboBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(20, 306);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(607, 33);
-            comboBox1.TabIndex = 16;
+            cmbSchoolYear.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cmbSchoolYear.FormattingEnabled = true;
+            cmbSchoolYear.Location = new Point(20, 306);
+            cmbSchoolYear.Margin = new Padding(3, 2, 3, 2);
+            cmbSchoolYear.Name = "cmbSchoolYear";
+            cmbSchoolYear.Size = new Size(607, 33);
+            cmbSchoolYear.TabIndex = 16;
+            cmbSchoolYear.SelectedIndexChanged += FilterSections;
             // 
             // label15
             // 
@@ -184,67 +202,67 @@
             label15.TabIndex = 15;
             label15.Text = "School Year *";
             // 
-            // label14
+            // lblSection
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.Black;
-            label14.Location = new Point(639, 226);
-            label14.Name = "label14";
-            label14.Size = new Size(83, 25);
-            label14.TabIndex = 14;
-            label14.Text = "<Label>";
+            lblSection.AutoSize = true;
+            lblSection.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSection.ForeColor = Color.Black;
+            lblSection.Location = new Point(505, 229);
+            lblSection.Name = "lblSection";
+            lblSection.Size = new Size(83, 25);
+            lblSection.TabIndex = 14;
+            lblSection.Text = "<Label>";
             // 
-            // label13
+            // lblGradeLevel
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label13.ForeColor = Color.Black;
-            label13.Location = new Point(639, 194);
-            label13.Name = "label13";
-            label13.Size = new Size(83, 25);
-            label13.TabIndex = 13;
-            label13.Text = "<Label>";
+            lblGradeLevel.AutoSize = true;
+            lblGradeLevel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblGradeLevel.ForeColor = Color.Black;
+            lblGradeLevel.Location = new Point(534, 194);
+            lblGradeLevel.Name = "lblGradeLevel";
+            lblGradeLevel.Size = new Size(83, 25);
+            lblGradeLevel.TabIndex = 13;
+            lblGradeLevel.Text = "<Label>";
             // 
-            // label12
+            // lblDateOfBirth
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.ForeColor = Color.Black;
-            label12.Location = new Point(639, 159);
-            label12.Name = "label12";
-            label12.Size = new Size(83, 25);
-            label12.TabIndex = 12;
-            label12.Text = "<Label>";
+            lblDateOfBirth.AutoSize = true;
+            lblDateOfBirth.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDateOfBirth.ForeColor = Color.Black;
+            lblDateOfBirth.Location = new Point(534, 159);
+            lblDateOfBirth.Name = "lblDateOfBirth";
+            lblDateOfBirth.Size = new Size(83, 25);
+            lblDateOfBirth.TabIndex = 12;
+            lblDateOfBirth.Text = "<Label>";
             // 
-            // label10
+            // lblStudentId
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.Black;
-            label10.Location = new Point(252, 194);
-            label10.Name = "label10";
-            label10.Size = new Size(83, 25);
-            label10.TabIndex = 10;
-            label10.Text = "<Label>";
+            lblStudentId.AutoSize = true;
+            lblStudentId.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStudentId.ForeColor = Color.Black;
+            lblStudentId.Location = new Point(161, 194);
+            lblStudentId.Name = "lblStudentId";
+            lblStudentId.Size = new Size(83, 25);
+            lblStudentId.TabIndex = 10;
+            lblStudentId.Text = "<Label>";
             // 
-            // label9
+            // lblStudentName
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.Black;
-            label9.Location = new Point(252, 159);
-            label9.Name = "label9";
-            label9.Size = new Size(83, 25);
-            label9.TabIndex = 9;
-            label9.Text = "<Label>";
+            lblStudentName.AutoSize = true;
+            lblStudentName.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStudentName.ForeColor = Color.Black;
+            lblStudentName.Location = new Point(161, 159);
+            lblStudentName.Name = "lblStudentName";
+            lblStudentName.Size = new Size(83, 25);
+            lblStudentName.TabIndex = 9;
+            lblStudentName.Text = "<Label>";
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.Black;
-            label8.Location = new Point(102, 194);
+            label8.Location = new Point(20, 194);
             label8.Name = "label8";
             label8.Size = new Size(103, 25);
             label8.TabIndex = 8;
@@ -255,7 +273,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(505, 226);
+            label7.Location = new Point(413, 229);
             label7.Name = "label7";
             label7.Size = new Size(78, 25);
             label7.TabIndex = 7;
@@ -266,7 +284,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(505, 194);
+            label6.Location = new Point(413, 194);
             label6.Name = "label6";
             label6.Size = new Size(115, 25);
             label6.TabIndex = 6;
@@ -277,7 +295,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(505, 159);
+            label5.Location = new Point(413, 159);
             label5.Name = "label5";
             label5.Size = new Size(122, 25);
             label5.TabIndex = 5;
@@ -288,7 +306,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(102, 226);
+            label4.Location = new Point(20, 226);
             label4.Name = "label4";
             label4.Size = new Size(78, 25);
             label4.TabIndex = 4;
@@ -299,7 +317,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(102, 159);
+            label3.Location = new Point(20, 159);
             label3.Name = "label3";
             label3.Size = new Size(135, 25);
             label3.TabIndex = 3;
@@ -312,18 +330,18 @@
             label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(20, 69);
             label2.Name = "label2";
-            label2.Size = new Size(160, 25);
+            label2.Size = new Size(103, 25);
             label2.TabIndex = 1;
-            label2.Text = "Student ID/Name:";
+            label2.Text = "Student ID:";
             // 
-            // textBox1
+            // txtStudentId
             // 
-            textBox1.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(20, 94);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(607, 32);
-            textBox1.TabIndex = 2;
+            txtStudentId.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtStudentId.Location = new Point(20, 94);
+            txtStudentId.Margin = new Padding(3, 2, 3, 2);
+            txtStudentId.Name = "txtStudentId";
+            txtStudentId.Size = new Size(607, 32);
+            txtStudentId.TabIndex = 2;
             // 
             // label1
             // 
@@ -346,6 +364,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "StudentEnrollment";
             Text = "StudentEnrollment";
+            Load += StudentEnrollment_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -359,23 +378,24 @@
         private Label label4;
         private Label label3;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox txtStudentId;
         private Label label7;
         private Label label6;
-        private Label label9;
+        private Label lblStudentName;
         private Label label8;
         private Label label15;
-        private Label label14;
-        private Label label13;
-        private Label label12;
-        private Label label10;
-        private ComboBox comboBox1;
-        private ComboBox comboBox3;
+        private Label lblSection;
+        private Label lblGradeLevel;
+        private Label lblDateOfBirth;
+        private Label lblStudentId;
+        private ComboBox cmbSchoolYear;
+        private ComboBox cmbSection;
         private Label label17;
-        private ComboBox comboBox2;
+        private ComboBox cmbGradeLevel;
         private Label label16;
-        private Button button1;
-        private ComboBox comboBox4;
-        private Button button2;
+        private Button btnEnroll;
+        private Button btnClear;
+        private Label lblGender;
+        private Button btnSearch;
     }
 }

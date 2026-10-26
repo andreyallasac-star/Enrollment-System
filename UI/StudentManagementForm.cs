@@ -1,12 +1,12 @@
-﻿using BusinessLogic.Controller;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BusinessLogic.Controller;
+using Model;
 
 namespace UI
 {
@@ -29,16 +29,12 @@ namespace UI
             cmbGender.Items.Add("Female");
             cmbGender.SelectedIndex = 0;
 
-            this.Load += StudentManagementForm_Load;
-            btnAdd.Click += btnAdd_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDeactivate.Click += btnDeactivate_Click;
-            dgvStudentRecords.CellClick += dgvStudentRecords_CellClick_1;
         }
 
         private void StudentManagementForm_Load(object sender, EventArgs e)
         {
             RefreshGrid();
+            ClearForm();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -82,7 +78,8 @@ namespace UI
 
             if (_studentController.UpdateStudent(updatedStudent) == "Success")
             {
-                ClearForm(); RefreshGrid();
+                ClearForm(); 
+                RefreshGrid();
             }
         }
 
@@ -92,7 +89,8 @@ namespace UI
 
             if (_studentController.DeactivateStudent(_selectedStudentId) == "Success")
             {
-                ClearForm(); RefreshGrid();
+                ClearForm(); 
+                RefreshGrid();
             }
         }
 
@@ -131,12 +129,12 @@ namespace UI
         private void ClearForm()
         {
             _selectedStudentId = "";
-            txtStudentID.Clear();
+            txtStudentID.Text = _studentController.GetNextStudentId();
             txtFirstName.Clear();
             txtMiddleName.Clear();
             txtLastName.Clear();
             txtAddress.Clear();
-            txtStudentID.Enabled = true;
+            txtStudentID.Enabled = false;
         }
 
         
