@@ -22,6 +22,7 @@ namespace UI
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
+            UserControl_Load(new AdminDashboarchUserControl());
             lblWelcome.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
         }
 
@@ -134,6 +135,29 @@ namespace UI
             report.Show();
         }
 
-        
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                LoginForm login = new LoginForm();
+                login.Show();
+
+                this.Close();
+            }
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            UserControl_Load(new AdminDashboarchUserControl());           
+        }
+
+        private void UserControl_Load(UserControl userControl) {
+            panel3.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
+            panel3.Controls.Add(userControl);
+            userControl.BringToFront();
+        }
     }
 }

@@ -23,11 +23,6 @@ namespace UI
             cmbRoles.Items.Add("Staff");
             cmbRoles.SelectedIndex = 0;
 
-            this.Load += UserAccountManagement_Load;
-            btnCreate.Click += btnCreate_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDeactivate.Click += btnDeactivate_Click;
-            dgvStudentInfo.CellClick += dgvStudentInfo_CellClick;
         }
 
         private void UserAccountManagement_Load(object sender, EventArgs e)

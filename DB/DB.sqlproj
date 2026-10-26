@@ -67,4 +67,30 @@
     <Build Include="Table\Students.sql" />
     <Build Include="Table\Sections.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Table\Enrollments.sql" />
+    <Build Include="Table\Payments.sql" />
+    <Build Include="Table\Assessments.sql" />
+    <Build Include="Table\GradeLevelFees.sql" />
+    <Build Include="StoredProc\SearchStudentAccount.sql" />
+    <Build Include="StoredProc\CreateStudent.sql" />
+    <Build Include="StoredProc\DeactivateStudent.sql" />
+    <Build Include="StoredProc\GetAllStudents.sql" />
+    <Build Include="StoredProc\UpdateStudent.sql" />
+    <Build Include="StoredProc\CreateUser.sql" />
+    <Build Include="StoredProc\GetAllUsers.sql" />
+    <Build Include="StoredProc\UpdateUser.sql" />
+    <Build Include="StoredProc\DeactivateUser.sql" />
+    <Build Include="StoredProc\CreateSection.sql" />
+    <Build Include="StoredProc\GetAllSections.sql" />
+    <Build Include="StoredProc\UpdateSection.sql" />
+    <Build Include="StoredProc\DeactivateSection.sql" />
+    <Build Include="StoredProc\GetUserByUsername.sql" />
+    <Build Include="StoredProc\GetUserById.sql" />
+    <Build Include="StoredProc\GetLatestStudentId.sql" />
+    <Build Include="StoredProc\EnrollStudent.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostScript\GradeLevelFees_Seed.sql" />
+  </ItemGroup>
 </Project>
