@@ -149,6 +149,7 @@
             btnStudentsAccSearch.TabIndex = 1;
             btnStudentsAccSearch.Text = "Student Account Search";
             btnStudentsAccSearch.UseVisualStyleBackColor = false;
+            btnStudentsAccSearch.Click += btnStudentsAccSearch_Click;
             // 
             // btnStudentEnrollment
             // 
