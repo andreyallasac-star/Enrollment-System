@@ -5,5 +5,6 @@ CREATE TABLE Students (
     LastName NVARCHAR(50) NOT NULL,
     DateOfBirth DATE NOT NULL,
     Address NVARCHAR(255) NULL,
-    Gender NVARCHAR(10) NULL
+    Gender NVARCHAR(10) NULL,
+	Status NVARCHAR(20) NOT NULL DEFAULT 'Inactive'
 );
