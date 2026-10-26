@@ -100,6 +100,7 @@
             btnLogOut.TabIndex = 2;
             btnLogOut.Text = "Log Out";
             btnLogOut.UseVisualStyleBackColor = false;
+            btnLogOut.Click += btnLogOut_Click;
             // 
             // btnPaymentHistory
             // 
@@ -112,6 +113,7 @@
             btnPaymentHistory.TabIndex = 3;
             btnPaymentHistory.Text = "Payment History and Receipts";
             btnPaymentHistory.UseVisualStyleBackColor = false;
+            btnPaymentHistory.Click += btnPaymentHistory_Click;
             // 
             // btnPaymentandCashiering
             // 
@@ -124,6 +126,7 @@
             btnPaymentandCashiering.TabIndex = 2;
             btnPaymentandCashiering.Text = "Payment and Cashiering";
             btnPaymentandCashiering.UseVisualStyleBackColor = false;
+            btnPaymentandCashiering.Click += btnPaymentandCashiering_Click;
             // 
             // btnStudentsAccSearch
             // 
@@ -148,6 +151,7 @@
             btnStudentEnrollment.TabIndex = 0;
             btnStudentEnrollment.Text = "Student Enrollment";
             btnStudentEnrollment.UseVisualStyleBackColor = false;
+            btnStudentEnrollment.Click += btnStudentEnrollment_Click;
             // 
             // panel3
             // 
