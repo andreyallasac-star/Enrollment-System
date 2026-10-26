@@ -23,5 +23,17 @@ namespace UI
         {
             lblWelcomeStaff.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
         }
+
+        private void btnStudentEnrollment_Click(object sender, EventArgs e)
+        {
+            StudentEnrollment enrollment = new StudentEnrollment();
+            enrollment.TopLevel = false;
+            enrollment.FormBorderStyle = FormBorderStyle.None;
+
+            enrollment.Dock = DockStyle.Fill;
+            panel3.Controls.Clear();
+            panel3.Controls.Add(enrollment);
+            enrollment.Show();
+        }
     }
 }
