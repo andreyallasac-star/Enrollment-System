@@ -7,9 +7,5 @@ AS
 BEGIN
     INSERT INTO Enrollments (StudentId, SectionCode, SchoolYear, AssessedFee, Status)
     VALUES (@StudentId, @SectionCode, @SchoolYear, @AssessedFee, 'Enrolled');
-
-    UPDATE Students 
-    SET Status = 'Enrolled' 
-    WHERE StudentId = @StudentId;
 END
 GO
