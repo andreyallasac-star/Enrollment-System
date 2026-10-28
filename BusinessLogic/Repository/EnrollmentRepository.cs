@@ -27,5 +27,18 @@ namespace BusinessLogic.Repository
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+
+        public string GetStudentStatus(string studentId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var cmd = new SqlCommand("SELECT Status FROM Students WHERE StudentId = @StudentId", conn);
+                cmd.Parameters.AddWithValue("@StudentId", studentId);
+
+                var result = cmd.ExecuteScalar();
+                return result != null ? result.ToString() : "";
+            }
+        }
     }
 }
