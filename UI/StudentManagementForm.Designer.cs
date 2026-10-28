@@ -57,6 +57,7 @@
             Column6 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
             Column8 = new DataGridViewTextBoxColumn();
+            btnActivate = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvStudentRecords).BeginInit();
             SuspendLayout();
             // 
@@ -320,6 +321,17 @@
             Column8.HeaderText = "Status";
             Column8.Name = "Column8";
             // 
+            // btnActivate
+            // 
+            btnActivate.BackColor = Color.Green;
+            btnActivate.ForeColor = SystemColors.Control;
+            btnActivate.Location = new Point(395, 470);
+            btnActivate.Name = "btnActivate";
+            btnActivate.Size = new Size(121, 33);
+            btnActivate.TabIndex = 21;
+            btnActivate.Text = "Activate";
+            btnActivate.UseVisualStyleBackColor = false;
+            // 
             // StudentManagementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -327,6 +339,7 @@
             AutoScroll = true;
             BackColor = Color.Azure;
             ClientSize = new Size(834, 747);
+            Controls.Add(btnActivate);
             Controls.Add(dgvStudentRecords);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -386,5 +399,6 @@
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
         private DataGridViewTextBoxColumn Column8;
+        private Button btnActivate;
     }
 }
