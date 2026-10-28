@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnActivate = new Button();
             dgvStudentInfo = new DataGridView();
             dtvUser = new DataGridViewTextBoxColumn();
             dgvUsername = new DataGridViewTextBoxColumn();
@@ -44,7 +45,6 @@
             lblPassword = new Label();
             lblUsername = new Label();
             lblUserAccount = new Label();
-            btnActivate = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvStudentInfo).BeginInit();
             SuspendLayout();
@@ -70,6 +70,18 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(752, 488);
             panel1.TabIndex = 0;
+            // 
+            // btnActivate
+            // 
+            btnActivate.BackColor = Color.Green;
+            btnActivate.ForeColor = SystemColors.Control;
+            btnActivate.Location = new Point(424, 214);
+            btnActivate.Name = "btnActivate";
+            btnActivate.Size = new Size(121, 33);
+            btnActivate.TabIndex = 22;
+            btnActivate.Text = "Activate";
+            btnActivate.UseVisualStyleBackColor = false;
+            btnActivate.Click += btnActivate_Click;
             // 
             // dgvStudentInfo
             // 
@@ -219,17 +231,6 @@
             lblUserAccount.Size = new Size(365, 37);
             lblUserAccount.TabIndex = 0;
             lblUserAccount.Text = "User Account Management";
-            // 
-            // btnActivate
-            // 
-            btnActivate.BackColor = Color.Green;
-            btnActivate.ForeColor = SystemColors.Control;
-            btnActivate.Location = new Point(424, 214);
-            btnActivate.Name = "btnActivate";
-            btnActivate.Size = new Size(121, 33);
-            btnActivate.TabIndex = 22;
-            btnActivate.Text = "Activate";
-            btnActivate.UseVisualStyleBackColor = false;
             // 
             // UserAccountManagement
             // 
