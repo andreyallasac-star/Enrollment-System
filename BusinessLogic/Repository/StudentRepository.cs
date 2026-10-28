@@ -93,6 +93,22 @@ namespace BusinessLogic.Repository
             }
         }
 
+        public bool ActivateStudent(string studentId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE Students SET Status = 'Active' WHERE StudentId = @StudentId";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@StudentId", studentId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
         public string GenerateNextStudentId()
         {
             string yearPrefix = DateTime.Now.Year.ToString();
