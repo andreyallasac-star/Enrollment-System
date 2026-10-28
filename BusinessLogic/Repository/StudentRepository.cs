@@ -53,7 +53,8 @@ namespace BusinessLogic.Repository
                             DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
                             Gender = reader["Gender"].ToString(),
                             Address = reader["Address"].ToString(),
-                            Status = reader["Status"].ToString()
+                            Status = reader["AccountStatus"].ToString(),
+                            EnrollmentStatus = reader["EnrollmentStatus"].ToString()
                         });
                     }
                 }
