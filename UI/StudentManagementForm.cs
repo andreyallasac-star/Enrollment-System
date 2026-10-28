@@ -78,7 +78,7 @@ namespace UI
 
             if (_studentController.UpdateStudent(updatedStudent) == "Success")
             {
-                ClearForm(); 
+                ClearForm();
                 RefreshGrid();
             }
         }
@@ -89,8 +89,36 @@ namespace UI
 
             if (_studentController.DeactivateStudent(_selectedStudentId) == "Success")
             {
-                ClearForm(); 
+                ClearForm();
                 RefreshGrid();
+            }
+        }
+
+        private void btnActivate_Click(object sender, EventArgs e)
+        {
+            if (dgvStudentRecords.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a student from the grid to activate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedStudentId = dgvStudentRecords.SelectedRows[0].Cells[0].Value.ToString();
+
+            DialogResult confirm = MessageBox.Show($"Are you sure you want to activate Student ID: {selectedStudentId}?", "Confirm Activation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                string result = _studentController.ActivateStudent(selectedStudentId);
+
+                if (result == "Success")
+                {
+                    MessageBox.Show("Student activated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ClearForm(); RefreshGrid();
+
+                }
+                else
+                {
+                    MessageBox.Show(result, "Activation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -123,7 +151,8 @@ namespace UI
                     s.DateOfBirth.ToString("yyyy-MM-dd"),
                     s.Gender,
                     s.Address,
-                    s.Status);
+                    s.Status,
+                    s.EnrollmentStatus);
         }
 
         private void ClearForm()
