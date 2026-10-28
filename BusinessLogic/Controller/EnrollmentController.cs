@@ -12,8 +12,13 @@ namespace BusinessLogic.Controller
 
         public string EnrollStudent(Enrollment enrollment)
         {
+            string studentStatus = _enrollmentRepo.GetStudentStatus(enrollment.StudentId);
+
             if (string.IsNullOrWhiteSpace(enrollment.StudentId))
                 return "Student ID is required. Please search for a student first.";
+
+            if (studentStatus == "Inactive")
+                return "Blocked: Cannot enroll an inactive student. Please activate their account in Student Management first.";
 
             if (string.IsNullOrWhiteSpace(enrollment.SectionCode))
                 return "Please select a Section.";
