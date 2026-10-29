@@ -26,7 +26,7 @@ namespace UI
             dgvInfo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
             dgvInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
 
-            cmbGradeLevel.Items.AddRange(new string[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10"});
+            cmbGradeLevel.Items.AddRange(new string[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10" });
 
             cmbSchoolYear.Items.AddRange(new string[] { "2026-2027", "2027-2028" });
         }
@@ -85,7 +85,7 @@ namespace UI
 
             if (_sectionController.UpdateSection(section) == "Success")
             {
-                ClearForm(); 
+                ClearForm();
                 RefreshGrid();
             }
         }
@@ -96,6 +96,36 @@ namespace UI
             if (_sectionController.DeactivateSection(_selectedCode) == "Success")
             {
                 ClearForm(); RefreshGrid();
+            }
+        }
+
+        private void btnActivate_Click(object sender, EventArgs e)
+        {
+            
+            if (dgvInfo.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a section from the grid to activate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedSectionCode = dgvInfo.SelectedRows[0].Cells[0].Value.ToString();
+
+            DialogResult confirm = MessageBox.Show($"Are you sure you want to activate Section: {selectedSectionCode}?", "Confirm Activation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                string result = _sectionController.ActivateSection(selectedSectionCode);
+
+                if (result == "Success")
+                {
+                    MessageBox.Show("Section activated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearForm();
+                    RefreshGrid();
+                }
+                else
+                {
+                    MessageBox.Show(result, "Activation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -120,7 +150,7 @@ namespace UI
                 dgvInfo.Rows.Clear();
                 foreach (var s in _sectionController.GetAllSections())
                 {
-                    dgvInfo.Rows.Add(s.SectionCode, s.SectionName, s.GradeLevel, s.SchoolYear);
+                    dgvInfo.Rows.Add(s.SectionCode, s.SectionName, s.GradeLevel, s.SchoolYear, s.Status);
                 }
             }
             catch (Exception ex)
@@ -132,7 +162,7 @@ namespace UI
         private void ClearForm()
         {
             _selectedCode = "";
-            txtSectionCode.Clear(); 
+            txtSectionCode.Clear();
             txtSectionName.Clear();
             cmbGradeLevel.SelectedIndex = -1;
             cmbSchoolYear.SelectedIndex = -1;
