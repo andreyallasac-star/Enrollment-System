@@ -72,10 +72,9 @@
             panel1.Controls.Add(lblSectionName);
             panel1.Controls.Add(lblSectionCode);
             panel1.Controls.Add(lblSectionManagement);
-            panel1.Location = new Point(2, 2);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(12, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(968, 786);
+            panel1.Size = new Size(1536, 966);
             panel1.TabIndex = 0;
             // 
             // dgvInfo
@@ -100,8 +99,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvInfo.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvInfo.Location = new Point(24, 421);
-            dgvInfo.Margin = new Padding(3, 2, 3, 2);
+            dgvInfo.Location = new Point(27, 563);
             dgvInfo.Name = "dgvInfo";
             dgvInfo.ReadOnly = true;
             dgvInfo.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
@@ -110,7 +108,7 @@
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
             dgvInfo.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInfo.Size = new Size(919, 354);
+            dgvInfo.Size = new Size(1506, 403);
             dgvInfo.TabIndex = 12;
             dgvInfo.CellClick += dgvInfo_CellClick;
             // 
@@ -149,8 +147,10 @@
             // Column1
             // 
             Column1.HeaderText = "Status";
+            Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
             Column1.ReadOnly = true;
+            Column1.Width = 125;
             // 
             // btnActivate
             // 
@@ -161,10 +161,9 @@
             btnActivate.FlatStyle = FlatStyle.Flat;
             btnActivate.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             btnActivate.ForeColor = Color.Green;
-            btnActivate.Location = new Point(393, 346);
-            btnActivate.Margin = new Padding(3, 2, 3, 2);
+            btnActivate.Location = new Point(734, 456);
             btnActivate.Name = "btnActivate";
-            btnActivate.Size = new Size(167, 62);
+            btnActivate.Size = new Size(278, 83);
             btnActivate.TabIndex = 15;
             btnActivate.Text = "ACTIVATE";
             btnActivate.UseVisualStyleBackColor = false;
@@ -175,9 +174,10 @@
             cmbSchoolYear.FlatStyle = FlatStyle.System;
             cmbSchoolYear.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
             cmbSchoolYear.FormattingEnabled = true;
-            cmbSchoolYear.Location = new Point(664, 246);
+            cmbSchoolYear.Location = new Point(848, 325);
+            cmbSchoolYear.Margin = new Padding(3, 4, 3, 4);
             cmbSchoolYear.Name = "cmbSchoolYear";
-            cmbSchoolYear.Size = new Size(221, 37);
+            cmbSchoolYear.Size = new Size(252, 44);
             cmbSchoolYear.TabIndex = 14;
             // 
             // cmbGradeLevel
@@ -186,9 +186,10 @@
             cmbGradeLevel.FlatStyle = FlatStyle.System;
             cmbGradeLevel.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
             cmbGradeLevel.FormattingEnabled = true;
-            cmbGradeLevel.Location = new Point(209, 249);
+            cmbGradeLevel.Location = new Point(239, 332);
+            cmbGradeLevel.Margin = new Padding(3, 4, 3, 4);
             cmbGradeLevel.Name = "cmbGradeLevel";
-            cmbGradeLevel.Size = new Size(235, 37);
+            cmbGradeLevel.Size = new Size(268, 44);
             cmbGradeLevel.TabIndex = 13;
             // 
             // btnDeactivate
@@ -199,10 +200,9 @@
             btnDeactivate.FlatStyle = FlatStyle.Flat;
             btnDeactivate.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             btnDeactivate.ForeColor = Color.Maroon;
-            btnDeactivate.Location = new Point(578, 346);
-            btnDeactivate.Margin = new Padding(3, 2, 3, 2);
+            btnDeactivate.Location = new Point(1065, 456);
             btnDeactivate.Name = "btnDeactivate";
-            btnDeactivate.Size = new Size(167, 62);
+            btnDeactivate.Size = new Size(278, 83);
             btnDeactivate.TabIndex = 11;
             btnDeactivate.Text = "DEACTIVATE";
             btnDeactivate.UseVisualStyleBackColor = false;
@@ -216,10 +216,9 @@
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             btnUpdate.ForeColor = Color.Teal;
-            btnUpdate.Location = new Point(209, 346);
-            btnUpdate.Margin = new Padding(3, 2, 3, 2);
+            btnUpdate.Location = new Point(404, 456);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(167, 62);
+            btnUpdate.Size = new Size(278, 83);
             btnUpdate.TabIndex = 10;
             btnUpdate.Text = "UPDATE";
             btnUpdate.UseVisualStyleBackColor = false;
@@ -234,10 +233,9 @@
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             btnAdd.ForeColor = Color.Green;
-            btnAdd.Location = new Point(24, 346);
-            btnAdd.Margin = new Padding(3, 2, 3, 2);
+            btnAdd.Location = new Point(79, 456);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(167, 62);
+            btnAdd.Size = new Size(278, 83);
             btnAdd.TabIndex = 9;
             btnAdd.Text = "ADD";
             btnAdd.UseVisualStyleBackColor = false;
@@ -247,10 +245,9 @@
             // 
             txtSectionName.BorderStyle = BorderStyle.FixedSingle;
             txtSectionName.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
-            txtSectionName.Location = new Point(664, 168);
-            txtSectionName.Margin = new Padding(3, 2, 3, 2);
+            txtSectionName.Location = new Point(848, 221);
             txtSectionName.Name = "txtSectionName";
-            txtSectionName.Size = new Size(221, 35);
+            txtSectionName.Size = new Size(252, 41);
             txtSectionName.TabIndex = 6;
             // 
             // txtSectionCode
@@ -258,10 +255,9 @@
             txtSectionCode.BorderStyle = BorderStyle.FixedSingle;
             txtSectionCode.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
             txtSectionCode.ForeColor = SystemColors.WindowText;
-            txtSectionCode.Location = new Point(209, 168);
-            txtSectionCode.Margin = new Padding(3, 2, 3, 2);
+            txtSectionCode.Location = new Point(239, 224);
             txtSectionCode.Name = "txtSectionCode";
-            txtSectionCode.Size = new Size(235, 35);
+            txtSectionCode.Size = new Size(268, 41);
             txtSectionCode.TabIndex = 5;
             // 
             // lblSchoolYear
@@ -269,9 +265,9 @@
             lblSchoolYear.AutoSize = true;
             lblSchoolYear.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
             lblSchoolYear.ForeColor = Color.Black;
-            lblSchoolYear.Location = new Point(474, 254);
+            lblSchoolYear.Location = new Point(631, 336);
             lblSchoolYear.Name = "lblSchoolYear";
-            lblSchoolYear.Size = new Size(163, 29);
+            lblSchoolYear.Size = new Size(198, 36);
             lblSchoolYear.TabIndex = 4;
             lblSchoolYear.Text = "School Year:";
             // 
@@ -280,9 +276,9 @@
             lblGradeLevel.AutoSize = true;
             lblGradeLevel.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
             lblGradeLevel.ForeColor = Color.Black;
-            lblGradeLevel.Location = new Point(24, 254);
+            lblGradeLevel.Location = new Point(27, 339);
             lblGradeLevel.Name = "lblGradeLevel";
-            lblGradeLevel.Size = new Size(162, 29);
+            lblGradeLevel.Size = new Size(196, 36);
             lblGradeLevel.TabIndex = 3;
             lblGradeLevel.Text = "Grade Level:";
             // 
@@ -291,9 +287,9 @@
             lblSectionName.AutoSize = true;
             lblSectionName.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
             lblSectionName.ForeColor = Color.Black;
-            lblSectionName.Location = new Point(474, 170);
+            lblSectionName.Location = new Point(631, 224);
             lblSectionName.Name = "lblSectionName";
-            lblSectionName.Size = new Size(184, 29);
+            lblSectionName.Size = new Size(221, 36);
             lblSectionName.TabIndex = 2;
             lblSectionName.Text = "Section Name:";
             // 
@@ -302,9 +298,9 @@
             lblSectionCode.AutoSize = true;
             lblSectionCode.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
             lblSectionCode.ForeColor = Color.Black;
-            lblSectionCode.Location = new Point(24, 170);
+            lblSectionCode.Location = new Point(27, 227);
             lblSectionCode.Name = "lblSectionCode";
-            lblSectionCode.Size = new Size(178, 29);
+            lblSectionCode.Size = new Size(215, 36);
             lblSectionCode.TabIndex = 1;
             lblSectionCode.Text = "Section Code:";
             // 
@@ -314,20 +310,19 @@
             lblSectionManagement.BackColor = Color.Transparent;
             lblSectionManagement.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSectionManagement.ForeColor = Color.Black;
-            lblSectionManagement.Location = new Point(24, 29);
+            lblSectionManagement.Location = new Point(27, 39);
             lblSectionManagement.Name = "lblSectionManagement";
-            lblSectionManagement.Size = new Size(290, 37);
+            lblSectionManagement.Size = new Size(359, 46);
             lblSectionManagement.TabIndex = 0;
             lblSectionManagement.Text = "Section Management";
             // 
             // SectionManagement
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(971, 788);
+            ClientSize = new Size(1560, 990);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "SectionManagement";
             Text = "SectionManagement";
             Load += SectionManagement_Load;
