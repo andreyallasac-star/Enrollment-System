@@ -103,11 +103,12 @@ namespace BusinessLogic.Repository
                     p.PaymentDate, 
                     p.StudentId, 
                     (s.FirstName + ' ' + s.LastName) AS StudentName,
-                    e.SectionCode AS Section,
+                    sec.SectionName AS Section,
                     p.AmountPaid
                 FROM Payments p
                 INNER JOIN Students s ON p.StudentId = s.StudentId
                 LEFT JOIN Enrollments e ON p.StudentId = e.StudentId AND e.Status = 'Enrolled'
+                LEFT JOIN Sections sec ON e.SectionCode = sec.SectionCode
                 WHERE CAST(p.PaymentDate AS DATE) >= @DateFrom 
                   AND CAST(p.PaymentDate AS DATE) <= @DateTo";
 
