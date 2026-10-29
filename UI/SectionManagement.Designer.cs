@@ -168,6 +168,7 @@
             btnActivate.TabIndex = 15;
             btnActivate.Text = "ACTIVATE";
             btnActivate.UseVisualStyleBackColor = false;
+            btnActivate.Click += btnActivate_Click;
             // 
             // cmbSchoolYear
             // 
