@@ -142,6 +142,6 @@ namespace UI
             cmbSection.Items.Clear();
         }
 
-        
+
     }
 }
