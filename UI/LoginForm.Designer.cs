@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            panel2 = new Panel();
-            label1 = new Label();
-            label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
-            label3 = new Label();
             panel3 = new Panel();
+            label3 = new Label();
+            panel2 = new Panel();
+            btnClear = new Button();
+            btnLogin = new Button();
+            txtPassword = new TextBox();
+            txtUsername = new TextBox();
+            lblWelcome = new Label();
+            lblPlease = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -52,87 +52,14 @@
             panel1.Size = new Size(429, 570);
             panel1.TabIndex = 5;
             // 
-            // panel2
+            // panel3
             // 
-            panel2.Controls.Add(button2);
-            panel2.Controls.Add(button1);
-            panel2.Controls.Add(textBox2);
-            panel2.Controls.Add(textBox1);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(label1);
-            panel2.Location = new Point(485, 71);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(370, 442);
-            panel2.TabIndex = 6;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(22, 98);
-            label1.Name = "label1";
-            label1.Size = new Size(342, 17);
-            label1.TabIndex = 0;
-            label1.Text = "Please sign in with your student username and password.";
-            label1.Click += label1_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(22, 51);
-            label2.Name = "label2";
-            label2.Size = new Size(275, 38);
-            label2.TabIndex = 1;
-            label2.Text = "Welcome, students!";
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = SystemColors.ControlLight;
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = SystemColors.ControlDarkDark;
-            textBox1.Location = new Point(73, 160);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(224, 34);
-            textBox1.TabIndex = 2;
-            textBox1.Text = "Username";
-            // 
-            // textBox2
-            // 
-            textBox2.BackColor = SystemColors.ControlLight;
-            textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox2.ForeColor = SystemColors.ControlDarkDark;
-            textBox2.Location = new Point(73, 213);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(224, 34);
-            textBox2.TabIndex = 3;
-            textBox2.Text = "Password";
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.DeepSkyBlue;
-            button1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(200, 298);
-            button1.Name = "button1";
-            button1.Size = new Size(97, 39);
-            button1.TabIndex = 4;
-            button1.Text = "Log in";
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.White;
-            button2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.DeepSkyBlue;
-            button2.Location = new Point(73, 298);
-            button2.Name = "button2";
-            button2.Size = new Size(97, 39);
-            button2.TabIndex = 5;
-            button2.Text = "Clear";
-            button2.UseVisualStyleBackColor = false;
+            panel3.BackColor = Color.White;
+            panel3.ForeColor = Color.White;
+            panel3.Location = new Point(60, 285);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(352, 10);
+            panel3.TabIndex = 7;
             // 
             // label3
             // 
@@ -145,14 +72,87 @@
             label3.TabIndex = 6;
             label3.Text = "Enrollment System";
             // 
-            // panel3
+            // panel2
             // 
-            panel3.BackColor = Color.White;
-            panel3.ForeColor = Color.White;
-            panel3.Location = new Point(60, 285);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(352, 10);
-            panel3.TabIndex = 7;
+            panel2.Controls.Add(btnClear);
+            panel2.Controls.Add(btnLogin);
+            panel2.Controls.Add(txtPassword);
+            panel2.Controls.Add(txtUsername);
+            panel2.Controls.Add(lblWelcome);
+            panel2.Controls.Add(lblPlease);
+            panel2.Location = new Point(485, 71);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(370, 442);
+            panel2.TabIndex = 6;
+            // 
+            // btnClear
+            // 
+            btnClear.BackColor = Color.White;
+            btnClear.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnClear.ForeColor = Color.DeepSkyBlue;
+            btnClear.Location = new Point(73, 298);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(97, 39);
+            btnClear.TabIndex = 5;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = false;
+            // 
+            // btnLogin
+            // 
+            btnLogin.BackColor = Color.DeepSkyBlue;
+            btnLogin.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLogin.ForeColor = Color.White;
+            btnLogin.Location = new Point(200, 298);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(97, 39);
+            btnLogin.TabIndex = 4;
+            btnLogin.Text = "Log in";
+            btnLogin.UseVisualStyleBackColor = false;
+            // 
+            // txtPassword
+            // 
+            txtPassword.BackColor = SystemColors.ControlLight;
+            txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPassword.ForeColor = SystemColors.ControlDarkDark;
+            txtPassword.Location = new Point(73, 213);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(224, 34);
+            txtPassword.TabIndex = 3;
+            txtPassword.Text = "Password";
+            // 
+            // txtUsername
+            // 
+            txtUsername.BackColor = SystemColors.ControlLight;
+            txtUsername.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsername.ForeColor = SystemColors.ControlDarkDark;
+            txtUsername.Location = new Point(73, 160);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(224, 34);
+            txtUsername.TabIndex = 2;
+            txtUsername.Text = "Username";
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.AutoSize = true;
+            lblWelcome.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblWelcome.ForeColor = SystemColors.ActiveCaptionText;
+            lblWelcome.Location = new Point(22, 51);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(275, 38);
+            lblWelcome.TabIndex = 1;
+            lblWelcome.Text = "Welcome, students!";
+            // 
+            // lblPlease
+            // 
+            lblPlease.AutoSize = true;
+            lblPlease.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPlease.ForeColor = SystemColors.ControlDarkDark;
+            lblPlease.Location = new Point(22, 98);
+            lblPlease.Name = "lblPlease";
+            lblPlease.Size = new Size(342, 17);
+            lblPlease.TabIndex = 0;
+            lblPlease.Text = "Please sign in with your student username and password.";
+            lblPlease.Click += label1_Click;
             // 
             // LoginForm
             // 
@@ -175,13 +175,13 @@
 
         private Panel panel1;
         private Panel panel2;
-        private Label label1;
-        private TextBox textBox1;
-        private Label label2;
-        private Button button1;
-        private TextBox textBox2;
+        private Label lblPlease;
+        private TextBox txtUsername;
+        private Label lblWelcome;
+        private Button btnLogin;
+        private TextBox txtPassword;
         private Panel panel3;
         private Label label3;
-        private Button button2;
+        private Button btnClear;
     }
 }
