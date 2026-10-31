@@ -162,6 +162,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
             WindowState = FormWindowState.Maximized;
             panel1.ResumeLayout(false);

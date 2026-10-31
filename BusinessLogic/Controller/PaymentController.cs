@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using BusinessLogic.Repository;
 using Model;
+using System.Data;
 
 namespace BusinessLogic.Controller
 {
@@ -34,6 +35,16 @@ namespace BusinessLogic.Controller
                 return (true, "Payment successful!", receiptId);
 
             return (false, "Database error: Could not process payment.", 0);
+        }
+
+        public DataTable GetPaymentHistory(string studentId) 
+        { 
+            return _paymentRepo.GetPaymentHistory(studentId); 
+        }
+
+        public DataTable SearchPaymentHistory(string studentId, string receiptId, DateTime dateFrom, DateTime dateTo)
+        {
+            return _paymentRepo.SearchPaymentHistory(studentId, receiptId, dateFrom, dateTo);
         }
     }
 }

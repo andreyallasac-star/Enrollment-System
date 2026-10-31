@@ -1,12 +1,13 @@
 ﻿CREATE PROCEDURE UpdateSection
-    @SectionCode NVARCHAR(50),
-    @GradeLevel NVARCHAR(50),
-    @Capacity INT
+    @SectionCode NVARCHAR(20),
+    @SectionName NVARCHAR(100),
+    @GradeLevel NVARCHAR(20),
+    @SchoolYear NVARCHAR(10)
 AS
 BEGIN
     UPDATE Sections 
-    SET GradeLevel = @GradeLevel, 
-        Capacity = @Capacity 
+    SET SectionName = @SectionName,
+        GradeLevel = @GradeLevel, 
+        SchoolYear = @SchoolYear
     WHERE SectionCode = @SectionCode;
 END
-GO

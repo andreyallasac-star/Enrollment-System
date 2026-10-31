@@ -18,15 +18,15 @@ namespace BusinessLogic.Controller
         public string SaveAssessment(Assessment assessment)
         {
             if (string.IsNullOrWhiteSpace(assessment.StudentId))
-                return "Student ID is required.";
+                return "Please enter a valid Student ID.";
 
             if (string.IsNullOrWhiteSpace(assessment.SchoolYear))
-                return "School Year is required.";
+                return "Student must be officially enrolled to have a valid School Year.";
 
             if (assessment.TotalAssessment <= 0)
-                return "Total assessment must be greater than zero.";
+                return "Please compute the fees before saving. Total Assessment must be greater than zero.";
 
-            return _assessmentRepo.SaveAssessment(assessment) ? "Success" : "Failed to save assessment to the database.";
+            return _assessmentRepo.SaveAssessment(assessment) ? "Success" : "Database Error: Could not save assessment.";
         }
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnActivate = new Button();
             dgvStudentInfo = new DataGridView();
             dtvUser = new DataGridViewTextBoxColumn();
             dgvUsername = new DataGridViewTextBoxColumn();
@@ -51,6 +52,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
+            panel1.Controls.Add(btnActivate);
             panel1.Controls.Add(dgvStudentInfo);
             panel1.Controls.Add(btnDeactivate);
             panel1.Controls.Add(btnUpdate);
@@ -69,6 +71,18 @@
             panel1.Size = new Size(752, 488);
             panel1.TabIndex = 0;
             // 
+            // btnActivate
+            // 
+            btnActivate.BackColor = Color.Green;
+            btnActivate.ForeColor = SystemColors.Control;
+            btnActivate.Location = new Point(424, 214);
+            btnActivate.Name = "btnActivate";
+            btnActivate.Size = new Size(121, 33);
+            btnActivate.TabIndex = 22;
+            btnActivate.Text = "Activate";
+            btnActivate.UseVisualStyleBackColor = false;
+            btnActivate.Click += btnActivate_Click;
+            // 
             // dgvStudentInfo
             // 
             dgvStudentInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -78,6 +92,7 @@
             dgvStudentInfo.Margin = new Padding(3, 2, 3, 2);
             dgvStudentInfo.Name = "dgvStudentInfo";
             dgvStudentInfo.RowHeadersWidth = 51;
+            dgvStudentInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvStudentInfo.Size = new Size(749, 219);
             dgvStudentInfo.TabIndex = 10;
             dgvStudentInfo.CellClick += dgvStudentInfo_CellClick;
@@ -114,7 +129,7 @@
             // 
             btnDeactivate.BackColor = Color.Red;
             btnDeactivate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnDeactivate.Location = new Point(382, 213);
+            btnDeactivate.Location = new Point(265, 213);
             btnDeactivate.Margin = new Padding(3, 2, 3, 2);
             btnDeactivate.Name = "btnDeactivate";
             btnDeactivate.Size = new Size(139, 34);
@@ -127,7 +142,7 @@
             // 
             btnUpdate.BackColor = Color.Red;
             btnUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnUpdate.Location = new Point(211, 213);
+            btnUpdate.Location = new Point(144, 213);
             btnUpdate.Margin = new Padding(3, 2, 3, 2);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(99, 34);
@@ -252,5 +267,6 @@
         private DataGridViewTextBoxColumn dgvUsername;
         private DataGridViewTextBoxColumn dgvRole;
         private DataGridViewTextBoxColumn dgvStatus;
+        private Button btnActivate;
     }
 }

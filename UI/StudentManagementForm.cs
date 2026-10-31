@@ -29,16 +29,12 @@ namespace UI
             cmbGender.Items.Add("Female");
             cmbGender.SelectedIndex = 0;
 
-            this.Load += StudentManagementForm_Load;
-            btnAdd.Click += btnAdd_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDeactivate.Click += btnDeactivate_Click;
-            dgvStudentRecords.CellClick += dgvStudentRecords_CellClick_1;
         }
 
         private void StudentManagementForm_Load(object sender, EventArgs e)
         {
             RefreshGrid();
+            ClearForm();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -82,7 +78,7 @@ namespace UI
 
             if (_studentController.UpdateStudent(updatedStudent) == "Success")
             {
-                ClearForm(); 
+                ClearForm();
                 RefreshGrid();
             }
         }
@@ -93,8 +89,36 @@ namespace UI
 
             if (_studentController.DeactivateStudent(_selectedStudentId) == "Success")
             {
-                ClearForm(); 
+                ClearForm();
                 RefreshGrid();
+            }
+        }
+
+        private void btnActivate_Click(object sender, EventArgs e)
+        {
+            if (dgvStudentRecords.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a student from the grid to activate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedStudentId = dgvStudentRecords.SelectedRows[0].Cells[0].Value.ToString();
+
+            DialogResult confirm = MessageBox.Show($"Are you sure you want to activate Student ID: {selectedStudentId}?", "Confirm Activation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                string result = _studentController.ActivateStudent(selectedStudentId);
+
+                if (result == "Success")
+                {
+                    MessageBox.Show("Student activated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ClearForm(); RefreshGrid();
+
+                }
+                else
+                {
+                    MessageBox.Show(result, "Activation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -127,18 +151,19 @@ namespace UI
                     s.DateOfBirth.ToString("yyyy-MM-dd"),
                     s.Gender,
                     s.Address,
-                    s.Status);
+                    s.Status,
+                    s.EnrollmentStatus);
         }
 
         private void ClearForm()
         {
             _selectedStudentId = "";
-            txtStudentID.Clear();
+            txtStudentID.Text = _studentController.GetNextStudentId();
             txtFirstName.Clear();
             txtMiddleName.Clear();
             txtLastName.Clear();
             txtAddress.Clear();
-            txtStudentID.Enabled = true;
+            txtStudentID.Enabled = false;
         }
 
         

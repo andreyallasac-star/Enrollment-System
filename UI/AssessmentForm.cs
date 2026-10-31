@@ -1,12 +1,12 @@
-﻿using BusinessLogic.Controller;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BusinessLogic.Controller;
+using Model;
 
 namespace UI
 {
@@ -14,34 +14,19 @@ namespace UI
     {
         private readonly AssessmentController _assessmentController = new AssessmentController();
         private readonly StudentSearchController _searchController = new StudentSearchController();
+        private string _currentSchoolYear = "";
         public AssessmentForm()
         {
             InitializeComponent();
             txtTuitionFee.ReadOnly = true;
             txtTuitionFee.BackColor = System.Drawing.SystemColors.Control;
-
-            txtStudentId.Leave += txtStudentId_Leave;
-            txtStudentId.KeyDown += txtStudentId_KeyDown;
-
-            btnCompute.Click += btnCompute_Click;
-            btnSave.Click += btnSave_Click;
-
-            txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             txtOtherFee.Text = "0.00";
+
         }
 
-        private void txtStudentId_Leave(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             FetchStudentDetails();
-        }
-
-        private void txtStudentId_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                FetchStudentDetails();
-            }
         }
 
         private void FetchStudentDetails()
@@ -53,62 +38,59 @@ namespace UI
 
             if (profile != null)
             {
-                label1.Text = profile.FullName;
-                label2.Text = profile.GradeLevel;
-                label3.Text = profile.Section;
+                lblStudentName.Text = profile.FullName;
+                lblGrade.Text = profile.GradeLevel;
+                lblSection.Text = profile.Section;
+
+                _currentSchoolYear = profile.SchoolYear;
+                lblStatus.Text = (profile.SchoolYear == "Not Enrolled") ? "Not Enrolled" : "Enrolled";
+
+                if (lblStatus.Text == "Enrolled")
+                {
+                    decimal officialTuition = _assessmentController.ComputeTuition(profile.GradeLevel, _currentSchoolYear);
+                    txtTuitionFee.Text = officialTuition.ToString("F2");
+                }
+                else
+                {
+                    txtTuitionFee.Text = "0.00";
+                }
             }
             else
             {
-                label1.Text = "Student not found";
-                label2.Text = "---";
-                label3.Text = "---";
+                MessageBox.Show("Student not found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearForm();
             }
         }
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
-            string gradeLevel = label2.Text;
-            string schoolYear = "2026-2027";
-
-            if (gradeLevel == "<Label>" || gradeLevel == "---")
-            {
-                MessageBox.Show("Please enter a valid Student ID first.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            decimal officialTuition = _assessmentController.ComputeTuition(gradeLevel, schoolYear);
-            txtTuitionFee.Text = officialTuition.ToString("F2");
+            decimal tuitionFee = 0;
+            decimal.TryParse(txtTuitionFee.Text, System.Globalization.NumberStyles.Any, null, out tuitionFee);
 
             decimal otherFees = 0;
-            decimal.TryParse(txtOtherFee.Text, out otherFees);
+            decimal.TryParse(txtOtherFee.Text, System.Globalization.NumberStyles.Any, null, out otherFees);
 
-            decimal total = officialTuition + otherFees;
-            label5.Text = total.ToString("F2");
+            decimal total = tuitionFee + otherFees;
+            lblTotalAssessment.Text = total.ToString("F2");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtStudentId.Text))
-            {
-                MessageBox.Show("Please enter a Student ID.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             decimal totalAssessment = 0;
-            decimal.TryParse(label5.Text, out totalAssessment);
+            decimal.TryParse(lblTotalAssessment.Text, out totalAssessment);
 
-            if (totalAssessment <= 0)
-            {
-                MessageBox.Show("Please compute the fees before saving.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            decimal tuitionFee = 0;
+            decimal.TryParse(txtTuitionFee.Text, out tuitionFee);
+
+            decimal otherFee = 0;
+            decimal.TryParse(txtOtherFee.Text, out otherFee);
 
             var newAssessment = new Assessment
             {
                 StudentId = txtStudentId.Text,
-                SchoolYear = "2026-2027",
-                TuitionFee = Convert.ToDecimal(txtTuitionFee.Text),
-                OtherFee = Convert.ToDecimal(txtOtherFee.Text),
+                SchoolYear = _currentSchoolYear,
+                TuitionFee = tuitionFee,
+                OtherFee = otherFee,
                 TotalAssessment = totalAssessment
             };
 
@@ -116,12 +98,12 @@ namespace UI
 
             if (result == "Success")
             {
-                MessageBox.Show("Assessment successfully saved! The student can now proceed to the Cashier.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Assessment successfully saved!\n\nThe student can now proceed to the Cashier.", "Core Integration Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
             }
             else
             {
-                MessageBox.Show(result, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(result, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -130,11 +112,16 @@ namespace UI
             txtStudentId.Clear();
             txtTuitionFee.Clear();
             txtOtherFee.Text = "0.00";
-            txtPaymentMode.Clear();
-            label1.Text = "<Label>";
-            label2.Text = "<Label>";
-            label3.Text = "<Label>";
-            label5.Text = "<Label>";
+
+            dateTimePicker1.Value = DateTime.Now;
+
+            lblStudentName.Text = "<Label>";
+            lblGrade.Text = "<Label>";
+            lblSection.Text = "<Label>";
+            lblStatus.Text = "<Label>";
+            lblTotalAssessment.Text = "<Label>";
+
+            _currentSchoolYear = "";
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -142,6 +129,5 @@ namespace UI
 
         }
 
-        
     }
 }

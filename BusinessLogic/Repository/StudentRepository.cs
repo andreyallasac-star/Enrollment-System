@@ -53,7 +53,8 @@ namespace BusinessLogic.Repository
                             DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
                             Gender = reader["Gender"].ToString(),
                             Address = reader["Address"].ToString(),
-                            Status = reader["Status"].ToString()
+                            Status = reader["AccountStatus"].ToString(),
+                            EnrollmentStatus = reader["EnrollmentStatus"].ToString()
                         });
                     }
                 }
@@ -91,6 +92,54 @@ namespace BusinessLogic.Repository
                 cmd.Parameters.AddWithValue("@StudentId", studentId);
                 return cmd.ExecuteNonQuery() > 0;
             }
+        }
+
+        public bool ActivateStudent(string studentId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE Students SET Status = 'Active' WHERE StudentId = @StudentId";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@StudentId", studentId);
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
+        public string GenerateNextStudentId()
+        {
+            string yearPrefix = DateTime.Now.Year.ToString();
+            string lastId = string.Empty;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var cmd = new SqlCommand("GetLatestStudentId", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@YearPrefix", yearPrefix);
+
+                var result = cmd.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    lastId = result.ToString();
+                }
+            }
+
+            int nextNumber = 1;
+            if (!string.IsNullOrEmpty(lastId))
+            {
+                string[] parts = lastId.Split('-');
+                if (parts.Length == 2 && int.TryParse(parts[1], out int currentNum))
+                {
+                    nextNumber = currentNum + 1;
+                }
+            }
+
+            return $"{yearPrefix}-{nextNumber:D4}";
         }
     }
 }
