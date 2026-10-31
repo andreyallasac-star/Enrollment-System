@@ -54,20 +54,20 @@ namespace UI
             if (profile != null)
             {
                 label1.Text = profile.FullName;
-                label2.Text = profile.GradeLevel;
-                label3.Text = profile.Section;
+                lblStudentName.Text = profile.GradeLevel;
+                lblGradeYearLevel.Text = profile.Section;
             }
             else
             {
                 label1.Text = "Student not found";
-                label2.Text = "---";
-                label3.Text = "---";
+                lblStudentName.Text = "---";
+                lblGradeYearLevel.Text = "---";
             }
         }
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
-            string gradeLevel = label2.Text;
+            string gradeLevel = lblStudentName.Text;
             string schoolYear = "2026-2027";
 
             if (gradeLevel == "<Label>" || gradeLevel == "---")
@@ -83,7 +83,7 @@ namespace UI
             decimal.TryParse(txtOtherFee.Text, out otherFees);
 
             decimal total = officialTuition + otherFees;
-            label5.Text = total.ToString("F2");
+            lblStatus.Text = total.ToString("F2");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace UI
             }
 
             decimal totalAssessment = 0;
-            decimal.TryParse(label5.Text, out totalAssessment);
+            decimal.TryParse(lblStatus.Text, out totalAssessment);
 
             if (totalAssessment <= 0)
             {
@@ -132,9 +132,9 @@ namespace UI
             txtOtherFee.Text = "0.00";
             txtPaymentMode.Clear();
             label1.Text = "<Label>";
-            label2.Text = "<Label>";
-            label3.Text = "<Label>";
-            label5.Text = "<Label>";
+            lblStudentName.Text = "<Label>";
+            lblGradeYearLevel.Text = "<Label>";
+            lblStatus.Text = "<Label>";
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -142,6 +142,19 @@ namespace UI
 
         }
 
-        
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStudent_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
