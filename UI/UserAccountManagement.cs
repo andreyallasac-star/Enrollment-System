@@ -23,11 +23,6 @@ namespace UI
             cmbRoles.Items.Add("Staff");
             cmbRoles.SelectedIndex = 0;
 
-            this.Load += UserAccountManagement_Load;
-            btnCreate.Click += btnCreate_Click;
-            btnUpdate.Click += btnUpdate_Click;
-            btnDeactivate.Click += btnDeactivate_Click;
-            dgvStudentInfo.CellClick += dgvStudentInfo_CellClick;
         }
 
         private void UserAccountManagement_Load(object sender, EventArgs e)
@@ -107,6 +102,33 @@ namespace UI
             }
         }
 
+        private void btnActivate_Click(object sender, EventArgs e)
+        {
+            if (_selectedUserId == 0)
+            {
+                MessageBox.Show("Please select a user from the grid to activate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show($"Are you sure you want to activate User ID: {_selectedUserId}?", "Confirm Activation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                string result = _userController.ReactivateUser(_selectedUserId);
+
+                if (result == "Success")
+                {
+                    MessageBox.Show("User activated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearForm();
+                    RefreshGrid();
+                }
+                else
+                {
+                    MessageBox.Show(result, "Activation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void dgvStudentInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -140,5 +162,7 @@ namespace UI
             cmbRoles.SelectedIndex = 0;
             txtUsername.Enabled = true;
         }
+
+        
     }
 }

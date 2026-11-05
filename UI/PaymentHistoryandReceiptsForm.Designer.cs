@@ -124,6 +124,7 @@
             btnPrint.TabIndex = 25;
             btnPrint.Text = "Print";
             btnPrint.UseVisualStyleBackColor = false;
+            btnPrint.Click += btnPrint_Click;
             // 
             // lblAmountPaid
             // 
@@ -281,6 +282,7 @@
             btnClear.TabIndex = 11;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
             // 
             // btnSearch
             // 
@@ -294,6 +296,7 @@
             btnSearch.TabIndex = 10;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // dataGridView1
             // 
@@ -303,9 +306,11 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6 });
             dataGridView1.Location = new Point(14, 284);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(822, 162);
             dataGridView1.StandardTab = true;
             dataGridView1.TabIndex = 9;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // Column1
             // 

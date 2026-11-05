@@ -1,12 +1,12 @@
-﻿using BusinessLogic.Controller;
-using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BusinessLogic.Controller;
+using Model;
 
 namespace UI
 {
@@ -14,34 +14,19 @@ namespace UI
     {
         private readonly AssessmentController _assessmentController = new AssessmentController();
         private readonly StudentSearchController _searchController = new StudentSearchController();
+        private string _currentSchoolYear = "";
         public AssessmentForm()
         {
             InitializeComponent();
             txtTuitionFee.ReadOnly = true;
             txtTuitionFee.BackColor = System.Drawing.SystemColors.Control;
-
-            txtStudentId.Leave += txtStudentId_Leave;
-            txtStudentId.KeyDown += txtStudentId_KeyDown;
-
-            btnCompute.Click += btnCompute_Click;
-            btnSave.Click += btnSave_Click;
-
-            txtDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             txtOtherFee.Text = "0.00";
+
         }
 
-        private void txtStudentId_Leave(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
             FetchStudentDetails();
-        }
-
-        private void txtStudentId_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                FetchStudentDetails();
-            }
         }
 
         private void FetchStudentDetails()
@@ -80,7 +65,7 @@ namespace UI
             txtTuitionFee.Text = officialTuition.ToString("F2");
 
             decimal otherFees = 0;
-            decimal.TryParse(txtOtherFee.Text, out otherFees);
+            decimal.TryParse(txtOtherFee.Text, System.Globalization.NumberStyles.Any, null, out otherFees);
 
             decimal total = officialTuition + otherFees;
             lblStatus.Text = total.ToString("F2");
@@ -88,27 +73,21 @@ namespace UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtStudentId.Text))
-            {
-                MessageBox.Show("Please enter a Student ID.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             decimal totalAssessment = 0;
             decimal.TryParse(lblStatus.Text, out totalAssessment);
 
-            if (totalAssessment <= 0)
-            {
-                MessageBox.Show("Please compute the fees before saving.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            decimal tuitionFee = 0;
+            decimal.TryParse(txtTuitionFee.Text, out tuitionFee);
+
+            decimal otherFee = 0;
+            decimal.TryParse(txtOtherFee.Text, out otherFee);
 
             var newAssessment = new Assessment
             {
                 StudentId = txtStudentId.Text,
-                SchoolYear = "2026-2027",
-                TuitionFee = Convert.ToDecimal(txtTuitionFee.Text),
-                OtherFee = Convert.ToDecimal(txtOtherFee.Text),
+                SchoolYear = _currentSchoolYear,
+                TuitionFee = tuitionFee,
+                OtherFee = otherFee,
                 TotalAssessment = totalAssessment
             };
 
@@ -116,12 +95,12 @@ namespace UI
 
             if (result == "Success")
             {
-                MessageBox.Show("Assessment successfully saved! The student can now proceed to the Cashier.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Assessment successfully saved!\n\nThe student can now proceed to the Cashier.", "Core Integration Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
             }
             else
             {
-                MessageBox.Show(result, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(result, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

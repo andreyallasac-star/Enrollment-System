@@ -15,8 +15,6 @@ namespace UI
         public StudentAccountSearch()
         {
             InitializeComponent();
-            this.Load += StudentAccountSearch_Load;
-            btnSearch.Click += btnSearch_Click;
         }
 
         private void StudentAccountSearch_Load(object sender, EventArgs e)
@@ -71,6 +69,11 @@ namespace UI
             lblTotalAssessment.Text = "0.00";
             lblTotalPaid.Text = "0.00";
             lblRemainingBalance.Text = "0.00";
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearLabels();
         }
     }
 }

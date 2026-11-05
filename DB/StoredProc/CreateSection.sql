@@ -1,10 +1,11 @@
 ﻿CREATE PROCEDURE CreateSection
-    @SectionCode NVARCHAR(50),
-    @GradeLevel NVARCHAR(50),
-    @Capacity INT
+    @SectionCode NVARCHAR(20),
+    @SectionName NVARCHAR(100),
+    @GradeLevel NVARCHAR(20),
+    @SchoolYear NVARCHAR(10)
 AS
 BEGIN
-    INSERT INTO Sections (SectionCode, GradeLevel, Capacity, Status) 
-    VALUES (@SectionCode, @GradeLevel, @Capacity, 'Active');
+    INSERT INTO Sections (SectionCode, SectionName, GradeLevel, SchoolYear, Status) 
+    VALUES (@SectionCode, @SectionName, @GradeLevel, @SchoolYear, 'Active');
 END
 GO

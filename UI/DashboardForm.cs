@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using BusinessLogic.Controller;
 
 namespace UI
 {
@@ -13,15 +14,41 @@ namespace UI
     {
         private string currentUsername;
         private string currentRole;
+
+        private System.Windows.Forms.Timer timer;
+        private readonly UserController _userController = new UserController();
         public DashboardForm(string username, string role)
         {
             InitializeComponent();
             currentUsername = username;
             currentRole = role;
+
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = (1 * 1000);
+            timer.Tick += SessionCheckTimer_Tick;
+            timer.Start();
+        }
+
+        private void SessionCheckTimer_Tick(object sender, EventArgs e)
+        {
+            var currentUser = _userController.GetAllUsers()
+                .Find(u => u.Username.Equals(currentUsername, StringComparison.OrdinalIgnoreCase));
+
+            if (currentUser.Status == "Inactive")
+            {
+                timer.Stop();
+
+                MessageBox.Show("Your account has been deactivated. You have been logged out for security reasons.", "Session Terminated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LoginForm login = new LoginForm();
+                login.Show();
+                this.Close();
+            }
         }
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
+            UserControl_Load(new AdminDashboarchUserControl());
             lblWelcome.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
         }
 
@@ -134,6 +161,29 @@ namespace UI
             report.Show();
         }
 
-        
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to log out?", "Logout Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                LoginForm login = new LoginForm();
+                login.Show();
+
+                this.Close();
+            }
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            UserControl_Load(new AdminDashboarchUserControl());           
+        }
+
+        private void UserControl_Load(UserControl userControl) {
+            panel3.Controls.Clear();
+            userControl.Dock = DockStyle.Fill;
+            panel3.Controls.Add(userControl);
+            userControl.BringToFront();
+        }
     }
 }

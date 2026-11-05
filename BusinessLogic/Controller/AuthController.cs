@@ -16,6 +16,9 @@ namespace BusinessLogic.Controller
             if (user == null || user.PasswordHash != HashPassword(password))
                 return new LoginResult { Success = false, Message = "Invalid username or password." };
 
+            if (user.Status == "Inactive")
+                return new LoginResult { Success = false, Message = "User is inactive." };
+
             return new LoginResult { Success = true, Role = user.Role, Username = user.Username };
         }
 

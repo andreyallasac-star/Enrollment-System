@@ -60,6 +60,21 @@ namespace BusinessLogic.Repository
             }
         }
 
+        public bool ActivateSection(string sectionCode)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE Sections SET Status = 'Active' WHERE SectionCode = @SectionCode AND Status = 'Inactive'";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
         public List<Section> GetAllSections()
         {
             var sections = new List<Section>();

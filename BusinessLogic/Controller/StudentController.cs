@@ -17,6 +17,7 @@ namespace BusinessLogic.Controller
 
         public string CreateStudent(Student student)
         {
+
             if (string.IsNullOrWhiteSpace(student.StudentId)) 
                 return "Student ID is required.";
 
@@ -37,6 +38,19 @@ namespace BusinessLogic.Controller
         public string DeactivateStudent(string studentId) 
         { 
             return _studentRepo.DeactivateStudent(studentId) ? "Success" : "Failed to deactivate student."; 
+        }
+
+        public string ActivateStudent(string studentId)
+        {
+            if (string.IsNullOrWhiteSpace(studentId))
+                return "System Error: No valid student ID detected from the selection.";
+
+            return _studentRepo.ActivateStudent(studentId) ? "Success" : "Failed to activate student.";
+        }
+
+        public string GetNextStudentId()
+        {
+            return _studentRepo.GenerateNextStudentId();
         }
     }
 }

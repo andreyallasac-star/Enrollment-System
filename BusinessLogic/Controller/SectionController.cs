@@ -33,5 +33,20 @@ namespace BusinessLogic.Controller
         {
             return _sectionRepo.DeactivateSection(sectionCode) ? "Success" : "Failed to deactivate.";
         }
+
+        public string ActivateSection(string sectionCode)
+        {
+            if (string.IsNullOrWhiteSpace(sectionCode))
+                return "Section Code is required.";
+
+            if (_sectionRepo.ActivateSection(sectionCode))
+            {
+                return "Success";
+            }
+            else
+            {
+                return "Failed to activate section. It may already be Active.";
+            }
+        }
     }
 }

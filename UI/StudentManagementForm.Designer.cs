@@ -49,6 +49,7 @@
             btnUpdate = new Button();
             btnDeactivate = new Button();
             dgvStudentRecords = new DataGridView();
+            btnActivate = new Button();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
@@ -57,6 +58,7 @@
             Column6 = new DataGridViewTextBoxColumn();
             Column7 = new DataGridViewTextBoxColumn();
             Column8 = new DataGridViewTextBoxColumn();
+            Column9 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvStudentRecords).BeginInit();
             SuspendLayout();
             // 
@@ -272,13 +274,25 @@
             // dgvStudentRecords
             // 
             dgvStudentRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudentRecords.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8 });
+            dgvStudentRecords.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8, Column9 });
             dgvStudentRecords.Location = new Point(12, 563);
             dgvStudentRecords.Name = "dgvStudentRecords";
             dgvStudentRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvStudentRecords.Size = new Size(801, 172);
+            dgvStudentRecords.Size = new Size(942, 172);
             dgvStudentRecords.TabIndex = 20;
             dgvStudentRecords.CellClick += dgvStudentRecords_CellClick_1;
+            // 
+            // btnActivate
+            // 
+            btnActivate.BackColor = Color.Green;
+            btnActivate.ForeColor = SystemColors.Control;
+            btnActivate.Location = new Point(395, 470);
+            btnActivate.Name = "btnActivate";
+            btnActivate.Size = new Size(121, 33);
+            btnActivate.TabIndex = 21;
+            btnActivate.Text = "Activate";
+            btnActivate.UseVisualStyleBackColor = false;
+            btnActivate.Click += btnActivate_Click;
             // 
             // Column1
             // 
@@ -317,8 +331,13 @@
             // 
             // Column8
             // 
-            Column8.HeaderText = "Status";
+            Column8.HeaderText = "Account Status";
             Column8.Name = "Column8";
+            // 
+            // Column9
+            // 
+            Column9.HeaderText = "Enrollment Status";
+            Column9.Name = "Column9";
             // 
             // StudentManagementForm
             // 
@@ -326,7 +345,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.Azure;
-            ClientSize = new Size(834, 747);
+            ClientSize = new Size(981, 747);
+            Controls.Add(btnActivate);
             Controls.Add(dgvStudentRecords);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -378,6 +398,7 @@
         private Button btnUpdate;
         private Button btnDeactivate;
         private DataGridView dgvStudentRecords;
+        private Button btnActivate;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
@@ -386,5 +407,6 @@
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
         private DataGridViewTextBoxColumn Column8;
+        private DataGridViewTextBoxColumn Column9;
     }
 }
