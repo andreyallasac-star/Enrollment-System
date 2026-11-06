@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Configuration;
 
 namespace BusinessLogic.Repository
 {
     public class UserRepository
     {
-        private readonly string connectionString = "Server=DESKTOP-TCVIDJV\\SQLEXPRESS01; Database=EnrollmentSystemDB; Trusted_Connection=True; TrustServerCertificate=True;";
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["EnrollmentDB"].ConnectionString;
 
         public User GetByUsername(string username)
         {

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Data.SqlClient;
 using Model;
+using System.Configuration;
 
 namespace BusinessLogic.Repository
 {
     public class AssessmentRepository
     {
-        private readonly string connectionString = "Server=DESKTOP-TCVIDJV\\SQLEXPRESS01; Database=EnrollmentSystemDB; Trusted_Connection=True; TrustServerCertificate=True;";
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["EnrollmentDB"].ConnectionString;
 
         public decimal GetTuitionFee(string gradeLevel, string schoolYear)
         {
