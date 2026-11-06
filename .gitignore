@@ -367,3 +367,4 @@ FodyWeavers.xsd
 .vs/
 *.user
 *.suo
+/UI/connections.config
