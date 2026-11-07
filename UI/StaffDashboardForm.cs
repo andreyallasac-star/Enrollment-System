@@ -1,15 +1,47 @@
-﻿namespace UI
+﻿using BusinessLogic.Controller;
+
+namespace UI
 {
     public partial class StaffDashboardForm : Form
+
     {
         private string currentUsername;
         private string currentRole;
+        private System.Windows.Forms.Timer timer;
+        private readonly UserController _userController = new UserController();
+    
+        private void SessionCheckTimer_Tick(object sender, EventArgs e)
+        {
+            var currentUser = _userController.GetAllUsers()
+                .Find(u => u.Username.Equals(currentUsername, StringComparison.OrdinalIgnoreCase));
+
+            if (currentUser.Status == "Inactive")
+            {
+                timer.Stop();
+
+                MessageBox.Show("Your account has been deactivated. You have been logged out for security reasons.", "Session Terminated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                LoginForm login = new LoginForm();
+                login.Show();
+                this.Close();
+            }
+        }
+
         public StaffDashboardForm(string username, string role)
         {
             InitializeComponent();
             currentUsername = username;
             currentRole = role;
+            InitializeComponent();
+            currentUsername = username;
+            currentRole = role;
+
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = (1 * 1000);
+            timer.Tick += SessionCheckTimer_Tick;
+            timer.Start();
         }
+        
 
         private void StaffDashboardForm_Load(object sender, EventArgs e)
         {
