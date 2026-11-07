@@ -38,46 +38,43 @@ namespace UI
 
             if (profile != null)
             {
-                lblStudentName.Text = profile.FullName;
-                lblGrade.Text = profile.GradeLevel;
-                lblSection.Text = profile.Section;
-
-                _currentSchoolYear = profile.SchoolYear;
-                lblStatus.Text = (profile.SchoolYear == "Not Enrolled") ? "Not Enrolled" : "Enrolled";
-
-                if (lblStatus.Text == "Enrolled")
-                {
-                    decimal officialTuition = _assessmentController.ComputeTuition(profile.GradeLevel, _currentSchoolYear);
-                    txtTuitionFee.Text = officialTuition.ToString("F2");
-                }
-                else
-                {
-                    txtTuitionFee.Text = "0.00";
-                }
+                label1.Text = profile.FullName;
+                lblStudentName.Text = profile.GradeLevel;
+                lblGradeYearLevel.Text = profile.Section;
             }
             else
             {
-                MessageBox.Show("Student not found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClearForm();
+                label1.Text = "Student not found";
+                lblStudentName.Text = "---";
+                lblGradeYearLevel.Text = "---";
             }
         }
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
-            decimal tuitionFee = 0;
-            decimal.TryParse(txtTuitionFee.Text, System.Globalization.NumberStyles.Any, null, out tuitionFee);
+            string gradeLevel = lblStudentName.Text;
+            string schoolYear = "2026-2027";
+
+            if (gradeLevel == "<Label>" || gradeLevel == "---")
+            {
+                MessageBox.Show("Please enter a valid Student ID first.", "Missing Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            decimal officialTuition = _assessmentController.ComputeTuition(gradeLevel, schoolYear);
+            txtTuitionFee.Text = officialTuition.ToString("F2");
 
             decimal otherFees = 0;
             decimal.TryParse(txtOtherFee.Text, System.Globalization.NumberStyles.Any, null, out otherFees);
 
-            decimal total = tuitionFee + otherFees;
-            lblTotalAssessment.Text = total.ToString("F2");
+            decimal total = officialTuition + otherFees;
+            lblStatus.Text = total.ToString("F2");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             decimal totalAssessment = 0;
-            decimal.TryParse(lblTotalAssessment.Text, out totalAssessment);
+            decimal.TryParse(lblStatus.Text, out totalAssessment);
 
             decimal tuitionFee = 0;
             decimal.TryParse(txtTuitionFee.Text, out tuitionFee);
@@ -112,16 +109,11 @@ namespace UI
             txtStudentId.Clear();
             txtTuitionFee.Clear();
             txtOtherFee.Text = "0.00";
-
-            dateTimePicker1.Value = DateTime.Now;
-
+            txtPaymentMode.Clear();
+            label1.Text = "<Label>";
             lblStudentName.Text = "<Label>";
-            lblGrade.Text = "<Label>";
-            lblSection.Text = "<Label>";
+            lblGradeYearLevel.Text = "<Label>";
             lblStatus.Text = "<Label>";
-            lblTotalAssessment.Text = "<Label>";
-
-            _currentSchoolYear = "";
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -129,5 +121,19 @@ namespace UI
 
         }
 
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblStudent_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
