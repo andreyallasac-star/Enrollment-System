@@ -93,5 +93,6 @@
   <ItemGroup>
     <None Include="PostScript\GradeLevelFees_Seed.sql" />
     <None Include="PostScript\Sections_Seed.sql" />
+    <None Include="Students_Seed.sql" />
   </ItemGroup>
 </Project>
