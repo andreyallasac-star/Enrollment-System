@@ -14,6 +14,7 @@ namespace UI
     {
         private readonly StudentController _studentController = new StudentController();
         private string _selectedStudentId = "";
+
         public StudentManagementForm()
         {
             InitializeComponent();
@@ -25,10 +26,14 @@ namespace UI
 
             dgvStudentRecords.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
             dgvStudentRecords.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
+
             cmbGender.Items.Add("Male");
             cmbGender.Items.Add("Female");
             cmbGender.SelectedIndex = 0;
 
+            cmbGgender.Items.Add("Male");
+            cmbGgender.Items.Add("Female");
+            cmbGgender.SelectedIndex = 0;
         }
 
         private void StudentManagementForm_Load(object sender, EventArgs e)
@@ -46,14 +51,35 @@ namespace UI
                 MiddleName = txtMiddleName.Text,
                 LastName = txtLastName.Text,
                 DateOfBirth = dtpDateofBirth.Value,
-                Gender = cmbGender.SelectedItem?.ToString()
+                Gender = cmbGender.SelectedItem?.ToString(),
+
+                HouseNo = txtHouseNo.Text,
+                Barangay = txtBarangay.Text,
+                Municipality = txtMunicipality.Text,
+                Province = txtProvince.Text,
+                PostalCode = txtPostal.Text,
+
+                GuardianFirstName = txtGfname.Text,
+                GuardianMiddleName = txtGmname.Text,
+                GuardianLastName = txtGlname.Text,
+                GuardianContact = txtGcontact.Text,
+                GuardianRelationship = txtGrelationship.Text,
+                GuardianGender = cmbGgender.SelectedItem?.ToString(),
+
+                GuardianHouseNo = txtGhouseno.Text,
+                GuardianBarangay = txtGbarangay.Text,
+                GuardianMunicipality = txtGmunicipality.Text,
+                GuardianProvince = txtGprovince.Text,
+                GuardianPostalCode = txtGpostal.Text
             };
 
             string result = _studentController.CreateStudent(newStudent);
 
             if (result == "Success")
             {
-                MessageBox.Show("Student created!"); ClearForm(); RefreshGrid();
+                MessageBox.Show("Student created!");
+                ClearForm();
+                RefreshGrid();
             }
             else
             {
@@ -71,7 +97,26 @@ namespace UI
                 MiddleName = txtMiddleName.Text,
                 LastName = txtLastName.Text,
                 DateOfBirth = dtpDateofBirth.Value,
-                Gender = cmbGender.SelectedItem?.ToString()
+                Gender = cmbGender.SelectedItem?.ToString(),
+
+                HouseNo = txtHouseNo.Text,
+                Barangay = txtBarangay.Text,
+                Municipality = txtMunicipality.Text,
+                Province = txtProvince.Text,
+                PostalCode = txtPostal.Text,
+
+                GuardianFirstName = txtGfname.Text,
+                GuardianMiddleName = txtGmname.Text,
+                GuardianLastName = txtGlname.Text,
+                GuardianContact = txtGcontact.Text,
+                GuardianRelationship = txtGrelationship.Text,
+                GuardianGender = cmbGgender.SelectedItem?.ToString(),
+
+                GuardianHouseNo = txtGhouseno.Text,
+                GuardianBarangay = txtGbarangay.Text,
+                GuardianMunicipality = txtGmunicipality.Text,
+                GuardianProvince = txtGprovince.Text,
+                GuardianPostalCode = txtGpostal.Text
             };
 
             if (_studentController.UpdateStudent(updatedStudent) == "Success")
@@ -110,8 +155,9 @@ namespace UI
 
                 if (result == "Success")
                 {
-                    MessageBox.Show("Student activated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); ClearForm(); RefreshGrid();
-
+                    MessageBox.Show("Student activated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearForm();
+                    RefreshGrid();
                 }
                 else
                 {
@@ -126,12 +172,38 @@ namespace UI
             {
                 DataGridViewRow row = dgvStudentRecords.Rows[e.RowIndex];
                 _selectedStudentId = row.Cells[0].Value?.ToString();
-                txtStudentID.Text = _selectedStudentId;
-                txtFirstName.Text = row.Cells[1].Value?.ToString();
-                txtMiddleName.Text = row.Cells[2].Value?.ToString();
-                txtLastName.Text = row.Cells[3].Value?.ToString();
-                if (DateTime.TryParse(row.Cells[4].Value?.ToString(), out DateTime dob)) dtpDateofBirth.Value = dob;
-                cmbGender.SelectedItem = row.Cells[5].Value?.ToString();
+
+                Student s = _studentController.GetStudentById(_selectedStudentId);
+
+                if (s != null)
+                {
+                    txtStudentID.Text = s.StudentId;
+                    txtFirstName.Text = s.FirstName;
+                    txtMiddleName.Text = s.MiddleName;
+                    txtLastName.Text = s.LastName;
+                    dtpDateofBirth.Value = s.DateOfBirth;
+                    cmbGender.SelectedItem = s.Gender;
+
+                    txtHouseNo.Text = s.HouseNo;
+                    txtBarangay.Text = s.Barangay;
+                    txtMunicipality.Text = s.Municipality;
+                    txtProvince.Text = s.Province;
+                    txtPostal.Text = s.PostalCode;
+
+                    txtGfname.Text = s.GuardianFirstName;
+                    txtGmname.Text = s.GuardianMiddleName;
+                    txtGlname.Text = s.GuardianLastName;
+                    txtGcontact.Text = s.GuardianContact;
+                    txtGrelationship.Text = s.GuardianRelationship;
+                    cmbGgender.SelectedItem = s.GuardianGender;
+
+                    txtGhouseno.Text = s.GuardianHouseNo;
+                    txtGbarangay.Text = s.GuardianBarangay;
+                    txtGmunicipality.Text = s.GuardianMunicipality;
+                    txtGprovince.Text = s.GuardianProvince;
+                    txtGpostal.Text = s.GuardianPostalCode;
+                }
+
                 txtStudentID.Enabled = false;
             }
         }
@@ -140,28 +212,51 @@ namespace UI
         {
             dgvStudentRecords.Rows.Clear();
             foreach (var s in _studentController.GetAllStudents())
+            {
+                string fullName = $"{s.FirstName} {s.MiddleName} {s.LastName}".Replace("  ", " ").Trim();
+                string guardianName = $"{s.GuardianFirstName} {s.GuardianLastName}".Trim();
+
                 dgvStudentRecords.Rows.Add(
                     s.StudentId,
-                    s.FirstName,
-                    s.MiddleName,
-                    s.LastName,
+                    fullName,
                     s.DateOfBirth.ToString("yyyy-MM-dd"),
                     s.Gender,
-                    s.Address,
                     s.Status,
-                    s.EnrollmentStatus);
+                    s.EnrollmentStatus,
+                    guardianName,
+                    s.GuardianContact
+                );
+            }
         }
 
         private void ClearForm()
         {
             _selectedStudentId = "";
             txtStudentID.Text = _studentController.GetNextStudentId();
+
             txtFirstName.Clear();
             txtMiddleName.Clear();
             txtLastName.Clear();
+
+            txtHouseNo.Clear();
+            txtBarangay.Clear();
+            txtMunicipality.Clear();
+            txtProvince.Clear();
+            txtPostal.Clear();
+
+            txtGfname.Clear();
+            txtGmname.Clear();
+            txtGlname.Clear();
+            txtGcontact.Clear();
+            txtGrelationship.Clear();
+
+            txtGhouseno.Clear();
+            txtGbarangay.Clear();
+            txtGmunicipality.Clear();
+            txtGprovince.Clear();
+            txtGpostal.Clear();
+
             txtStudentID.Enabled = false;
         }
-
-        
     }
 }
