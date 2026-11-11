@@ -1,12 +1,13 @@
-﻿using System;
+﻿using BusinessLogic.Controller;
+using Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using BusinessLogic.Controller;
-using Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace UI
 {
@@ -34,6 +35,10 @@ namespace UI
             cmbGgender.Items.Add("Male");
             cmbGgender.Items.Add("Female");
             cmbGgender.SelectedIndex = 0;
+
+            cmbStudentType.Items.Add("New");
+            cmbStudentType.Items.Add("Old");
+            cmbStudentType.Items.Add("Transferee");
         }
 
         private void StudentManagementForm_Load(object sender, EventArgs e)
@@ -52,6 +57,7 @@ namespace UI
                 LastName = txtLastName.Text,
                 DateOfBirth = dtpDateofBirth.Value,
                 Gender = cmbGender.SelectedItem?.ToString(),
+                StudentType = cmbStudentType.SelectedItem?.ToString(),
 
                 HouseNo = txtHouseNo.Text,
                 Barangay = txtBarangay.Text,
@@ -98,6 +104,7 @@ namespace UI
                 LastName = txtLastName.Text,
                 DateOfBirth = dtpDateofBirth.Value,
                 Gender = cmbGender.SelectedItem?.ToString(),
+                StudentType = cmbStudentType.SelectedItem?.ToString(),
 
                 HouseNo = txtHouseNo.Text,
                 Barangay = txtBarangay.Text,
@@ -183,6 +190,7 @@ namespace UI
                     txtLastName.Text = s.LastName;
                     dtpDateofBirth.Value = s.DateOfBirth;
                     cmbGender.SelectedItem = s.Gender;
+                    cmbStudentType.SelectedItem = s.StudentType;
 
                     txtHouseNo.Text = s.HouseNo;
                     txtBarangay.Text = s.Barangay;
@@ -233,6 +241,9 @@ namespace UI
         {
             _selectedStudentId = "";
             txtStudentID.Text = _studentController.GetNextStudentId();
+            cmbStudentType.SelectedIndex = -1;
+            cmbGender.SelectedIndex = -1;
+            cmbGgender.SelectedIndex = -1;
 
             txtFirstName.Clear();
             txtMiddleName.Clear();
@@ -258,5 +269,6 @@ namespace UI
 
             txtStudentID.Enabled = false;
         }
+
     }
 }
