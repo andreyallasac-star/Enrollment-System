@@ -62,7 +62,7 @@ namespace BusinessLogic.Repository
             {
                 conn.Open();
                 var cmd = new SqlCommand("GetAllStudents", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -111,7 +111,7 @@ namespace BusinessLogic.Repository
             {
                 conn.Open();
                 var cmd = new SqlCommand("GetStudentById", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@StudentId", studentId);
 
                 using (var reader = cmd.ExecuteReader())
@@ -160,7 +160,7 @@ namespace BusinessLogic.Repository
             {
                 conn.Open();
                 var cmd = new SqlCommand("UpdateStudent", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@StudentId", student.StudentId);
                 cmd.Parameters.AddWithValue("@FirstName", student.FirstName);
