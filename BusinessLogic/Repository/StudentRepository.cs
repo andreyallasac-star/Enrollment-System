@@ -27,6 +27,7 @@ namespace BusinessLogic.Repository
                     cmd.Parameters.AddWithValue("@LastName", s.LastName);
                     cmd.Parameters.AddWithValue("@DateOfBirth", s.DateOfBirth);
                     cmd.Parameters.AddWithValue("@Gender", (object)s.Gender ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@StudentType", (object)s.StudentType ?? DBNull.Value);
 
                     cmd.Parameters.AddWithValue("@HouseNo", (object)s.HouseNo ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@Barangay", (object)s.Barangay ?? DBNull.Value);
@@ -76,6 +77,7 @@ namespace BusinessLogic.Repository
                             LastName = reader["LastName"].ToString(),
                             DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
                             Gender = reader["Gender"].ToString(),
+                            StudentType = reader["StudentType"].ToString(),
 
                             HouseNo = reader["HouseNo"].ToString(),
                             Barangay = reader["Barangay"].ToString(),
@@ -126,6 +128,7 @@ namespace BusinessLogic.Repository
                             LastName = reader["LastName"].ToString(),
                             DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
                             Gender = reader["Gender"].ToString(),
+                            StudentType = reader["StudentType"].ToString(),
 
                             HouseNo = reader["HouseNo"].ToString(),
                             Barangay = reader["Barangay"].ToString(),
@@ -168,6 +171,7 @@ namespace BusinessLogic.Repository
                 cmd.Parameters.AddWithValue("@LastName", student.LastName);
                 cmd.Parameters.AddWithValue("@DateOfBirth", student.DateOfBirth);
                 cmd.Parameters.AddWithValue("@Gender", student.Gender ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@StudentType", (object)student.StudentType ?? DBNull.Value);
 
                 cmd.Parameters.AddWithValue("@HouseNo", student.HouseNo ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Barangay", student.Barangay ?? (object)DBNull.Value);

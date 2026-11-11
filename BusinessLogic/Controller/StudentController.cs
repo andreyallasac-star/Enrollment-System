@@ -31,6 +31,9 @@ namespace BusinessLogic.Controller
             if (string.IsNullOrWhiteSpace(student.FirstName) || string.IsNullOrWhiteSpace(student.LastName))
                 return "First and Last names are required.";
 
+            if (string.IsNullOrWhiteSpace(student.StudentType))
+                return "Please select a Student Type (New, Old, or Transferee).";
+
             return _studentRepo.CreateStudent(student) ? "Success" : "Failed to create student.";
         }
 
@@ -38,6 +41,9 @@ namespace BusinessLogic.Controller
         {
             if (string.IsNullOrWhiteSpace(student.FirstName) || string.IsNullOrWhiteSpace(student.LastName))
                 return "First and Last names are required.";
+
+            if (string.IsNullOrWhiteSpace(student.StudentType))
+                return "Please select a Student Type (New, Old, or Transferee).";
 
             return _studentRepo.UpdateStudent(student) ? "Success" : "Failed to update student.";
         }

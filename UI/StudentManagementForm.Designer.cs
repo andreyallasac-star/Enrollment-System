@@ -56,6 +56,8 @@
             Column8 = new DataGridViewTextBoxColumn();
             btnActivate = new Button();
             gbStudentInfo = new GroupBox();
+            cmbStudentType = new ComboBox();
+            lblStudentType = new Label();
             txtPostal = new TextBox();
             lblPostal = new Label();
             txtProvince = new TextBox();
@@ -199,6 +201,7 @@
             // 
             // txtFirstName
             // 
+            txtFirstName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtFirstName.Location = new Point(18, 142);
             txtFirstName.Multiline = true;
             txtFirstName.Name = "txtFirstName";
@@ -207,6 +210,7 @@
             // 
             // txtMiddleName
             // 
+            txtMiddleName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtMiddleName.Location = new Point(199, 142);
             txtMiddleName.Multiline = true;
             txtMiddleName.Name = "txtMiddleName";
@@ -215,6 +219,7 @@
             // 
             // txtLastName
             // 
+            txtLastName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtLastName.Location = new Point(384, 142);
             txtLastName.Multiline = true;
             txtLastName.Name = "txtLastName";
@@ -277,13 +282,16 @@
             // dgvStudentRecords
             // 
             dgvStudentRecords.AllowUserToAddRows = false;
+            dgvStudentRecords.AllowUserToResizeColumns = false;
+            dgvStudentRecords.AllowUserToResizeRows = false;
             dgvStudentRecords.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvStudentRecords.BackgroundColor = Color.White;
-            dgvStudentRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvStudentRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvStudentRecords.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8 });
             dgvStudentRecords.Location = new Point(12, 563);
             dgvStudentRecords.Name = "dgvStudentRecords";
             dgvStudentRecords.RowHeadersVisible = false;
+            dgvStudentRecords.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dgvStudentRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvStudentRecords.Size = new Size(1155, 172);
             dgvStudentRecords.TabIndex = 20;
@@ -343,6 +351,8 @@
             // 
             // gbStudentInfo
             // 
+            gbStudentInfo.Controls.Add(cmbStudentType);
+            gbStudentInfo.Controls.Add(lblStudentType);
             gbStudentInfo.Controls.Add(txtPostal);
             gbStudentInfo.Controls.Add(lblPostal);
             gbStudentInfo.Controls.Add(txtProvince);
@@ -373,8 +383,30 @@
             gbStudentInfo.TabStop = false;
             gbStudentInfo.Text = "Student Information";
             // 
+            // cmbStudentType
+            // 
+            cmbStudentType.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            cmbStudentType.FormattingEnabled = true;
+            cmbStudentType.Location = new Point(181, 343);
+            cmbStudentType.Name = "cmbStudentType";
+            cmbStudentType.Size = new Size(183, 29);
+            cmbStudentType.TabIndex = 28;
+            // 
+            // lblStudentType
+            // 
+            lblStudentType.AutoSize = true;
+            lblStudentType.BackColor = Color.Transparent;
+            lblStudentType.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStudentType.ForeColor = Color.Black;
+            lblStudentType.Location = new Point(181, 319);
+            lblStudentType.Name = "lblStudentType";
+            lblStudentType.Size = new Size(110, 21);
+            lblStudentType.TabIndex = 27;
+            lblStudentType.Text = "Student Type";
+            // 
             // txtPostal
             // 
+            txtPostal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtPostal.Location = new Point(18, 345);
             txtPostal.Multiline = true;
             txtPostal.Name = "txtPostal";
@@ -387,7 +419,7 @@
             lblPostal.BackColor = Color.Transparent;
             lblPostal.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPostal.ForeColor = Color.Black;
-            lblPostal.Location = new Point(18, 321);
+            lblPostal.Location = new Point(18, 319);
             lblPostal.Name = "lblPostal";
             lblPostal.Size = new Size(132, 21);
             lblPostal.TabIndex = 25;
@@ -395,6 +427,7 @@
             // 
             // txtProvince
             // 
+            txtProvince.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtProvince.Location = new Point(401, 282);
             txtProvince.Multiline = true;
             txtProvince.Name = "txtProvince";
@@ -415,6 +448,7 @@
             // 
             // txtMunicipality
             // 
+            txtMunicipality.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtMunicipality.Location = new Point(247, 282);
             txtMunicipality.Multiline = true;
             txtMunicipality.Name = "txtMunicipality";
@@ -435,6 +469,7 @@
             // 
             // txtBarangay
             // 
+            txtBarangay.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtBarangay.Location = new Point(117, 282);
             txtBarangay.Multiline = true;
             txtBarangay.Name = "txtBarangay";
@@ -467,6 +502,7 @@
             // 
             // txtHouseNo
             // 
+            txtHouseNo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtHouseNo.Location = new Point(18, 282);
             txtHouseNo.Multiline = true;
             txtHouseNo.Name = "txtHouseNo";
@@ -507,6 +543,7 @@
             // 
             // txtGpostal
             // 
+            txtGpostal.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGpostal.Location = new Point(18, 282);
             txtGpostal.Multiline = true;
             txtGpostal.Name = "txtGpostal";
@@ -527,6 +564,7 @@
             // 
             // txtGprovince
             // 
+            txtGprovince.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGprovince.Location = new Point(422, 218);
             txtGprovince.Multiline = true;
             txtGprovince.Name = "txtGprovince";
@@ -547,6 +585,7 @@
             // 
             // txtGmunicipality
             // 
+            txtGmunicipality.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGmunicipality.Location = new Point(265, 218);
             txtGmunicipality.Multiline = true;
             txtGmunicipality.Name = "txtGmunicipality";
@@ -567,6 +606,7 @@
             // 
             // txtGbarangay
             // 
+            txtGbarangay.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGbarangay.Location = new Point(127, 218);
             txtGbarangay.Multiline = true;
             txtGbarangay.Name = "txtGbarangay";
@@ -587,6 +627,7 @@
             // 
             // txtGhouseno
             // 
+            txtGhouseno.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGhouseno.Location = new Point(18, 218);
             txtGhouseno.Multiline = true;
             txtGhouseno.Name = "txtGhouseno";
@@ -628,6 +669,7 @@
             // 
             // txtGrelationship
             // 
+            txtGrelationship.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGrelationship.Location = new Point(199, 142);
             txtGrelationship.Multiline = true;
             txtGrelationship.Name = "txtGrelationship";
@@ -660,6 +702,7 @@
             // 
             // txtGcontact
             // 
+            txtGcontact.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGcontact.Location = new Point(18, 142);
             txtGcontact.Multiline = true;
             txtGcontact.Name = "txtGcontact";
@@ -668,6 +711,7 @@
             // 
             // txtGlname
             // 
+            txtGlname.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGlname.Location = new Point(380, 77);
             txtGlname.Multiline = true;
             txtGlname.Name = "txtGlname";
@@ -676,6 +720,7 @@
             // 
             // txtGmname
             // 
+            txtGmname.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGmname.Location = new Point(199, 77);
             txtGmname.Multiline = true;
             txtGmname.Name = "txtGmname";
@@ -708,6 +753,7 @@
             // 
             // txtGfname
             // 
+            txtGfname.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             txtGfname.Location = new Point(18, 77);
             txtGfname.Multiline = true;
             txtGfname.Name = "txtGfname";
@@ -816,5 +862,7 @@
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
         private DataGridViewTextBoxColumn Column8;
+        private ComboBox cmbStudentType;
+        private Label lblStudentType;
     }
 }
