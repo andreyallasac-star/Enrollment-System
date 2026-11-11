@@ -89,10 +89,10 @@
     <Build Include="StoredProc\GetUserById.sql" />
     <Build Include="StoredProc\GetLatestStudentId.sql" />
     <Build Include="StoredProc\EnrollStudent.sql" />
+    <None Include="PostScript\Students_Seed.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PostScript\GradeLevelFees_Seed.sql" />
     <None Include="PostScript\Sections_Seed.sql" />
-    <None Include="Students_Seed.sql" />
   </ItemGroup>
 </Project>
