@@ -46,8 +46,7 @@ namespace UI
                 MiddleName = txtMiddleName.Text,
                 LastName = txtLastName.Text,
                 DateOfBirth = dtpDateofBirth.Value,
-                Gender = cmbGender.SelectedItem?.ToString(),
-                Address = txtAddress.Text
+                Gender = cmbGender.SelectedItem?.ToString()
             };
 
             string result = _studentController.CreateStudent(newStudent);
@@ -72,8 +71,7 @@ namespace UI
                 MiddleName = txtMiddleName.Text,
                 LastName = txtLastName.Text,
                 DateOfBirth = dtpDateofBirth.Value,
-                Gender = cmbGender.SelectedItem?.ToString(),
-                Address = txtAddress.Text
+                Gender = cmbGender.SelectedItem?.ToString()
             };
 
             if (_studentController.UpdateStudent(updatedStudent) == "Success")
@@ -134,7 +132,6 @@ namespace UI
                 txtLastName.Text = row.Cells[3].Value?.ToString();
                 if (DateTime.TryParse(row.Cells[4].Value?.ToString(), out DateTime dob)) dtpDateofBirth.Value = dob;
                 cmbGender.SelectedItem = row.Cells[5].Value?.ToString();
-                txtAddress.Text = row.Cells[6].Value?.ToString();
                 txtStudentID.Enabled = false;
             }
         }
@@ -162,7 +159,6 @@ namespace UI
             txtFirstName.Clear();
             txtMiddleName.Clear();
             txtLastName.Clear();
-            txtAddress.Clear();
             txtStudentID.Enabled = false;
         }
 
