@@ -10,7 +10,8 @@ BEGIN
         s.StudentId,
         s.FirstName + ' ' + ISNULL(s.MiddleName + ' ', '') + s.LastName AS FullName,
         sec.GradeLevel,
-        sec.SectionName AS Section
+        sec.SectionName AS Section,
+        e.EnrollmentDate AS DateEnrolled
     FROM Students s
     INNER JOIN Enrollments e ON s.StudentId = e.StudentId
     INNER JOIN Sections sec ON e.SectionCode = sec.SectionCode
