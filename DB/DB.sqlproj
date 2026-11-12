@@ -90,6 +90,7 @@
     <Build Include="StoredProc\GetLatestStudentId.sql" />
     <Build Include="StoredProc\EnrollStudent.sql" />
     <None Include="PostScript\Students_Seed.sql" />
+    <Build Include="StoredProc\GenerateStudentReport.sql" />
     <Build Include="StoredProc\GetStudentById.sql" />
   </ItemGroup>
   <ItemGroup>
