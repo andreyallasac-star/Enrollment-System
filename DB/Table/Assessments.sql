@@ -1,10 +1,12 @@
 ﻿CREATE TABLE Assessments (
     AssessmentId INT PRIMARY KEY IDENTITY(1,1),
-    StudentId NVARCHAR(50) NOT NULL,
+    StudentId NVARCHAR(20) NOT NULL, 
     SchoolYear NVARCHAR(10) NOT NULL,
     TuitionFee DECIMAL(18,2) NOT NULL,
     OtherFee DECIMAL(18,2) NOT NULL DEFAULT 0.00,
     TotalAssessment DECIMAL(18,2) NOT NULL,
     AssessmentDate DATETIME NOT NULL DEFAULT GETDATE(),
-    Status NVARCHAR(20) NOT NULL DEFAULT 'Unpaid'
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Unpaid',
+
+    CONSTRAINT FK_Assessments_Students FOREIGN KEY (StudentId) REFERENCES Students(StudentId) ON DELETE CASCADE
 );
