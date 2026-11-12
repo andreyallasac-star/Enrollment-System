@@ -78,7 +78,7 @@
             panel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             panel1.Location = new Point(22, 19);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1321, 634);
+            panel1.Size = new Size(1157, 634);
             panel1.TabIndex = 0;
             // 
             // label1
@@ -108,7 +108,7 @@
             txtStudentId.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtStudentId.Location = new Point(31, 105);
             txtStudentId.Name = "txtStudentId";
-            txtStudentId.Size = new Size(1103, 31);
+            txtStudentId.Size = new Size(758, 31);
             txtStudentId.TabIndex = 2;
             txtStudentId.Text = "Enter ID or Name (e.g., ST2023-001)";
             // 
@@ -118,7 +118,7 @@
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(1151, 104);
+            btnSearch.Location = new Point(804, 105);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(136, 30);
             btnSearch.TabIndex = 25;
@@ -146,7 +146,7 @@
             panelStudentDetails.Location = new Point(31, 150);
             panelStudentDetails.Margin = new Padding(3, 2, 3, 2);
             panelStudentDetails.Name = "panelStudentDetails";
-            panelStudentDetails.Size = new Size(1256, 323);
+            panelStudentDetails.Size = new Size(1100, 323);
             panelStudentDetails.TabIndex = 26;
             // 
             // label3
@@ -309,7 +309,7 @@
             cmbSchoolYear.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbSchoolYear.Location = new Point(31, 501);
             cmbSchoolYear.Name = "cmbSchoolYear";
-            cmbSchoolYear.Size = new Size(613, 29);
+            cmbSchoolYear.Size = new Size(441, 29);
             cmbSchoolYear.TabIndex = 16;
             cmbSchoolYear.SelectedIndexChanged += FilterSections;
             // 
@@ -318,7 +318,7 @@
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label16.ForeColor = Color.FromArgb(51, 65, 85);
-            label16.Location = new Point(674, 475);
+            label16.Location = new Point(506, 475);
             label16.Name = "label16";
             label16.Size = new Size(97, 20);
             label16.TabIndex = 37;
@@ -328,9 +328,9 @@
             // 
             cmbGradeLevel.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbGradeLevel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbGradeLevel.Location = new Point(674, 501);
+            cmbGradeLevel.Location = new Point(506, 501);
             cmbGradeLevel.Name = "cmbGradeLevel";
-            cmbGradeLevel.Size = new Size(613, 29);
+            cmbGradeLevel.Size = new Size(416, 29);
             cmbGradeLevel.TabIndex = 18;
             cmbGradeLevel.SelectedIndexChanged += FilterSections;
             // 
@@ -352,7 +352,7 @@
             cmbSection.Items.AddRange(new object[] { "Bronze", "Silver", "Gold", "Platinum", "Titinium", "Diamond" });
             cmbSection.Location = new Point(31, 568);
             cmbSection.Name = "cmbSection";
-            cmbSection.Size = new Size(1256, 29);
+            cmbSection.Size = new Size(441, 29);
             cmbSection.TabIndex = 20;
             // 
             // btnClear
@@ -360,7 +360,7 @@
             btnClear.BackColor = Color.White;
             btnClear.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnClear.ForeColor = Color.FromArgb(51, 65, 85);
-            btnClear.Location = new Point(1015, 644);
+            btnClear.Location = new Point(550, 559);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(127, 38);
             btnClear.TabIndex = 23;
@@ -374,7 +374,7 @@
             btnEnroll.FlatStyle = FlatStyle.Flat;
             btnEnroll.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEnroll.ForeColor = Color.White;
-            btnEnroll.Location = new Point(1159, 644);
+            btnEnroll.Location = new Point(776, 562);
             btnEnroll.Name = "btnEnroll";
             btnEnroll.Size = new Size(127, 38);
             btnEnroll.TabIndex = 22;

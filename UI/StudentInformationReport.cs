@@ -22,9 +22,8 @@ namespace UI
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.ReadOnly = true;
 
-            this.Load += StudentInformationReport_Load;
             cmbGradeLevel.SelectedIndexChanged += FilterSections;
-            btnGenerateReport.Click += btnGenerateReport_Click;
+
         }
 
         private void StudentInformationReport_Load(object sender, EventArgs e)
@@ -79,7 +78,8 @@ namespace UI
                         row["StudentId"].ToString(),
                         row["FullName"].ToString(),
                         row["GradeLevel"].ToString(),
-                        row["Section"].ToString()
+                        row["Section"].ToString(),
+                        Convert.ToDateTime(row["DateEnrolled"]).ToString("yyyy-MM-dd")
                     );
                 }
             }
