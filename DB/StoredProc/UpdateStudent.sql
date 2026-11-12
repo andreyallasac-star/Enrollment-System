@@ -1,4 +1,4 @@
-﻿CREATE  PROCEDURE UpdateStudent
+﻿CREATE PROCEDURE UpdateStudent
     @StudentId NVARCHAR(20),
     @FirstName NVARCHAR(50),
     @MiddleName NVARCHAR(50) = NULL,
