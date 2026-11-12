@@ -91,6 +91,7 @@
     <Build Include="StoredProc\EnrollStudent.sql" />
     <None Include="PostScript\Students_Seed.sql" />
     <Build Include="StoredProc\GenerateStudentReport.sql" />
+    <Build Include="StoredProc\GetStudentById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PostScript\GradeLevelFees_Seed.sql" />
