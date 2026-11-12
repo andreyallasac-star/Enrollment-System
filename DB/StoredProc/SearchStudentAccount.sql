@@ -3,13 +3,16 @@
 AS
 BEGIN
     SET NOCOUNT ON;
-
     SELECT 
         s.StudentId,
         s.FirstName + ' ' + ISNULL(s.MiddleName + ' ', '') + s.LastName AS FullName,
         s.DateOfBirth,
         s.Gender,
-        s.Address,
+        CONCAT_WS(', ',
+        NULLIF(s.HouseNo, ''),
+        NULLIF(s.Barangay, ''), 
+        NULLIF(s.Municipality, ''), 
+        NULLIF(s.Province, '')) AS Address,
         e.SchoolYear,
         sec.GradeLevel,
         sec.SectionName AS Section, 
