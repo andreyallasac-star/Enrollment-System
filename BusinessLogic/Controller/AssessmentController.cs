@@ -12,7 +12,14 @@ namespace BusinessLogic.Controller
 
         public decimal ComputeTuition(string gradeLevel, string schoolYear)
         {
-            return _assessmentRepo.GetTuitionFee(gradeLevel, schoolYear);
+            try
+            {
+                return _assessmentRepo.GetTuitionFee(gradeLevel, schoolYear);
+            }
+            catch (Exception)
+            {
+                return 0.00m;
+            }
         }
 
         public string SaveAssessment(Assessment assessment)
@@ -26,7 +33,19 @@ namespace BusinessLogic.Controller
             if (assessment.TotalAssessment <= 0)
                 return "Please compute the fees before saving. Total Assessment must be greater than zero.";
 
-            return _assessmentRepo.SaveAssessment(assessment) ? "Success" : "Database Error: Could not save assessment.";
+            try
+            {
+                if (_assessmentRepo.CheckAssessmentExists(assessment.StudentId, assessment.SchoolYear))
+                {
+                    return "This student has already been assessed for the current school year.";
+                }
+
+                return _assessmentRepo.SaveAssessment(assessment) ? "Success" : "Database Error: Could not save assessment.";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
