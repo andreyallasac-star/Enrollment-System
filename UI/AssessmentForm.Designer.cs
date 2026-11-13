@@ -61,9 +61,9 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(29, 7);
+            label6.Location = new Point(25, 5);
             label6.Name = "label6";
-            label6.Size = new Size(339, 46);
+            label6.Size = new Size(273, 37);
             label6.TabIndex = 0;
             label6.Text = "Student Assessment";
             // 
@@ -95,8 +95,9 @@
             panel2.Controls.Add(lblStudentId);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1136, 639);
+            panel2.Size = new Size(994, 479);
             panel2.TabIndex = 1;
             panel2.Paint += panel2_Paint;
             // 
@@ -106,19 +107,21 @@
             lblTotalAssessment.BackColor = Color.Transparent;
             lblTotalAssessment.Font = new Font("Segoe UI", 13.8F);
             lblTotalAssessment.ForeColor = Color.Black;
-            lblTotalAssessment.Location = new Point(200, 509);
+            lblTotalAssessment.Location = new Point(175, 382);
             lblTotalAssessment.Name = "lblTotalAssessment";
-            lblTotalAssessment.Size = new Size(101, 31);
+            lblTotalAssessment.Size = new Size(83, 25);
             lblTotalAssessment.TabIndex = 27;
             lblTotalAssessment.Text = "<Label>";
             // 
             // btnSearch
             // 
-            btnSearch.BackColor = Color.Transparent;
+            btnSearch.BackColor = Color.White;
             btnSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSearch.Location = new Point(537, 76);
+            btnSearch.ForeColor = Color.Black;
+            btnSearch.Location = new Point(470, 57);
+            btnSearch.Margin = new Padding(3, 2, 3, 2);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(128, 43);
+            btnSearch.Size = new Size(112, 32);
             btnSearch.TabIndex = 26;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = false;
@@ -127,10 +130,9 @@
             // dateTimePicker1
             // 
             dateTimePicker1.Font = new Font("Segoe UI", 13.8F);
-            dateTimePicker1.Location = new Point(173, 453);
-            dateTimePicker1.Margin = new Padding(3, 4, 3, 4);
+            dateTimePicker1.Location = new Point(151, 340);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(294, 38);
+            dateTimePicker1.Size = new Size(258, 32);
             dateTimePicker1.TabIndex = 23;
             // 
             // lblStatus
@@ -139,9 +141,9 @@
             lblStatus.BackColor = Color.Transparent;
             lblStatus.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStatus.ForeColor = Color.Black;
-            lblStatus.Location = new Point(190, 284);
+            lblStatus.Location = new Point(166, 213);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(86, 28);
+            lblStatus.Size = new Size(69, 21);
             lblStatus.TabIndex = 20;
             lblStatus.Text = "<Label>";
             // 
@@ -151,9 +153,9 @@
             lblSection.BackColor = Color.Transparent;
             lblSection.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSection.ForeColor = Color.Black;
-            lblSection.Location = new Point(190, 232);
+            lblSection.Location = new Point(166, 174);
             lblSection.Name = "lblSection";
-            lblSection.Size = new Size(86, 28);
+            lblSection.Size = new Size(69, 21);
             lblSection.TabIndex = 19;
             lblSection.Text = "<Label>";
             // 
@@ -163,9 +165,9 @@
             lblGrade.BackColor = Color.Transparent;
             lblGrade.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblGrade.ForeColor = Color.Black;
-            lblGrade.Location = new Point(190, 184);
+            lblGrade.Location = new Point(166, 138);
             lblGrade.Name = "lblGrade";
-            lblGrade.Size = new Size(86, 28);
+            lblGrade.Size = new Size(69, 21);
             lblGrade.TabIndex = 18;
             lblGrade.Text = "<Label>";
             // 
@@ -175,43 +177,47 @@
             lblStudentName.BackColor = Color.Transparent;
             lblStudentName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentName.ForeColor = Color.Black;
-            lblStudentName.Location = new Point(190, 132);
+            lblStudentName.Location = new Point(166, 99);
             lblStudentName.Name = "lblStudentName";
-            lblStudentName.Size = new Size(86, 28);
+            lblStudentName.Size = new Size(69, 21);
             lblStudentName.TabIndex = 17;
             lblStudentName.Text = "<Label>";
             // 
             // txtOtherFee
             // 
             txtOtherFee.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtOtherFee.Location = new Point(173, 393);
+            txtOtherFee.Location = new Point(151, 295);
+            txtOtherFee.Margin = new Padding(3, 2, 3, 2);
             txtOtherFee.Name = "txtOtherFee";
-            txtOtherFee.Size = new Size(294, 38);
+            txtOtherFee.Size = new Size(258, 32);
             txtOtherFee.TabIndex = 15;
             // 
             // txtTuitionFee
             // 
             txtTuitionFee.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtTuitionFee.Location = new Point(173, 332);
+            txtTuitionFee.Location = new Point(151, 249);
+            txtTuitionFee.Margin = new Padding(3, 2, 3, 2);
             txtTuitionFee.Name = "txtTuitionFee";
-            txtTuitionFee.Size = new Size(291, 38);
+            txtTuitionFee.Size = new Size(255, 32);
             txtTuitionFee.TabIndex = 13;
             // 
             // txtStudentId
             // 
             txtStudentId.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtStudentId.Location = new Point(173, 76);
+            txtStudentId.Location = new Point(151, 57);
+            txtStudentId.Margin = new Padding(3, 2, 3, 2);
             txtStudentId.Name = "txtStudentId";
-            txtStudentId.Size = new Size(357, 38);
+            txtStudentId.Size = new Size(313, 32);
             txtStudentId.TabIndex = 12;
             // 
             // btnSave
             // 
             btnSave.BackColor = Color.IndianRed;
             btnSave.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSave.Location = new Point(240, 567);
+            btnSave.Location = new Point(210, 425);
+            btnSave.Margin = new Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(145, 53);
+            btnSave.Size = new Size(127, 40);
             btnSave.TabIndex = 11;
             btnSave.Text = "SAVE";
             btnSave.UseVisualStyleBackColor = false;
@@ -221,9 +227,10 @@
             // 
             btnCompute.BackColor = Color.IndianRed;
             btnCompute.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCompute.Location = new Point(29, 567);
+            btnCompute.Location = new Point(25, 425);
+            btnCompute.Margin = new Padding(3, 2, 3, 2);
             btnCompute.Name = "btnCompute";
-            btnCompute.Size = new Size(145, 53);
+            btnCompute.Size = new Size(127, 40);
             btnCompute.TabIndex = 10;
             btnCompute.Text = "COMPUTE";
             btnCompute.UseVisualStyleBackColor = false;
@@ -235,9 +242,9 @@
             labelTotalAssessment.BackColor = Color.Transparent;
             labelTotalAssessment.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelTotalAssessment.ForeColor = Color.Black;
-            labelTotalAssessment.Location = new Point(29, 509);
+            labelTotalAssessment.Location = new Point(25, 382);
             labelTotalAssessment.Name = "labelTotalAssessment";
-            labelTotalAssessment.Size = new Size(194, 31);
+            labelTotalAssessment.Size = new Size(158, 25);
             labelTotalAssessment.TabIndex = 9;
             labelTotalAssessment.Text = "Total Assessment:";
             // 
@@ -247,9 +254,9 @@
             lblDate.BackColor = Color.Transparent;
             lblDate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDate.ForeColor = Color.Black;
-            lblDate.Location = new Point(29, 453);
+            lblDate.Location = new Point(25, 340);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(67, 31);
+            lblDate.Size = new Size(55, 25);
             lblDate.TabIndex = 8;
             lblDate.Text = "Date:";
             // 
@@ -259,9 +266,9 @@
             lblOtherFee.BackColor = Color.Transparent;
             lblOtherFee.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblOtherFee.ForeColor = Color.Black;
-            lblOtherFee.Location = new Point(29, 393);
+            lblOtherFee.Location = new Point(25, 295);
             lblOtherFee.Name = "lblOtherFee";
-            lblOtherFee.Size = new Size(118, 31);
+            lblOtherFee.Size = new Size(98, 25);
             lblOtherFee.TabIndex = 7;
             lblOtherFee.Text = "Other Fee:";
             // 
@@ -271,9 +278,9 @@
             lblPaymentMode.BackColor = Color.Transparent;
             lblPaymentMode.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPaymentMode.ForeColor = Color.Black;
-            lblPaymentMode.Location = new Point(576, 339);
+            lblPaymentMode.Location = new Point(504, 254);
             lblPaymentMode.Name = "lblPaymentMode";
-            lblPaymentMode.Size = new Size(0, 31);
+            lblPaymentMode.Size = new Size(0, 25);
             lblPaymentMode.TabIndex = 6;
             // 
             // lblTuitionFee
@@ -282,9 +289,9 @@
             lblTuitionFee.BackColor = Color.Transparent;
             lblTuitionFee.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTuitionFee.ForeColor = Color.Black;
-            lblTuitionFee.Location = new Point(29, 339);
+            lblTuitionFee.Location = new Point(25, 254);
             lblTuitionFee.Name = "lblTuitionFee";
-            lblTuitionFee.Size = new Size(131, 31);
+            lblTuitionFee.Size = new Size(109, 25);
             lblTuitionFee.TabIndex = 5;
             lblTuitionFee.Text = "Tuition Fee:";
             // 
@@ -294,9 +301,9 @@
             labelstatus.BackColor = Color.Transparent;
             labelstatus.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelstatus.ForeColor = Color.Black;
-            labelstatus.Location = new Point(29, 284);
+            labelstatus.Location = new Point(25, 213);
             labelstatus.Name = "labelstatus";
-            labelstatus.Size = new Size(81, 31);
+            labelstatus.Size = new Size(66, 25);
             labelstatus.TabIndex = 4;
             labelstatus.Text = "Status:";
             // 
@@ -306,9 +313,9 @@
             labelsection.BackColor = Color.Transparent;
             labelsection.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelsection.ForeColor = Color.Black;
-            labelsection.Location = new Point(29, 232);
+            labelsection.Location = new Point(25, 174);
             labelsection.Name = "labelsection";
-            labelsection.Size = new Size(94, 31);
+            labelsection.Size = new Size(78, 25);
             labelsection.TabIndex = 3;
             labelsection.Text = "Section:";
             // 
@@ -318,9 +325,9 @@
             labelgrade.BackColor = Color.Transparent;
             labelgrade.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelgrade.ForeColor = Color.Black;
-            labelgrade.Location = new Point(29, 180);
+            labelgrade.Location = new Point(25, 135);
             labelgrade.Name = "labelgrade";
-            labelgrade.Size = new Size(81, 31);
+            labelgrade.Size = new Size(67, 25);
             labelgrade.TabIndex = 2;
             labelgrade.Text = "Grade:";
             // 
@@ -330,9 +337,9 @@
             lblStudent.BackColor = Color.Transparent;
             lblStudent.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudent.ForeColor = Color.Black;
-            lblStudent.Location = new Point(29, 132);
+            lblStudent.Location = new Point(25, 99);
             lblStudent.Name = "lblStudent";
-            lblStudent.Size = new Size(165, 31);
+            lblStudent.Size = new Size(135, 25);
             lblStudent.TabIndex = 1;
             lblStudent.Text = "Student Name:";
             // 
@@ -342,20 +349,21 @@
             lblStudentId.BackColor = Color.Transparent;
             lblStudentId.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStudentId.ForeColor = Color.Black;
-            lblStudentId.Location = new Point(29, 83);
+            lblStudentId.Location = new Point(25, 62);
             lblStudentId.Name = "lblStudentId";
-            lblStudentId.Size = new Size(126, 31);
+            lblStudentId.Size = new Size(103, 25);
             lblStudentId.TabIndex = 0;
             lblStudentId.Text = "Student ID:";
             // 
             // AssessmentForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1136, 639);
+            ClientSize = new Size(994, 479);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AssessmentForm";
             Text = "AssessmentForm";
             panel2.ResumeLayout(false);
