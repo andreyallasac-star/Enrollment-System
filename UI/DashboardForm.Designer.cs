@@ -38,7 +38,7 @@
             btnStudentInfoReport = new Button();
             btnPaymentHistoryReceipts = new Button();
             btnPaymentCashiering = new Button();
-            button7 = new Button();
+            btnAssessment = new Button();
             btnStudentEnrollment = new Button();
             btnSectionManagement = new Button();
             btnStudentManagement = new Button();
@@ -137,7 +137,7 @@
             panel2.Controls.Add(btnStudentInfoReport);
             panel2.Controls.Add(btnPaymentHistoryReceipts);
             panel2.Controls.Add(btnPaymentCashiering);
-            panel2.Controls.Add(button7);
+            panel2.Controls.Add(btnAssessment);
             panel2.Controls.Add(btnStudentEnrollment);
             panel2.Controls.Add(btnSectionManagement);
             panel2.Controls.Add(btnStudentManagement);
@@ -192,19 +192,19 @@
             btnPaymentCashiering.UseVisualStyleBackColor = false;
             btnPaymentCashiering.Click += btnPaymentCashiering_Click;
             // 
-            // button7
+            // btnAssessment
             // 
-            button7.BackColor = Color.Azure;
-            button7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button7.ForeColor = Color.Black;
-            button7.Location = new Point(18, 438);
-            button7.Margin = new Padding(2, 3, 2, 3);
-            button7.Name = "button7";
-            button7.Size = new Size(229, 54);
-            button7.TabIndex = 6;
-            button7.Text = "Student Assessment";
-            button7.UseVisualStyleBackColor = false;
-            button7.Click += button7_Click;
+            btnAssessment.BackColor = Color.Azure;
+            btnAssessment.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnAssessment.ForeColor = Color.Black;
+            btnAssessment.Location = new Point(18, 438);
+            btnAssessment.Margin = new Padding(2, 3, 2, 3);
+            btnAssessment.Name = "btnAssessment";
+            btnAssessment.Size = new Size(229, 54);
+            btnAssessment.TabIndex = 6;
+            btnAssessment.Text = "Student Assessment";
+            btnAssessment.UseVisualStyleBackColor = false;
+            btnAssessment.Click += btnAssessment_Click;
             // 
             // btnStudentEnrollment
             // 
@@ -353,7 +353,7 @@
         private Button btnStudentInfoReport;
         private Button btnPaymentHistoryReceipts;
         private Button btnPaymentCashiering;
-        private Button button7;
+        private Button btnAssessment;
         private Button btnLogout;
         private Panel panel3;
         private Label lblWelcome;
