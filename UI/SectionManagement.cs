@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using BusinessLogic.Controller;
 using Model;
@@ -27,8 +28,6 @@ namespace UI
             dgvInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
 
             cmbGradeLevel.Items.AddRange(new string[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10" });
-
-            cmbSchoolYear.Items.AddRange(new string[] { "2026-2027", "2027-2028" });
         }
 
         private void SectionManagement_Load(object sender, EventArgs e)
@@ -36,14 +35,49 @@ namespace UI
             RefreshGrid();
         }
 
+        private bool IsValidSchoolYear(string input, out string errorMessage)
+        {
+            errorMessage = "";
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                errorMessage = "School Year is required. Please enter in format: YYYY-YYYY (e.g. 2026-2027).";
+                return false;
+            }
+
+            if (!Regex.IsMatch(input.Trim(), @"^\d{4}-\d{4}$"))
+            {
+                errorMessage = "Invalid School Year format. Please use YYYY-YYYY (e.g. 2026-2027).";
+                return false;
+            }
+
+            string[] parts = input.Trim().Split('-');
+            int startYear = int.Parse(parts[0]);
+            int endYear = int.Parse(parts[1]);
+
+            if (endYear != startYear + 1)
+            {
+                errorMessage = "The end year must be exactly one year after the start year (e.g. 2026-2027).";
+                return false;
+            }
+
+            return true;
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (!IsValidSchoolYear(txtSchoolYear.Text, out string yearError))
+            {
+                MessageBox.Show(yearError, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var section = new Section
             {
                 SectionCode = txtSectionCode.Text,
                 SectionName = txtSectionName.Text,
                 GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
-                SchoolYear = cmbSchoolYear.SelectedItem?.ToString(),
+                SchoolYear = txtSchoolYear.Text.Trim(),
             };
 
             string result = _sectionController.CreateSection(section);
@@ -63,12 +97,18 @@ namespace UI
         {
             if (string.IsNullOrWhiteSpace(_selectedCode)) return;
 
+            if (!IsValidSchoolYear(txtSchoolYear.Text, out string yearError))
+            {
+                MessageBox.Show(yearError, "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var section = new Section
             {
                 SectionCode = _selectedCode,
                 SectionName = txtSectionName.Text,
                 GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
-                SchoolYear = cmbSchoolYear.SelectedItem?.ToString(),
+                SchoolYear = txtSchoolYear.Text.Trim(),
             };
 
             string result = _sectionController.UpdateSection(section);
@@ -81,12 +121,6 @@ namespace UI
             else
             {
                 MessageBox.Show("Failed to update: " + result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (_sectionController.UpdateSection(section) == "Success")
-            {
-                ClearForm();
-                RefreshGrid();
             }
         }
 
@@ -138,7 +172,7 @@ namespace UI
                 txtSectionCode.Text = _selectedCode;
                 txtSectionName.Text = row.Cells[1].Value?.ToString();
                 cmbGradeLevel.SelectedItem = row.Cells[2].Value?.ToString();
-                cmbSchoolYear.SelectedItem = row.Cells[3].Value?.ToString();
+                txtSchoolYear.Text = row.Cells[3].Value?.ToString();
                 txtSectionCode.Enabled = false;
             }
         }
@@ -165,7 +199,7 @@ namespace UI
             txtSectionCode.Clear();
             txtSectionName.Clear();
             cmbGradeLevel.SelectedIndex = -1;
-            cmbSchoolYear.SelectedIndex = -1;
+            txtSchoolYear.Clear();
             txtSectionCode.Enabled = true;
         }
     }

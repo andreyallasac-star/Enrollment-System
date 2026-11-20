@@ -31,8 +31,11 @@ namespace UI
 
         private void LoadDropdowns()
         {
-            cmbSchoolYear.Items.Add("2026-2027");
-            cmbSchoolYear.Items.Add("2027-2028");
+            var schoolYears = _sectionController.GetDistinctSchoolYears();
+            foreach (var year in schoolYears)
+            {
+                cmbSchoolYear.Items.Add(year);
+            }
 
             cmbGradeLevel.Items.AddRange(new string[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10" });
         }
