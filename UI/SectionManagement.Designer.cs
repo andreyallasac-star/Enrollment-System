@@ -39,7 +39,7 @@
             dgvYear = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
             btnActivate = new Button();
-            cmbSchoolYear = new ComboBox();
+            txtSchoolYear = new TextBox();
             cmbGradeLevel = new ComboBox();
             btnDeactivate = new Button();
             btnUpdate = new Button();
@@ -60,7 +60,7 @@
             panel1.BackColor = Color.Transparent;
             panel1.Controls.Add(dgvInfo);
             panel1.Controls.Add(btnActivate);
-            panel1.Controls.Add(cmbSchoolYear);
+            panel1.Controls.Add(txtSchoolYear);
             panel1.Controls.Add(cmbGradeLevel);
             panel1.Controls.Add(btnDeactivate);
             panel1.Controls.Add(btnUpdate);
@@ -169,17 +169,16 @@
             btnActivate.UseVisualStyleBackColor = false;
             btnActivate.Click += btnActivate_Click;
             // 
-            // cmbSchoolYear
+            // txtSchoolYear
             // 
-            cmbSchoolYear.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbSchoolYear.FlatStyle = FlatStyle.System;
-            cmbSchoolYear.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
-            cmbSchoolYear.FormattingEnabled = true;
-            cmbSchoolYear.Location = new Point(848, 325);
-            cmbSchoolYear.Margin = new Padding(3, 4, 3, 4);
-            cmbSchoolYear.Name = "cmbSchoolYear";
-            cmbSchoolYear.Size = new Size(252, 44);
-            cmbSchoolYear.TabIndex = 14;
+            txtSchoolYear.BorderStyle = BorderStyle.FixedSingle;
+            txtSchoolYear.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            txtSchoolYear.Location = new Point(848, 325);
+            txtSchoolYear.Margin = new Padding(3, 4, 3, 4);
+            txtSchoolYear.Name = "txtSchoolYear";
+            txtSchoolYear.PlaceholderText = "e.g. 2026-2027";
+            txtSchoolYear.Size = new Size(252, 41);
+            txtSchoolYear.TabIndex = 14;
             // 
             // cmbGradeLevel
             // 
@@ -352,7 +351,7 @@
         private DataGridViewTextBoxColumn dgvGrade;
         private DataGridViewTextBoxColumn dgvYear;
         private ComboBox cmbGradeLevel;
-        private ComboBox cmbSchoolYear;
+        private TextBox txtSchoolYear;
         private Button btnActivate;
         private DataGridViewTextBoxColumn Column1;
     }

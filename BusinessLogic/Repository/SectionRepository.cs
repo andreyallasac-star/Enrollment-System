@@ -102,5 +102,24 @@ namespace BusinessLogic.Repository
             }
             return sections;
         }
+
+        public List<string> GetDistinctSchoolYears()
+        {
+            var schoolYears = new List<string>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var cmd = new SqlCommand("SELECT DISTINCT SchoolYear FROM Sections ORDER BY SchoolYear DESC", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        schoolYears.Add(reader["SchoolYear"].ToString());
+                    }
+                }
+            }
+            return schoolYears;
+        }
     }
 }

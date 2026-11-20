@@ -16,6 +16,11 @@ namespace BusinessLogic.Controller
             return _sectionRepo.GetAllSections(); 
         }
 
+        public List<string> GetDistinctSchoolYears()
+        {
+            return _sectionRepo.GetDistinctSchoolYears();
+        }
+
         public string CreateSection(Section section)
         {
             if (string.IsNullOrWhiteSpace(section.SectionCode)) return "Section Code is required.";
