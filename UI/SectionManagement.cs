@@ -1,172 +1,110 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
-using BusinessLogic.Controller;
+using BusinessLogic.Repository;
 using Model;
 
-namespace UI
+namespace BusinessLogic.Controller
 {
-    public partial class SectionManagement : Form
+    public class SectionController
     {
-        private readonly SectionController _sectionController = new SectionController();
-        private string _selectedCode = "";
-        public SectionManagement()
+        private readonly SectionRepository _sectionRepo = new SectionRepository();
+
+        public List<Section> GetAllSections()
         {
-            InitializeComponent();
-            dgvInfo.DefaultCellStyle.ForeColor = Color.Black;
-            dgvInfo.DefaultCellStyle.BackColor = Color.White;
-
-            dgvInfo.RowsDefaultCellStyle.ForeColor = Color.Black;
-            dgvInfo.RowsDefaultCellStyle.BackColor = Color.White;
-
-            dgvInfo.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
-            dgvInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
-
-            cmbGradeLevel.Items.AddRange(new string[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10" });
-
-            cmbSchoolYear.Items.AddRange(new string[] { "2026-2027", "2027-2028" });
+            return _sectionRepo.GetAllSections();
         }
 
-        private void SectionManagement_Load(object sender, EventArgs e)
+        public List<string> GetDistinctSchoolYears()
         {
-            RefreshGrid();
+            return _sectionRepo.GetDistinctSchoolYears();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        public string CreateSection(Section section)
         {
-            var section = new Section
-            {
-                SectionCode = txtSectionCode.Text,
-                SectionName = txtSectionName.Text,
-                GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
-                SchoolYear = cmbSchoolYear.SelectedItem?.ToString(),
-            };
+            if (string.IsNullOrWhiteSpace(section.SectionCode)) return "Section Code is required.";
+            if (string.IsNullOrWhiteSpace(section.SectionName)) return "Section Name is required.";
+            if (string.IsNullOrWhiteSpace(section.GradeLevel)) return "Please select a Grade Level.";
+            if (string.IsNullOrWhiteSpace(section.SchoolYear)) return "School Year is required.";
+            if (section.Capacity <= 0) return "Capacity must be greater than zero.";
 
-            string result = _sectionController.CreateSection(section);
+            section.SectionCode = section.SectionCode.Trim();
+            section.SectionName = section.SectionName.Trim();
 
-            if (result == "Success")
+            try
             {
-                ClearForm();
-                RefreshGrid();
+                if (_sectionRepo.SectionCodeExists(section.SectionCode))
+                    return $"Section Code '{section.SectionCode}' already exists. Please use a different code.";
+
+                return _sectionRepo.CreateSection(section) ? "Success" : "Failed to create section.";
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(result);
+                return "Database error while creating section: " + ex.Message;
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        public string UpdateSection(Section section)
         {
-            if (string.IsNullOrWhiteSpace(_selectedCode)) return;
+            if (string.IsNullOrWhiteSpace(section.SectionCode)) return "Please select a section to update.";
+            if (string.IsNullOrWhiteSpace(section.SectionName)) return "Section Name is required.";
+            if (string.IsNullOrWhiteSpace(section.GradeLevel)) return "Please select a Grade Level.";
+            if (string.IsNullOrWhiteSpace(section.SchoolYear)) return "School Year is required.";
 
-            var section = new Section
-            {
-                SectionCode = _selectedCode,
-                SectionName = txtSectionName.Text,
-                GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
-                SchoolYear = cmbSchoolYear.SelectedItem?.ToString(),
-            };
+            section.SectionName = section.SectionName.Trim();
 
-            string result = _sectionController.UpdateSection(section);
-            if (result == "Success")
+            try
             {
-                MessageBox.Show("Section updated successfully!");
-                ClearForm();
-                RefreshGrid();
+                return _sectionRepo.UpdateSection(section) ? "Success" : "Failed to update section.";
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Failed to update: " + result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (_sectionController.UpdateSection(section) == "Success")
-            {
-                ClearForm();
-                RefreshGrid();
+                return "Database error while updating section: " + ex.Message;
             }
         }
 
-        private void btnDeactivate_Click(object sender, EventArgs e)
+        public string DeactivateSection(string sectionCode)
         {
-            if (string.IsNullOrWhiteSpace(_selectedCode)) return;
-            if (_sectionController.DeactivateSection(_selectedCode) == "Success")
+            if (string.IsNullOrWhiteSpace(sectionCode))
+                return "Please select a section to deactivate.";
+
+            try
             {
-                ClearForm(); RefreshGrid();
-            }
-        }
-
-        private void btnActivate_Click(object sender, EventArgs e)
-        {
-            
-            if (dgvInfo.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a section from the grid to activate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string selectedSectionCode = dgvInfo.SelectedRows[0].Cells[0].Value.ToString();
-
-            DialogResult confirm = MessageBox.Show($"Are you sure you want to activate Section: {selectedSectionCode}?", "Confirm Activation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
-            {
-                string result = _sectionController.ActivateSection(selectedSectionCode);
-
-                if (result == "Success")
+                if (_sectionRepo.DeactivateSection(sectionCode))
                 {
-                    MessageBox.Show("Section activated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearForm();
-                    RefreshGrid();
+                    return "Success";
                 }
                 else
                 {
-                    MessageBox.Show(result, "Activation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void dgvInfo_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                var row = dgvInfo.Rows[e.RowIndex];
-                _selectedCode = row.Cells[0].Value?.ToString();
-                txtSectionCode.Text = _selectedCode;
-                txtSectionName.Text = row.Cells[1].Value?.ToString();
-                cmbGradeLevel.SelectedItem = row.Cells[2].Value?.ToString();
-                cmbSchoolYear.SelectedItem = row.Cells[3].Value?.ToString();
-                txtSectionCode.Enabled = false;
-            }
-        }
-
-        private void RefreshGrid()
-        {
-            try
-            {
-                dgvInfo.Rows.Clear();
-                foreach (var s in _sectionController.GetAllSections())
-                {
-                    dgvInfo.Rows.Add(s.SectionCode, s.SectionName, s.GradeLevel, s.SchoolYear, s.Status);
+                    return "Failed to deactivate section. It may already be Inactive.";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading sections: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "Database error while deactivating section: " + ex.Message;
             }
         }
 
-        private void ClearForm()
+        public string ActivateSection(string sectionCode)
         {
-            _selectedCode = "";
-            txtSectionCode.Clear();
-            txtSectionName.Clear();
-            cmbGradeLevel.SelectedIndex = -1;
-            cmbSchoolYear.SelectedIndex = -1;
-            txtSectionCode.Enabled = true;
+            if (string.IsNullOrWhiteSpace(sectionCode))
+                return "Section Code is required.";
+
+            try
+            {
+                if (_sectionRepo.ActivateSection(sectionCode))
+                {
+                    return "Success";
+                }
+                else
+                {
+                    return "Failed to activate section. It may already be Active.";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Database error while activating section: " + ex.Message;
+            }
         }
     }
 }

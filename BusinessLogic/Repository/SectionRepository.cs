@@ -2,7 +2,6 @@
 using Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Configuration;
@@ -52,12 +51,13 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand("DeactivateSection", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                string query = "UPDATE Sections SET Status = 'Inactive' WHERE SectionCode = @SectionCode AND Status = 'Active'";
 
-                cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
-
-                return cmd.ExecuteNonQuery() > 0;
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
             }
         }
 
@@ -72,6 +72,19 @@ namespace BusinessLogic.Repository
                 {
                     cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
                     return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool SectionCodeExists(string sectionCode)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM Sections WHERE SectionCode = @SectionCode", conn))
+                {
+                    cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
+                    return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
                 }
             }
         }
@@ -101,6 +114,25 @@ namespace BusinessLogic.Repository
                 }
             }
             return sections;
+        }
+
+        public List<string> GetDistinctSchoolYears()
+        {
+            var schoolYears = new List<string>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var cmd = new SqlCommand("SELECT DISTINCT SchoolYear FROM Sections ORDER BY SchoolYear DESC", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        schoolYears.Add(reader["SchoolYear"].ToString());
+                    }
+                }
+            }
+            return schoolYears;
         }
     }
 }
