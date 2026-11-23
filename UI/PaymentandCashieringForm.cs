@@ -7,8 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using BusinessLogic.Controller;
 using Model;
-using System.Data;
-
 
 namespace UI
 {
@@ -21,10 +19,14 @@ namespace UI
         private decimal _totalAssessment = 0;
         private decimal _totalPaid = 0;
         private string _studentGrade = "";
-        public PaymentandCashieringForm()
+        private int _currentAssessmentId = 0;
+        private readonly string _processedBy;
+
+        public PaymentandCashieringForm(string processedBy = "admin")
         {
+            _processedBy = string.IsNullOrWhiteSpace(processedBy) ? "admin" : processedBy;
             InitializeComponent();
-            dataGridView1.GridColor = System.Drawing.Color.Black; 
+            dataGridView1.GridColor = System.Drawing.Color.Black;
 
             dataGridView1.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             dataGridView1.DefaultCellStyle.BackColor = System.Drawing.Color.White;
@@ -32,17 +34,15 @@ namespace UI
 
             cmbPaymentMethod.Items.AddRange(new string[] { "Cash", "GCash", "Bank Transfer" });
 
-
             ClearForm();
-
         }
 
         private void btnSearchID_Click(object sender, EventArgs e)
         {
-            string studentId = txtSearchStudent.Text.Trim();
-            if (string.IsNullOrWhiteSpace(studentId)) return;
+            string keyword = txtSearchStudent.Text.Trim();
+            if (string.IsNullOrWhiteSpace(keyword)) return;
 
-            var profile = _searchController.SearchStudent(studentId);
+            var profile = _searchController.SearchStudent(keyword);
             if (profile == null)
             {
                 MessageBox.Show("Student not found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -50,7 +50,8 @@ namespace UI
                 return;
             }
 
-            lblID.Text = profile.StudentId;
+            string studentId = profile.StudentId;
+            lblID.Text = studentId;
             lblName.Text = profile.FullName;
             lblSection.Text = profile.Section;
             _studentGrade = profile.GradeLevel;
@@ -58,17 +59,28 @@ namespace UI
             var assessment = _paymentController.GetStudentAssessment(studentId);
             if (assessment == null)
             {
-                MessageBox.Show("No active assessment found for this student. They must be assessed before paying.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _totalAssessment = 0;
+                var latest = _paymentController.GetLatestAssessment(studentId);
+                if (latest != null && latest.Status == "Paid")
+                {
+                    _currentAssessmentId = 0;
+                    _totalAssessment = latest.TotalAssessment;
+                    MessageBox.Show("This student is already fully paid.", "Fully Paid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    _currentAssessmentId = 0;
+                    _totalAssessment = 0;
+                    MessageBox.Show("No active assessment found for this student. They must be assessed before paying.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
+                _currentAssessmentId = assessment.AssessmentId;
                 _totalAssessment = assessment.TotalAssessment;
             }
 
             _totalPaid = _paymentController.GetTotalPaid(studentId);
-
-            _currentBalance = _totalAssessment - _totalPaid;
+            _currentBalance = Math.Max(0, _totalAssessment - _totalPaid);
 
             lblAssessment.Text = _totalAssessment.ToString("F2");
             lblPaid.Text = _totalPaid.ToString("F2");
@@ -77,6 +89,10 @@ namespace UI
             txtPaymentAmount.Clear();
             lblRemaining.Text = _currentBalance.ToString("F2");
             lblReceipt.Text = "---";
+
+            bool canPay = _currentAssessmentId > 0 && _currentBalance > 0;
+            btnConfirm.Enabled = canPay;
+            txtPaymentAmount.Enabled = canPay;
 
             dataGridView1.Rows.Clear();
             var history = _paymentController.GetPaymentHistory(studentId);
@@ -120,18 +136,48 @@ namespace UI
                 return;
             }
 
-            decimal paymentAmount = 0;
-            decimal.TryParse(txtPaymentAmount.Text, System.Globalization.NumberStyles.Any, null, out paymentAmount);
+            if (_currentAssessmentId <= 0 || _currentBalance <= 0)
+            {
+                MessageBox.Show("This student has no unpaid balance to pay.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!decimal.TryParse(txtPaymentAmount.Text, System.Globalization.NumberStyles.Any, null, out decimal paymentAmount) || paymentAmount <= 0)
+            {
+                MessageBox.Show("Payment amount must be greater than zero.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (paymentAmount > _currentBalance)
+            {
+                MessageBox.Show("Payment cannot exceed the current balance.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string method = cmbPaymentMethod.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(method))
+            {
+                MessageBox.Show("Please select a payment method.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                $"Confirm payment of PHP {paymentAmount:F2} via {method} for {lblName.Text} ({lblID.Text})?",
+                "Confirm Payment",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
 
             var payment = new Payment
             {
                 StudentId = lblID.Text,
                 AmountPaid = paymentAmount,
-                PaymentMethod = cmbPaymentMethod.SelectedItem?.ToString(),
-                ProcessedBy = "admin"
+                PaymentMethod = method,
+                ProcessedBy = _processedBy
             };
 
-            var result = _paymentController.ProcessPayment(payment, _currentBalance);
+            var result = _paymentController.ProcessPayment(payment, _currentBalance, _currentAssessmentId);
 
             if (result.Success)
             {
@@ -148,6 +194,17 @@ namespace UI
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            if (lblID.Text != "---" && lblID.Text != "<Label>")
+            {
+                DialogResult confirm = MessageBox.Show(
+                    "Are you sure you want to clear the current student and payment fields?",
+                    "Confirm Clear",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirm != DialogResult.Yes) return;
+            }
+
             ClearForm();
         }
 
@@ -174,6 +231,10 @@ namespace UI
             _totalAssessment = 0;
             _totalPaid = 0;
             _studentGrade = "";
+            _currentAssessmentId = 0;
+
+            btnConfirm.Enabled = true;
+            txtPaymentAmount.Enabled = true;
 
             dataGridView1.Rows.Clear();
         }
