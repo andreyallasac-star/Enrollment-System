@@ -45,7 +45,6 @@
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -124,6 +123,7 @@
             btnGenerateReport.TabIndex = 6;
             btnGenerateReport.Text = "🔍︎ Generate Report";
             btnGenerateReport.UseVisualStyleBackColor = false;
+            btnGenerateReport.Click += btnGenerateReport_Click;
             // 
             // label5
             // 
@@ -143,7 +143,7 @@
             dataGridViewCellStyle1.ForeColor = Color.Black;
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -154,6 +154,7 @@
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Location = new Point(12, 333);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.ForeColor = Color.Black;
             dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
@@ -164,44 +165,43 @@
             // 
             Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Column1.HeaderText = "Student ID";
+            Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
             // 
             // Column2
             // 
             Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Column2.HeaderText = "Full Name";
+            Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
             // 
             // Column3
             // 
             Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Column3.HeaderText = "Grade Level";
+            Column3.MinimumWidth = 6;
             Column3.Name = "Column3";
             // 
             // Column4
             // 
             Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             Column4.HeaderText = "Section";
+            Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
             // 
             // Column5
             // 
             Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column5.HeaderText = "Enrollment Status";
+            Column5.HeaderText = "Date Enrolled";
+            Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column6.HeaderText = "Date Enrolled";
-            Column6.Name = "Column6";
             // 
             // StudentInformationReport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Azure;
-            ClientSize = new Size(800, 638);
+            ClientSize = new Size(800, 562);
             Controls.Add(dataGridView1);
             Controls.Add(label5);
             Controls.Add(btnGenerateReport);
@@ -213,6 +213,7 @@
             Controls.Add(label1);
             Name = "StudentInformationReport";
             Text = "StudentInformationReport";
+            Load += StudentInformationReport_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -234,6 +235,5 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column6;
     }
 }

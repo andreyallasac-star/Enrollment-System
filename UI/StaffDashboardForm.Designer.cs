@@ -39,6 +39,7 @@
             btnStudentsAccSearch = new Button();
             btnStudentEnrollment = new Button();
             panel3 = new Panel();
+            btnDashboard = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -81,6 +82,7 @@
             panel2.BackColor = Color.Azure;
             panel2.BackgroundImageLayout = ImageLayout.Stretch;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(btnDashboard);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(btnLogOut);
             panel2.Controls.Add(btnPaymentHistory);
@@ -105,7 +107,7 @@
             // 
             btnLogOut.BackColor = Color.Azure;
             btnLogOut.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
-            btnLogOut.Location = new Point(22, 416);
+            btnLogOut.Location = new Point(22, 428);
             btnLogOut.Margin = new Padding(3, 2, 3, 2);
             btnLogOut.Name = "btnLogOut";
             btnLogOut.Size = new Size(262, 61);
@@ -118,7 +120,7 @@
             // 
             btnPaymentHistory.BackColor = Color.Azure;
             btnPaymentHistory.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
-            btnPaymentHistory.Location = new Point(22, 330);
+            btnPaymentHistory.Location = new Point(22, 349);
             btnPaymentHistory.Margin = new Padding(3, 2, 3, 2);
             btnPaymentHistory.Name = "btnPaymentHistory";
             btnPaymentHistory.Size = new Size(262, 61);
@@ -131,7 +133,7 @@
             // 
             btnPaymentandCashiering.BackColor = Color.Azure;
             btnPaymentandCashiering.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
-            btnPaymentandCashiering.Location = new Point(22, 248);
+            btnPaymentandCashiering.Location = new Point(22, 270);
             btnPaymentandCashiering.Margin = new Padding(3, 2, 3, 2);
             btnPaymentandCashiering.Name = "btnPaymentandCashiering";
             btnPaymentandCashiering.Size = new Size(262, 61);
@@ -144,7 +146,7 @@
             // 
             btnStudentsAccSearch.BackColor = Color.Azure;
             btnStudentsAccSearch.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
-            btnStudentsAccSearch.Location = new Point(22, 164);
+            btnStudentsAccSearch.Location = new Point(22, 189);
             btnStudentsAccSearch.Margin = new Padding(3, 2, 3, 2);
             btnStudentsAccSearch.Name = "btnStudentsAccSearch";
             btnStudentsAccSearch.Size = new Size(262, 61);
@@ -157,7 +159,7 @@
             // 
             btnStudentEnrollment.BackColor = Color.Azure;
             btnStudentEnrollment.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
-            btnStudentEnrollment.Location = new Point(22, 84);
+            btnStudentEnrollment.Location = new Point(22, 109);
             btnStudentEnrollment.Margin = new Padding(3, 2, 3, 2);
             btnStudentEnrollment.Name = "btnStudentEnrollment";
             btnStudentEnrollment.Size = new Size(262, 61);
@@ -175,12 +177,25 @@
             panel3.Size = new Size(1594, 995);
             panel3.TabIndex = 2;
             // 
+            // btnDashboard
+            // 
+            btnDashboard.BackColor = Color.Azure;
+            btnDashboard.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold);
+            btnDashboard.Location = new Point(22, 27);
+            btnDashboard.Margin = new Padding(3, 2, 3, 2);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(262, 61);
+            btnDashboard.TabIndex = 5;
+            btnDashboard.Text = "Dashboard";
+            btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
+            // 
             // StaffDashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1920, 1080);
+            ClientSize = new Size(1386, 788);
             Controls.Add(panel1);
             Controls.Add(panel2);
             Controls.Add(panel3);
@@ -209,5 +224,6 @@
         private Button btnPaymentandCashiering;
         private Panel panel3;
         private Panel panel4;
+        private Button btnDashboard;
     }
 }

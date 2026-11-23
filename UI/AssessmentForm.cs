@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 using BusinessLogic.Controller;
@@ -15,6 +16,9 @@ namespace UI
         private readonly AssessmentController _assessmentController = new AssessmentController();
         private readonly StudentSearchController _searchController = new StudentSearchController();
         private string _currentSchoolYear = "";
+        private string _currentStudentId = "";
+        private bool _isEnrolled = false;
+
         public AssessmentForm()
         {
             InitializeComponent();
@@ -22,6 +26,7 @@ namespace UI
             txtTuitionFee.BackColor = System.Drawing.SystemColors.Control;
             txtOtherFee.Text = "0.00";
 
+            SetAssessmentControlsEnabled(false);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -31,44 +36,57 @@ namespace UI
 
         private void FetchStudentDetails()
         {
-            string studentId = txtStudentId.Text.Trim();
-            if (string.IsNullOrWhiteSpace(studentId)) return;
-
-            var profile = _searchController.SearchStudent(studentId);
-
-            if (profile != null)
+            string keyword = txtStudentId.Text.Trim();
+            if (string.IsNullOrWhiteSpace(keyword))
             {
-                lblStudentName.Text = profile.FullName;
-                lblGrade.Text = profile.GradeLevel;
-                lblSection.Text = profile.Section;
-
-                _currentSchoolYear = profile.SchoolYear;
-                lblStatus.Text = (profile.SchoolYear == "Not Enrolled") ? "Not Enrolled" : "Enrolled";
-
-                if (lblStatus.Text == "Enrolled")
-                {
-                    decimal officialTuition = _assessmentController.ComputeTuition(profile.GradeLevel, _currentSchoolYear);
-                    txtTuitionFee.Text = officialTuition.ToString("F2");
-                }
-                else
-                {
-                    txtTuitionFee.Text = "0.00";
-                }
+                MessageBox.Show("Please enter a Student ID.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
+
+            var profile = _searchController.SearchStudent(keyword);
+
+            if (profile == null)
             {
                 MessageBox.Show("Student not found.", "Search", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
+                return;
             }
+
+            _currentStudentId = profile.StudentId;
+            txtStudentId.Text = profile.StudentId;
+            lblStudentName.Text = profile.FullName;
+            lblGrade.Text = profile.GradeLevel;
+            lblSection.Text = profile.Section;
+            lblTotalAssessment.Text = "0.00";
+
+            _isEnrolled = profile.SchoolYear != "Not Enrolled";
+            _currentSchoolYear = _isEnrolled ? profile.SchoolYear : "";
+            lblStatus.Text = _isEnrolled ? "Enrolled" : "Not Enrolled";
+
+            if (!_isEnrolled)
+            {
+                txtTuitionFee.Text = "0.00";
+                SetAssessmentControlsEnabled(false);
+                MessageBox.Show("This student is not enrolled. Please enroll the student before assessment.", "Not Enrolled", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            decimal officialTuition = _assessmentController.ComputeTuition(profile.GradeLevel, _currentSchoolYear);
+            txtTuitionFee.Text = officialTuition.ToString("F2");
+            SetAssessmentControlsEnabled(true);
         }
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
             decimal tuitionFee = 0;
-            decimal.TryParse(txtTuitionFee.Text, System.Globalization.NumberStyles.Any, null, out tuitionFee);
+            decimal.TryParse(txtTuitionFee.Text, NumberStyles.Any, null, out tuitionFee);
 
             decimal otherFees = 0;
-            decimal.TryParse(txtOtherFee.Text, System.Globalization.NumberStyles.Any, null, out otherFees);
+            if (!decimal.TryParse(txtOtherFee.Text, NumberStyles.Any, null, out otherFees) || otherFees < 0)
+            {
+                MessageBox.Show("Please enter a valid, non-negative amount for Other Fee.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             decimal total = tuitionFee + otherFees;
             lblTotalAssessment.Text = total.ToString("F2");
@@ -76,18 +94,28 @@ namespace UI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            decimal totalAssessment = 0;
-            decimal.TryParse(lblTotalAssessment.Text, out totalAssessment);
+            if (!_isEnrolled || string.IsNullOrWhiteSpace(_currentStudentId))
+            {
+                MessageBox.Show("Please search for an enrolled student first.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             decimal tuitionFee = 0;
-            decimal.TryParse(txtTuitionFee.Text, out tuitionFee);
+            decimal.TryParse(txtTuitionFee.Text, NumberStyles.Any, null, out tuitionFee);
 
             decimal otherFee = 0;
-            decimal.TryParse(txtOtherFee.Text, out otherFee);
+            if (!decimal.TryParse(txtOtherFee.Text, NumberStyles.Any, null, out otherFee) || otherFee < 0)
+            {
+                MessageBox.Show("Please enter a valid, non-negative amount for Other Fee.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            decimal totalAssessment = tuitionFee + otherFee;
+            lblTotalAssessment.Text = totalAssessment.ToString("F2");
 
             var newAssessment = new Assessment
             {
-                StudentId = txtStudentId.Text,
+                StudentId = _currentStudentId,
                 SchoolYear = _currentSchoolYear,
                 TuitionFee = tuitionFee,
                 OtherFee = otherFee,
@@ -107,6 +135,13 @@ namespace UI
             }
         }
 
+        private void SetAssessmentControlsEnabled(bool enabled)
+        {
+            btnCompute.Enabled = enabled;
+            btnSave.Enabled = enabled;
+            txtOtherFee.Enabled = enabled;
+        }
+
         private void ClearForm()
         {
             txtStudentId.Clear();
@@ -122,12 +157,14 @@ namespace UI
             lblTotalAssessment.Text = "<Label>";
 
             _currentSchoolYear = "";
+            _currentStudentId = "";
+            _isEnrolled = false;
+            SetAssessmentControlsEnabled(false);
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
-
     }
 }

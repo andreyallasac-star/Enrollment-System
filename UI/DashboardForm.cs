@@ -17,6 +17,7 @@ namespace UI
 
         private System.Windows.Forms.Timer timer;
         private readonly UserController _userController = new UserController();
+        private Button _activeButton;
         public DashboardForm(string username, string role)
         {
             InitializeComponent();
@@ -27,6 +28,25 @@ namespace UI
             timer.Interval = (1 * 1000);
             timer.Tick += SessionCheckTimer_Tick;
             timer.Start();
+        }
+
+        private void ActivateButton(object btnSender)
+        {
+            if (btnSender != null)
+            {
+                if (_activeButton != (Button)btnSender)
+                {
+                    if (_activeButton != null)
+                    {
+                        _activeButton.Enabled = true;
+                    }
+
+                    _activeButton = (Button)btnSender;
+                    _activeButton.Enabled = false;
+
+                    panel1.Focus();
+                }
+            }
         }
 
         private void SessionCheckTimer_Tick(object sender, EventArgs e)
@@ -48,13 +68,14 @@ namespace UI
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
-            UserControl_Load(new AdminDashboarchUserControl());
             lblWelcome.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
+            ActivateButton(btnDashboard);
+            UserControl_Load(new AdminDashboarchUserControl());
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void btnAssessment_Click(object sender, EventArgs e)
         {
-
+            ActivateButton(sender);
             AssessmentForm ass = new AssessmentForm();
             ass.TopLevel = false;
             ass.FormBorderStyle = FormBorderStyle.None;
@@ -67,6 +88,7 @@ namespace UI
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             StudentAccountSearch search = new StudentAccountSearch();
             search.TopLevel = false;
             search.FormBorderStyle = FormBorderStyle.None;
@@ -79,6 +101,7 @@ namespace UI
 
         private void btnUserAccount_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             UserAccountManagement user = new UserAccountManagement();
             user.TopLevel = false;
             user.FormBorderStyle = FormBorderStyle.None;
@@ -91,6 +114,7 @@ namespace UI
 
         private void btnStudentManagement_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             StudentManagementForm student = new StudentManagementForm();
             student.TopLevel = false;
             student.FormBorderStyle = FormBorderStyle.None;
@@ -103,6 +127,7 @@ namespace UI
 
         private void btnSectionManagement_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             SectionManagement section = new SectionManagement();
             section.TopLevel = false;
             section.FormBorderStyle = FormBorderStyle.None;
@@ -115,6 +140,7 @@ namespace UI
 
         private void btnStudentEnrollment_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             StudentEnrollment enrollment = new StudentEnrollment();
             enrollment.TopLevel = false;
             enrollment.FormBorderStyle = FormBorderStyle.None;
@@ -127,6 +153,7 @@ namespace UI
 
         private void btnPaymentCashiering_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             PaymentandCashieringForm payment = new PaymentandCashieringForm();
             payment.TopLevel = false;
             payment.FormBorderStyle = FormBorderStyle.None;
@@ -139,6 +166,7 @@ namespace UI
 
         private void btnPaymentHistoryReceipts_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             PaymentHistoryandReceiptsForm paymentHistory = new PaymentHistoryandReceiptsForm();
             paymentHistory.TopLevel = false;
             paymentHistory.FormBorderStyle = FormBorderStyle.None;
@@ -151,6 +179,7 @@ namespace UI
 
         private void btnStudentInfoReport_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             StudentInformationReport report = new StudentInformationReport();
             report.TopLevel = false;
             report.FormBorderStyle = FormBorderStyle.None;
@@ -176,6 +205,7 @@ namespace UI
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             UserControl_Load(new AdminDashboarchUserControl());           
         }
 
