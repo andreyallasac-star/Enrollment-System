@@ -2,7 +2,6 @@
 using Model;
 using System;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Configuration;
@@ -72,6 +71,19 @@ namespace BusinessLogic.Repository
                 {
                     cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
                     return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public bool SectionCodeExists(string sectionCode)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM Sections WHERE SectionCode = @SectionCode", conn))
+                {
+                    cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
+                    return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
                 }
             }
         }
