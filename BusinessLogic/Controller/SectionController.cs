@@ -70,7 +70,14 @@ namespace BusinessLogic.Controller
 
             try
             {
-                return _sectionRepo.DeactivateSection(sectionCode) ? "Success" : "Failed to deactivate.";
+                if (_sectionRepo.DeactivateSection(sectionCode))
+                {
+                    return "Success";
+                }
+                else
+                {
+                    return "Failed to deactivate section. It may already be Inactive.";
+                }
             }
             catch (Exception ex)
             {

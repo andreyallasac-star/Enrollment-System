@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -74,28 +74,41 @@ namespace UI
 
             var section = new Section
             {
-                SectionCode = txtSectionCode.Text,
-                SectionName = txtSectionName.Text,
+                SectionCode = txtSectionCode.Text.Trim(),
+                SectionName = txtSectionName.Text.Trim(),
                 GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
                 SchoolYear = txtSchoolYear.Text.Trim(),
             };
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to add Section: {section.SectionCode} ({section.SectionName})?",
+                "Confirm Add Section",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
 
             string result = _sectionController.CreateSection(section);
 
             if (result == "Success")
             {
+                MessageBox.Show("Section added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
                 RefreshGrid();
             }
             else
             {
-                MessageBox.Show(result);
+                MessageBox.Show(result, "Add Section", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(_selectedCode)) return;
+            if (string.IsNullOrWhiteSpace(_selectedCode))
+            {
+                MessageBox.Show("Please select a section from the grid to update.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (!IsValidSchoolYear(txtSchoolYear.Text, out string yearError))
             {
@@ -103,10 +116,18 @@ namespace UI
                 return;
             }
 
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to update Section: {_selectedCode}?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
             var section = new Section
             {
                 SectionCode = _selectedCode,
-                SectionName = txtSectionName.Text,
+                SectionName = txtSectionName.Text.Trim(),
                 GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
                 SchoolYear = txtSchoolYear.Text.Trim(),
             };
@@ -114,7 +135,7 @@ namespace UI
             string result = _sectionController.UpdateSection(section);
             if (result == "Success")
             {
-                MessageBox.Show("Section updated successfully!");
+                MessageBox.Show("Section updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
                 RefreshGrid();
             }
@@ -126,25 +147,48 @@ namespace UI
 
         private void btnDeactivate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(_selectedCode)) return;
-            if (_sectionController.DeactivateSection(_selectedCode) == "Success")
+            if (string.IsNullOrWhiteSpace(_selectedCode))
             {
-                ClearForm(); RefreshGrid();
+                MessageBox.Show("Please select a section from the grid to deactivate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to deactivate Section: {_selectedCode}?",
+                "Confirm Deactivation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
+            string result = _sectionController.DeactivateSection(_selectedCode);
+            if (result == "Success")
+            {
+                MessageBox.Show("Section deactivated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ClearForm();
+                RefreshGrid();
+            }
+            else
+            {
+                MessageBox.Show(result, "Deactivation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnActivate_Click(object sender, EventArgs e)
         {
-            
             if (dgvInfo.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a section from the grid to activate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string selectedSectionCode = dgvInfo.SelectedRows[0].Cells[0].Value.ToString();
+            string selectedSectionCode = dgvInfo.SelectedRows[0].Cells[0].Value?.ToString();
 
-            DialogResult confirm = MessageBox.Show($"Are you sure you want to activate Section: {selectedSectionCode}?", "Confirm Activation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to activate Section: {selectedSectionCode}?",
+                "Confirm Activation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
             if (confirm == DialogResult.Yes)
             {

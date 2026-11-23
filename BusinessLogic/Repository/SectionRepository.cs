@@ -51,12 +51,13 @@ namespace BusinessLogic.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand("DeactivateSection", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                string query = "UPDATE Sections SET Status = 'Inactive' WHERE SectionCode = @SectionCode AND Status = 'Active'";
 
-                cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
-
-                return cmd.ExecuteNonQuery() > 0;
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
             }
         }
 
