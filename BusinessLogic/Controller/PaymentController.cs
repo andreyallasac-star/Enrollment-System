@@ -13,9 +13,11 @@ namespace BusinessLogic.Controller
 
         public Assessment GetStudentAssessment(string studentId) => _paymentRepo.GetStudentAssessment(studentId);
 
+        public Assessment GetLatestAssessment(string studentId) => _paymentRepo.GetLatestAssessment(studentId);
+
         public decimal GetTotalPaid(string studentId) => _paymentRepo.GetTotalPaid(studentId);
 
-        public (bool Success, string Message, int ReceiptId) ProcessPayment(Payment payment, decimal currentBalance)
+        public (bool Success, string Message, int ReceiptId) ProcessPayment(Payment payment, decimal currentBalance, int assessmentId = 0)
         {
             if (string.IsNullOrWhiteSpace(payment.StudentId))
                 return (false, "Please search for a student first.", 0);
@@ -29,17 +31,24 @@ namespace BusinessLogic.Controller
             if (string.IsNullOrWhiteSpace(payment.PaymentMethod))
                 return (false, "Please select a payment method.", 0);
 
-            int receiptId = _paymentRepo.ProcessPayment(payment);
+            try
+            {
+                int receiptId = _paymentRepo.ProcessPayment(payment, assessmentId);
 
-            if (receiptId > 0)
-                return (true, "Payment successful!", receiptId);
+                if (receiptId > 0)
+                    return (true, "Payment successful!", receiptId);
 
-            return (false, "Database error: Could not process payment.", 0);
+                return (false, "Database error: Could not process payment.", 0);
+            }
+            catch (Exception ex)
+            {
+                return (false, "Database error: " + ex.Message, 0);
+            }
         }
 
-        public DataTable GetPaymentHistory(string studentId) 
-        { 
-            return _paymentRepo.GetPaymentHistory(studentId); 
+        public DataTable GetPaymentHistory(string studentId)
+        {
+            return _paymentRepo.GetPaymentHistory(studentId);
         }
 
         public DataTable SearchPaymentHistory(string studentId, string receiptId, DateTime dateFrom, DateTime dateTo)
