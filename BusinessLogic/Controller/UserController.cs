@@ -14,12 +14,21 @@ namespace BusinessLogic.Controller
             return _userRepository.GetAllUsers();
         }
 
+        public User GetByUsername(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                return null;
+
+            return _userRepository.GetByUsername(username);
+        }
+
         public string CreateUser(User user)
         {
             if (string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.PasswordHash))
                 return "Username and password are required.";
 
             if (user.PasswordHash.Length < 8)
+                
                 return "Password must be at least 8 characters.";
 
             var existing = _userRepository.GetByUsername(user.Username);
