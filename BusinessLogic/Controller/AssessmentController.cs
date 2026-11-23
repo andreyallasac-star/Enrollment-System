@@ -27,18 +27,22 @@ namespace BusinessLogic.Controller
             if (string.IsNullOrWhiteSpace(assessment.StudentId))
                 return "Please enter a valid Student ID.";
 
-            if (string.IsNullOrWhiteSpace(assessment.SchoolYear))
-                return "Student must be officially enrolled to have a valid School Year.";
+            if (string.IsNullOrWhiteSpace(assessment.SchoolYear) || assessment.SchoolYear == "Not Enrolled")
+                return "This student is not enrolled. Please enroll the student before assessment.";
+
+            if (assessment.OtherFee < 0)
+                return "Other Fee cannot be negative.";
 
             if (assessment.TotalAssessment <= 0)
                 return "Please compute the fees before saving. Total Assessment must be greater than zero.";
 
             try
             {
+                if (!_assessmentRepo.IsStudentEnrolled(assessment.StudentId, assessment.SchoolYear))
+                    return $"Student {assessment.StudentId} is not enrolled for School Year {assessment.SchoolYear}. Please enroll the student before assessment.";
+
                 if (_assessmentRepo.CheckAssessmentExists(assessment.StudentId, assessment.SchoolYear))
-                {
                     return "This student has already been assessed for the current school year.";
-                }
 
                 return _assessmentRepo.SaveAssessment(assessment) ? "Success" : "Database Error: Could not save assessment.";
             }
