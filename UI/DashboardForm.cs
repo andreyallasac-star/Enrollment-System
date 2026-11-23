@@ -18,6 +18,8 @@ namespace UI
         private System.Windows.Forms.Timer timer;
         private readonly UserController _userController = new UserController();
         private Button _activeButton;
+        private bool _isLoggingOut = false;
+
         public DashboardForm(string username, string role)
         {
             InitializeComponent();
@@ -25,7 +27,7 @@ namespace UI
             currentRole = role;
 
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = (1 * 1000);
+            timer.Interval = (5 * 1000);
             timer.Tick += SessionCheckTimer_Tick;
             timer.Start();
         }
@@ -51,18 +53,25 @@ namespace UI
 
         private void SessionCheckTimer_Tick(object sender, EventArgs e)
         {
-            var currentUser = _userController.GetAllUsers()
-                .Find(u => u.Username.Equals(currentUsername, StringComparison.OrdinalIgnoreCase));
-
-            if (currentUser.Status == "Inactive")
+            try
             {
-                timer.Stop();
+                var currentUser = _userController.GetByUsername(currentUsername);
 
-                MessageBox.Show("Your account has been deactivated. You have been logged out for security reasons.", "Session Terminated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (currentUser == null || currentUser.Status == "Inactive")
+                {
+                    timer.Stop();
+                    _isLoggingOut = true;
 
-                LoginForm login = new LoginForm();
-                login.Show();
-                this.Close();
+                    MessageBox.Show("Your account has been deactivated. You have been logged out for security reasons.", "Session Terminated", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    LoginForm login = new LoginForm();
+                    login.Show();
+                    this.Close();
+                }
+            }
+            catch
+            {
+                // Ignore transient DB errors during background session check
             }
         }
 
@@ -154,7 +163,7 @@ namespace UI
         private void btnPaymentCashiering_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            PaymentandCashieringForm payment = new PaymentandCashieringForm();
+            PaymentandCashieringForm payment = new PaymentandCashieringForm(currentUsername);
             payment.TopLevel = false;
             payment.FormBorderStyle = FormBorderStyle.None;
 
@@ -196,6 +205,9 @@ namespace UI
 
             if (result == DialogResult.Yes)
             {
+                timer.Stop();
+                _isLoggingOut = true;
+
                 LoginForm login = new LoginForm();
                 login.Show();
 
@@ -203,13 +215,26 @@ namespace UI
             }
         }
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            timer?.Stop();
+            timer?.Dispose();
+            base.OnFormClosed(e);
+
+            if (!_isLoggingOut)
+            {
+                Application.Exit();
+            }
+        }
+
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            UserControl_Load(new AdminDashboarchUserControl());           
+            UserControl_Load(new AdminDashboarchUserControl());
         }
 
-        private void UserControl_Load(UserControl userControl) {
+        private void UserControl_Load(UserControl userControl)
+        {
             panel3.Controls.Clear();
             userControl.Dock = DockStyle.Fill;
             panel3.Controls.Add(userControl);
