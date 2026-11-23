@@ -18,8 +18,36 @@ namespace BusinessLogic.Repository
             {
                 conn.Open();
                 var cmd = new SqlCommand(
-                    "SELECT AssessmentId, TotalAssessment, Status FROM Assessments " +
+                    "SELECT TOP 1 AssessmentId, TotalAssessment, Status FROM Assessments " +
                     "WHERE StudentId = @StudentId AND Status IN ('Unpaid', 'Partial') " +
+                    "ORDER BY AssessmentDate DESC", conn);
+
+                cmd.Parameters.AddWithValue("@StudentId", studentId);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return new Assessment
+                        {
+                            AssessmentId = (int)reader["AssessmentId"],
+                            TotalAssessment = (decimal)reader["TotalAssessment"],
+                            Status = reader["Status"].ToString()
+                        };
+                    }
+                }
+            }
+            return null;
+        }
+
+        public Assessment GetLatestAssessment(string studentId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var cmd = new SqlCommand(
+                    "SELECT TOP 1 AssessmentId, TotalAssessment, Status FROM Assessments " +
+                    "WHERE StudentId = @StudentId " +
                     "ORDER BY AssessmentDate DESC", conn);
 
                 cmd.Parameters.AddWithValue("@StudentId", studentId);
@@ -51,24 +79,54 @@ namespace BusinessLogic.Repository
             }
         }
 
-        public int ProcessPayment(Payment payment)
+        public int ProcessPayment(Payment payment, int assessmentId)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+                using (SqlTransaction tx = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        var cmd = new SqlCommand(
+                            "INSERT INTO Payments (StudentId, AmountPaid, PaymentMethod, ProcessedBy, PaymentDate) " +
+                            "OUTPUT INSERTED.ReceiptId " +
+                            "VALUES (@StudentId, @AmountPaid, @PaymentMethod, @ProcessedBy, GETDATE())", conn, tx);
 
-                var cmd = new SqlCommand(
-                    "INSERT INTO Payments (StudentId, AmountPaid, PaymentMethod, ProcessedBy, PaymentDate) " +
-                    "OUTPUT INSERTED.ReceiptId " +
-                    "VALUES (@StudentId, @AmountPaid, @PaymentMethod, @ProcessedBy, GETDATE())", conn);
+                        cmd.Parameters.AddWithValue("@StudentId", payment.StudentId);
+                        cmd.Parameters.AddWithValue("@AmountPaid", payment.AmountPaid);
+                        cmd.Parameters.AddWithValue("@PaymentMethod", payment.PaymentMethod);
+                        cmd.Parameters.AddWithValue("@ProcessedBy", payment.ProcessedBy);
 
-                cmd.Parameters.AddWithValue("@StudentId", payment.StudentId);
-                cmd.Parameters.AddWithValue("@AmountPaid", payment.AmountPaid);
-                cmd.Parameters.AddWithValue("@PaymentMethod", payment.PaymentMethod);
-                cmd.Parameters.AddWithValue("@ProcessedBy", payment.ProcessedBy);
+                        var result = cmd.ExecuteScalar();
+                        int receiptId = result != null ? Convert.ToInt32(result) : 0;
 
-                var result = cmd.ExecuteScalar();
-                return result != null ? Convert.ToInt32(result) : 0;
+                        if (receiptId > 0 && assessmentId > 0)
+                        {
+                            var updateCmd = new SqlCommand(@"
+                                DECLARE @TotalPaid DECIMAL(18,2) = (SELECT ISNULL(SUM(AmountPaid), 0) FROM Payments WHERE StudentId = @StudentId);
+                                UPDATE Assessments
+                                SET Status = CASE
+                                    WHEN @TotalPaid >= TotalAssessment THEN 'Paid'
+                                    WHEN @TotalPaid > 0 THEN 'Partial'
+                                    ELSE 'Unpaid'
+                                END
+                                WHERE AssessmentId = @AssessmentId;", conn, tx);
+
+                            updateCmd.Parameters.AddWithValue("@StudentId", payment.StudentId);
+                            updateCmd.Parameters.AddWithValue("@AssessmentId", assessmentId);
+                            updateCmd.ExecuteNonQuery();
+                        }
+
+                        tx.Commit();
+                        return receiptId;
+                    }
+                    catch
+                    {
+                        tx.Rollback();
+                        throw;
+                    }
+                }
             }
         }
 
@@ -98,39 +156,19 @@ namespace BusinessLogic.Repository
             {
                 conn.Open();
 
-                string query = @"
-                SELECT 
-                    p.ReceiptId, 
-                    p.PaymentDate, 
-                    p.StudentId, 
-                    (s.FirstName + ' ' + s.LastName) AS StudentName,
-                    sec.SectionName AS Section,
-                    p.AmountPaid
-                FROM Payments p
-                INNER JOIN Students s ON p.StudentId = s.StudentId
-                LEFT JOIN Enrollments e ON p.StudentId = e.StudentId AND e.Status = 'Enrolled'
-                LEFT JOIN Sections sec ON e.SectionCode = sec.SectionCode
-                WHERE CAST(p.PaymentDate AS DATE) >= @DateFrom 
-                  AND CAST(p.PaymentDate AS DATE) <= @DateTo";
-
-                if (!string.IsNullOrWhiteSpace(studentId))
-                    query += " AND p.StudentId = @StudentId";
-
-                if (!string.IsNullOrWhiteSpace(receiptId))
-                    query += " AND p.ReceiptId = @ReceiptId";
-
-                query += " ORDER BY p.PaymentDate DESC";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand("SearchPaymentHistory", conn))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@DateFrom", dateFrom.Date);
                     cmd.Parameters.AddWithValue("@DateTo", dateTo.Date);
+                    cmd.Parameters.AddWithValue("@StudentId",
+                        string.IsNullOrWhiteSpace(studentId) ? (object)DBNull.Value : studentId.Trim());
 
-                    if (!string.IsNullOrWhiteSpace(studentId))
-                        cmd.Parameters.AddWithValue("@StudentId", studentId);
-
-                    if (!string.IsNullOrWhiteSpace(receiptId))
-                        cmd.Parameters.AddWithValue("@ReceiptId", receiptId);
+                    if (!string.IsNullOrWhiteSpace(receiptId) && int.TryParse(receiptId.Trim(), out int parsedReceiptId))
+                        cmd.Parameters.AddWithValue("@ReceiptId", parsedReceiptId);
+                    else
+                        cmd.Parameters.AddWithValue("@ReceiptId", DBNull.Value);
 
                     DataTable dt = new DataTable();
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
