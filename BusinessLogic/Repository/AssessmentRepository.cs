@@ -77,5 +77,26 @@ namespace BusinessLogic.Repository
                 throw new Exception("Database error while checking existing assessments: " + ex.Message);
             }
         }
+
+        public bool IsStudentEnrolled(string studentId, string schoolYear)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    var cmd = new SqlCommand(
+                        "SELECT COUNT(1) FROM Enrollments WHERE StudentId = @StudentId AND SchoolYear = @SchoolYear AND Status = 'Enrolled'", conn);
+                    cmd.Parameters.AddWithValue("@StudentId", studentId);
+                    cmd.Parameters.AddWithValue("@SchoolYear", schoolYear);
+
+                    return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Database error while checking enrollment: " + ex.Message);
+            }
+        }
     }
 }
