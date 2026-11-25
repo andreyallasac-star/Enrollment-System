@@ -17,10 +17,11 @@ namespace UI
         private readonly SectionController _sectionController = new SectionController();
         private readonly EnrollmentController _enrollmentController = new EnrollmentController();
         private readonly AssessmentController _assessmentController = new AssessmentController();
+
         public StudentEnrollment()
         {
             InitializeComponent();
-
+            cmbSection.SelectedIndexChanged += cmbSection_SelectedIndexChanged;
         }
 
         private void StudentEnrollment_Load(object sender, EventArgs e)
@@ -70,6 +71,8 @@ namespace UI
         private void FilterSections(object sender, EventArgs e)
         {
             cmbSection.Items.Clear();
+            ResetCapacityLabel();
+
             string selectedGrade = cmbGradeLevel.SelectedItem?.ToString();
             string selectedYear = cmbSchoolYear.SelectedItem?.ToString();
 
@@ -83,6 +86,41 @@ namespace UI
             {
                 cmbSection.Items.Add(sec.SectionCode);
             }
+        }
+
+        private void cmbSection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sectionCode = cmbSection.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(sectionCode))
+            {
+                ResetCapacityLabel();
+                return;
+            }
+
+            var cap = _enrollmentController.GetSectionCapacity(sectionCode);
+            if (cap.Capacity > 0)
+            {
+                if (cap.IsFull)
+                {
+                    lblSectionCapacity.Text = $"Capacity: {cap.CurrentCount} / {cap.Capacity} (FULL)";
+                    lblSectionCapacity.ForeColor = Color.Red;
+                }
+                else
+                {
+                    lblSectionCapacity.Text = $"Capacity: {cap.CurrentCount} / {cap.Capacity}";
+                    lblSectionCapacity.ForeColor = Color.ForestGreen;
+                }
+            }
+            else
+            {
+                ResetCapacityLabel();
+            }
+        }
+
+        private void ResetCapacityLabel()
+        {
+            lblSectionCapacity.Text = "Capacity: ---";
+            lblSectionCapacity.ForeColor = Color.FromArgb(51, 65, 85);
         }
 
         private void btnEnroll_Click(object sender, EventArgs e)
@@ -101,13 +139,23 @@ namespace UI
 
             string gradeLevel = cmbGradeLevel.SelectedItem.ToString();
             string schoolYear = cmbSchoolYear.SelectedItem.ToString();
+            string sectionCode = cmbSection.SelectedItem.ToString();
+
+            DialogResult confirm = MessageBox.Show(
+                $"Confirm enrollment for {lblStudentName.Text} ({lblStudentId.Text})?\n\n" +
+                $"School Year: {schoolYear}\nGrade Level: {gradeLevel}\nSection: {sectionCode}",
+                "Confirm Enrollment",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
 
             decimal tuitionFee = _assessmentController.ComputeTuition(gradeLevel, schoolYear);
 
             var enrollment = new Enrollment
             {
                 StudentId = lblStudentId.Text,
-                SectionCode = cmbSection.SelectedItem.ToString(),
+                SectionCode = sectionCode,
                 SchoolYear = schoolYear,
                 AssessedFee = tuitionFee
             };
@@ -127,6 +175,17 @@ namespace UI
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            if (lblStudentId.Text != "---")
+            {
+                DialogResult confirm = MessageBox.Show(
+                    "Are you sure you want to clear the enrollment form?",
+                    "Confirm Clear",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirm != DialogResult.Yes) return;
+            }
+
             ClearForm();
         }
 
@@ -143,8 +202,7 @@ namespace UI
             cmbSchoolYear.SelectedIndex = -1;
             cmbGradeLevel.SelectedIndex = -1;
             cmbSection.Items.Clear();
+            ResetCapacityLabel();
         }
-
-
     }
 }
