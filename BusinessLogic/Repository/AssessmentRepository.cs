@@ -23,7 +23,15 @@ namespace BusinessLogic.Repository
                     cmd.Parameters.AddWithValue("@SchoolYear", schoolYear);
 
                     var result = cmd.ExecuteScalar();
-                    return result != null ? Convert.ToDecimal(result) : 0.00m;
+                    if (result != null && result != DBNull.Value)
+                        return Convert.ToDecimal(result);
+
+                    var fallbackCmd = new SqlCommand(
+                        "SELECT TOP 1 TuitionFee FROM GradeLevelFees WHERE GradeLevel = @GradeLevel ORDER BY SchoolYear DESC, FeeId DESC", conn);
+                    fallbackCmd.Parameters.AddWithValue("@GradeLevel", gradeLevel);
+
+                    var fallbackResult = fallbackCmd.ExecuteScalar();
+                    return (fallbackResult != null && fallbackResult != DBNull.Value) ? Convert.ToDecimal(fallbackResult) : 0.00m;
                 }
             }
             catch (Exception ex)

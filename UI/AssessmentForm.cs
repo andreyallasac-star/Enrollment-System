@@ -74,6 +74,11 @@ namespace UI
             decimal officialTuition = _assessmentController.ComputeTuition(profile.GradeLevel, _currentSchoolYear);
             txtTuitionFee.Text = officialTuition.ToString("F2");
             SetAssessmentControlsEnabled(true);
+
+            if (officialTuition <= 0)
+            {
+                MessageBox.Show($"No tuition fee is configured for {profile.GradeLevel}. Please add a tuition fee before assessing this student.", "Tuition Fee Missing", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnCompute_Click(object sender, EventArgs e)
@@ -112,6 +117,15 @@ namespace UI
 
             decimal totalAssessment = tuitionFee + otherFee;
             lblTotalAssessment.Text = totalAssessment.ToString("F2");
+
+            DialogResult confirm = MessageBox.Show(
+                $"Confirm saving assessment for {lblStudentName.Text} ({_currentStudentId})?\n\n" +
+                $"School Year: {_currentSchoolYear}\nTotal Assessment: PHP {totalAssessment:F2}",
+                "Confirm Save Assessment",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
 
             var newAssessment = new Assessment
             {
