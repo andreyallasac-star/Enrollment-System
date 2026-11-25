@@ -59,5 +59,34 @@ namespace BusinessLogic.Repository
                 }
             }
         }
+
+        public (bool IsFull, int CurrentCount, int Capacity) CheckSectionCapacity(string sectionCode)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = @"
+                    SELECT 
+                        s.Capacity,
+                        (SELECT COUNT(*) FROM Enrollments e WHERE e.SectionCode = s.SectionCode AND e.Status = 'Enrolled') AS CurrentCount
+                    FROM Sections s
+                    WHERE s.SectionCode = @SectionCode";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SectionCode", sectionCode);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            int capacity = Convert.ToInt32(reader["Capacity"]);
+                            int currentCount = Convert.ToInt32(reader["CurrentCount"]);
+                            return (currentCount >= capacity, currentCount, capacity);
+                        }
+                    }
+                }
+            }
+            return (false, 0, 0);
+        }
     }
 }

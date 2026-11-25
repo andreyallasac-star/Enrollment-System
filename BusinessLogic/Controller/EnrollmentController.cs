@@ -10,15 +10,25 @@ namespace BusinessLogic.Controller
     {
         private readonly EnrollmentRepository _enrollmentRepo = new EnrollmentRepository();
 
+        public (bool IsFull, int CurrentCount, int Capacity) GetSectionCapacity(string sectionCode)
+        {
+            if (string.IsNullOrWhiteSpace(sectionCode))
+                return (false, 0, 0);
+
+            try
+            {
+                return _enrollmentRepo.CheckSectionCapacity(sectionCode);
+            }
+            catch
+            {
+                return (false, 0, 0);
+            }
+        }
+
         public string EnrollStudent(Enrollment enrollment)
         {
-            string studentStatus = _enrollmentRepo.GetStudentStatus(enrollment.StudentId);
-
             if (string.IsNullOrWhiteSpace(enrollment.StudentId))
                 return "Student ID is required. Please search for a student first.";
-
-            if (studentStatus == "Inactive")
-                return "Cannot enroll an inactive student. Please activate their account in Student Management first.";
 
             if (string.IsNullOrWhiteSpace(enrollment.SectionCode))
                 return "Please select a Section.";
@@ -26,10 +36,26 @@ namespace BusinessLogic.Controller
             if (string.IsNullOrWhiteSpace(enrollment.SchoolYear))
                 return "Please select a School Year.";
 
-            if (_enrollmentRepo.IsStudentAlreadyEnrolled(enrollment.StudentId, enrollment.SchoolYear))
-                return $"Student {enrollment.StudentId} is already enrolled for the {enrollment.SchoolYear} school year.";
+            try
+            {
+                string studentStatus = _enrollmentRepo.GetStudentStatus(enrollment.StudentId);
 
-            return _enrollmentRepo.EnrollStudent(enrollment) ? "Success" : "Database error: Could not enroll student.";
+                if (studentStatus == "Inactive")
+                    return "Cannot enroll an inactive student. Please activate their account in Student Management first.";
+
+                if (_enrollmentRepo.IsStudentAlreadyEnrolled(enrollment.StudentId, enrollment.SchoolYear))
+                    return $"Student {enrollment.StudentId} is already enrolled for the {enrollment.SchoolYear} school year.";
+
+                var capacityCheck = _enrollmentRepo.CheckSectionCapacity(enrollment.SectionCode);
+                if (capacityCheck.Capacity > 0 && capacityCheck.IsFull)
+                    return $"Section {enrollment.SectionCode} is full ({capacityCheck.CurrentCount}/{capacityCheck.Capacity}). Please choose another section.";
+
+                return _enrollmentRepo.EnrollStudent(enrollment) ? "Success" : "Database error: Could not enroll student.";
+            }
+            catch (Exception ex)
+            {
+                return "Database error while enrolling student: " + ex.Message;
+            }
         }
     }
 }

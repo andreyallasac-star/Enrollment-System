@@ -55,6 +55,7 @@
             cmbSection = new ComboBox();
             btnClear = new Button();
             btnEnroll = new Button();
+            lblSectionCapacity = new Label();
             panel1.SuspendLayout();
             panelStudentDetails.SuspendLayout();
             SuspendLayout();
@@ -62,6 +63,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(248, 249, 250);
+            panel1.Controls.Add(lblSectionCapacity);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(txtStudentId);
@@ -382,6 +384,17 @@
             btnEnroll.UseVisualStyleBackColor = false;
             btnEnroll.Click += btnEnroll_Click;
             // 
+            // lblSectionCapacity
+            // 
+            lblSectionCapacity.AutoSize = true;
+            lblSectionCapacity.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSectionCapacity.ForeColor = Color.FromArgb(51, 65, 85);
+            lblSectionCapacity.Location = new Point(105, 542);
+            lblSectionCapacity.Name = "lblSectionCapacity";
+            lblSectionCapacity.Size = new Size(91, 20);
+            lblSectionCapacity.TabIndex = 39;
+            lblSectionCapacity.Text = "Capacity: ---";
+            // 
             // StudentEnrollment
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -429,5 +442,7 @@
         private Label label7;
         private Label label8;
         private Label lblPhotoPlaceholder;
+        private Label label10;
+        private Label lblSectionCapacity;
     }
 }
