@@ -1,7 +1,6 @@
 ﻿CREATE PROCEDURE GetAllSections
 AS
 BEGIN
-    SELECT SectionCode, SectionName, GradeLevel, SchoolYear, Status 
+    SELECT SectionCode, SectionName, GradeLevel, SchoolYear, Capacity, Status 
     FROM Sections;
 END
-GO
