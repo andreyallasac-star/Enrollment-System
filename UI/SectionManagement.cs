@@ -15,6 +15,7 @@ namespace UI
     {
         private readonly SectionController _sectionController = new SectionController();
         private string _selectedCode = "";
+
         public SectionManagement()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace UI
             dgvInfo.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
 
             cmbGradeLevel.Items.AddRange(new string[] { "Grade 7", "Grade 8", "Grade 9", "Grade 10" });
+            txtCapacity.Text = "40";
         }
 
         private void SectionManagement_Load(object sender, EventArgs e)
@@ -72,16 +74,23 @@ namespace UI
                 return;
             }
 
+            if (!int.TryParse(txtCapacity.Text.Trim(), out int capacity) || capacity <= 0)
+            {
+                MessageBox.Show("Please enter a valid positive whole number for Capacity (e.g. 40).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var section = new Section
             {
                 SectionCode = txtSectionCode.Text.Trim(),
                 SectionName = txtSectionName.Text.Trim(),
                 GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
                 SchoolYear = txtSchoolYear.Text.Trim(),
+                Capacity = capacity
             };
 
             DialogResult confirm = MessageBox.Show(
-                $"Are you sure you want to add Section: {section.SectionCode} ({section.SectionName})?",
+                $"Are you sure you want to add Section: {section.SectionCode} ({section.SectionName}) with Capacity {section.Capacity}?",
                 "Confirm Add Section",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -116,6 +125,12 @@ namespace UI
                 return;
             }
 
+            if (!int.TryParse(txtCapacity.Text.Trim(), out int capacity) || capacity <= 0)
+            {
+                MessageBox.Show("Please enter a valid positive whole number for Capacity (e.g. 40).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult confirm = MessageBox.Show(
                 $"Are you sure you want to update Section: {_selectedCode}?",
                 "Confirm Update",
@@ -130,6 +145,7 @@ namespace UI
                 SectionName = txtSectionName.Text.Trim(),
                 GradeLevel = cmbGradeLevel.SelectedItem?.ToString(),
                 SchoolYear = txtSchoolYear.Text.Trim(),
+                Capacity = capacity
             };
 
             string result = _sectionController.UpdateSection(section);
@@ -217,6 +233,7 @@ namespace UI
                 txtSectionName.Text = row.Cells[1].Value?.ToString();
                 cmbGradeLevel.SelectedItem = row.Cells[2].Value?.ToString();
                 txtSchoolYear.Text = row.Cells[3].Value?.ToString();
+                txtCapacity.Text = row.Cells[5].Value?.ToString();
                 txtSectionCode.Enabled = false;
             }
         }
@@ -228,7 +245,7 @@ namespace UI
                 dgvInfo.Rows.Clear();
                 foreach (var s in _sectionController.GetAllSections())
                 {
-                    dgvInfo.Rows.Add(s.SectionCode, s.SectionName, s.GradeLevel, s.SchoolYear, s.Status);
+                    dgvInfo.Rows.Add(s.SectionCode, s.SectionName, s.GradeLevel, s.SchoolYear, s.Status, s.Capacity);
                 }
             }
             catch (Exception ex)
@@ -244,6 +261,7 @@ namespace UI
             txtSectionName.Clear();
             cmbGradeLevel.SelectedIndex = -1;
             txtSchoolYear.Clear();
+            txtCapacity.Text = "40";
             txtSectionCode.Enabled = true;
         }
     }

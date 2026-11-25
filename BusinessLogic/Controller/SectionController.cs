@@ -50,6 +50,7 @@ namespace BusinessLogic.Controller
             if (string.IsNullOrWhiteSpace(section.SectionName)) return "Section Name is required.";
             if (string.IsNullOrWhiteSpace(section.GradeLevel)) return "Please select a Grade Level.";
             if (string.IsNullOrWhiteSpace(section.SchoolYear)) return "School Year is required.";
+            if (section.Capacity <= 0) return "Capacity must be greater than zero.";
 
             section.SectionName = section.SectionName.Trim();
 

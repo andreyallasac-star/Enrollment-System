@@ -24,6 +24,7 @@ namespace BusinessLogic.Repository
                 cmd.Parameters.AddWithValue("@SectionName", section.SectionName);
                 cmd.Parameters.AddWithValue("@GradeLevel", section.GradeLevel);
                 cmd.Parameters.AddWithValue("@SchoolYear", section.SchoolYear);
+                cmd.Parameters.AddWithValue("@Capacity", section.Capacity);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
@@ -41,6 +42,7 @@ namespace BusinessLogic.Repository
                 cmd.Parameters.AddWithValue("@SectionName", section.SectionName);
                 cmd.Parameters.AddWithValue("@GradeLevel", section.GradeLevel);
                 cmd.Parameters.AddWithValue("@SchoolYear", section.SchoolYear);
+                cmd.Parameters.AddWithValue("@Capacity", section.Capacity);
 
                 return cmd.ExecuteNonQuery() > 0;
             }
@@ -108,6 +110,7 @@ namespace BusinessLogic.Repository
                             SectionName = reader["SectionName"] != DBNull.Value ? reader["SectionName"].ToString() : "",
                             GradeLevel = reader["GradeLevel"].ToString(),
                             SchoolYear = reader["SchoolYear"] != DBNull.Value ? reader["SchoolYear"].ToString() : "",
+                            Capacity = reader["Capacity"] != DBNull.Value ? Convert.ToInt32(reader["Capacity"]) : 40,
                             Status = reader["Status"].ToString()
                         });
                     }
