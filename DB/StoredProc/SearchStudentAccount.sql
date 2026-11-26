@@ -16,10 +16,21 @@ BEGIN
         e.SchoolYear,
         sec.GradeLevel,
         sec.SectionName AS Section, 
-        ISNULL((SELECT TOP 1 TotalAssessment FROM Assessments WHERE StudentId = s.StudentId ORDER BY AssessmentId DESC), 0) AS TotalAssessment,
-        ISNULL((SELECT SUM(AmountPaid) FROM Payments WHERE StudentId = s.StudentId), 0) AS TotalPaid
+        ISNULL(a.TotalAssessment, 0) AS TotalAssessment,
+        ISNULL((SELECT SUM(p.AmountPaid) FROM Payments p WHERE p.AssessmentId = a.AssessmentId), 0) AS TotalPaid
     FROM Students s
-    LEFT JOIN Enrollments e ON s.StudentId = e.StudentId AND e.Status = 'Enrolled'
+    OUTER APPLY (
+        SELECT TOP 1 en.SchoolYear, en.SectionCode
+        FROM Enrollments en
+        WHERE en.StudentId = s.StudentId AND en.Status = 'Enrolled'
+        ORDER BY en.EnrollmentDate DESC
+    ) e
     LEFT JOIN Sections sec ON e.SectionCode = sec.SectionCode
+    OUTER APPLY (
+        SELECT TOP 1 asm.AssessmentId, asm.TotalAssessment
+        FROM Assessments asm
+        WHERE asm.StudentId = s.StudentId AND asm.SchoolYear = e.SchoolYear
+        ORDER BY asm.AssessmentId DESC
+    ) a
     WHERE s.StudentId = @Keyword OR (s.FirstName + ' ' + s.LastName) LIKE '%' + @Keyword + '%';
 END

@@ -56,6 +56,8 @@ namespace UI
             lblSection.Text = profile.Section;
             _studentGrade = profile.GradeLevel;
 
+            int? paidLookupAssessmentId = null;
+
             var assessment = _paymentController.GetStudentAssessment(studentId);
             if (assessment == null)
             {
@@ -64,6 +66,7 @@ namespace UI
                 {
                     _currentAssessmentId = 0;
                     _totalAssessment = latest.TotalAssessment;
+                    paidLookupAssessmentId = latest.AssessmentId;
                     MessageBox.Show("This student is already fully paid.", "Fully Paid", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -77,9 +80,12 @@ namespace UI
             {
                 _currentAssessmentId = assessment.AssessmentId;
                 _totalAssessment = assessment.TotalAssessment;
+                paidLookupAssessmentId = assessment.AssessmentId;
             }
 
-            _totalPaid = _paymentController.GetTotalPaid(studentId);
+            _totalPaid = paidLookupAssessmentId.HasValue
+                ? _paymentController.GetTotalPaid(studentId, paidLookupAssessmentId.Value)
+                : 0;
             _currentBalance = Math.Max(0, _totalAssessment - _totalPaid);
 
             lblAssessment.Text = _totalAssessment.ToString("F2");
@@ -172,6 +178,7 @@ namespace UI
             var payment = new Payment
             {
                 StudentId = lblID.Text,
+                AssessmentId = _currentAssessmentId,
                 AmountPaid = paymentAmount,
                 PaymentMethod = method,
                 ProcessedBy = _processedBy

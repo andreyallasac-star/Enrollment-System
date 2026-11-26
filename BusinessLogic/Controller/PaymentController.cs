@@ -15,7 +15,7 @@ namespace BusinessLogic.Controller
 
         public Assessment GetLatestAssessment(string studentId) => _paymentRepo.GetLatestAssessment(studentId);
 
-        public decimal GetTotalPaid(string studentId) => _paymentRepo.GetTotalPaid(studentId);
+        public decimal GetTotalPaid(string studentId, int? assessmentId = null) => _paymentRepo.GetTotalPaid(studentId, assessmentId);
 
         public (bool Success, string Message, int ReceiptId) ProcessPayment(Payment payment, decimal currentBalance, int assessmentId = 0)
         {
