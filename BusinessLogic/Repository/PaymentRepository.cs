@@ -68,19 +68,30 @@ namespace BusinessLogic.Repository
             return null;
         }
 
-        public decimal GetTotalPaid(string studentId)
+        public decimal GetTotalPaid(string studentId, int? assessmentId = null)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var cmd = new SqlCommand("SELECT ISNULL(SUM(AmountPaid), 0) FROM Payments WHERE StudentId = @StudentId", conn);
-                cmd.Parameters.AddWithValue("@StudentId", studentId);
+                SqlCommand cmd;
+                if (assessmentId.HasValue && assessmentId.Value > 0)
+                {
+                    cmd = new SqlCommand("SELECT ISNULL(SUM(AmountPaid), 0) FROM Payments WHERE AssessmentId = @AssessmentId", conn);
+                    cmd.Parameters.AddWithValue("@AssessmentId", assessmentId.Value);
+                }
+                else
+                {
+                    cmd = new SqlCommand("SELECT ISNULL(SUM(AmountPaid), 0) FROM Payments WHERE StudentId = @StudentId", conn);
+                    cmd.Parameters.AddWithValue("@StudentId", studentId);
+                }
                 return Convert.ToDecimal(cmd.ExecuteScalar());
             }
         }
 
-        public int ProcessPayment(Payment payment, int assessmentId)
+        public int ProcessPayment(Payment payment, int assessmentId = 0)
         {
+            int targetAssessmentId = assessmentId > 0 ? assessmentId : (payment.AssessmentId ?? 0);
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -89,11 +100,12 @@ namespace BusinessLogic.Repository
                     try
                     {
                         var cmd = new SqlCommand(
-                            "INSERT INTO Payments (StudentId, AmountPaid, PaymentMethod, ProcessedBy, PaymentDate) " +
+                            "INSERT INTO Payments (StudentId, AssessmentId, AmountPaid, PaymentMethod, ProcessedBy, PaymentDate) " +
                             "OUTPUT INSERTED.ReceiptId " +
-                            "VALUES (@StudentId, @AmountPaid, @PaymentMethod, @ProcessedBy, GETDATE())", conn, tx);
+                            "VALUES (@StudentId, @AssessmentId, @AmountPaid, @PaymentMethod, @ProcessedBy, GETDATE())", conn, tx);
 
                         cmd.Parameters.AddWithValue("@StudentId", payment.StudentId);
+                        cmd.Parameters.AddWithValue("@AssessmentId", targetAssessmentId > 0 ? (object)targetAssessmentId : DBNull.Value);
                         cmd.Parameters.AddWithValue("@AmountPaid", payment.AmountPaid);
                         cmd.Parameters.AddWithValue("@PaymentMethod", payment.PaymentMethod);
                         cmd.Parameters.AddWithValue("@ProcessedBy", payment.ProcessedBy);
@@ -101,10 +113,10 @@ namespace BusinessLogic.Repository
                         var result = cmd.ExecuteScalar();
                         int receiptId = result != null ? Convert.ToInt32(result) : 0;
 
-                        if (receiptId > 0 && assessmentId > 0)
+                        if (receiptId > 0 && targetAssessmentId > 0)
                         {
                             var updateCmd = new SqlCommand(@"
-                                DECLARE @TotalPaid DECIMAL(18,2) = (SELECT ISNULL(SUM(AmountPaid), 0) FROM Payments WHERE StudentId = @StudentId);
+                                DECLARE @TotalPaid DECIMAL(18,2) = (SELECT ISNULL(SUM(AmountPaid), 0) FROM Payments WHERE AssessmentId = @AssessmentId);
                                 UPDATE Assessments
                                 SET Status = CASE
                                     WHEN @TotalPaid >= TotalAssessment THEN 'Paid'
@@ -113,8 +125,7 @@ namespace BusinessLogic.Repository
                                 END
                                 WHERE AssessmentId = @AssessmentId;", conn, tx);
 
-                            updateCmd.Parameters.AddWithValue("@StudentId", payment.StudentId);
-                            updateCmd.Parameters.AddWithValue("@AssessmentId", assessmentId);
+                            updateCmd.Parameters.AddWithValue("@AssessmentId", targetAssessmentId);
                             updateCmd.ExecuteNonQuery();
                         }
 

@@ -46,6 +46,10 @@ namespace BusinessLogic.Controller
                 if (_enrollmentRepo.IsStudentAlreadyEnrolled(enrollment.StudentId, enrollment.SchoolYear))
                     return $"Student {enrollment.StudentId} is already enrolled for the {enrollment.SchoolYear} school year.";
 
+                var balanceCheck = _enrollmentRepo.GetPreviousUnpaidBalance(enrollment.StudentId, enrollment.SchoolYear);
+                if (balanceCheck.HasUnpaidBalance)
+                    return $"Cannot enroll Student {enrollment.StudentId}. They still have an unpaid balance of PHP {balanceCheck.RemainingBalance:N2} from School Year {balanceCheck.UnpaidSchoolYear}. Please settle it at the Cashier first.";
+
                 var capacityCheck = _enrollmentRepo.CheckSectionCapacity(enrollment.SectionCode);
                 if (capacityCheck.Capacity > 0 && capacityCheck.IsFull)
                     return $"Section {enrollment.SectionCode} is full ({capacityCheck.CurrentCount}/{capacityCheck.Capacity}). Please choose another section.";

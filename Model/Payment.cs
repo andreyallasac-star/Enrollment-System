@@ -8,6 +8,7 @@ namespace Model
     {
         public int ReceiptId { get; set; }
         public string StudentId { get; set; }
+        public int? AssessmentId { get; set; }
         public decimal AmountPaid { get; set; }
         public string PaymentMethod { get; set; }
         public DateTime PaymentDate { get; set; }

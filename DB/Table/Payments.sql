@@ -1,10 +1,12 @@
 ﻿CREATE TABLE Payments (
     ReceiptId INT PRIMARY KEY IDENTITY(1000,1),
     StudentId NVARCHAR(20) NOT NULL, 
+    AssessmentId INT NULL,
     AmountPaid DECIMAL(18,2) NOT NULL,
     PaymentMethod NVARCHAR(50) NOT NULL,
     PaymentDate DATETIME NOT NULL DEFAULT GETDATE(),
     ProcessedBy NVARCHAR(50) NOT NULL,
     
-    CONSTRAINT FK_Payments_Students FOREIGN KEY (StudentId) REFERENCES Students(StudentId) ON DELETE CASCADE
+    CONSTRAINT FK_Payments_Students FOREIGN KEY (StudentId) REFERENCES Students(StudentId) ON DELETE CASCADE,
+    CONSTRAINT FK_Payments_Assessments FOREIGN KEY (AssessmentId) REFERENCES Assessments(AssessmentId)
 );

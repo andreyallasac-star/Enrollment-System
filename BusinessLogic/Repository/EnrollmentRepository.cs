@@ -88,5 +88,40 @@ namespace BusinessLogic.Repository
             }
             return (false, 0, 0);
         }
+
+        public (bool HasUnpaidBalance, string UnpaidSchoolYear, decimal RemainingBalance) GetPreviousUnpaidBalance(string studentId, string targetSchoolYear)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = @"
+                    SELECT TOP 1
+                        a.SchoolYear,
+                        a.TotalAssessment - ISNULL((SELECT SUM(p.AmountPaid) FROM Payments p WHERE p.AssessmentId = a.AssessmentId), 0) AS RemainingBalance
+                    FROM Assessments a
+                    WHERE a.StudentId = @StudentId
+                      AND a.SchoolYear <> @TargetSchoolYear
+                      AND a.Status IN ('Unpaid', 'Partial')
+                    ORDER BY a.AssessmentDate DESC";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@StudentId", studentId);
+                    cmd.Parameters.AddWithValue("@TargetSchoolYear", targetSchoolYear);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string unpaidYear = reader["SchoolYear"].ToString();
+                            decimal balance = Convert.ToDecimal(reader["RemainingBalance"]);
+                            if (balance > 0)
+                                return (true, unpaidYear, balance);
+                        }
+                    }
+                }
+            }
+            return (false, "", 0m);
+        }
     }
 }
