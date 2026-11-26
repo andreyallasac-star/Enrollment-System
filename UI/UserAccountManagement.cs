@@ -12,17 +12,20 @@ namespace UI
 {
     public partial class UserAccountManagement : Form
     {
-
         private readonly UserController _userController = new UserController();
         private int _selectedUserId = 0;
+
         public UserAccountManagement()
         {
             InitializeComponent();
 
+            dgvStudentInfo.AllowUserToAddRows = false;
+            dgvStudentInfo.ReadOnly = true;
+
+            cmbRoles.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbRoles.Items.Add("Admin");
             cmbRoles.Items.Add("Staff");
             cmbRoles.SelectedIndex = 0;
-
         }
 
         private void UserAccountManagement_Load(object sender, EventArgs e)
@@ -32,11 +35,32 @@ namespace UI
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            if (_selectedUserId != 0)
+            {
+                MessageBox.Show("An existing user is currently selected. Click Update to edit this user.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string role = cmbRoles.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                MessageBox.Show("Please select a Role.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to create user '{txtUsername.Text.Trim()}' with role '{role}'?",
+                "Confirm Create User",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
             User newUser = new User
             {
-                Username = txtUsername.Text,
+                Username = txtUsername.Text.Trim(),
                 PasswordHash = txtPassword.Text,
-                Role = cmbRoles.SelectedItem.ToString()
+                Role = role
             };
 
             string result = _userController.CreateUser(newUser);
@@ -61,11 +85,26 @@ namespace UI
                 return;
             }
 
+            string role = cmbRoles.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                MessageBox.Show("Please select a Role.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to update user '{txtUsername.Text}'?",
+                "Confirm Update User",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
             User updatedUser = new User
             {
                 UserId = _selectedUserId,
                 PasswordHash = txtPassword.Text,
-                Role = cmbRoles.SelectedItem.ToString()
+                Role = role
             };
 
             string result = _userController.UpdateUser(updatedUser);
@@ -96,8 +135,13 @@ namespace UI
                 string result = _userController.DeactivateUser(_selectedUserId);
                 if (result == "Success")
                 {
+                    MessageBox.Show("User deactivated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ClearForm();
                     RefreshGrid();
+                }
+                else
+                {
+                    MessageBox.Show(result, "Deactivation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -134,9 +178,11 @@ namespace UI
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvStudentInfo.Rows[e.RowIndex];
+                if (row.IsNewRow || row.Cells[0].Value == null) return;
+
                 _selectedUserId = Convert.ToInt32(row.Cells[0].Value);
-                txtUsername.Text = row.Cells[1].Value.ToString();
-                cmbRoles.SelectedItem = row.Cells[2].Value.ToString();
+                txtUsername.Text = row.Cells[1].Value?.ToString() ?? "";
+                cmbRoles.SelectedItem = row.Cells[2].Value?.ToString();
                 txtPassword.Text = "";
 
                 txtUsername.Enabled = false;
@@ -145,12 +191,19 @@ namespace UI
 
         private void RefreshGrid()
         {
-            dgvStudentInfo.Rows.Clear();
-            var users = _userController.GetAllUsers();
-
-            foreach (var u in users)
+            try
             {
-                dgvStudentInfo.Rows.Add(u.UserId, u.Username, u.Role, u.Status);
+                dgvStudentInfo.Rows.Clear();
+                var users = _userController.GetAllUsers();
+
+                foreach (var u in users)
+                {
+                    dgvStudentInfo.Rows.Add(u.UserId, u.Username, u.Role, u.Status);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading users: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -162,7 +215,5 @@ namespace UI
             cmbRoles.SelectedIndex = 0;
             txtUsername.Enabled = true;
         }
-
-        
     }
 }
