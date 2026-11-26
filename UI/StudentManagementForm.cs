@@ -49,41 +49,55 @@ namespace UI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(_selectedStudentId))
+            {
+                MessageBox.Show($"Student '{_selectedStudentId}' is already selected. Click Update to save changes.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to add student {txtFirstName.Text.Trim()} {txtLastName.Text.Trim()} ({txtStudentID.Text})?",
+                "Confirm Add Student",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
             var newStudent = new Student
             {
                 StudentId = txtStudentID.Text,
-                FirstName = txtFirstName.Text,
-                MiddleName = txtMiddleName.Text,
-                LastName = txtLastName.Text,
+                FirstName = txtFirstName.Text.Trim(),
+                MiddleName = txtMiddleName.Text.Trim(),
+                LastName = txtLastName.Text.Trim(),
                 DateOfBirth = dtpDateofBirth.Value,
                 Gender = cmbGender.SelectedItem?.ToString(),
                 StudentType = cmbStudentType.SelectedItem?.ToString(),
 
-                HouseNo = txtHouseNo.Text,
-                Barangay = txtBarangay.Text,
-                Municipality = txtMunicipality.Text,
-                Province = txtProvince.Text,
-                PostalCode = txtPostal.Text,
+                HouseNo = txtHouseNo.Text.Trim(),
+                Barangay = txtBarangay.Text.Trim(),
+                Municipality = txtMunicipality.Text.Trim(),
+                Province = txtProvince.Text.Trim(),
+                PostalCode = txtPostal.Text.Trim(),
 
-                GuardianFirstName = txtGfname.Text,
-                GuardianMiddleName = txtGmname.Text,
-                GuardianLastName = txtGlname.Text,
-                GuardianContact = txtGcontact.Text,
-                GuardianRelationship = txtGrelationship.Text,
+                GuardianFirstName = txtGfname.Text.Trim(),
+                GuardianMiddleName = txtGmname.Text.Trim(),
+                GuardianLastName = txtGlname.Text.Trim(),
+                GuardianContact = txtGcontact.Text.Trim(),
+                GuardianRelationship = txtGrelationship.Text.Trim(),
                 GuardianGender = cmbGgender.SelectedItem?.ToString(),
 
-                GuardianHouseNo = txtGhouseno.Text,
-                GuardianBarangay = txtGbarangay.Text,
-                GuardianMunicipality = txtGmunicipality.Text,
-                GuardianProvince = txtGprovince.Text,
-                GuardianPostalCode = txtGpostal.Text
+                GuardianHouseNo = txtGhouseno.Text.Trim(),
+                GuardianBarangay = txtGbarangay.Text.Trim(),
+                GuardianMunicipality = txtGmunicipality.Text.Trim(),
+                GuardianProvince = txtGprovince.Text.Trim(),
+                GuardianPostalCode = txtGpostal.Text.Trim()
             };
 
             string result = _studentController.CreateStudent(newStudent);
 
             if (result == "Success")
             {
-                MessageBox.Show("Student created!");
+                MessageBox.Show("Student created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
                 RefreshGrid();
             }
@@ -95,52 +109,90 @@ namespace UI
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(_selectedStudentId)) return;
+            if (string.IsNullOrWhiteSpace(_selectedStudentId))
+            {
+                MessageBox.Show("Please select a student from the grid to update.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to update Student ID: {_selectedStudentId}?",
+                "Confirm Update",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
             var updatedStudent = new Student
             {
                 StudentId = _selectedStudentId,
-                FirstName = txtFirstName.Text,
-                MiddleName = txtMiddleName.Text,
-                LastName = txtLastName.Text,
+                FirstName = txtFirstName.Text.Trim(),
+                MiddleName = txtMiddleName.Text.Trim(),
+                LastName = txtLastName.Text.Trim(),
                 DateOfBirth = dtpDateofBirth.Value,
                 Gender = cmbGender.SelectedItem?.ToString(),
                 StudentType = cmbStudentType.SelectedItem?.ToString(),
 
-                HouseNo = txtHouseNo.Text,
-                Barangay = txtBarangay.Text,
-                Municipality = txtMunicipality.Text,
-                Province = txtProvince.Text,
-                PostalCode = txtPostal.Text,
+                HouseNo = txtHouseNo.Text.Trim(),
+                Barangay = txtBarangay.Text.Trim(),
+                Municipality = txtMunicipality.Text.Trim(),
+                Province = txtProvince.Text.Trim(),
+                PostalCode = txtPostal.Text.Trim(),
 
-                GuardianFirstName = txtGfname.Text,
-                GuardianMiddleName = txtGmname.Text,
-                GuardianLastName = txtGlname.Text,
-                GuardianContact = txtGcontact.Text,
-                GuardianRelationship = txtGrelationship.Text,
+                GuardianFirstName = txtGfname.Text.Trim(),
+                GuardianMiddleName = txtGmname.Text.Trim(),
+                GuardianLastName = txtGlname.Text.Trim(),
+                GuardianContact = txtGcontact.Text.Trim(),
+                GuardianRelationship = txtGrelationship.Text.Trim(),
                 GuardianGender = cmbGgender.SelectedItem?.ToString(),
 
-                GuardianHouseNo = txtGhouseno.Text,
-                GuardianBarangay = txtGbarangay.Text,
-                GuardianMunicipality = txtGmunicipality.Text,
-                GuardianProvince = txtGprovince.Text,
-                GuardianPostalCode = txtGpostal.Text
+                GuardianHouseNo = txtGhouseno.Text.Trim(),
+                GuardianBarangay = txtGbarangay.Text.Trim(),
+                GuardianMunicipality = txtGmunicipality.Text.Trim(),
+                GuardianProvince = txtGprovince.Text.Trim(),
+                GuardianPostalCode = txtGpostal.Text.Trim()
             };
 
-            if (_studentController.UpdateStudent(updatedStudent) == "Success")
+            string result = _studentController.UpdateStudent(updatedStudent);
+
+            if (result == "Success")
             {
+                MessageBox.Show("Student updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
                 RefreshGrid();
+            }
+            else
+            {
+                MessageBox.Show(result, "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void btnDeactivate_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(_selectedStudentId)) return;
-
-            if (_studentController.DeactivateStudent(_selectedStudentId) == "Success")
+            if (string.IsNullOrWhiteSpace(_selectedStudentId))
             {
+                MessageBox.Show("Please select a student from the grid to deactivate.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to deactivate Student ID: {_selectedStudentId}?",
+                "Confirm Deactivation",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
+            string result = _studentController.DeactivateStudent(_selectedStudentId);
+            if (result == "Success")
+            {
+                MessageBox.Show("Student deactivated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ClearForm();
                 RefreshGrid();
+            }
+            else
+            {
+                MessageBox.Show(result, "Deactivation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -152,7 +204,7 @@ namespace UI
                 return;
             }
 
-            string selectedStudentId = dgvStudentRecords.SelectedRows[0].Cells[0].Value.ToString();
+            string selectedStudentId = dgvStudentRecords.SelectedRows[0].Cells[0].Value?.ToString();
 
             DialogResult confirm = MessageBox.Show($"Are you sure you want to activate Student ID: {selectedStudentId}?", "Confirm Activation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -177,98 +229,120 @@ namespace UI
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = dgvStudentRecords.Rows[e.RowIndex];
-                _selectedStudentId = row.Cells[0].Value?.ToString();
-
-                Student s = _studentController.GetStudentById(_selectedStudentId);
-
-                if (s != null)
+                try
                 {
-                    txtStudentID.Text = s.StudentId;
-                    txtFirstName.Text = s.FirstName;
-                    txtMiddleName.Text = s.MiddleName;
-                    txtLastName.Text = s.LastName;
-                    dtpDateofBirth.Value = s.DateOfBirth;
-                    cmbGender.SelectedItem = s.Gender;
-                    cmbStudentType.SelectedItem = s.StudentType;
+                    DataGridViewRow row = dgvStudentRecords.Rows[e.RowIndex];
+                    if (row.IsNewRow || row.Cells[0].Value == null) return;
 
-                    txtHouseNo.Text = s.HouseNo;
-                    txtBarangay.Text = s.Barangay;
-                    txtMunicipality.Text = s.Municipality;
-                    txtProvince.Text = s.Province;
-                    txtPostal.Text = s.PostalCode;
+                    _selectedStudentId = row.Cells[0].Value?.ToString();
 
-                    txtGfname.Text = s.GuardianFirstName;
-                    txtGmname.Text = s.GuardianMiddleName;
-                    txtGlname.Text = s.GuardianLastName;
-                    txtGcontact.Text = s.GuardianContact;
-                    txtGrelationship.Text = s.GuardianRelationship;
-                    cmbGgender.SelectedItem = s.GuardianGender;
+                    Student s = _studentController.GetStudentById(_selectedStudentId);
 
-                    txtGhouseno.Text = s.GuardianHouseNo;
-                    txtGbarangay.Text = s.GuardianBarangay;
-                    txtGmunicipality.Text = s.GuardianMunicipality;
-                    txtGprovince.Text = s.GuardianProvince;
-                    txtGpostal.Text = s.GuardianPostalCode;
+                    if (s != null)
+                    {
+                        txtStudentID.Text = s.StudentId;
+                        txtFirstName.Text = s.FirstName;
+                        txtMiddleName.Text = s.MiddleName;
+                        txtLastName.Text = s.LastName;
+                        dtpDateofBirth.Value = s.DateOfBirth;
+                        cmbGender.SelectedItem = s.Gender;
+                        cmbStudentType.SelectedItem = s.StudentType;
+
+                        txtHouseNo.Text = s.HouseNo;
+                        txtBarangay.Text = s.Barangay;
+                        txtMunicipality.Text = s.Municipality;
+                        txtProvince.Text = s.Province;
+                        txtPostal.Text = s.PostalCode;
+
+                        txtGfname.Text = s.GuardianFirstName;
+                        txtGmname.Text = s.GuardianMiddleName;
+                        txtGlname.Text = s.GuardianLastName;
+                        txtGcontact.Text = s.GuardianContact;
+                        txtGrelationship.Text = s.GuardianRelationship;
+                        cmbGgender.SelectedItem = s.GuardianGender;
+
+                        txtGhouseno.Text = s.GuardianHouseNo;
+                        txtGbarangay.Text = s.GuardianBarangay;
+                        txtGmunicipality.Text = s.GuardianMunicipality;
+                        txtGprovince.Text = s.GuardianProvince;
+                        txtGpostal.Text = s.GuardianPostalCode;
+                    }
+
+                    txtStudentID.Enabled = false;
                 }
-
-                txtStudentID.Enabled = false;
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading student details: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void RefreshGrid()
         {
-            dgvStudentRecords.Rows.Clear();
-            foreach (var s in _studentController.GetAllStudents())
+            try
             {
-                string fullName = $"{s.FirstName} {s.MiddleName} {s.LastName}".Replace("  ", " ").Trim();
-                string guardianName = $"{s.GuardianFirstName} {s.GuardianLastName}".Trim();
+                dgvStudentRecords.Rows.Clear();
+                foreach (var s in _studentController.GetAllStudents())
+                {
+                    string fullName = $"{s.FirstName} {s.MiddleName} {s.LastName}".Replace("  ", " ").Trim();
+                    string guardianName = $"{s.GuardianFirstName} {s.GuardianLastName}".Trim();
 
-                dgvStudentRecords.Rows.Add(
-                    s.StudentId,
-                    fullName,
-                    s.DateOfBirth.ToString("yyyy-MM-dd"),
-                    s.Gender,
-                    s.Status,
-                    s.EnrollmentStatus,
-                    guardianName,
-                    s.GuardianContact
-                );
+                    dgvStudentRecords.Rows.Add(
+                        s.StudentId,
+                        fullName,
+                        s.DateOfBirth.ToString("yyyy-MM-dd"),
+                        s.Gender,
+                        s.Status,
+                        s.EnrollmentStatus,
+                        guardianName,
+                        s.GuardianContact
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading students: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void ClearForm()
         {
-            _selectedStudentId = "";
-            txtStudentID.Text = _studentController.GetNextStudentId();
-            cmbStudentType.SelectedIndex = -1;
-            cmbGender.SelectedIndex = -1;
-            cmbGgender.SelectedIndex = -1;
+            try
+            {
+                _selectedStudentId = "";
+                txtStudentID.Text = _studentController.GetNextStudentId();
+                cmbStudentType.SelectedIndex = -1;
+                cmbGender.SelectedIndex = -1;
+                cmbGgender.SelectedIndex = -1;
 
-            txtFirstName.Clear();
-            txtMiddleName.Clear();
-            txtLastName.Clear();
+                txtFirstName.Clear();
+                txtMiddleName.Clear();
+                txtLastName.Clear();
 
-            txtHouseNo.Clear();
-            txtBarangay.Clear();
-            txtMunicipality.Clear();
-            txtProvince.Clear();
-            txtPostal.Clear();
+                txtHouseNo.Clear();
+                txtBarangay.Clear();
+                txtMunicipality.Clear();
+                txtProvince.Clear();
+                txtPostal.Clear();
 
-            txtGfname.Clear();
-            txtGmname.Clear();
-            txtGlname.Clear();
-            txtGcontact.Clear();
-            txtGrelationship.Clear();
+                txtGfname.Clear();
+                txtGmname.Clear();
+                txtGlname.Clear();
+                txtGcontact.Clear();
+                txtGrelationship.Clear();
 
-            txtGhouseno.Clear();
-            txtGbarangay.Clear();
-            txtGmunicipality.Clear();
-            txtGprovince.Clear();
-            txtGpostal.Clear();
+                txtGhouseno.Clear();
+                txtGbarangay.Clear();
+                txtGmunicipality.Clear();
+                txtGprovince.Clear();
+                txtGpostal.Clear();
 
-            txtStudentID.Enabled = false;
+                txtStudentID.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating Student ID: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
     }
 }
