@@ -122,7 +122,6 @@
             lblPlease.Size = new Size(310, 13);
             lblPlease.TabIndex = 0;
             lblPlease.Text = "Please sign in with your assigned username and password.";
-            lblPlease.Click += label1_Click;
             // 
             // btnLogin
             // 

@@ -19,9 +19,6 @@ namespace UI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            AuthController authController = new AuthController();
-            var result = authController.Login(txtUsername.Text, txtPassword.Text);
-
             if (string.IsNullOrWhiteSpace(txtUsername.Text))
             {
                 MessageBox.Show("Please enter the account's username.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -39,6 +36,9 @@ namespace UI
                 MessageBox.Show("Password must be at least 8 characters long.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            AuthController authController = new AuthController();
+            var result = authController.Login(txtUsername.Text.Trim(), txtPassword.Text);
 
             if (result.Success)
             {
@@ -59,11 +59,6 @@ namespace UI
             {
                 MessageBox.Show(result.Message, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
