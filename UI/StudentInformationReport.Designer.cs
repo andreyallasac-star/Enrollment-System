@@ -45,6 +45,8 @@
             Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
+            label6 = new Label();
+            cmbSchoolYear = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -196,12 +198,35 @@
             Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.Black;
+            label6.Location = new Point(12, 199);
+            label6.Name = "label6";
+            label6.Size = new Size(89, 20);
+            label6.TabIndex = 9;
+            label6.Text = "School Year";
+            // 
+            // cmbSchoolYear
+            // 
+            cmbSchoolYear.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSchoolYear.FormattingEnabled = true;
+            cmbSchoolYear.Location = new Point(12, 222);
+            cmbSchoolYear.Name = "cmbSchoolYear";
+            cmbSchoolYear.Size = new Size(276, 23);
+            cmbSchoolYear.TabIndex = 10;
+            // 
             // StudentInformationReport
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Azure;
             ClientSize = new Size(800, 562);
+            Controls.Add(cmbSchoolYear);
+            Controls.Add(label6);
             Controls.Add(dataGridView1);
             Controls.Add(label5);
             Controls.Add(btnGenerateReport);
@@ -235,5 +260,7 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
+        private Label label6;
+        private ComboBox cmbSchoolYear;
     }
 }
