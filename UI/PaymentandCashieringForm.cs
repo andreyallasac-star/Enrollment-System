@@ -32,9 +32,44 @@ namespace UI
             dataGridView1.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.White;
 
-            cmbPaymentMethod.Items.AddRange(new string[] { "Cash", "GCash", "Bank Transfer" });
+            cmbPaymentMethod.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPaymentMethod.Items.AddRange(new string[] { "Cash (Full Payment)", "Installment" });
 
             ClearForm();
+        }
+
+        private void cmbPaymentMethod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyPaymentMode();
+        }
+
+        private void ApplyPaymentMode()
+        {
+            bool canPay = _currentAssessmentId > 0 && _currentBalance > 0;
+            btnConfirm.Enabled = canPay;
+            txtPaymentAmount.Enabled = canPay;
+
+            if (!canPay)
+            {
+                txtPaymentAmount.ReadOnly = false;
+                txtPaymentAmount.BackColor = Color.White;
+                txtPaymentAmount.Clear();
+                return;
+            }
+
+            string selectedMode = cmbPaymentMethod.SelectedItem?.ToString();
+            if (selectedMode == "Cash (Full Payment)")
+            {
+                txtPaymentAmount.Text = _currentBalance.ToString("F2");
+                txtPaymentAmount.ReadOnly = true;
+                txtPaymentAmount.BackColor = SystemColors.Control;
+            }
+            else
+            {
+                txtPaymentAmount.ReadOnly = false;
+                txtPaymentAmount.BackColor = Color.White;
+                txtPaymentAmount.Clear();
+            }
         }
 
         private void btnSearchID_Click(object sender, EventArgs e)
@@ -92,13 +127,10 @@ namespace UI
             lblPaid.Text = _totalPaid.ToString("F2");
             lblBalance.Text = _currentBalance.ToString("F2");
 
-            txtPaymentAmount.Clear();
             lblRemaining.Text = _currentBalance.ToString("F2");
             lblReceipt.Text = "---";
 
-            bool canPay = _currentAssessmentId > 0 && _currentBalance > 0;
-            btnConfirm.Enabled = canPay;
-            txtPaymentAmount.Enabled = canPay;
+            ApplyPaymentMode();
 
             dataGridView1.Rows.Clear();
             var history = _paymentController.GetPaymentHistory(studentId);
@@ -148,6 +180,13 @@ namespace UI
                 return;
             }
 
+            string method = cmbPaymentMethod.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(method))
+            {
+                MessageBox.Show("Please select a payment method.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!decimal.TryParse(txtPaymentAmount.Text, System.Globalization.NumberStyles.Any, null, out decimal paymentAmount) || paymentAmount <= 0)
             {
                 MessageBox.Show("Payment amount must be greater than zero.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -160,10 +199,9 @@ namespace UI
                 return;
             }
 
-            string method = cmbPaymentMethod.SelectedItem?.ToString();
-            if (string.IsNullOrWhiteSpace(method))
+            if (method == "Cash (Full Payment)" && paymentAmount < _currentBalance)
             {
-                MessageBox.Show("Please select a payment method.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Cash (Full Payment) must pay the full remaining balance. Select Installment for partial payments.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -218,6 +256,8 @@ namespace UI
         private void ClearForm()
         {
             txtSearchStudent.Clear();
+            txtPaymentAmount.ReadOnly = false;
+            txtPaymentAmount.BackColor = Color.White;
             txtPaymentAmount.Clear();
 
             lblID.Text = "---";
@@ -229,16 +269,16 @@ namespace UI
             lblRemaining.Text = "0.00";
             lblReceipt.Text = "---";
 
-            if (cmbPaymentMethod.Items.Count > 0)
-                cmbPaymentMethod.SelectedIndex = 0;
-
-            dtpPayment.Value = DateTime.Now;
-
             _currentBalance = 0;
             _totalAssessment = 0;
             _totalPaid = 0;
             _studentGrade = "";
             _currentAssessmentId = 0;
+
+            if (cmbPaymentMethod.Items.Count > 0)
+                cmbPaymentMethod.SelectedIndex = 0;
+
+            dtpPayment.Value = DateTime.Now;
 
             btnConfirm.Enabled = true;
             txtPaymentAmount.Enabled = true;

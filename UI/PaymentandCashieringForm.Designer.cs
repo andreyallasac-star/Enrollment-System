@@ -331,6 +331,7 @@
             cmbPaymentMethod.Name = "cmbPaymentMethod";
             cmbPaymentMethod.Size = new Size(218, 33);
             cmbPaymentMethod.TabIndex = 13;
+            cmbPaymentMethod.SelectedIndexChanged += cmbPaymentMethod_SelectedIndexChanged;
             // 
             // lblRemaining
             // 
