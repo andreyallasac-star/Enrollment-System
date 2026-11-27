@@ -25,8 +25,72 @@ namespace UI
             txtTuitionFee.ReadOnly = true;
             txtTuitionFee.BackColor = System.Drawing.SystemColors.Control;
             txtOtherFee.Text = "0.00";
+            lblDiscountAmount.Text = "0.00";
+            lblTotalAssessment.Text = "0.00";
+
+            LoadDiscounts();
+            cmbDiscount.SelectedIndexChanged += cmbDiscount_SelectedIndexChanged;
 
             SetAssessmentControlsEnabled(false);
+        }
+
+        private void LoadDiscounts()
+        {
+            var discounts = _assessmentController.GetActiveDiscounts();
+            if (discounts == null || discounts.Count == 0)
+            {
+                discounts = new List<Discount>
+                {
+                    new Discount { DiscountId = 0, DiscountName = "None", DiscountPercent = 0m, IsActive = true }
+                };
+            }
+
+            cmbDiscount.DataSource = null;
+            cmbDiscount.DataSource = discounts;
+            cmbDiscount.DisplayMember = "DisplayText";
+            cmbDiscount.ValueMember = "DiscountPercent";
+            cmbDiscount.SelectedIndex = 0;
+        }
+
+        private Discount GetSelectedDiscount()
+        {
+            if (cmbDiscount.SelectedItem is Discount selected)
+                return selected;
+
+            return new Discount { DiscountId = 0, DiscountName = "None", DiscountPercent = 0m, IsActive = true };
+        }
+
+        private bool TryCalculateAssessment(bool showValidationErrors, out decimal tuitionFee, out decimal otherFee, out Discount selectedDiscount, out decimal discountAmount, out decimal totalAssessment)
+        {
+            tuitionFee = 0m;
+            decimal.TryParse(txtTuitionFee.Text, NumberStyles.Any, null, out tuitionFee);
+
+            otherFee = 0m;
+            selectedDiscount = GetSelectedDiscount();
+            discountAmount = 0m;
+            totalAssessment = 0m;
+
+            if (!decimal.TryParse(txtOtherFee.Text, NumberStyles.Any, null, out otherFee) || otherFee < 0)
+            {
+                if (showValidationErrors)
+                    MessageBox.Show("Please enter a valid, non-negative amount for Other Fee.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            discountAmount = Math.Round(tuitionFee * (selectedDiscount.DiscountPercent / 100m), 2);
+            totalAssessment = Math.Max(0m, tuitionFee + otherFee - discountAmount);
+
+            lblDiscountAmount.Text = discountAmount.ToString("F2");
+            lblTotalAssessment.Text = totalAssessment.ToString("F2");
+            return true;
+        }
+
+        private void cmbDiscount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!_isEnrolled || string.IsNullOrWhiteSpace(_currentStudentId))
+                return;
+
+            TryCalculateAssessment(false, out _, out _, out _, out _, out _);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -57,7 +121,9 @@ namespace UI
             lblStudentName.Text = profile.FullName;
             lblGrade.Text = profile.GradeLevel;
             lblSection.Text = profile.Section;
+            lblDiscountAmount.Text = "0.00";
             lblTotalAssessment.Text = "0.00";
+            if (cmbDiscount.Items.Count > 0) cmbDiscount.SelectedIndex = 0;
 
             _isEnrolled = profile.SchoolYear != "Not Enrolled";
             _currentSchoolYear = _isEnrolled ? profile.SchoolYear : "";
@@ -83,18 +149,7 @@ namespace UI
 
         private void btnCompute_Click(object sender, EventArgs e)
         {
-            decimal tuitionFee = 0;
-            decimal.TryParse(txtTuitionFee.Text, NumberStyles.Any, null, out tuitionFee);
-
-            decimal otherFees = 0;
-            if (!decimal.TryParse(txtOtherFee.Text, NumberStyles.Any, null, out otherFees) || otherFees < 0)
-            {
-                MessageBox.Show("Please enter a valid, non-negative amount for Other Fee.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            decimal total = tuitionFee + otherFees;
-            lblTotalAssessment.Text = total.ToString("F2");
+            TryCalculateAssessment(true, out _, out _, out _, out _, out _);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -105,22 +160,16 @@ namespace UI
                 return;
             }
 
-            decimal tuitionFee = 0;
-            decimal.TryParse(txtTuitionFee.Text, NumberStyles.Any, null, out tuitionFee);
-
-            decimal otherFee = 0;
-            if (!decimal.TryParse(txtOtherFee.Text, NumberStyles.Any, null, out otherFee) || otherFee < 0)
-            {
-                MessageBox.Show("Please enter a valid, non-negative amount for Other Fee.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!TryCalculateAssessment(true, out decimal tuitionFee, out decimal otherFee, out Discount selectedDiscount, out decimal discountAmount, out decimal totalAssessment))
                 return;
-            }
-
-            decimal totalAssessment = tuitionFee + otherFee;
-            lblTotalAssessment.Text = totalAssessment.ToString("F2");
 
             DialogResult confirm = MessageBox.Show(
                 $"Confirm saving assessment for {lblStudentName.Text} ({_currentStudentId})?\n\n" +
-                $"School Year: {_currentSchoolYear}\nTotal Assessment: PHP {totalAssessment:F2}",
+                $"School Year: {_currentSchoolYear}\n" +
+                $"Tuition Fee: PHP {tuitionFee:F2}\n" +
+                $"Other Fee: PHP {otherFee:F2}\n" +
+                $"Discount: {selectedDiscount.DisplayText} (-PHP {discountAmount:F2})\n" +
+                $"Total Assessment: PHP {totalAssessment:F2}",
                 "Confirm Save Assessment",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -133,6 +182,8 @@ namespace UI
                 SchoolYear = _currentSchoolYear,
                 TuitionFee = tuitionFee,
                 OtherFee = otherFee,
+                DiscountName = selectedDiscount.DiscountName,
+                DiscountAmount = discountAmount,
                 TotalAssessment = totalAssessment
             };
 
@@ -154,6 +205,7 @@ namespace UI
             btnCompute.Enabled = enabled;
             btnSave.Enabled = enabled;
             txtOtherFee.Enabled = enabled;
+            cmbDiscount.Enabled = enabled;
         }
 
         private void ClearForm()
@@ -164,11 +216,15 @@ namespace UI
 
             dateTimePicker1.Value = DateTime.Now;
 
-            lblStudentName.Text = "<Label>";
-            lblGrade.Text = "<Label>";
-            lblSection.Text = "<Label>";
-            lblStatus.Text = "<Label>";
-            lblTotalAssessment.Text = "<Label>";
+            lblStudentName.Text = "---";
+            lblGrade.Text = "---";
+            lblSection.Text = "---";
+            lblStatus.Text = "---";
+            lblDiscountAmount.Text = "0.00";
+            lblTotalAssessment.Text = "0.00";
+
+            if (cmbDiscount.Items.Count > 0)
+                cmbDiscount.SelectedIndex = 0;
 
             _currentSchoolYear = "";
             _currentStudentId = "";

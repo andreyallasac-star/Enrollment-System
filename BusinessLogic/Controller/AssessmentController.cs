@@ -10,6 +10,18 @@ namespace BusinessLogic.Controller
     {
         private readonly AssessmentRepository _assessmentRepo = new AssessmentRepository();
 
+        public List<Discount> GetActiveDiscounts()
+        {
+            try
+            {
+                return _assessmentRepo.GetActiveDiscounts();
+            }
+            catch (Exception)
+            {
+                return new List<Discount>();
+            }
+        }
+
         public decimal ComputeTuition(string gradeLevel, string schoolYear)
         {
             try
@@ -33,7 +45,13 @@ namespace BusinessLogic.Controller
             if (assessment.OtherFee < 0)
                 return "Other Fee cannot be negative.";
 
-            if (assessment.TotalAssessment <= 0)
+            if (assessment.DiscountAmount < 0)
+                return "Discount amount cannot be negative.";
+
+            if (assessment.TotalAssessment < 0)
+                return "Total Assessment cannot be negative.";
+
+            if (assessment.TotalAssessment == 0 && assessment.DiscountAmount <= 0)
                 return "Please compute the fees before saving. Total Assessment must be greater than zero.";
 
             try
