@@ -1,5 +1,6 @@
 CREATE TABLE Students (
     StudentId NVARCHAR(20) PRIMARY KEY,
+    LRN NVARCHAR(12) NULL,
     FirstName NVARCHAR(50) NOT NULL,
     MiddleName NVARCHAR(50) NULL,
     LastName NVARCHAR(50) NOT NULL,
