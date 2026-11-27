@@ -28,6 +28,9 @@ namespace UI
             dgvStudentRecords.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
             dgvStudentRecords.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
 
+            txtStudentID.PlaceholderText = "Auto-generated or previous campus ID";
+            txtLRN.PlaceholderText = "12-digit LRN";
+
             cmbGender.Items.Add("Male");
             cmbGender.Items.Add("Female");
             cmbGender.SelectedIndex = 0;
@@ -39,12 +42,38 @@ namespace UI
             cmbStudentType.Items.Add("New");
             cmbStudentType.Items.Add("Old");
             cmbStudentType.Items.Add("Transferee");
+            cmbStudentType.SelectedIndexChanged += cmbStudentType_SelectedIndexChanged;
         }
 
         private void StudentManagementForm_Load(object sender, EventArgs e)
         {
             RefreshGrid();
             ClearForm();
+        }
+
+        private void cmbStudentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(_selectedStudentId)) return;
+
+            string selectedType = cmbStudentType.SelectedItem?.ToString();
+            if (selectedType == "Transferee")
+            {
+                txtStudentID.Clear();
+                txtStudentID.Enabled = true;
+                txtStudentID.Focus();
+            }
+            else if (!string.IsNullOrWhiteSpace(selectedType) && string.IsNullOrWhiteSpace(txtStudentID.Text))
+            {
+                try
+                {
+                    txtStudentID.Text = _studentController.GetNextStudentId();
+                    txtStudentID.Enabled = true;
+                }
+                catch
+                {
+                    // Allow manual entry if ID lookup fails
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -55,8 +84,16 @@ namespace UI
                 return;
             }
 
+            string studentId = txtStudentID.Text.Trim();
+            if (string.IsNullOrWhiteSpace(studentId))
+            {
+                MessageBox.Show("Please enter a Student ID (or previous campus ID for transferees).", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtStudentID.Focus();
+                return;
+            }
+
             DialogResult confirm = MessageBox.Show(
-                $"Are you sure you want to add student {txtFirstName.Text.Trim()} {txtLastName.Text.Trim()} ({txtStudentID.Text})?",
+                $"Are you sure you want to add student {txtFirstName.Text.Trim()} {txtLastName.Text.Trim()} ({studentId})?",
                 "Confirm Add Student",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -65,7 +102,8 @@ namespace UI
 
             var newStudent = new Student
             {
-                StudentId = txtStudentID.Text,
+                StudentId = studentId,
+                LRN = txtLRN.Text.Trim(),
                 FirstName = txtFirstName.Text.Trim(),
                 MiddleName = txtMiddleName.Text.Trim(),
                 LastName = txtLastName.Text.Trim(),
@@ -126,6 +164,7 @@ namespace UI
             var updatedStudent = new Student
             {
                 StudentId = _selectedStudentId,
+                LRN = txtLRN.Text.Trim(),
                 FirstName = txtFirstName.Text.Trim(),
                 MiddleName = txtMiddleName.Text.Trim(),
                 LastName = txtLastName.Text.Trim(),
@@ -241,6 +280,7 @@ namespace UI
                     if (s != null)
                     {
                         txtStudentID.Text = s.StudentId;
+                        txtLRN.Text = s.LRN;
                         txtFirstName.Text = s.FirstName;
                         txtMiddleName.Text = s.MiddleName;
                         txtLastName.Text = s.LastName;
@@ -310,10 +350,13 @@ namespace UI
             try
             {
                 _selectedStudentId = "";
-                txtStudentID.Text = _studentController.GetNextStudentId();
                 cmbStudentType.SelectedIndex = -1;
                 cmbGender.SelectedIndex = -1;
                 cmbGgender.SelectedIndex = -1;
+
+                txtStudentID.Text = _studentController.GetNextStudentId();
+                txtStudentID.Enabled = true;
+                txtLRN.Clear();
 
                 txtFirstName.Clear();
                 txtMiddleName.Clear();
@@ -336,12 +379,11 @@ namespace UI
                 txtGmunicipality.Clear();
                 txtGprovince.Clear();
                 txtGpostal.Clear();
-
-                txtStudentID.Enabled = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error generating Student ID: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtStudentID.Enabled = true;
             }
         }
     }

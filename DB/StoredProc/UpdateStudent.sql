@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE UpdateStudent
     @StudentId NVARCHAR(20),
+    @LRN NVARCHAR(12) = NULL,
     @FirstName NVARCHAR(50),
     @MiddleName NVARCHAR(50) = NULL,
     @LastName NVARCHAR(50),
@@ -25,9 +26,10 @@
 AS
 BEGIN
     UPDATE Students 
-    SET FirstName = @FirstName,
-    MiddleName = @MiddleName, 
-    LastName = @LastName, 
+    SET LRN = @LRN,
+        FirstName = @FirstName,
+        MiddleName = @MiddleName, 
+        LastName = @LastName, 
         DateOfBirth = @DateOfBirth, 
         Gender = @Gender, 
         StudentType = @StudentType,

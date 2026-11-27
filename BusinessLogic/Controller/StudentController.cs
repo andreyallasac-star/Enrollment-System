@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BusinessLogic.Controller
 {
@@ -28,6 +29,19 @@ namespace BusinessLogic.Controller
             if (string.IsNullOrWhiteSpace(student.StudentId))
                 return "Student ID is required.";
 
+            student.StudentId = student.StudentId.Trim();
+
+            if (student.StudentId.Length > 20)
+                return "Student ID cannot exceed 20 characters.";
+
+            if (string.IsNullOrWhiteSpace(student.LRN))
+                return "LRN is required.";
+
+            student.LRN = student.LRN.Trim();
+
+            if (!Regex.IsMatch(student.LRN, @"^\d{12}$"))
+                return "LRN must be exactly 12 digits (e.g. 107823000001).";
+
             if (string.IsNullOrWhiteSpace(student.FirstName) || string.IsNullOrWhiteSpace(student.LastName))
                 return "First and Last names are required.";
 
@@ -38,6 +52,9 @@ namespace BusinessLogic.Controller
             {
                 if (_studentRepo.GetStudentById(student.StudentId) != null)
                     return $"Student ID '{student.StudentId}' already exists. Click Update to edit this student.";
+
+                if (_studentRepo.LrnExists(student.LRN))
+                    return $"LRN '{student.LRN}' is already registered to another student.";
 
                 return _studentRepo.CreateStudent(student) ? "Success" : "Failed to create student.";
             }
@@ -52,6 +69,13 @@ namespace BusinessLogic.Controller
             if (string.IsNullOrWhiteSpace(student.StudentId))
                 return "Please select a student to update.";
 
+            if (!string.IsNullOrWhiteSpace(student.LRN))
+            {
+                student.LRN = student.LRN.Trim();
+                if (!Regex.IsMatch(student.LRN, @"^\d{12}$"))
+                    return "LRN must be exactly 12 digits (e.g. 107823000001).";
+            }
+
             if (string.IsNullOrWhiteSpace(student.FirstName) || string.IsNullOrWhiteSpace(student.LastName))
                 return "First and Last names are required.";
 
@@ -60,6 +84,9 @@ namespace BusinessLogic.Controller
 
             try
             {
+                if (!string.IsNullOrWhiteSpace(student.LRN) && _studentRepo.LrnExists(student.LRN, student.StudentId))
+                    return $"LRN '{student.LRN}' is already registered to another student.";
+
                 return _studentRepo.UpdateStudent(student) ? "Success" : "Failed to update student.";
             }
             catch (Exception ex)

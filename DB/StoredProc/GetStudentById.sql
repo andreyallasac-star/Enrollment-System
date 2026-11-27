@@ -5,6 +5,7 @@ BEGIN
     SET NOCOUNT ON;
     SELECT 
         StudentId,
+        LRN,
         FirstName, 
         MiddleName, 
         LastName, 
@@ -25,7 +26,7 @@ BEGIN
         GuardianHouseNo,
         GuardianBarangay, 
         GuardianMunicipality,
-        GuardianProvince,
+        GuardianProvince, 
         GuardianPostalCode,
         Status AS AccountStatus
     FROM Students
