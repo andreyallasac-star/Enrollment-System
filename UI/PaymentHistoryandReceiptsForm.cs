@@ -105,7 +105,7 @@ namespace UI
             printPreview.Width = 500;
             printPreview.Height = 500;
             printPreview.ShowDialog();
-            
+
         }
 
         private void printReceipt_PrintPage(object sender, PrintPageEventArgs e)
@@ -143,6 +143,11 @@ namespace UI
             lblStudentName.Text = "---";
             lblSection.Text = "---";
             lblAmountPaid.Text = "---";
+        }
+
+        private void lblStudentID_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

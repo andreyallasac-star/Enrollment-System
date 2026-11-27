@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -54,11 +55,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Arial", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.Black;
-            label1.Location = new Point(12, 20);
+            label1.Location = new Point(14, 27);
             label1.Name = "label1";
-            label1.Size = new Size(226, 34);
+            label1.Size = new Size(311, 54);
             label1.TabIndex = 0;
             label1.Text = "Student Report";
             // 
@@ -66,11 +67,11 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(12, 85);
+            label2.Location = new Point(14, 113);
             label2.Name = "label2";
-            label2.Size = new Size(132, 25);
+            label2.Size = new Size(210, 41);
             label2.TabIndex = 1;
             label2.Text = "Report Filters";
             // 
@@ -78,11 +79,11 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(12, 132);
+            label3.Location = new Point(14, 176);
             label3.Name = "label3";
-            label3.Size = new Size(98, 20);
+            label3.Size = new Size(179, 38);
             label3.TabIndex = 2;
             label3.Text = "Grade Level*";
             // 
@@ -90,38 +91,43 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(313, 132);
+            label4.Location = new Point(604, 176);
             label4.Name = "label4";
-            label4.Size = new Size(67, 20);
+            label4.Size = new Size(122, 38);
             label4.TabIndex = 3;
             label4.Text = "Section*";
             // 
             // cmbGradeLevel
             // 
+            cmbGradeLevel.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbGradeLevel.FormattingEnabled = true;
-            cmbGradeLevel.Location = new Point(12, 155);
+            cmbGradeLevel.Location = new Point(14, 218);
+            cmbGradeLevel.Margin = new Padding(3, 4, 3, 4);
             cmbGradeLevel.Name = "cmbGradeLevel";
-            cmbGradeLevel.Size = new Size(276, 23);
+            cmbGradeLevel.Size = new Size(508, 45);
             cmbGradeLevel.TabIndex = 4;
             // 
             // cmbSection
             // 
+            cmbSection.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbSection.FormattingEnabled = true;
-            cmbSection.Location = new Point(313, 155);
+            cmbSection.Location = new Point(604, 218);
+            cmbSection.Margin = new Padding(3, 4, 3, 4);
             cmbSection.Name = "cmbSection";
-            cmbSection.Size = new Size(276, 23);
+            cmbSection.Size = new Size(522, 45);
             cmbSection.TabIndex = 5;
             // 
             // btnGenerateReport
             // 
             btnGenerateReport.BackColor = Color.DeepSkyBlue;
-            btnGenerateReport.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGenerateReport.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGenerateReport.ForeColor = SystemColors.Control;
-            btnGenerateReport.Location = new Point(616, 155);
+            btnGenerateReport.Location = new Point(1179, 213);
+            btnGenerateReport.Margin = new Padding(3, 4, 3, 4);
             btnGenerateReport.Name = "btnGenerateReport";
-            btnGenerateReport.Size = new Size(172, 30);
+            btnGenerateReport.Size = new Size(258, 45);
             btnGenerateReport.TabIndex = 6;
             btnGenerateReport.Text = "🔍︎ Generate Report";
             btnGenerateReport.UseVisualStyleBackColor = false;
@@ -131,11 +137,11 @@
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(12, 289);
+            label5.Location = new Point(14, 427);
             label5.Name = "label5";
-            label5.Size = new Size(150, 25);
+            label5.Size = new Size(234, 41);
             label5.TabIndex = 7;
             label5.Text = "Student Report";
             // 
@@ -144,23 +150,32 @@
             dataGridViewCellStyle1.BackColor = Color.White;
             dataGridViewCellStyle1.ForeColor = Color.Black;
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.Black;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Location = new Point(12, 333);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.Location = new Point(14, 472);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridView1.Size = new Size(776, 282);
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView1.Size = new Size(1502, 438);
             dataGridView1.TabIndex = 8;
             // 
             // Column1
@@ -202,29 +217,31 @@
             // 
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Black;
-            label6.Location = new Point(12, 199);
+            label6.Location = new Point(14, 297);
             label6.Name = "label6";
-            label6.Size = new Size(89, 20);
+            label6.Size = new Size(164, 38);
             label6.TabIndex = 9;
             label6.Text = "School Year";
             // 
             // cmbSchoolYear
             // 
             cmbSchoolYear.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSchoolYear.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cmbSchoolYear.FormattingEnabled = true;
-            cmbSchoolYear.Location = new Point(12, 222);
+            cmbSchoolYear.Location = new Point(10, 343);
+            cmbSchoolYear.Margin = new Padding(3, 4, 3, 4);
             cmbSchoolYear.Name = "cmbSchoolYear";
-            cmbSchoolYear.Size = new Size(276, 23);
+            cmbSchoolYear.Size = new Size(512, 45);
             cmbSchoolYear.TabIndex = 10;
             // 
             // StudentInformationReport
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Azure;
-            ClientSize = new Size(800, 562);
+            ClientSize = new Size(1518, 918);
             Controls.Add(cmbSchoolYear);
             Controls.Add(label6);
             Controls.Add(dataGridView1);
@@ -236,6 +253,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "StudentInformationReport";
             Text = "StudentInformationReport";
             Load += StudentInformationReport_Load;
