@@ -1,0 +1,6 @@
+﻿CREATE TABLE Discounts (
+    DiscountId INT PRIMARY KEY IDENTITY(1,1),
+    DiscountName NVARCHAR(100) NOT NULL UNIQUE,
+    DiscountPercent DECIMAL(5,2) NOT NULL DEFAULT 0.00,
+    IsActive BIT NOT NULL DEFAULT 1
+);

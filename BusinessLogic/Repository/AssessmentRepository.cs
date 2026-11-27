@@ -11,6 +11,41 @@ namespace BusinessLogic.Repository
     {
         private readonly string connectionString = ConfigurationManager.ConnectionStrings["EnrollmentDB"].ConnectionString;
 
+        public List<Discount> GetActiveDiscounts()
+        {
+            var discounts = new List<Discount>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    var cmd = new SqlCommand(
+                        "SELECT DiscountId, DiscountName, DiscountPercent, IsActive " +
+                        "FROM Discounts WHERE IsActive = 1 " +
+                        "ORDER BY DiscountPercent ASC, DiscountName ASC", conn);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            discounts.Add(new Discount
+                            {
+                                DiscountId = Convert.ToInt32(reader["DiscountId"]),
+                                DiscountName = reader["DiscountName"].ToString(),
+                                DiscountPercent = Convert.ToDecimal(reader["DiscountPercent"]),
+                                IsActive = Convert.ToBoolean(reader["IsActive"])
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Database error while fetching discounts: " + ex.Message);
+            }
+            return discounts;
+        }
+
         public decimal GetTuitionFee(string gradeLevel, string schoolYear)
         {
             try
@@ -48,14 +83,19 @@ namespace BusinessLogic.Repository
                 {
                     conn.Open();
                     var cmd = new SqlCommand(
-                        "INSERT INTO Assessments (StudentId, SchoolYear, TuitionFee, OtherFee, TotalAssessment, Status) " +
-                        "VALUES (@StudentId, @SchoolYear, @TuitionFee, @OtherFee, @TotalAssessment, 'Unpaid')", conn);
+                        "INSERT INTO Assessments (StudentId, SchoolYear, TuitionFee, OtherFee, DiscountName, DiscountAmount, TotalAssessment, Status) " +
+                        "VALUES (@StudentId, @SchoolYear, @TuitionFee, @OtherFee, @DiscountName, @DiscountAmount, @TotalAssessment, @Status)", conn);
+
+                    string initialStatus = assessment.TotalAssessment <= 0 ? "Paid" : "Unpaid";
 
                     cmd.Parameters.AddWithValue("@StudentId", assessment.StudentId);
                     cmd.Parameters.AddWithValue("@SchoolYear", assessment.SchoolYear);
                     cmd.Parameters.AddWithValue("@TuitionFee", assessment.TuitionFee);
                     cmd.Parameters.AddWithValue("@OtherFee", assessment.OtherFee);
+                    cmd.Parameters.AddWithValue("@DiscountName", string.IsNullOrWhiteSpace(assessment.DiscountName) ? "None" : assessment.DiscountName);
+                    cmd.Parameters.AddWithValue("@DiscountAmount", assessment.DiscountAmount);
                     cmd.Parameters.AddWithValue("@TotalAssessment", assessment.TotalAssessment);
+                    cmd.Parameters.AddWithValue("@Status", initialStatus);
 
                     return cmd.ExecuteNonQuery() > 0;
                 }

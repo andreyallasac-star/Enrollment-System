@@ -11,6 +11,8 @@ namespace Model
         public string SchoolYear { get; set; }
         public decimal TuitionFee { get; set; }
         public decimal OtherFee { get; set; }
+        public string DiscountName { get; set; } = "None";
+        public decimal DiscountAmount { get; set; }
         public decimal TotalAssessment { get; set; }
         public DateTime AssessmentDate { get; set; }
         public string Status { get; set; }
