@@ -32,12 +32,15 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            txtCapacity = new TextBox();
+            lblCap = new Label();
             dgvInfo = new DataGridView();
             dgvCode = new DataGridViewTextBoxColumn();
             dgvName = new DataGridViewTextBoxColumn();
             dgvGrade = new DataGridViewTextBoxColumn();
             dgvYear = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
+            dgvCapacity = new DataGridViewTextBoxColumn();
             btnActivate = new Button();
             txtSchoolYear = new TextBox();
             cmbGradeLevel = new ComboBox();
@@ -51,16 +54,13 @@
             lblSectionName = new Label();
             lblSectionCode = new Label();
             lblSectionManagement = new Label();
-            lblCap = new Label();
-            txtCapacity = new TextBox();
-            dgvCapacity = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvInfo).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Transparent;
+            panel1.BackColor = Color.Azure;
             panel1.Controls.Add(txtCapacity);
             panel1.Controls.Add(lblCap);
             panel1.Controls.Add(dgvInfo);
@@ -77,11 +77,32 @@
             panel1.Controls.Add(lblSectionName);
             panel1.Controls.Add(lblSectionCode);
             panel1.Controls.Add(lblSectionManagement);
-            panel1.Location = new Point(10, 9);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(-2, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1344, 724);
+            panel1.Size = new Size(1551, 989);
             panel1.TabIndex = 0;
+            // 
+            // txtCapacity
+            // 
+            txtCapacity.BorderStyle = BorderStyle.FixedSingle;
+            txtCapacity.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtCapacity.ForeColor = SystemColors.WindowText;
+            txtCapacity.Location = new Point(252, 350);
+            txtCapacity.Name = "txtCapacity";
+            txtCapacity.Size = new Size(287, 47);
+            txtCapacity.TabIndex = 18;
+            txtCapacity.Text = "40";
+            // 
+            // lblCap
+            // 
+            lblCap.AutoSize = true;
+            lblCap.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCap.ForeColor = Color.Black;
+            lblCap.Location = new Point(27, 352);
+            lblCap.Name = "lblCap";
+            lblCap.Size = new Size(142, 41);
+            lblCap.TabIndex = 17;
+            lblCap.Text = "Capacity:";
             // 
             // dgvInfo
             // 
@@ -105,8 +126,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvInfo.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvInfo.Location = new Point(24, 422);
-            dgvInfo.Margin = new Padding(3, 2, 3, 2);
+            dgvInfo.Location = new Point(3, 550);
             dgvInfo.Name = "dgvInfo";
             dgvInfo.ReadOnly = true;
             dgvInfo.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
@@ -115,7 +135,7 @@
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
             dgvInfo.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvInfo.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInfo.Size = new Size(1318, 302);
+            dgvInfo.Size = new Size(1531, 412);
             dgvInfo.TabIndex = 12;
             dgvInfo.CellClick += dgvInfo_CellClick;
             // 
@@ -159,19 +179,26 @@
             Column1.ReadOnly = true;
             Column1.Width = 125;
             // 
+            // dgvCapacity
+            // 
+            dgvCapacity.HeaderText = "Capacity";
+            dgvCapacity.MinimumWidth = 6;
+            dgvCapacity.Name = "dgvCapacity";
+            dgvCapacity.ReadOnly = true;
+            dgvCapacity.Width = 125;
+            // 
             // btnActivate
             // 
-            btnActivate.BackColor = Color.Lime;
+            btnActivate.BackColor = Color.ForestGreen;
             btnActivate.BackgroundImageLayout = ImageLayout.Stretch;
             btnActivate.FlatAppearance.BorderColor = Color.Green;
             btnActivate.FlatAppearance.BorderSize = 3;
             btnActivate.FlatStyle = FlatStyle.Flat;
-            btnActivate.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-            btnActivate.ForeColor = Color.Green;
-            btnActivate.Location = new Point(642, 342);
-            btnActivate.Margin = new Padding(3, 2, 3, 2);
+            btnActivate.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnActivate.ForeColor = Color.White;
+            btnActivate.Location = new Point(717, 466);
             btnActivate.Name = "btnActivate";
-            btnActivate.Size = new Size(243, 62);
+            btnActivate.Size = new Size(226, 65);
             btnActivate.TabIndex = 15;
             btnActivate.Text = "ACTIVATE";
             btnActivate.UseVisualStyleBackColor = false;
@@ -180,36 +207,37 @@
             // txtSchoolYear
             // 
             txtSchoolYear.BorderStyle = BorderStyle.FixedSingle;
-            txtSchoolYear.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
-            txtSchoolYear.Location = new Point(742, 198);
+            txtSchoolYear.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSchoolYear.Location = new Point(908, 262);
+            txtSchoolYear.Margin = new Padding(3, 4, 3, 4);
             txtSchoolYear.Name = "txtSchoolYear";
             txtSchoolYear.PlaceholderText = "e.g. 2026-2027";
-            txtSchoolYear.Size = new Size(221, 35);
+            txtSchoolYear.Size = new Size(279, 47);
             txtSchoolYear.TabIndex = 14;
             // 
             // cmbGradeLevel
             // 
             cmbGradeLevel.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbGradeLevel.FlatStyle = FlatStyle.System;
-            cmbGradeLevel.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            cmbGradeLevel.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbGradeLevel.FormattingEnabled = true;
-            cmbGradeLevel.Location = new Point(209, 198);
+            cmbGradeLevel.Location = new Point(252, 262);
+            cmbGradeLevel.Margin = new Padding(3, 4, 3, 4);
             cmbGradeLevel.Name = "cmbGradeLevel";
-            cmbGradeLevel.Size = new Size(235, 37);
+            cmbGradeLevel.Size = new Size(287, 49);
             cmbGradeLevel.TabIndex = 13;
             // 
             // btnDeactivate
             // 
-            btnDeactivate.BackColor = Color.FromArgb(255, 128, 0);
+            btnDeactivate.BackColor = Color.Red;
             btnDeactivate.FlatAppearance.BorderColor = Color.Maroon;
             btnDeactivate.FlatAppearance.BorderSize = 3;
             btnDeactivate.FlatStyle = FlatStyle.Flat;
-            btnDeactivate.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-            btnDeactivate.ForeColor = Color.Maroon;
-            btnDeactivate.Location = new Point(932, 342);
-            btnDeactivate.Margin = new Padding(3, 2, 3, 2);
+            btnDeactivate.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDeactivate.ForeColor = Color.White;
+            btnDeactivate.Location = new Point(1004, 466);
             btnDeactivate.Name = "btnDeactivate";
-            btnDeactivate.Size = new Size(243, 62);
+            btnDeactivate.Size = new Size(247, 65);
             btnDeactivate.TabIndex = 11;
             btnDeactivate.Text = "DEACTIVATE";
             btnDeactivate.UseVisualStyleBackColor = false;
@@ -217,16 +245,15 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.BackColor = Color.FromArgb(128, 255, 255);
+            btnUpdate.BackColor = Color.DeepSkyBlue;
             btnUpdate.FlatAppearance.BorderColor = Color.DodgerBlue;
             btnUpdate.FlatAppearance.BorderSize = 3;
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-            btnUpdate.ForeColor = Color.Teal;
-            btnUpdate.Location = new Point(354, 342);
-            btnUpdate.Margin = new Padding(3, 2, 3, 2);
+            btnUpdate.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(448, 466);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(243, 62);
+            btnUpdate.Size = new Size(201, 65);
             btnUpdate.TabIndex = 10;
             btnUpdate.Text = "UPDATE";
             btnUpdate.UseVisualStyleBackColor = false;
@@ -234,17 +261,16 @@
             // 
             // btnAdd
             // 
-            btnAdd.BackColor = Color.Lime;
+            btnAdd.BackColor = Color.Green;
             btnAdd.BackgroundImageLayout = ImageLayout.Stretch;
             btnAdd.FlatAppearance.BorderColor = Color.Green;
             btnAdd.FlatAppearance.BorderSize = 3;
             btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-            btnAdd.ForeColor = Color.Green;
-            btnAdd.Location = new Point(69, 342);
-            btnAdd.Margin = new Padding(3, 2, 3, 2);
+            btnAdd.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(174, 466);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(243, 62);
+            btnAdd.Size = new Size(212, 65);
             btnAdd.TabIndex = 9;
             btnAdd.Text = "ADD";
             btnAdd.UseVisualStyleBackColor = false;
@@ -253,65 +279,63 @@
             // txtSectionName
             // 
             txtSectionName.BorderStyle = BorderStyle.FixedSingle;
-            txtSectionName.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
-            txtSectionName.Location = new Point(742, 130);
-            txtSectionName.Margin = new Padding(3, 2, 3, 2);
+            txtSectionName.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSectionName.Location = new Point(908, 171);
             txtSectionName.Name = "txtSectionName";
-            txtSectionName.Size = new Size(221, 35);
+            txtSectionName.Size = new Size(279, 47);
             txtSectionName.TabIndex = 6;
             // 
             // txtSectionCode
             // 
             txtSectionCode.BorderStyle = BorderStyle.FixedSingle;
-            txtSectionCode.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            txtSectionCode.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtSectionCode.ForeColor = SystemColors.WindowText;
-            txtSectionCode.Location = new Point(209, 133);
-            txtSectionCode.Margin = new Padding(3, 2, 3, 2);
+            txtSectionCode.Location = new Point(252, 171);
             txtSectionCode.Name = "txtSectionCode";
-            txtSectionCode.Size = new Size(235, 35);
+            txtSectionCode.Size = new Size(287, 47);
             txtSectionCode.TabIndex = 5;
             // 
             // lblSchoolYear
             // 
             lblSchoolYear.AutoSize = true;
-            lblSchoolYear.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            lblSchoolYear.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSchoolYear.ForeColor = Color.Black;
-            lblSchoolYear.Location = new Point(552, 201);
+            lblSchoolYear.Location = new Point(668, 262);
             lblSchoolYear.Name = "lblSchoolYear";
-            lblSchoolYear.Size = new Size(163, 29);
+            lblSchoolYear.Size = new Size(182, 41);
             lblSchoolYear.TabIndex = 4;
             lblSchoolYear.Text = "School Year:";
             // 
             // lblGradeLevel
             // 
             lblGradeLevel.AutoSize = true;
-            lblGradeLevel.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            lblGradeLevel.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblGradeLevel.ForeColor = Color.Black;
-            lblGradeLevel.Location = new Point(24, 201);
+            lblGradeLevel.Location = new Point(27, 268);
             lblGradeLevel.Name = "lblGradeLevel";
-            lblGradeLevel.Size = new Size(162, 29);
+            lblGradeLevel.Size = new Size(185, 41);
             lblGradeLevel.TabIndex = 3;
             lblGradeLevel.Text = "Grade Level:";
             // 
             // lblSectionName
             // 
             lblSectionName.AutoSize = true;
-            lblSectionName.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            lblSectionName.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSectionName.ForeColor = Color.Black;
-            lblSectionName.Location = new Point(552, 135);
+            lblSectionName.Location = new Point(668, 177);
             lblSectionName.Name = "lblSectionName";
-            lblSectionName.Size = new Size(184, 29);
+            lblSectionName.Size = new Size(216, 41);
             lblSectionName.TabIndex = 2;
             lblSectionName.Text = "Section Name:";
             // 
             // lblSectionCode
             // 
             lblSectionCode.AutoSize = true;
-            lblSectionCode.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
+            lblSectionCode.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSectionCode.ForeColor = Color.Black;
-            lblSectionCode.Location = new Point(24, 135);
+            lblSectionCode.Location = new Point(27, 177);
             lblSectionCode.Name = "lblSectionCode";
-            lblSectionCode.Size = new Size(178, 29);
+            lblSectionCode.Size = new Size(205, 41);
             lblSectionCode.TabIndex = 1;
             lblSectionCode.Text = "Section Code:";
             // 
@@ -319,51 +343,21 @@
             // 
             lblSectionManagement.AutoSize = true;
             lblSectionManagement.BackColor = Color.Transparent;
-            lblSectionManagement.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSectionManagement.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSectionManagement.ForeColor = Color.Black;
-            lblSectionManagement.Location = new Point(24, 29);
+            lblSectionManagement.Location = new Point(27, 44);
             lblSectionManagement.Name = "lblSectionManagement";
-            lblSectionManagement.Size = new Size(290, 37);
+            lblSectionManagement.Size = new Size(391, 50);
             lblSectionManagement.TabIndex = 0;
             lblSectionManagement.Text = "Section Management";
             // 
-            // lblCap
-            // 
-            lblCap.AutoSize = true;
-            lblCap.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
-            lblCap.ForeColor = Color.Black;
-            lblCap.Location = new Point(24, 264);
-            lblCap.Name = "lblCap";
-            lblCap.Size = new Size(120, 29);
-            lblCap.TabIndex = 17;
-            lblCap.Text = "Capacity:";
-            // 
-            // txtCapacity
-            // 
-            txtCapacity.BorderStyle = BorderStyle.FixedSingle;
-            txtCapacity.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Bold);
-            txtCapacity.ForeColor = SystemColors.WindowText;
-            txtCapacity.Location = new Point(209, 264);
-            txtCapacity.Margin = new Padding(3, 2, 3, 2);
-            txtCapacity.Name = "txtCapacity";
-            txtCapacity.Size = new Size(235, 35);
-            txtCapacity.TabIndex = 18;
-            txtCapacity.Text = "40";
-            // 
-            // dgvCapacity
-            // 
-            dgvCapacity.HeaderText = "Capacity";
-            dgvCapacity.Name = "dgvCapacity";
-            dgvCapacity.ReadOnly = true;
-            // 
             // SectionManagement
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1213, 591);
+            ClientSize = new Size(1536, 965);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "SectionManagement";
             Text = "SectionManagement";
             Load += SectionManagement_Load;
