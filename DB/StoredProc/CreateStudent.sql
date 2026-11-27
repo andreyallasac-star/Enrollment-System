@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE CreateStudent
     @StudentId NVARCHAR(20),
+    @LRN NVARCHAR(12) = NULL,
     @FirstName NVARCHAR(50),
     @MiddleName NVARCHAR(50) = NULL,
     @LastName NVARCHAR(50),
@@ -26,6 +27,7 @@ AS
 BEGIN
     INSERT INTO Students (
         StudentId,
+        LRN,
         FirstName,
         MiddleName,
         LastName,
@@ -47,10 +49,12 @@ BEGIN
         GuardianBarangay, 
         GuardianMunicipality,
         GuardianProvince,
-        GuardianPostalCode, Status
+        GuardianPostalCode,
+        Status
     ) 
     VALUES (
         @StudentId,
+        @LRN,
         @FirstName,
         @MiddleName,
         @LastName,
@@ -70,8 +74,9 @@ BEGIN
         @GuardianGender,
         @GuardianHouseNo, 
         @GuardianBarangay, 
-        @GuardianMunicipality, 
+        @GuardianMunicipality,
         @GuardianProvince, 
-        @GuardianPostalCode, 'Active'
+        @GuardianPostalCode,
+        'Active'
     );
 END

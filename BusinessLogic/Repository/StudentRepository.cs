@@ -22,6 +22,7 @@ namespace BusinessLogic.Repository
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@StudentId", s.StudentId);
+                    cmd.Parameters.AddWithValue("@LRN", string.IsNullOrWhiteSpace(s.LRN) ? (object)DBNull.Value : s.LRN);
                     cmd.Parameters.AddWithValue("@FirstName", s.FirstName);
                     cmd.Parameters.AddWithValue("@MiddleName", (object)s.MiddleName ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@LastName", s.LastName);
@@ -53,9 +54,6 @@ namespace BusinessLogic.Repository
             }
         }
 
-
-
-
         public List<Student> GetAllStudents()
         {
             var students = new List<Student>();
@@ -72,6 +70,7 @@ namespace BusinessLogic.Repository
                         students.Add(new Student
                         {
                             StudentId = reader["StudentId"].ToString(),
+                            LRN = reader["LRN"] != DBNull.Value ? reader["LRN"].ToString() : "",
                             FirstName = reader["FirstName"].ToString(),
                             MiddleName = reader["MiddleName"].ToString(),
                             LastName = reader["LastName"].ToString(),
@@ -123,6 +122,7 @@ namespace BusinessLogic.Repository
                         return new Student
                         {
                             StudentId = reader["StudentId"].ToString(),
+                            LRN = reader["LRN"] != DBNull.Value ? reader["LRN"].ToString() : "",
                             FirstName = reader["FirstName"].ToString(),
                             MiddleName = reader["MiddleName"].ToString(),
                             LastName = reader["LastName"].ToString(),
@@ -157,6 +157,26 @@ namespace BusinessLogic.Repository
             return null;
         }
 
+        public bool LrnExists(string lrn, string excludeStudentId = null)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = string.IsNullOrWhiteSpace(excludeStudentId)
+                    ? "SELECT COUNT(1) FROM Students WHERE LRN = @LRN"
+                    : "SELECT COUNT(1) FROM Students WHERE LRN = @LRN AND StudentId <> @ExcludeStudentId";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@LRN", lrn);
+                    if (!string.IsNullOrWhiteSpace(excludeStudentId))
+                        cmd.Parameters.AddWithValue("@ExcludeStudentId", excludeStudentId);
+
+                    return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                }
+            }
+        }
+
         public bool UpdateStudent(Student student)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -166,6 +186,7 @@ namespace BusinessLogic.Repository
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@StudentId", student.StudentId);
+                cmd.Parameters.AddWithValue("@LRN", string.IsNullOrWhiteSpace(student.LRN) ? (object)DBNull.Value : student.LRN);
                 cmd.Parameters.AddWithValue("@FirstName", student.FirstName);
                 cmd.Parameters.AddWithValue("@MiddleName", student.MiddleName ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@LastName", student.LastName);
@@ -195,6 +216,7 @@ namespace BusinessLogic.Repository
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+
         public bool DeactivateStudent(string studentId)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -233,7 +255,7 @@ namespace BusinessLogic.Repository
                 conn.Open();
                 var cmd = new SqlCommand("GetLatestStudentId", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@YearPrefix", yearPrefix);
+                cmd.Parameters.AddWithValue("@YearPrefix", yearPrefix + "-");
 
                 var result = cmd.ExecuteScalar();
                 if (result != null && result != DBNull.Value)

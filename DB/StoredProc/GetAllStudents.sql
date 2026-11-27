@@ -1,9 +1,10 @@
-﻿Create PROCEDURE GetAllStudents
+﻿CREATE PROCEDURE GetAllStudents
 AS
 BEGIN
     SET NOCOUNT ON;
     SELECT 
         s.StudentId,
+        s.LRN,
         s.FirstName, 
         s.MiddleName, 
         s.LastName, 
