@@ -30,7 +30,7 @@
         {
             panel1 = new Panel();
             panel3 = new Panel();
-            label3 = new Label();
+            lblSchoolName = new Label();
             panel2 = new Panel();
             lblPasswordDisplay = new Label();
             lblUsernameDisplay = new Label();
@@ -47,7 +47,7 @@
             // 
             panel1.BackColor = Color.DeepSkyBlue;
             panel1.Controls.Add(panel3);
-            panel1.Controls.Add(label3);
+            panel1.Controls.Add(lblSchoolName);
             panel1.Location = new Point(-4, -1);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
@@ -64,16 +64,16 @@
             panel3.Size = new Size(308, 8);
             panel3.TabIndex = 7;
             // 
-            // label3
+            // lblSchoolName
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(36, 174);
-            label3.Name = "label3";
-            label3.Size = new Size(299, 45);
-            label3.TabIndex = 6;
-            label3.Text = "Enrollment System";
+            lblSchoolName.AutoSize = true;
+            lblSchoolName.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSchoolName.ForeColor = Color.White;
+            lblSchoolName.Location = new Point(30, 167);
+            lblSchoolName.Name = "lblSchoolName";
+            lblSchoolName.Size = new Size(311, 45);
+            lblSchoolName.TabIndex = 6;
+            lblSchoolName.Text = "Mecha High School";
             // 
             // panel2
             // 
@@ -199,8 +199,8 @@
         private Button btnLogin;
         private TextBox txtPassword;
         private Panel panel3;
-        private Label label3;
         private Label lblUsernameDisplay;
         private Label lblPasswordDisplay;
+        private Label lblSchoolName;
     }
 }

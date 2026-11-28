@@ -31,6 +31,18 @@ namespace UI
             txtStudentID.PlaceholderText = "Auto-generated or previous campus ID";
             txtLRN.PlaceholderText = "12-digit LRN";
 
+            dgvStudentRecords.ReadOnly = true;
+            dgvStudentRecords.AllowUserToAddRows = false;
+
+            cmbGender.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbGgender.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbStudentType.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            dtpDateofBirth.Format = DateTimePickerFormat.Short;
+            dtpDateofBirth.MinDate = new DateTime(1990, 1, 1);
+            dtpDateofBirth.MaxDate = DateTime.Today;
+            dtpDateofBirth.Value = DateTime.Today.AddYears(-13);
+
             cmbGender.Items.Add("Male");
             cmbGender.Items.Add("Female");
             cmbGender.SelectedIndex = 0;
@@ -71,7 +83,7 @@ namespace UI
                 }
                 catch
                 {
-                    // Allow manual entry if ID lookup fails
+
                 }
             }
         }
@@ -284,7 +296,7 @@ namespace UI
                         txtFirstName.Text = s.FirstName;
                         txtMiddleName.Text = s.MiddleName;
                         txtLastName.Text = s.LastName;
-                        dtpDateofBirth.Value = s.DateOfBirth;
+                        dtpDateofBirth.Value = (s.DateOfBirth >= dtpDateofBirth.MinDate && s.DateOfBirth <= dtpDateofBirth.MaxDate) ? s.DateOfBirth : DateTime.Today.AddYears(-13);
                         cmbGender.SelectedItem = s.Gender;
                         cmbStudentType.SelectedItem = s.StudentType;
 
@@ -357,6 +369,7 @@ namespace UI
                 txtStudentID.Text = _studentController.GetNextStudentId();
                 txtStudentID.Enabled = true;
                 txtLRN.Clear();
+                dtpDateofBirth.Value = DateTime.Today.AddYears(-13);
 
                 txtFirstName.Clear();
                 txtMiddleName.Clear();

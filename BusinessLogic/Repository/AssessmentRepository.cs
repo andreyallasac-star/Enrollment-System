@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Data.SqlClient;
 using Model;
 using System.Configuration;
@@ -113,7 +112,8 @@ namespace BusinessLogic.Repository
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    var cmd = new SqlCommand("SELECT COUNT(1) FROM Assessments WHERE StudentId = @StudentId AND SchoolYear = @SchoolYear", conn);
+                    var cmd = new SqlCommand(
+                        "SELECT COUNT(1) FROM Assessments WHERE StudentId = @StudentId AND SchoolYear = @SchoolYear AND Status <> 'Voided'", conn);
                     cmd.Parameters.AddWithValue("@StudentId", studentId);
                     cmd.Parameters.AddWithValue("@SchoolYear", schoolYear);
 

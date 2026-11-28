@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using BusinessLogic.Repository;
 using Model;
 
@@ -23,6 +21,30 @@ namespace BusinessLogic.Controller
             {
                 return (false, 0, 0);
             }
+        }
+
+        public Enrollment GetActiveEnrollment(string studentId)
+        {
+            if (string.IsNullOrWhiteSpace(studentId)) return null;
+            try
+            {
+                return _enrollmentRepo.GetActiveEnrollment(studentId);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public (bool Success, string Message) CancelEnrollment(string studentId, string reason)
+        {
+            if (string.IsNullOrWhiteSpace(studentId))
+                return (false, "Please search for an enrolled student first.");
+
+            if (string.IsNullOrWhiteSpace(reason))
+                return (false, "Please provide a reason for cancelling/voiding this enrollment.");
+
+            return _enrollmentRepo.CancelEnrollment(studentId.Trim(), reason.Trim());
         }
 
         public string EnrollStudent(Enrollment enrollment)

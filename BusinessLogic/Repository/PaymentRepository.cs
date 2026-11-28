@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Data.SqlClient;
 using Model;
 using System.Data;
@@ -47,7 +46,7 @@ namespace BusinessLogic.Repository
                 conn.Open();
                 var cmd = new SqlCommand(
                     "SELECT TOP 1 AssessmentId, TotalAssessment, Status FROM Assessments " +
-                    "WHERE StudentId = @StudentId " +
+                    "WHERE StudentId = @StudentId AND Status <> 'Voided' " +
                     "ORDER BY AssessmentDate DESC", conn);
 
                 cmd.Parameters.AddWithValue("@StudentId", studentId);
@@ -139,6 +138,103 @@ namespace BusinessLogic.Repository
                     }
                 }
             }
+        }
+
+        public InvoiceData GetInvoiceDetails(int receiptId)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = @"
+                    SELECT
+                        p.ReceiptId,
+                        p.PaymentDate,
+                        p.StudentId,
+                        s.FirstName + ' ' + ISNULL(s.MiddleName + ' ', '') + s.LastName AS StudentName,
+                        ISNULL(a.SchoolYear, ISNULL(e.SchoolYear, 'N/A')) AS SchoolYear,
+                        ISNULL(sec.GradeLevel, 'N/A') AS GradeLevel,
+                        ISNULL(sec.SectionName, 'N/A') AS Section,
+                        p.PaymentMethod,
+                        p.AmountPaid,
+                        ISNULL(a.TotalAssessment, p.AmountPaid) AS TotalAssessment,
+                        ISNULL((SELECT SUM(p2.AmountPaid) FROM Payments p2 WHERE p2.AssessmentId = p.AssessmentId AND p2.ReceiptId <= p.ReceiptId), p.AmountPaid) AS TotalPaidToDate,
+                        p.ProcessedBy
+                    FROM Payments p
+                    INNER JOIN Students s ON p.StudentId = s.StudentId
+                    LEFT JOIN Assessments a ON p.AssessmentId = a.AssessmentId
+                    OUTER APPLY (
+                        SELECT TOP 1 en.SchoolYear, en.SectionCode
+                        FROM Enrollments en
+                        WHERE en.StudentId = p.StudentId
+                          AND (a.SchoolYear IS NULL OR en.SchoolYear = a.SchoolYear)
+                        ORDER BY CASE WHEN en.Status = 'Enrolled' THEN 0 ELSE 1 END, en.EnrollmentDate DESC
+                    ) e
+                    LEFT JOIN Sections sec ON e.SectionCode = sec.SectionCode
+                    WHERE p.ReceiptId = @ReceiptId";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ReceiptId", receiptId);
+                    using (var r = cmd.ExecuteReader())
+                    {
+                        if (r.Read())
+                        {
+                            return new InvoiceData
+                            {
+                                ReceiptId = Convert.ToInt32(r["ReceiptId"]),
+                                PaymentDate = Convert.ToDateTime(r["PaymentDate"]),
+                                StudentId = r["StudentId"].ToString(),
+                                StudentName = r["StudentName"].ToString(),
+                                SchoolYear = r["SchoolYear"].ToString(),
+                                GradeLevel = r["GradeLevel"].ToString(),
+                                Section = r["Section"].ToString(),
+                                PaymentMethod = r["PaymentMethod"].ToString(),
+                                AmountPaid = Convert.ToDecimal(r["AmountPaid"]),
+                                TotalAssessment = Convert.ToDecimal(r["TotalAssessment"]),
+                                TotalPaidToDate = Convert.ToDecimal(r["TotalPaidToDate"]),
+                                ProcessedBy = r["ProcessedBy"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public List<SoaPaymentLine> GetPaymentsForAssessment(string studentId, int assessmentId)
+        {
+            var list = new List<SoaPaymentLine>();
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string query = assessmentId > 0
+                    ? "SELECT ReceiptId, PaymentDate, PaymentMethod, ProcessedBy, AmountPaid FROM Payments WHERE AssessmentId = @AssessmentId ORDER BY PaymentDate ASC, ReceiptId ASC"
+                    : "SELECT ReceiptId, PaymentDate, PaymentMethod, ProcessedBy, AmountPaid FROM Payments WHERE StudentId = @StudentId ORDER BY PaymentDate ASC, ReceiptId ASC";
+
+                using (var cmd = new SqlCommand(query, conn))
+                {
+                    if (assessmentId > 0)
+                        cmd.Parameters.AddWithValue("@AssessmentId", assessmentId);
+                    else
+                        cmd.Parameters.AddWithValue("@StudentId", studentId);
+
+                    using (var r = cmd.ExecuteReader())
+                    {
+                        while (r.Read())
+                        {
+                            list.Add(new SoaPaymentLine
+                            {
+                                ReceiptId = Convert.ToInt32(r["ReceiptId"]),
+                                PaymentDate = Convert.ToDateTime(r["PaymentDate"]),
+                                PaymentMethod = r["PaymentMethod"].ToString(),
+                                ProcessedBy = r["ProcessedBy"].ToString(),
+                                AmountPaid = Convert.ToDecimal(r["AmountPaid"])
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
         }
 
         public DataTable GetPaymentHistory(string studentId)

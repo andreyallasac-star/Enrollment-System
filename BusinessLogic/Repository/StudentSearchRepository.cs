@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using Microsoft.Data.SqlClient;
 using Model;
 using System.Configuration;
@@ -29,6 +27,8 @@ namespace BusinessLogic.Repository
                         return new StudentProfileDTO
                         {
                             StudentId = reader["StudentId"].ToString(),
+                            LRN = reader["LRN"] != DBNull.Value ? reader["LRN"].ToString() : "",
+                            StudentType = reader["StudentType"] != DBNull.Value ? reader["StudentType"].ToString() : "",
                             FullName = reader["FullName"].ToString(),
                             DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]).ToString("yyyy-MM-dd"),
                             Gender = reader["Gender"].ToString(),
@@ -36,7 +36,14 @@ namespace BusinessLogic.Repository
                             SchoolYear = reader["SchoolYear"] != DBNull.Value ? reader["SchoolYear"].ToString() : "Not Enrolled",
                             GradeLevel = reader["GradeLevel"] != DBNull.Value ? reader["GradeLevel"].ToString() : "N/A",
                             Section = reader["Section"] != DBNull.Value ? reader["Section"].ToString() : "N/A",
+                            RequirementsStatus = reader["RequirementsStatus"] != DBNull.Value ? reader["RequirementsStatus"].ToString() : "N/A",
+                            AssessmentId = reader["AssessmentId"] != DBNull.Value ? Convert.ToInt32(reader["AssessmentId"]) : 0,
+                            TuitionFee = reader["TuitionFee"] != DBNull.Value ? Convert.ToDecimal(reader["TuitionFee"]) : 0m,
+                            OtherFee = reader["OtherFee"] != DBNull.Value ? Convert.ToDecimal(reader["OtherFee"]) : 0m,
+                            DiscountName = reader["DiscountName"] != DBNull.Value ? reader["DiscountName"].ToString() : "None",
+                            DiscountAmount = reader["DiscountAmount"] != DBNull.Value ? Convert.ToDecimal(reader["DiscountAmount"]) : 0m,
                             TotalAssessment = Convert.ToDecimal(reader["TotalAssessment"]),
+                            AssessmentStatus = reader["AssessmentStatus"] != DBNull.Value ? reader["AssessmentStatus"].ToString() : "Not Assessed",
                             TotalPaid = Convert.ToDecimal(reader["TotalPaid"])
                         };
                     }

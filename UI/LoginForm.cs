@@ -1,11 +1,5 @@
 ﻿using BusinessLogic.Controller;
-using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace UI
@@ -42,18 +36,16 @@ namespace UI
 
             if (result.Success)
             {
-                if (result.Role == "Admin")
+                if (result.Role == "Admin" || result.Role == "Registrar" || result.Role == "Cashier")
                 {
                     DashboardForm dashboard = new DashboardForm(result.Username, result.Role);
                     dashboard.Show();
+                    this.Hide();
                 }
-                else if (result.Role == "Staff")
+                else
                 {
-                    StaffDashboardForm dashboard = new StaffDashboardForm(result.Username, result.Role);
-                    dashboard.Show();
+                    MessageBox.Show($"Unrecognized user role: {result.Role}. Please contact the Administrator.", "Access Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                this.Hide();
             }
             else
             {
