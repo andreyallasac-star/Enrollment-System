@@ -2,7 +2,6 @@
 using Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace BusinessLogic.Controller
@@ -22,6 +21,20 @@ namespace BusinessLogic.Controller
                 return null;
 
             return _studentRepo.GetStudentById(studentId);
+        }
+
+        private string ValidateDateOfBirth(DateTime dob)
+        {
+            if (dob.Date > DateTime.Today)
+                return "Date of Birth cannot be in the future.";
+
+            int age = DateTime.Today.Year - dob.Year;
+            if (dob.Date > DateTime.Today.AddYears(-age)) age--;
+
+            if (age < 10 || age > 25)
+                return $"Invalid Date of Birth (calculated age: {age}). Student age must be between 10 and 25 years old for Junior High School enrollment.";
+
+            return null;
         }
 
         public string CreateStudent(Student student)
@@ -44,6 +57,10 @@ namespace BusinessLogic.Controller
 
             if (string.IsNullOrWhiteSpace(student.FirstName) || string.IsNullOrWhiteSpace(student.LastName))
                 return "First and Last names are required.";
+
+            string dobError = ValidateDateOfBirth(student.DateOfBirth);
+            if (dobError != null)
+                return dobError;
 
             if (string.IsNullOrWhiteSpace(student.StudentType))
                 return "Please select a Student Type (New, Old, or Transferee).";
@@ -78,6 +95,10 @@ namespace BusinessLogic.Controller
 
             if (string.IsNullOrWhiteSpace(student.FirstName) || string.IsNullOrWhiteSpace(student.LastName))
                 return "First and Last names are required.";
+
+            string dobError = ValidateDateOfBirth(student.DateOfBirth);
+            if (dobError != null)
+                return dobError;
 
             if (string.IsNullOrWhiteSpace(student.StudentType))
                 return "Please select a Student Type (New, Old, or Transferee).";

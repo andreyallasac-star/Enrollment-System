@@ -71,13 +71,14 @@ namespace UI
             }
             catch
             {
-                // Ignore transient DB errors during background session check
+
             }
         }
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
             lblWelcome.Text = "Welcome, " + currentUsername + "   " + "Role: " + currentRole;
+            ApplyRolePermissions();
             ActivateButton(btnDashboard);
             UserControl_Load(new AdminDashboarchUserControl());
         }
@@ -239,6 +240,67 @@ namespace UI
             userControl.Dock = DockStyle.Fill;
             panel3.Controls.Add(userControl);
             userControl.BringToFront();
+        }
+
+        private void ApplyRolePermissions()
+        {
+            if (currentRole == "Admin") return;
+
+            var allButtons = new List<Button>
+            {
+                btnDashboard,
+                btnSearch,
+                btnUserAccount,
+                btnStudentManagement,
+                btnSectionManagement,
+                btnStudentEnrollment,
+                btnAssessment,
+                btnPaymentCashiering,
+                btnPaymentHistoryReceipts,
+                btnStudentInfoReport
+            };
+
+            var slotLocations = new List<Point>();
+            foreach (var b in allButtons)
+                slotLocations.Add(b.Location);
+
+            foreach (var b in allButtons)
+                b.Visible = false;
+
+            List<Button> allowedButtons;
+            if (currentRole == "Registrar")
+            {
+                allowedButtons = new List<Button>
+                {
+                    btnDashboard,
+                    btnStudentManagement,
+                    btnSectionManagement,
+                    btnStudentEnrollment,
+                    btnSearch,
+                    btnStudentInfoReport
+                };
+            }
+            else if (currentRole == "Cashier")
+            {
+                allowedButtons = new List<Button>
+                {
+                    btnDashboard,
+                    btnAssessment,
+                    btnPaymentCashiering,
+                    btnPaymentHistoryReceipts,
+                    btnSearch
+                };
+            }
+            else
+            {
+                allowedButtons = new List<Button> { btnDashboard };
+            }
+
+            for (int i = 0; i < allowedButtons.Count; i++)
+            {
+                allowedButtons[i].Location = slotLocations[i];
+                allowedButtons[i].Visible = true;
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using BusinessLogic.Repository;
 using Model;
 using System.Data;
@@ -16,6 +15,11 @@ namespace BusinessLogic.Controller
         public Assessment GetLatestAssessment(string studentId) => _paymentRepo.GetLatestAssessment(studentId);
 
         public decimal GetTotalPaid(string studentId, int? assessmentId = null) => _paymentRepo.GetTotalPaid(studentId, assessmentId);
+
+        public InvoiceData GetInvoiceDetails(int receiptId) => _paymentRepo.GetInvoiceDetails(receiptId);
+
+        public List<SoaPaymentLine> GetPaymentsForAssessment(string studentId, int assessmentId) =>
+            _paymentRepo.GetPaymentsForAssessment(studentId, assessmentId);
 
         public (bool Success, string Message, int ReceiptId) ProcessPayment(Payment payment, decimal currentBalance, int assessmentId = 0)
         {
@@ -46,14 +50,9 @@ namespace BusinessLogic.Controller
             }
         }
 
-        public DataTable GetPaymentHistory(string studentId)
-        {
-            return _paymentRepo.GetPaymentHistory(studentId);
-        }
+        public DataTable GetPaymentHistory(string studentId) => _paymentRepo.GetPaymentHistory(studentId);
 
-        public DataTable SearchPaymentHistory(string studentId, string receiptId, DateTime dateFrom, DateTime dateTo)
-        {
-            return _paymentRepo.SearchPaymentHistory(studentId, receiptId, dateFrom, dateTo);
-        }
+        public DataTable SearchPaymentHistory(string studentId, string receiptId, DateTime dateFrom, DateTime dateTo) =>
+            _paymentRepo.SearchPaymentHistory(studentId, receiptId, dateFrom, dateTo);
     }
 }

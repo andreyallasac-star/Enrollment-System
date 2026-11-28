@@ -23,8 +23,10 @@ namespace UI
             dgvStudentInfo.ReadOnly = true;
 
             cmbRoles.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRoles.Items.Clear();
             cmbRoles.Items.Add("Admin");
-            cmbRoles.Items.Add("Staff");
+            cmbRoles.Items.Add("Registrar");
+            cmbRoles.Items.Add("Cashier");
             cmbRoles.SelectedIndex = 0;
         }
 

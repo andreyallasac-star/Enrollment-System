@@ -29,12 +29,18 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            btnCancelEnrollment = new Button();
             lblSectionCapacity = new Label();
             label1 = new Label();
             label2 = new Label();
             txtStudentId = new TextBox();
             btnSearch = new Button();
             panelStudentDetails = new Panel();
+            chkConditional = new CheckBox();
+            chkForm137 = new CheckBox();
+            chkGoodMoral = new CheckBox();
+            chkForm138 = new CheckBox();
+            chkPSA = new CheckBox();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
@@ -56,13 +62,16 @@
             cmbSection = new ComboBox();
             btnClear = new Button();
             btnEnroll = new Button();
+            gbEnrollmentRequirements = new GroupBox();
             panel1.SuspendLayout();
             panelStudentDetails.SuspendLayout();
+            gbEnrollmentRequirements.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(248, 249, 250);
+            panel1.Controls.Add(btnCancelEnrollment);
             panel1.Controls.Add(lblSectionCapacity);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label2);
@@ -78,20 +87,33 @@
             panel1.Controls.Add(btnClear);
             panel1.Controls.Add(btnEnroll);
             panel1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            panel1.Location = new Point(25, 25);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(22, 19);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1513, 939);
+            panel1.Size = new Size(1824, 904);
             panel1.TabIndex = 0;
+            // 
+            // btnCancelEnrollment
+            // 
+            btnCancelEnrollment.BackColor = Color.Maroon;
+            btnCancelEnrollment.FlatStyle = FlatStyle.Flat;
+            btnCancelEnrollment.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancelEnrollment.ForeColor = Color.White;
+            btnCancelEnrollment.Location = new Point(1045, 516);
+            btnCancelEnrollment.Name = "btnCancelEnrollment";
+            btnCancelEnrollment.Size = new Size(186, 33);
+            btnCancelEnrollment.TabIndex = 40;
+            btnCancelEnrollment.Text = "Cancel Enrollment";
+            btnCancelEnrollment.UseVisualStyleBackColor = false;
+            btnCancelEnrollment.Click += btnCancelEnrollment_Click;
             // 
             // lblSectionCapacity
             // 
             lblSectionCapacity.AutoSize = true;
             lblSectionCapacity.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSectionCapacity.ForeColor = Color.FromArgb(51, 65, 85);
-            lblSectionCapacity.Location = new Point(145, 771);
+            lblSectionCapacity.Location = new Point(127, 578);
             lblSectionCapacity.Name = "lblSectionCapacity";
-            lblSectionCapacity.Size = new Size(140, 31);
+            lblSectionCapacity.Size = new Size(117, 25);
             lblSectionCapacity.TabIndex = 39;
             lblSectionCapacity.Text = "Capacity: ---";
             // 
@@ -100,9 +122,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 22F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(30, 41, 59);
-            label1.Location = new Point(35, 29);
+            label1.Location = new Point(31, 22);
             label1.Name = "label1";
-            label1.Size = new Size(434, 50);
+            label1.Size = new Size(351, 41);
             label1.TabIndex = 0;
             label1.Text = "Enrollment Information";
             // 
@@ -111,19 +133,18 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.FromArgb(51, 65, 85);
-            label2.Location = new Point(35, 105);
+            label2.Location = new Point(31, 79);
             label2.Name = "label2";
-            label2.Size = new Size(126, 31);
+            label2.Size = new Size(103, 25);
             label2.TabIndex = 1;
             label2.Text = "Student ID:";
             // 
             // txtStudentId
             // 
             txtStudentId.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtStudentId.Location = new Point(35, 142);
-            txtStudentId.Margin = new Padding(3, 4, 3, 4);
+            txtStudentId.Location = new Point(31, 106);
             txtStudentId.Name = "txtStudentId";
-            txtStudentId.Size = new Size(866, 38);
+            txtStudentId.Size = new Size(758, 32);
             txtStudentId.TabIndex = 2;
             txtStudentId.Text = "Enter ID or Name (e.g., ST2023-001)";
             // 
@@ -133,10 +154,9 @@
             btnSearch.FlatStyle = FlatStyle.Flat;
             btnSearch.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSearch.ForeColor = Color.White;
-            btnSearch.Location = new Point(918, 142);
-            btnSearch.Margin = new Padding(3, 4, 3, 4);
+            btnSearch.Location = new Point(803, 106);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(154, 40);
+            btnSearch.Size = new Size(135, 30);
             btnSearch.TabIndex = 25;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = false;
@@ -146,6 +166,7 @@
             // 
             panelStudentDetails.BackColor = Color.FromArgb(241, 245, 249);
             panelStudentDetails.BorderStyle = BorderStyle.FixedSingle;
+            panelStudentDetails.Controls.Add(gbEnrollmentRequirements);
             panelStudentDetails.Controls.Add(label3);
             panelStudentDetails.Controls.Add(label4);
             panelStudentDetails.Controls.Add(label5);
@@ -159,19 +180,70 @@
             panelStudentDetails.Controls.Add(lblGender);
             panelStudentDetails.Controls.Add(lblGradeLevel);
             panelStudentDetails.Controls.Add(lblSection);
-            panelStudentDetails.Location = new Point(35, 200);
+            panelStudentDetails.Location = new Point(31, 150);
+            panelStudentDetails.Margin = new Padding(3, 2, 3, 2);
             panelStudentDetails.Name = "panelStudentDetails";
-            panelStudentDetails.Size = new Size(1444, 430);
+            panelStudentDetails.Size = new Size(1264, 323);
             panelStudentDetails.TabIndex = 26;
+            // 
+            // chkConditional
+            // 
+            chkConditional.AutoSize = true;
+            chkConditional.Location = new Point(6, 220);
+            chkConditional.Name = "chkConditional";
+            chkConditional.Size = new Size(297, 25);
+            chkConditional.TabIndex = 18;
+            chkConditional.Text = "Allow Conditional (Docs To Follow)";
+            chkConditional.UseVisualStyleBackColor = true;
+            // 
+            // chkForm137
+            // 
+            chkForm137.AutoSize = true;
+            chkForm137.Location = new Point(7, 176);
+            chkForm137.Name = "chkForm137";
+            chkForm137.Size = new Size(265, 25);
+            chkForm137.TabIndex = 17;
+            chkForm137.Text = "Form 137 / Transfer Credentials";
+            chkForm137.UseVisualStyleBackColor = true;
+            // 
+            // chkGoodMoral
+            // 
+            chkGoodMoral.AutoSize = true;
+            chkGoodMoral.Location = new Point(6, 134);
+            chkGoodMoral.Name = "chkGoodMoral";
+            chkGoodMoral.Size = new Size(222, 25);
+            chkGoodMoral.TabIndex = 16;
+            chkGoodMoral.Text = "Certificate of Good Moral";
+            chkGoodMoral.UseVisualStyleBackColor = true;
+            // 
+            // chkForm138
+            // 
+            chkForm138.AutoSize = true;
+            chkForm138.Location = new Point(6, 88);
+            chkForm138.Name = "chkForm138";
+            chkForm138.Size = new Size(205, 25);
+            chkForm138.TabIndex = 15;
+            chkForm138.Text = "Report Card (Form 138)";
+            chkForm138.UseVisualStyleBackColor = true;
+            // 
+            // chkPSA
+            // 
+            chkPSA.AutoSize = true;
+            chkPSA.Location = new Point(6, 46);
+            chkPSA.Name = "chkPSA";
+            chkPSA.Size = new Size(183, 25);
+            chkPSA.TabIndex = 14;
+            chkPSA.Text = "PSA Birth Certificate";
+            chkPSA.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             label3.ForeColor = Color.FromArgb(51, 65, 85);
-            label3.Location = new Point(53, 63);
+            label3.Location = new Point(46, 47);
             label3.Name = "label3";
-            label3.Size = new Size(166, 38);
+            label3.Size = new Size(130, 30);
             label3.TabIndex = 8;
             label3.Text = "Student ID: ";
             // 
@@ -180,9 +252,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             label4.ForeColor = Color.FromArgb(51, 65, 85);
-            label4.Location = new Point(53, 160);
+            label4.Location = new Point(46, 120);
             label4.Name = "label4";
-            label4.Size = new Size(152, 38);
+            label4.Size = new Size(119, 30);
             label4.TabIndex = 9;
             label4.Text = "Full Name:";
             // 
@@ -191,9 +263,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             label5.ForeColor = Color.FromArgb(51, 65, 85);
-            label5.Location = new Point(53, 339);
+            label5.Location = new Point(46, 254);
             label5.Name = "label5";
-            label5.Size = new Size(196, 38);
+            label5.Size = new Size(153, 30);
             label5.TabIndex = 10;
             label5.Text = "Date of Birth: ";
             // 
@@ -202,9 +274,9 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             label6.ForeColor = Color.FromArgb(51, 65, 85);
-            label6.Location = new Point(53, 246);
+            label6.Location = new Point(46, 184);
             label6.Name = "label6";
-            label6.Size = new Size(118, 38);
+            label6.Size = new Size(92, 30);
             label6.TabIndex = 11;
             label6.Text = "Gender:";
             // 
@@ -213,9 +285,9 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             label7.ForeColor = Color.FromArgb(51, 65, 85);
-            label7.Location = new Point(734, 65);
+            label7.Location = new Point(328, 47);
             label7.Name = "label7";
-            label7.Size = new Size(174, 38);
+            label7.Size = new Size(135, 30);
             label7.TabIndex = 12;
             label7.Text = "Grade Level:";
             // 
@@ -224,9 +296,9 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             label8.ForeColor = Color.FromArgb(51, 65, 85);
-            label8.Location = new Point(734, 160);
+            label8.Location = new Point(328, 120);
             label8.Name = "label8";
-            label8.Size = new Size(125, 38);
+            label8.Size = new Size(98, 30);
             label8.TabIndex = 13;
             label8.Text = "Section: ";
             // 
@@ -235,9 +307,9 @@
             lblDetailsTitle.AutoSize = true;
             lblDetailsTitle.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDetailsTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblDetailsTitle.Location = new Point(21, 15);
+            lblDetailsTitle.Location = new Point(18, 11);
             lblDetailsTitle.Name = "lblDetailsTitle";
-            lblDetailsTitle.Size = new Size(147, 25);
+            lblDetailsTitle.Size = new Size(116, 20);
             lblDetailsTitle.TabIndex = 0;
             lblDetailsTitle.Text = "Student Details";
             // 
@@ -246,9 +318,9 @@
             lblStudentId.AutoSize = true;
             lblStudentId.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             lblStudentId.ForeColor = Color.FromArgb(51, 65, 85);
-            lblStudentId.Location = new Point(225, 63);
+            lblStudentId.Location = new Point(197, 47);
             lblStudentId.Name = "lblStudentId";
-            lblStudentId.Size = new Size(50, 38);
+            lblStudentId.Size = new Size(40, 30);
             lblStudentId.TabIndex = 2;
             lblStudentId.Text = "---";
             // 
@@ -257,9 +329,9 @@
             lblStudentName.AutoSize = true;
             lblStudentName.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             lblStudentName.ForeColor = Color.FromArgb(51, 65, 85);
-            lblStudentName.Location = new Point(211, 160);
+            lblStudentName.Location = new Point(185, 120);
             lblStudentName.Name = "lblStudentName";
-            lblStudentName.Size = new Size(50, 38);
+            lblStudentName.Size = new Size(40, 30);
             lblStudentName.TabIndex = 3;
             lblStudentName.Text = "---";
             // 
@@ -268,9 +340,9 @@
             lblDateOfBirth.AutoSize = true;
             lblDateOfBirth.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             lblDateOfBirth.ForeColor = Color.FromArgb(51, 65, 85);
-            lblDateOfBirth.Location = new Point(255, 339);
+            lblDateOfBirth.Location = new Point(223, 254);
             lblDateOfBirth.Name = "lblDateOfBirth";
-            lblDateOfBirth.Size = new Size(50, 38);
+            lblDateOfBirth.Size = new Size(40, 30);
             lblDateOfBirth.TabIndex = 4;
             lblDateOfBirth.Text = "---";
             // 
@@ -279,9 +351,9 @@
             lblGender.AutoSize = true;
             lblGender.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             lblGender.ForeColor = Color.FromArgb(51, 65, 85);
-            lblGender.Location = new Point(189, 246);
+            lblGender.Location = new Point(165, 184);
             lblGender.Name = "lblGender";
-            lblGender.Size = new Size(50, 38);
+            lblGender.Size = new Size(40, 30);
             lblGender.TabIndex = 5;
             lblGender.Text = "---";
             // 
@@ -290,9 +362,9 @@
             lblGradeLevel.AutoSize = true;
             lblGradeLevel.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             lblGradeLevel.ForeColor = Color.FromArgb(51, 65, 85);
-            lblGradeLevel.Location = new Point(914, 65);
+            lblGradeLevel.Location = new Point(482, 47);
             lblGradeLevel.Name = "lblGradeLevel";
-            lblGradeLevel.Size = new Size(50, 38);
+            lblGradeLevel.Size = new Size(40, 30);
             lblGradeLevel.TabIndex = 6;
             lblGradeLevel.Text = "---";
             // 
@@ -301,9 +373,9 @@
             lblSection.AutoSize = true;
             lblSection.Font = new Font("Segoe UI Semibold", 16.2F, FontStyle.Bold);
             lblSection.ForeColor = Color.FromArgb(51, 65, 85);
-            lblSection.Location = new Point(865, 160);
+            lblSection.Location = new Point(447, 120);
             lblSection.Name = "lblSection";
-            lblSection.Size = new Size(50, 38);
+            lblSection.Size = new Size(40, 30);
             lblSection.TabIndex = 7;
             lblSection.Text = "---";
             // 
@@ -312,9 +384,9 @@
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label15.ForeColor = Color.FromArgb(51, 65, 85);
-            label15.Location = new Point(35, 653);
+            label15.Location = new Point(31, 490);
             label15.Name = "label15";
-            label15.Size = new Size(147, 31);
+            label15.Size = new Size(123, 25);
             label15.TabIndex = 36;
             label15.Text = "School Year *";
             // 
@@ -322,10 +394,9 @@
             // 
             cmbSchoolYear.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSchoolYear.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbSchoolYear.Location = new Point(35, 688);
-            cmbSchoolYear.Margin = new Padding(3, 4, 3, 4);
+            cmbSchoolYear.Location = new Point(31, 516);
             cmbSchoolYear.Name = "cmbSchoolYear";
-            cmbSchoolYear.Size = new Size(503, 39);
+            cmbSchoolYear.Size = new Size(441, 33);
             cmbSchoolYear.TabIndex = 16;
             cmbSchoolYear.SelectedIndexChanged += FilterSections;
             // 
@@ -334,9 +405,9 @@
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label16.ForeColor = Color.FromArgb(51, 65, 85);
-            label16.Location = new Point(672, 653);
+            label16.Location = new Point(588, 490);
             label16.Name = "label16";
-            label16.Size = new Size(150, 31);
+            label16.Size = new Size(124, 25);
             label16.TabIndex = 37;
             label16.Text = "Grade Level *";
             // 
@@ -344,10 +415,9 @@
             // 
             cmbGradeLevel.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbGradeLevel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbGradeLevel.Location = new Point(672, 688);
-            cmbGradeLevel.Margin = new Padding(3, 4, 3, 4);
+            cmbGradeLevel.Location = new Point(588, 516);
             cmbGradeLevel.Name = "cmbGradeLevel";
-            cmbGradeLevel.Size = new Size(489, 39);
+            cmbGradeLevel.Size = new Size(428, 33);
             cmbGradeLevel.TabIndex = 18;
             cmbGradeLevel.SelectedIndexChanged += FilterSections;
             // 
@@ -356,9 +426,9 @@
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label17.ForeColor = Color.FromArgb(51, 65, 85);
-            label17.Location = new Point(35, 771);
+            label17.Location = new Point(31, 578);
             label17.Name = "label17";
-            label17.Size = new Size(105, 31);
+            label17.Size = new Size(87, 25);
             label17.TabIndex = 38;
             label17.Text = "Section *";
             // 
@@ -367,10 +437,9 @@
             cmbSection.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbSection.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbSection.Items.AddRange(new object[] { "Bronze", "Silver", "Gold", "Platinum", "Titinium", "Diamond" });
-            cmbSection.Location = new Point(35, 806);
-            cmbSection.Margin = new Padding(3, 4, 3, 4);
+            cmbSection.Location = new Point(31, 604);
             cmbSection.Name = "cmbSection";
-            cmbSection.Size = new Size(503, 39);
+            cmbSection.Size = new Size(441, 33);
             cmbSection.TabIndex = 20;
             // 
             // btnClear
@@ -378,10 +447,9 @@
             btnClear.BackColor = Color.White;
             btnClear.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnClear.ForeColor = Color.FromArgb(51, 65, 85);
-            btnClear.Location = new Point(1043, 822);
-            btnClear.Margin = new Padding(3, 4, 3, 4);
+            btnClear.Location = new Point(913, 616);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(175, 66);
+            btnClear.Size = new Size(153, 50);
             btnClear.TabIndex = 23;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = false;
@@ -393,23 +461,36 @@
             btnEnroll.FlatStyle = FlatStyle.Flat;
             btnEnroll.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEnroll.ForeColor = Color.White;
-            btnEnroll.Location = new Point(1273, 822);
-            btnEnroll.Margin = new Padding(3, 4, 3, 4);
+            btnEnroll.Location = new Point(1114, 616);
             btnEnroll.Name = "btnEnroll";
-            btnEnroll.Size = new Size(176, 66);
+            btnEnroll.Size = new Size(154, 50);
             btnEnroll.TabIndex = 22;
             btnEnroll.Text = "ENROLL";
             btnEnroll.UseVisualStyleBackColor = false;
             btnEnroll.Click += btnEnroll_Click;
             // 
+            // gbEnrollmentRequirements
+            // 
+            gbEnrollmentRequirements.Controls.Add(chkPSA);
+            gbEnrollmentRequirements.Controls.Add(chkConditional);
+            gbEnrollmentRequirements.Controls.Add(chkForm138);
+            gbEnrollmentRequirements.Controls.Add(chkForm137);
+            gbEnrollmentRequirements.Controls.Add(chkGoodMoral);
+            gbEnrollmentRequirements.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gbEnrollmentRequirements.Location = new Point(692, 12);
+            gbEnrollmentRequirements.Name = "gbEnrollmentRequirements";
+            gbEnrollmentRequirements.Size = new Size(311, 272);
+            gbEnrollmentRequirements.TabIndex = 19;
+            gbEnrollmentRequirements.TabStop = false;
+            gbEnrollmentRequirements.Text = "Enrollment Requirements";
+            // 
             // StudentEnrollment
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1536, 965);
+            ClientSize = new Size(1213, 591);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "StudentEnrollment";
             Text = "School Enrollment System - Enroll Student";
             Load += StudentEnrollment_Load;
@@ -417,6 +498,8 @@
             panel1.PerformLayout();
             panelStudentDetails.ResumeLayout(false);
             panelStudentDetails.PerformLayout();
+            gbEnrollmentRequirements.ResumeLayout(false);
+            gbEnrollmentRequirements.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -452,5 +535,13 @@
         private Label lblPhotoPlaceholder;
         private Label label10;
         private Label lblSectionCapacity;
+        private CheckBox chkPSA;
+        private CheckBox chkConditional;
+        private CheckBox chkForm137;
+        private CheckBox chkGoodMoral;
+        private CheckBox checkBox1;
+        private Button btnCancelEnrollment;
+        private CheckBox chkForm138;
+        private GroupBox gbEnrollmentRequirements;
     }
 }

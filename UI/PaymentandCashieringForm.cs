@@ -31,6 +31,8 @@ namespace UI
             dataGridView1.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             dataGridView1.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.White;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ReadOnly = true;
 
             cmbPaymentMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPaymentMethod.Items.AddRange(new string[] { "Cash (Full Payment)", "Installment" });
@@ -226,10 +228,22 @@ namespace UI
 
             if (result.Success)
             {
-                MessageBox.Show(result.Message + $"\n\nOfficial Receipt ID: {result.ReceiptId}", "Transaction Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                int issuedReceiptId = result.ReceiptId;
                 btnSearchID.PerformClick();
-                lblReceipt.Text = result.ReceiptId.ToString();
+                lblReceipt.Text = issuedReceiptId.ToString();
+
+                DialogResult printNow = MessageBox.Show(
+                    $"{result.Message}\n\nOfficial Invoice / Receipt No.: INV-{issuedReceiptId:D6} (OR #{issuedReceiptId})\n\n" +
+                    "Would you like to preview / print the Official Receipt & Billing Invoice now?",
+                    "Transaction Complete",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information);
+
+                if (printNow == DialogResult.Yes)
+                {
+                    var invoice = _paymentController.GetInvoiceDetails(issuedReceiptId);
+                    PrintHelper.PreviewOfficialInvoice(invoice);
+                }
             }
             else
             {

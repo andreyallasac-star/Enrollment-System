@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Model
 {
@@ -13,5 +11,12 @@ namespace Model
         public decimal AssessedFee { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public string Status { get; set; }
+        public bool HasPSA { get; set; }
+        public bool HasForm138 { get; set; }
+        public bool HasGoodMoral { get; set; }
+        public bool HasForm137 { get; set; }
+        public string RequirementsStatus { get; set; } = "Complete";
+        public string CancellationReason { get; set; }
+        public DateTime? CancelledDate { get; set; }
     }
 }

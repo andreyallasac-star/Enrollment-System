@@ -1,21 +1,14 @@
 ﻿using BusinessLogic.Controller;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Drawing.Printing;
 
 namespace UI
 {
     public partial class PaymentHistoryandReceiptsForm : Form
     {
         private readonly PaymentController _paymentController = new PaymentController();
-        private PrintDocument printReceipt = new PrintDocument();
-        private PrintPreviewDialog printPreview = new PrintPreviewDialog();
+
         public PaymentHistoryandReceiptsForm()
         {
             InitializeComponent();
@@ -23,12 +16,11 @@ namespace UI
             dataGridView1.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             dataGridView1.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.White;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ReadOnly = true;
 
             dtpDateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dtpDateTo.Value = DateTime.Now;
-
-
-            printReceipt.PrintPage += new PrintPageEventHandler(printReceipt_PrintPage);
 
             ClearReceiptPanel();
         }
@@ -39,6 +31,12 @@ namespace UI
             string receiptId = txtReceiptId.Text.Trim();
             DateTime dateFrom = dtpDateFrom.Value;
             DateTime dateTo = dtpDateTo.Value;
+
+            if (dateFrom.Date > dateTo.Date)
+            {
+                MessageBox.Show("'Date From' cannot be later than 'Date To'.", "Date Filter", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             DataTable results = _paymentController.SearchPaymentHistory(studentId, receiptId, dateFrom, dateTo);
 
@@ -70,6 +68,7 @@ namespace UI
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                if (row.IsNewRow || row.Cells[0].Value == null) return;
 
                 lblReceiptID.Text = row.Cells[0].Value?.ToString();
                 lblDate.Text = row.Cells[1].Value?.ToString();
@@ -93,46 +92,14 @@ namespace UI
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            if (lblReceiptID.Text == "---" || string.IsNullOrWhiteSpace(lblReceiptID.Text))
+            if (lblReceiptID.Text == "---" || !int.TryParse(lblReceiptID.Text, out int receiptId))
             {
-                MessageBox.Show("Please select a receipt from the grid first.", "Print Receipt", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a receipt from the grid first.", "Print Official Invoice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            printPreview.Document = printReceipt;
-            printPreview.StartPosition = FormStartPosition.CenterScreen;
-
-            printPreview.Width = 500;
-            printPreview.Height = 500;
-            printPreview.ShowDialog();
-
-        }
-
-        private void printReceipt_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            Font headerFont = new Font("Segoe UI", 18, FontStyle.Bold);
-            Font subHeaderFont = new Font("Segoe UI", 12, FontStyle.Italic);
-            Font regularFont = new Font("Consolas", 12, FontStyle.Regular);
-            Font boldFont = new Font("Consolas", 12, FontStyle.Bold);
-
-            int startX = 50;
-            int startY = 50;
-            int lineSpacing = 30;
-
-            e.Graphics.DrawString("OFFICIAL RECEIPT", headerFont, Brushes.Black, startX, startY);
-            e.Graphics.DrawString("Student Enrollment System", subHeaderFont, Brushes.Black, startX, startY + 30);
-            e.Graphics.DrawString("-------------------------------------------------", regularFont, Brushes.Black, startX, startY + 60);
-
-            e.Graphics.DrawString("Receipt ID : " + lblReceiptID.Text, boldFont, Brushes.Black, startX, startY + 100);
-            e.Graphics.DrawString("Date       : " + lblDate.Text, regularFont, Brushes.Black, startX, startY + 100 + lineSpacing);
-
-            e.Graphics.DrawString("Student ID : " + lblStudentID.Text, boldFont, Brushes.Black, startX, startY + 100 + (lineSpacing * 2));
-            e.Graphics.DrawString("Name       : " + lblStudentName.Text, regularFont, Brushes.Black, startX, startY + 100 + (lineSpacing * 3));
-            e.Graphics.DrawString("Section    : " + lblSection.Text, regularFont, Brushes.Black, startX, startY + 100 + (lineSpacing * 4));
-
-            e.Graphics.DrawString("-------------------------------------------------", regularFont, Brushes.Black, startX, startY + 100 + (lineSpacing * 5));
-
-            e.Graphics.DrawString("TOTAL PAID : PHP " + lblAmountPaid.Text, headerFont, Brushes.Black, startX, startY + 100 + (lineSpacing * 6));
+            var invoice = _paymentController.GetInvoiceDetails(receiptId);
+            PrintHelper.PreviewOfficialInvoice(invoice);
         }
 
         private void ClearReceiptPanel()
@@ -147,7 +114,6 @@ namespace UI
 
         private void lblStudentID_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
